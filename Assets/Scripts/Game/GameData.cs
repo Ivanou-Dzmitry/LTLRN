@@ -14,7 +14,35 @@ public class GameData : MonoBehaviour
     public static GameData gameData;
     public SaveData saveData;
 
+    public SectionManager sectionManager;
+
     const string SETTINGS_FILE_NAME = "ltlrn_settings.json";
+
+
+    private void Awake()
+    {
+        if (gameData == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            gameData = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+        //check world manager
+        if (sectionManager == null)
+        {
+            sectionManager = FindFirstObjectByType<SectionManager>();
+
+            if (sectionManager == null)
+            {
+                Debug.LogError("WorldManager not found!");
+                return;
+            }
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
