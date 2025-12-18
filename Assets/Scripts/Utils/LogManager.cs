@@ -6,6 +6,7 @@ using UnityEngine;
 public class LogManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static LogManager log;
 
     private string gameLogFilePath;
     private string sysLogFilePath;
@@ -14,7 +15,20 @@ public class LogManager : MonoBehaviour
     const string GAME_LOG_FILE_NAME = "ltlrn_log.csv";
     const string SYS_LOG_FILE_NAME = "ltlrn_syslog.csv";
 
-    public string questionID;    
+    public string questionID;
+
+    private void Awake()
+    {
+        if (log == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            log = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Start()
     {
@@ -37,10 +51,6 @@ public class LogManager : MonoBehaviour
         {
             File.WriteAllText(gameLogFilePath, "Duration(sec)\n");
             WriteSysLog("Game log file exist.");
-        }
-        else
-        {
-            WriteSysLog("Game log file NOT exist.");
         }
     }
 

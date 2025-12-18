@@ -9,13 +9,13 @@ public class Question : ScriptableObject
 
     public enum QuestionLang
     {
-        Rus,
-        Bel,
-        Eng
+        RU,
+        BY,
+        EN
     }
 
     [Header("lang")]
-    public QuestionLang questionLang = QuestionLang.Rus;
+    public QuestionLang questionLang = QuestionLang.RU;
 
     public enum QuestionDifficulty
     {

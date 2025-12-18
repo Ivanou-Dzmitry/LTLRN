@@ -1,20 +1,29 @@
 using System;
 using System.IO;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 [Serializable]
 public class SaveData
 {
-    public int levelToLoad;
+    [Header("Game")]
+    public int totalScore;
+
+    [Header("Player")]
+    public string playerName;
+    public string playerPass;
+    public int playerIconIndex;
+
+    [Header("Volume control")]
+    public bool soundToggle;
+    public bool musicToggle;
+    public float soundVolume;
+    public float musicVolume;
 }
 
 public class GameData : MonoBehaviour
 {
     public static GameData gameData;
     public SaveData saveData;
-
-    public SectionManager sectionManager;
 
     const string SETTINGS_FILE_NAME = "ltlrn_settings.json";
 
@@ -30,24 +39,12 @@ public class GameData : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        //check world manager
-        if (sectionManager == null)
-        {
-            sectionManager = FindFirstObjectByType<SectionManager>();
-
-            if (sectionManager == null)
-            {
-                Debug.LogError("WorldManager not found!");
-                return;
-            }
-        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        //empty
     }
 
     public void SaveToFile()
@@ -59,12 +56,14 @@ public class GameData : MonoBehaviour
             return;
         }
 
+        //try save
         try
         {
             string savingData = JsonUtility.ToJson(gameData.saveData, true);
             string filePath = Path.Combine(Application.persistentDataPath, SETTINGS_FILE_NAME);
 
             File.WriteAllText(filePath, savingData);
+            Debug.Log(filePath);
         }
         catch (Exception ex)
         {
@@ -95,10 +94,26 @@ public class GameData : MonoBehaviour
     public void AddDefaultData()
     {
         saveData = new SaveData();
+
+        //score
+        gameData.saveData.totalScore = 0;
+
+        gameData.saveData.playerName = "DefaultPlayerName";
+        gameData.saveData.playerPass = "";
+        gameData.saveData.playerIconIndex = 0;
+
+
+        //sound and music settings
+        saveData.soundToggle = true;
+        saveData.musicToggle = true;
+        saveData.soundVolume = 0.5f;
+        saveData.musicVolume = 0.1f;
     }
 
     private void PatchSavedData()
     {
+
+
         SaveToFile();
     }
 
