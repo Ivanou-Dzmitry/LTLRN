@@ -25,16 +25,6 @@ public class SoundManager : MonoBehaviour
     [Header("Sound Clips")]
     public AudioClip[] soundClips;
 
-    [Header("Sound")]
-    public Button soundButton;
-    public Slider soundSlider;
-    public Sprite[] soundButtonSprites;
-
-    [Header("Music")]
-    public Button musicButton;
-    public Slider musicSlider;
-    public Sprite[] musicButtonSprites;
-
     public AudioClip CurrentMusicClip => musicSource.clip;
 
     private LogManager logClass;
@@ -64,7 +54,7 @@ public class SoundManager : MonoBehaviour
     private void LoadSoundData()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-        logClass = GameObject.FindWithTag("LogManager").GetComponent<LogManager>();
+        logClass = GameObject.FindWithTag("Log").GetComponent<LogManager>();
 
         try
         {
@@ -294,14 +284,12 @@ public class SoundManager : MonoBehaviour
         if (toggle)
         {
             gameData.saveData.soundToggle = false;
-            soundButton.image.sprite = soundButtonSprites[1];
-            soundManager.MuteSound(false);
+            MuteSound(false);
         }
         else
         {
             gameData.saveData.soundToggle = true;
-            soundButton.image.sprite = soundButtonSprites[0];
-            soundManager.MuteSound(true);
+            MuteSound(true);
         }
     }
 
@@ -312,28 +300,13 @@ public class SoundManager : MonoBehaviour
         if (toggle)
         {
             gameData.saveData.musicToggle = false;
-            musicButton.image.sprite = musicButtonSprites[1];
-            soundManager.MuteMusic(false);
+            MuteMusic(false);
         }
         else
         {
             gameData.saveData.musicToggle = true;
-            musicButton.image.sprite = musicButtonSprites[0];
-            soundManager.MuteMusic(true);
+            MuteMusic(true);
         }
-
     }
 
-    public void OnSoundSliderChanged()
-    {
-        gameData.saveData.soundVolume = soundSlider.value;
-        soundManager.SetVolume("sound");
-
-    }
-
-    public void OnMuscSliderChange()
-    {
-        gameData.saveData.musicVolume = musicSlider.value;
-        soundManager.SetVolume("music");
-    }
 }
