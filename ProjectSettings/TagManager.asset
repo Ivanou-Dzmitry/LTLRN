@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameData
   - Log
+  - SoundManager
   layers:
   - Default
   - TransparentFX

@@ -6,115 +6,105 @@ using TMPro;
 public class SettingsPanel : Panel
 {
     private GameData gameData;
-    private SoundManager soundManager => SoundManager.Instance;
+    private SoundManager soundManager => SoundManager.soundManager;
 
     [Header("Data")]
     [SerializeField] private UIImagesGallery imagesGallery;
-
-    [Header("Avatar UI")]
-    [SerializeField] private Image avatarImage;
-    [SerializeField] private Button prevButton;
-    [SerializeField] private Button nextButton;
 
     public TMP_Text playerNameText;
 
     [Header("Sound")]
     public Button soundButton;
     public Slider soundSlider;
-    public Sprite[] soundButtonSprites;
+    private Image soundBtnImg;
+
+    [Header("Sound Speed")]
+    public Button soundSpeedButton;
+    public Slider soundSpeedSlider;
+    private Image speedBtnImg;
 
     [Header("Music")]
     public Button musicButton;
     public Slider musicSlider;
-    public Sprite[] musicButtonSprites;
+    private Image musicBtnImg;
 
-    private int currentIndex;
+    //for user avatar
+    public CarouselImages userAvatarCarousel;
 
     public override void Initialize()
     {
         if (IsInitialized)
             return;
 
-        prevButton.onClick.AddListener(PreviousAvatar);
-        nextButton.onClick.AddListener(NextAvatar);
+        soundButton.onClick.AddListener(SoundToggle);
+
+        musicButton.onClick.AddListener(MusicToggle);
 
         base.Initialize();
+    }
+
+    private void SoundToggle()
+    {
+        soundManager.SoundToggle();
+        SoundButtonPress();
+    }
+
+    private void MusicToggle()
+    {
+        soundManager.MusicToggle();
+        MusicButtonPress();
     }
 
     public override void Open()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
-        LoadAvatar();
+        userAvatarCarousel.LoadAvatar();
         LoadData();
         base.Open();
     }
 
     private void LoadData()
     {
+        soundBtnImg = soundButton.GetComponent<ButtonImage>().buttonIcon;
+        musicBtnImg = musicButton.GetComponent<ButtonImage>().buttonIcon;
+        speedBtnImg = soundSpeedButton.GetComponent<ButtonImage>().buttonIcon;
+
         //player
         playerNameText.text = gameData.saveData.playerName;
 
         //sound and music
         soundSlider.value = gameData.saveData.soundVolume;
         
-        bool soundToggle = gameData.saveData.soundToggle;
+        bool soundToggle = gameData.saveData.soundToggle;        
 
         if (soundToggle)
-            soundButton.image.sprite = soundButtonSprites[0];
+            soundBtnImg.sprite = imagesGallery.soundSprites[0];
         else
-            soundButton.image.sprite = soundButtonSprites[1];
+            soundBtnImg.sprite = imagesGallery.soundSprites[1];
 
         musicSlider.value = gameData.saveData.musicVolume;
 
+        //music toggle
         bool musicToggle = gameData.saveData.musicToggle;
 
         if (musicToggle)
-            musicButton.image.sprite = musicButtonSprites[0];
+            musicBtnImg.sprite = imagesGallery.musicSprites[0];
         else
-            musicButton.image.sprite = musicButtonSprites[1];
+            musicBtnImg.sprite = imagesGallery.musicSprites[1];
+
+        //sound speed
+        soundSpeedSlider.value = gameData.saveData.soundSpeed;
+
+        if (soundSpeedSlider.value == 1)
+        {
+            speedBtnImg.sprite = imagesGallery.soundSpeedSprites[0];
+        }
+        else if (soundSpeedSlider.value == 0)
+        {
+            speedBtnImg.sprite = imagesGallery.soundSpeedSprites[1];
+        }
     }
-
-
-
-    private void LoadAvatar()
-    {        
-        if (gameData == null || imagesGallery == null || imagesGallery.userAvatar.Length == 0)
-            return;
-
-        currentIndex = Mathf.Clamp(
-            gameData.saveData.playerIconIndex,
-            0,
-            imagesGallery.userAvatar.Length - 1
-        );
-
-        ApplyAvatar();
-    }
-
-    private void ApplyAvatar()
-    {
-        avatarImage.sprite = imagesGallery.userAvatar[currentIndex];
-        gameData.saveData.playerIconIndex = currentIndex;
-    }
-
-    private void NextAvatar()
-    {
-        currentIndex++;
-        if (currentIndex >= imagesGallery.userAvatar.Length)
-            currentIndex = 0;
-
-        ApplyAvatar();
-    }
-
-    private void PreviousAvatar()
-    {
-        currentIndex--;
-        if (currentIndex < 0)
-            currentIndex = imagesGallery.userAvatar.Length - 1;
-
-        ApplyAvatar();
-    }
-
 
     public void SaveSettings()
     {        
@@ -137,17 +127,37 @@ public class SettingsPanel : Panel
         soundManager.SetVolume("music");
     }
 
+    public void OnSpeedSliderChange()
+    {
+        gameData.saveData.soundSpeed = soundSpeedSlider.value;
+        
+        float speed = 0;
+
+        if(soundSpeedSlider.value == 1)
+        {
+            speedBtnImg.sprite = imagesGallery.soundSpeedSprites[0];
+            speed = 1f;
+        }
+        else if(soundSpeedSlider.value == 0)
+        {
+            speedBtnImg.sprite = imagesGallery.soundSpeedSprites[1];
+            speed = 0.5f;
+        }
+
+        soundManager.SetSoundSpeed(speed);
+    }
+
     public void SoundButtonPress()
     {
         bool toggle = gameData.saveData.soundToggle;
 
         if (toggle)
         {
-            soundButton.image.sprite = soundButtonSprites[0];
+            soundBtnImg.sprite = imagesGallery.soundSprites[0];
         }
         else
         {
-            soundButton.image.sprite = soundButtonSprites[1];
+            soundBtnImg.sprite = imagesGallery.soundSprites[1];
         }
     }
 
@@ -157,11 +167,11 @@ public class SettingsPanel : Panel
 
         if (toggle)
         {
-            musicButton.image.sprite = musicButtonSprites[0];
+            musicBtnImg.sprite = imagesGallery.musicSprites[0];
         }
         else
         {
-            musicButton.image.sprite = musicButtonSprites[1];
+            musicBtnImg.sprite = imagesGallery.musicSprites[1];
         }
     }
 

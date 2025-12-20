@@ -13,16 +13,25 @@ public class SaveData
     public string playerPass;
     public int playerIconIndex;
 
+    //bonus stuff
+    [Header("Resources")]
+    public int stars;
+    public int life;
+    public int crystals;
+
     [Header("Volume control")]
     public bool soundToggle;
     public bool musicToggle;
     public float soundVolume;
     public float musicVolume;
+    public float soundSpeed;
 }
 
 public class GameData : MonoBehaviour
 {
     public static GameData gameData;
+
+    //public static SoundManager Instance;
     public SaveData saveData;
 
     const string SETTINGS_FILE_NAME = "ltlrn_settings.json";
@@ -102,12 +111,17 @@ public class GameData : MonoBehaviour
         gameData.saveData.playerPass = "";
         gameData.saveData.playerIconIndex = 0;
 
+        //bonus stuff
+        gameData.saveData.stars = 0;
+        gameData.saveData.life = 5;
+        gameData.saveData.crystals = 0;
 
         //sound and music settings
         saveData.soundToggle = true;
         saveData.musicToggle = true;
         saveData.soundVolume = 0.5f;
         saveData.musicVolume = 0.1f;
+        saveData.soundSpeed = 1.0f;
     }
 
     private void PatchSavedData()

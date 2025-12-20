@@ -30,13 +30,13 @@ public class SoundManager : MonoBehaviour
     private LogManager logClass;
     private const string className = "SoundManager:";
 
-    public static SoundManager Instance;
+    //public static SoundManager Instance;
 
     private void Awake()
     {
-        if (Instance == null)
+        if (soundManager == null)
         {
-            Instance = this;
+            soundManager = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -75,7 +75,10 @@ public class SoundManager : MonoBehaviour
         if (lastPlayedClip != null && musicSource.mute == false)
         {
             PlayMusic(lastPlayedClip);
-        }        
+        }
+
+        //set sound speed
+        SetSoundSpeed(gameData.saveData.soundSpeed);
     }
 
 
@@ -307,6 +310,11 @@ public class SoundManager : MonoBehaviour
             gameData.saveData.musicToggle = true;
             MuteMusic(true);
         }
+    }
+
+    public void SetSoundSpeed(float speed)
+    {             
+        effectsSource.pitch = speed;
     }
 
 }

@@ -225,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ButtonImage
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
   selectedButtonColor: 0
+  buttonIcon: {fileID: 7052922696757609624}
   selectedTextColor: 0
   buttonTextStr: Text
   buttonText: {fileID: 3164418077823230374}

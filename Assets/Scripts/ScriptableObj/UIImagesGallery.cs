@@ -8,4 +8,10 @@ using UnityEngine.UI;
 public class UIImagesGallery : ScriptableObject
 {
     public Sprite[] userAvatar;
+
+    public Sprite[] soundSprites;
+
+    public Sprite[] musicSprites;
+
+    public Sprite[] soundSpeedSprites;
 }

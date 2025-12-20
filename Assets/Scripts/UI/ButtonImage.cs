@@ -13,7 +13,7 @@ public class ButtonImage : MonoBehaviour
         Warning,
         Error,
         Panel,
-        Background
+        Transparent
     }
 
     public enum TextColor
@@ -30,6 +30,9 @@ public class ButtonImage : MonoBehaviour
 
     [Header("Button Color")]
     public ButtonColor selectedButtonColor = ButtonColor.Primary;
+
+    [Header("Button Icon")]
+    public Image buttonIcon;
 
     [Header("Text Color")]
     public TextColor selectedTextColor = TextColor.Primary;
@@ -91,7 +94,7 @@ public class ButtonImage : MonoBehaviour
             ButtonColor.Warning => palette.Warning,
             ButtonColor.Error => palette.Error,
             ButtonColor.Panel => palette.DisabledButton,
-            ButtonColor.Background => palette.Background,
+            ButtonColor.Transparent => palette.TransparentPanel,
             _ => palette.Primary
         };
     }
