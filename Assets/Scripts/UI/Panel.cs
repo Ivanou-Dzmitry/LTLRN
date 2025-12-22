@@ -45,5 +45,21 @@ namespace LTLRN.UI
             container.gameObject.SetActive(false);
             isOpen = false;
         }
+
+        public virtual float GetSize()
+        {
+            if (initialized == false) { Initialize(); }
+
+            return container.rect.height;
+        }
+
+        public virtual void SetBottom(float height)
+        {
+            if (initialized == false) { Initialize(); }
+
+            Vector2 offsetMin = container.offsetMin;
+
+            container.offsetMin = new Vector2 (0, height);
+        }
     }
 }

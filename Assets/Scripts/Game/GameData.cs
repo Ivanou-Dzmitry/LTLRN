@@ -126,7 +126,9 @@ public class GameData : MonoBehaviour
 
     private void PatchSavedData()
     {
-
+        // Ensure life is at least 1
+        if (gameData.saveData.life == 0)
+            gameData.saveData.life = 5;
 
         SaveToFile();
     }

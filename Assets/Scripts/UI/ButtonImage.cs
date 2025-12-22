@@ -125,6 +125,12 @@ public class ButtonImage : MonoBehaviour
         ApplyButtonText();
     }
 
+    public void SetText(string text)
+    {
+        buttonText.text = text;
+        ApplyButtonText();
+    }
+
     public void RefreshState()
     {
         ApplyAll();
