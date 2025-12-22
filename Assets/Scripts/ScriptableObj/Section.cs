@@ -4,5 +4,8 @@ using UnityEngine;
 public class Section : ScriptableObject
 {
     public int sectionNumber;
+    public Sprite sectionIcon;
+    public string sectionTitle;
+    public string sectionDescription;
     public Question[] questions;
 }

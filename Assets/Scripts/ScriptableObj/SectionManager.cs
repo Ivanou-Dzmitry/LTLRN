@@ -5,4 +5,18 @@ public class SectionManager : ScriptableObject
 {
     public Section[] sections;
     public int questionPerSection = 10;
+
+
+    public int GetTotalQuestionCount()
+    {
+        int totalQuestions = 0;
+
+        foreach (var section in sections)
+        {
+            if (section != null && section.questions != null)
+                totalQuestions += section.questions.Length;
+        }
+        return totalQuestions;
+    }
+
 }

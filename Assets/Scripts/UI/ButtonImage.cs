@@ -13,7 +13,9 @@ public class ButtonImage : MonoBehaviour
         Warning,
         Error,
         Panel,
-        Transparent
+        Transparent,
+        PrimaryLight,
+        SuccessLight
     }
 
     public enum TextColor
@@ -95,6 +97,8 @@ public class ButtonImage : MonoBehaviour
             ButtonColor.Error => palette.Error,
             ButtonColor.Panel => palette.DisabledButton,
             ButtonColor.Transparent => palette.TransparentPanel,
+            ButtonColor.PrimaryLight => palette.PrimaryLight,
+            ButtonColor.SuccessLight => palette.SuccessLight,
             _ => palette.Primary
         };
     }

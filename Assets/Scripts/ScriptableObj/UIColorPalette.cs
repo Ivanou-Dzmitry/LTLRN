@@ -21,9 +21,13 @@ public class UIColorPalette : ScriptableObject
     public Color TextPrimary;
     public Color TextSecondary;
 
+    [Header("Info colors")]
     public Color Success;
     public Color Warning;
     public Color Error;
 
+    [Header("Other colors")]
     public Color DisabledButton;
+    public Color PrimaryLight;
+    public Color SuccessLight;
 }
