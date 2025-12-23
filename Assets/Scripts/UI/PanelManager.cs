@@ -1,7 +1,8 @@
 
+using LTLRN.UI;
 using System.Collections.Generic;
 using UnityEngine;
-using LTLRN.UI;
+using UnityEngine.SceneManagement;
 
 public class PanelManager : MonoBehaviour
 {
@@ -113,4 +114,9 @@ public class PanelManager : MonoBehaviour
             }
         }
     }    
+
+    public static void OpenScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

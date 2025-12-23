@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351b13381c0821045b4f77b8da9f1b62, type: 3}
+  m_Name: S01M
+  m_EditorClassIdentifier: Assembly-CSharp::SectionManager
+  themeName: Base
+  themeDescriptions: Base theme
+  sections:
+  - {fileID: 11400000, guid: aa5a675aac82ad14ca40620c12515158, type: 2}
+  - {fileID: 11400000, guid: bda88b7d8dec8e840be6363aac98aa25, type: 2}
+  - {fileID: 11400000, guid: 1db12ef78e2466b4489afdbb746267e5, type: 2}
+  - {fileID: 11400000, guid: 3c35cc59f6f75754a8afd8537c653135, type: 2}
+  - {fileID: 11400000, guid: 380619b9147628a4fb0e9d2a7bc7b2c4, type: 2}
+  - {fileID: 11400000, guid: d106d62c52e77404a8c62107170282e9, type: 2}
+  - {fileID: 11400000, guid: 210c53a3e13db834d9152ea0e33031f5, type: 2}
+  - {fileID: 11400000, guid: d896452d0b7f04740b63987c064428d0, type: 2}
+  - {fileID: 11400000, guid: c828be20ffd8b1848889ed7e05fd5215, type: 2}
+  - {fileID: 11400000, guid: 3f8fcd7193a658a46b3d23deb4539cee, type: 2}
+  questionPerSection: 10

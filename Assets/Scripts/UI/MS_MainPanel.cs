@@ -15,7 +15,7 @@ public class MainPanel : Panel
     public RectTransform panel_03;
 
     private float panel01Height = 128f;
-    private float panel03Height = 128f;
+    private float panel03Height = 192f;
 
 
     public override void Initialize()
@@ -31,12 +31,12 @@ public class MainPanel : Panel
 
     private void OpenAdventureMenu()
     {
-        SceneManager.LoadScene("AdventureMenu");
+        PanelManager.OpenScene("AdventureMenu");
     }
 
     private void OpenExercisesMenu()
     {
-        SceneManager.LoadScene("ExscersisesMenu");
+        PanelManager.OpenScene("ExscersisesMenu");
     }
 
     private void Start()

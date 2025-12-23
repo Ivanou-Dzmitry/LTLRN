@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SectionManager", menuName = "Scriptable Objects/SectionManager")]
 public class SectionManager : ScriptableObject
 {
+    public string themeName;
+    public string themeDescriptions;
     public Section[] sections;
     public int questionPerSection = 10;
 
