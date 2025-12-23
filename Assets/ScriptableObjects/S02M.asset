@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351b13381c0821045b4f77b8da9f1b62, type: 3}
   m_Name: S02M
   m_EditorClassIdentifier: Assembly-CSharp::SectionManager
-  themeName: Second
-  themeDescriptions: Base second  theme
+  themeName: Theme 2
+  themeIcon: {fileID: 0}
+  themeDescription: Theme 2 description
   sections:
-  - {fileID: 11400000, guid: aa5a675aac82ad14ca40620c12515158, type: 2}
-  - {fileID: 11400000, guid: bda88b7d8dec8e840be6363aac98aa25, type: 2}
-  - {fileID: 11400000, guid: 1db12ef78e2466b4489afdbb746267e5, type: 2}
-  - {fileID: 11400000, guid: 3c35cc59f6f75754a8afd8537c653135, type: 2}
-  - {fileID: 11400000, guid: 380619b9147628a4fb0e9d2a7bc7b2c4, type: 2}
-  - {fileID: 11400000, guid: d106d62c52e77404a8c62107170282e9, type: 2}
-  - {fileID: 11400000, guid: 210c53a3e13db834d9152ea0e33031f5, type: 2}
-  - {fileID: 11400000, guid: d896452d0b7f04740b63987c064428d0, type: 2}
-  - {fileID: 11400000, guid: c828be20ffd8b1848889ed7e05fd5215, type: 2}
-  - {fileID: 11400000, guid: 3f8fcd7193a658a46b3d23deb4539cee, type: 2}
+  - {fileID: 11400000, guid: 4cdf71e0674346f4b8539b198a1ed2b3, type: 2}
+  - {fileID: 11400000, guid: d6ceefccca08f6b44b86615af5dce2f4, type: 2}
+  - {fileID: 11400000, guid: 2ab46fd09a34d6c44b2cfb9436a596c4, type: 2}
+  - {fileID: 11400000, guid: 02ba80f845f8d5f4ab2d345d1d845077, type: 2}
+  - {fileID: 11400000, guid: 0c0dfcc23ecb3c044bb7a75008ef3a14, type: 2}
+  - {fileID: 11400000, guid: 19308801fb881154abd0416429088fed, type: 2}
+  - {fileID: 11400000, guid: 506276df547c4b94584293340f4346b5, type: 2}
+  - {fileID: 11400000, guid: d0d135d616ed7d1448f1105e9161e16a, type: 2}
+  - {fileID: 11400000, guid: 2af9a59a6b3b01c4b83bcdc512e69c6e, type: 2}
+  - {fileID: 11400000, guid: 307816dfb23aaf646b10fd42df223e19, type: 2}
   questionPerSection: 10

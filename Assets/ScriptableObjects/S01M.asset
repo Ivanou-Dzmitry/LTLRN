@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351b13381c0821045b4f77b8da9f1b62, type: 3}
   m_Name: S01M
   m_EditorClassIdentifier: Assembly-CSharp::SectionManager
-  themeName: Base
-  themeDescriptions: Base theme
+  themeName: Teme 01
+  themeDescription: Theme 1 description
   sections:
   - {fileID: 11400000, guid: aa5a675aac82ad14ca40620c12515158, type: 2}
   - {fileID: 11400000, guid: bda88b7d8dec8e840be6363aac98aa25, type: 2}

@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class EX_MainPanel : Panel
 {
     private GameData gameData;
-    
+    private ExDataLoader exDataLoader;
+
     private ButtonImage starsBtnImage;
     private ButtonImage lifeBtnImage;
     private ButtonImage crystalsBtnImage;
@@ -18,6 +19,10 @@ public class EX_MainPanel : Panel
     public Button crystalsBtn;
     public Button starsBtn;
 
+    [Header("Theme")]
+    public Button themeButton;
+    private ButtonImage themeButtonData;
+
     [Header("UI")]
     public Canvas canvasRoot;
     public RectTransform panel_01;
@@ -26,6 +31,7 @@ public class EX_MainPanel : Panel
 
     public RectTransform scrollPanel;
 
+    // for ui layout
     private const float panel01Height = 128f;
     private const float panel03Height = 192f;
 
@@ -37,23 +43,45 @@ public class EX_MainPanel : Panel
         starsBtnImage = starsBtn.GetComponent<ButtonImage>();
         lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
         crystalsBtnImage = crystalsBtn.GetComponent<ButtonImage>();
+        themeButtonData = themeButton.GetComponent<ButtonImage>();
+    }
+
+    public override void Open()
+    {
+        LoadGameData();
+        base.Open();
     }
 
     private void Start()
     {
         LoadGameData();     
         base.Open();
-
         SetPanelHeight();
     }
 
     private void LoadGameData()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        exDataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
 
-        UpdateButton(starsBtnImage, gameData.saveData.stars);
-        UpdateButton(lifeBtnImage, gameData.saveData.life);
-        UpdateButton(crystalsBtnImage, gameData.saveData.crystals);
+        if (gameData != null)
+        {
+            UpdateButton(starsBtnImage, gameData.saveData.stars);
+            UpdateButton(lifeBtnImage, gameData.saveData.life);
+            UpdateButton(crystalsBtnImage, gameData.saveData.crystals);
+        }
+
+        //upb theme button text       
+        if (exDataLoader != null)
+        {
+            SectionManager currentTheme = exDataLoader.sectionManager;
+
+            if (currentTheme != null)
+            {
+                themeButtonData.buttonTextStr = currentTheme.themeName;
+                themeButtonData.RefreshState();
+            }
+        }
     }
 
     private void UpdateButton(ButtonImage btn, int value)

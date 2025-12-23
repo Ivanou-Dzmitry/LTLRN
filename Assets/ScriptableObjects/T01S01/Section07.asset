@@ -16,4 +16,5 @@ MonoBehaviour:
   sectionIcon: {fileID: 0}
   sectionTitle: Section 07
   sectionDescription: Its test section
+  sectionHeaderColor: {r: 0.29195824, g: 0.5581571, b: 0.76729554, a: 1}
   questions: []

@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class ExDataLoader : MonoBehaviour
 {
+    private GameData gameData;
+
     public SectionManager[] themes;
 
     public Section sectionClass;
     public SectionManager sectionManager;
     public Question question;
+
+    public SectionManager tempSectionManager;
+    public int tempThemeIndex;
 
     public int totalQuestions;
     public int totalSections;
@@ -22,9 +27,16 @@ public class ExDataLoader : MonoBehaviour
         LoadData();
     }
 
-    private void LoadData()
+    //IMPORTANT
+    public void LoadData()
     {
-        if(sectionManager != null)
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        //load theme
+        if(gameData != null)
+            sectionManager = themes[gameData.saveData.selectedThemeIndex];
+
+        if (sectionManager != null)
         {
             //get total levels
             totalQuestions = sectionManager.GetTotalQuestionCount();
@@ -34,6 +46,7 @@ public class ExDataLoader : MonoBehaviour
         }        
     }
 
+    //IMPORTANT
     private void CreateSectionPanels()
     {
         // Clear old panels (important when reloading)
@@ -66,7 +79,25 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.sectionHeaderText.text = section.sectionTitle;
             sectionPanel.sectionDescriptionText.text = section.sectionDescription;
 
-            Debug.Log($"{section.sectionTitle}/{section.sectionDescription}");
+            /*            if (section.questions == null || section.questions.Length == 0)
+                            return;*/
+
+            if (section.questions.Length > 0 && section.questions != null)
+            {
+                for (int j = 0; j < section.questions.Length; j++)
+                {
+                    GameObject button = Instantiate(questionBtnPrefab, sectionPanel.questionsRectTransform);
+                    button.name = "S" + i + "Button" + j.ToString();
+
+                    QuestionButton btn = button.GetComponent<QuestionButton>();
+
+                    int fixedNumber = j + 1;
+
+                    if (btn != null)
+                        btn.qBtnText.text = $"{fixedNumber}";
+                }
+            }
+
         }
     }
 

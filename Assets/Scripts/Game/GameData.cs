@@ -8,6 +8,8 @@ public class SaveData
     [Header("Game")]
     public int totalScore;
 
+    public int selectedThemeIndex;
+
     [Header("Player")]
     public string playerName;
     public string playerPass;
@@ -103,6 +105,8 @@ public class GameData : MonoBehaviour
     public void AddDefaultData()
     {
         saveData = new SaveData();
+
+        gameData.saveData.selectedThemeIndex = 0;
 
         //score
         gameData.saveData.totalScore = 0;

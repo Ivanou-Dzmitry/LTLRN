@@ -677,5 +677,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SectionPanel
   sectionImage: {fileID: 8106103573425996816}
   sectionHeaderText: {fileID: 6463488542157099374}
+  headerPanel: {fileID: 3144307337193926974}
   sectionDescriptionText: {fileID: 4732318133900515945}
   questionsRectTransform: {fileID: 7374151962388404818}

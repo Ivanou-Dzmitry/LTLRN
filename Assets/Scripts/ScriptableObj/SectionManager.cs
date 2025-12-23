@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "SectionManager", menuName = "Scriptable Objects/SectionManager")]
 public class SectionManager : ScriptableObject
 {
+    [Header("Additional data")]
     public string themeName;
-    public string themeDescriptions;
+    public Sprite themeIcon;
+    public string themeDescription;
+
+    [Header("Theme Sections")]
     public Section[] sections;
     public int questionPerSection = 10;
 
