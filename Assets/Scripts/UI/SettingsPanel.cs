@@ -1,7 +1,10 @@
-using UnityEngine;
 using LTLRN.UI;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Diagnostics;
+using UnityEngine.UI;
+
+
 
 public class SettingsPanel : Panel
 {
@@ -27,6 +30,10 @@ public class SettingsPanel : Panel
     public Button musicButton;
     public Slider musicSlider;
     private Image musicBtnImg;
+
+    [Header("DB")]
+    public TMP_Text dbLog;
+    private DBUtils dbUtils;
 
     //for user avatar
     public CarouselImages userAvatarCarousel;
@@ -58,9 +65,15 @@ public class SettingsPanel : Panel
     public override void Open()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
 
         userAvatarCarousel.LoadAvatar();
+        
         LoadData();
+
+        if(dbUtils != null)
+            dbLog.text = "Database: " + dbUtils.CheckConnection();
+
         base.Open();
     }
 

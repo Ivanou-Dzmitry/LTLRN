@@ -4,15 +4,18 @@ public class ExDataLoader : MonoBehaviour
 {
     private GameData gameData;
 
-    public SectionManager[] themes;
+    public Themes themes;
 
+    //public SectionManager[] themes;
+
+    [Header("Data")]
     public Section sectionClass;
     public SectionManager sectionManager;
-    public Question question;
 
     public SectionManager tempSectionManager;
     public int tempThemeIndex;
 
+    [Header("Stat")]
     public int totalQuestions;
     public int totalSections;
 
@@ -34,7 +37,7 @@ public class ExDataLoader : MonoBehaviour
 
         //load theme
         if(gameData != null)
-            sectionManager = themes[gameData.saveData.selectedThemeIndex];
+            sectionManager = themes.theme[gameData.saveData.selectedThemeIndex];
 
         if (sectionManager != null)
         {
@@ -82,11 +85,22 @@ public class ExDataLoader : MonoBehaviour
             /*            if (section.questions == null || section.questions.Length == 0)
                             return;*/
 
+            sectionPanel.currentSection = section;
+            sectionPanel.sectionIndex = i;
+
+            //set progress slider max value
+            if (section.questions.Length > 0 && section.questions != null)
+            {
+                sectionPanel.progressSlider.maxValue = section.questions.Length;
+                Debug.Log("Section " + i + " has " + section.questions.Length + " questions.");
+            }
+              
+            
             if (section.questions.Length > 0 && section.questions != null)
             {
                 for (int j = 0; j < section.questions.Length; j++)
                 {
-                    GameObject button = Instantiate(questionBtnPrefab, sectionPanel.questionsRectTransform);
+/*                    GameObject button = Instantiate(questionBtnPrefab, sectionPanel.questionsRectTransform);
                     button.name = "S" + i + "Button" + j.ToString();
 
                     QuestionButton btn = button.GetComponent<QuestionButton>();
@@ -94,7 +108,7 @@ public class ExDataLoader : MonoBehaviour
                     int fixedNumber = j + 1;
 
                     if (btn != null)
-                        btn.qBtnText.text = $"{fixedNumber}";
+                        btn.qBtnText.text = $"{fixedNumber}";*/
                 }
             }
 

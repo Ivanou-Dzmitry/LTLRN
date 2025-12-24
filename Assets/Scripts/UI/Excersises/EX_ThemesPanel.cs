@@ -40,7 +40,7 @@ public class EX_ThemesPanel : Panel
             Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < dataLoader.themes.Length; i++)
+        for (int i = 0; i < dataLoader.themes.theme.Length; i++)
         {
             GameObject themeButton = Instantiate(themeButtonPrefab, themesContainer.transform);
             themeButton.name = "ThemeButton_" + i.ToString();
@@ -54,9 +54,9 @@ public class EX_ThemesPanel : Panel
             EX_ThemeBtn themeBtnComponent = themeButton.GetComponent<EX_ThemeBtn>();
 
             //load data into button component
-            themeBtnComponent.themeName.text = dataLoader.themes[i].themeName;
-            themeBtnComponent.themeDescription.text = dataLoader.themes[i].themeDescription;
-            themeBtnComponent.sectionManager = dataLoader.themes[i];
+            themeBtnComponent.themeName.text = dataLoader.themes.theme[i].themeName;
+            themeBtnComponent.themeDescription.text = dataLoader.themes.theme[i].themeDescription;
+            themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
 
             themeBtnComponent.themeIndex = i;
         }

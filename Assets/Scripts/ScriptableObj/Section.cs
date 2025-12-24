@@ -10,6 +10,7 @@ public class Section : ScriptableObject
     public string sectionTitle;
     public string sectionDescription;
     public Color sectionHeaderColor;
+    public bool isLiked;
 
     public Question[] questions;
 }

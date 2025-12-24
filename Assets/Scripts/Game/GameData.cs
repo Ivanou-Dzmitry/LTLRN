@@ -8,7 +8,9 @@ public class SaveData
     [Header("Game")]
     public int totalScore;
 
+    [Header("Data")]
     public int selectedThemeIndex;
+    public int selectedSectionIndex;
 
     [Header("Player")]
     public string playerName;
@@ -107,6 +109,7 @@ public class GameData : MonoBehaviour
         saveData = new SaveData();
 
         gameData.saveData.selectedThemeIndex = 0;
+        gameData.saveData.selectedSectionIndex = 0;
 
         //score
         gameData.saveData.totalScore = 0;

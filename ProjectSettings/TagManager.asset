@@ -8,6 +8,7 @@ TagManager:
   - Log
   - SoundManager
   - ExDataLoader
+  - DBUtils
   layers:
   - Default
   - TransparentFX

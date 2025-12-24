@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class EX_ThemeBtn : MonoBehaviour
 {
     private ExDataLoader dataLoader;
+    private GameData gameData;
+
     private bool isSelected = false;
 
     [Header("UI")]
@@ -30,24 +32,38 @@ public class EX_ThemeBtn : MonoBehaviour
 
         button.onClick.AddListener(OnClicked);
 
+        //sety color
+        Image buttonImg = button.GetComponent<Image>();
+        buttonImg.color = palette.PrimaryLight;
+
         //set default colors
-        SetSelected(false);
+        //SetSelected(false);
     }
 
     private void OnClicked()
     {
         dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
 
-        if (dataLoader != null)
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        if (dataLoader != null && dataLoader.tempSectionManager != null)
         {
-            dataLoader.tempSectionManager = sectionManager;
-            dataLoader.tempThemeIndex = themeIndex;
+            dataLoader.sectionManager = sectionManager;
+            gameData.saveData.selectedThemeIndex = themeIndex;
+            gameData.SaveToFile();
         }
 
-        SetSelected(true);
+        PanelManager.Close("themes");
+        PanelManager.Open("exmain");
+
+        dataLoader.LoadData();
+
+        isSelected = true;
+
+        //SetSelected(true);
     }
 
-    public void SetSelected(bool selected)
+/*    public void SetSelected(bool selected)
     {
         if (selected)
         {
@@ -61,6 +77,6 @@ public class EX_ThemeBtn : MonoBehaviour
             themeName.color = palette.TextSecondary;
             themeDescription.color = palette.TextSecondary;
         }
-    }
+    }*/
 
 }
