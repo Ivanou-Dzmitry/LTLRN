@@ -36,11 +36,17 @@ public class ExGameLogic : MonoBehaviour
     private ButtonImage nextBtn;
     private ButtonImage exitBtn;
 
+    [Header("Score")]
+    public int tempScore = 0;
+
     [Header("Log")]
     public TMP_Text log;
 
     private int qCounter = 0;
 
+    //timers
+    private float sessionStartTime;
+    public float sessionDuration;
 
     private void Awake()
     {
@@ -92,6 +98,8 @@ public class ExGameLogic : MonoBehaviour
 
         nextButton.interactable = false;
         nextBtn.RefreshState();
+
+        sessionStartTime = Time.time;
     }
 
 
@@ -129,7 +137,7 @@ public class ExGameLogic : MonoBehaviour
 
     private void checkBtnClicked()
     {
-        if (qCounter < currentSection.questions.Length - 1)
+/*        if (qCounter < currentSection.questions.Length - 1)
         {
             checkButton.interactable = false;
             checkBtn.RefreshState();
@@ -145,10 +153,10 @@ public class ExGameLogic : MonoBehaviour
             PanelManager.Open("exwin");
         }
 
-        CheckAnswer();
+        Check();*/
     }
 
-    private void CheckAnswer()
+    public void Check()
     {
         //load data to prefab
         ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
@@ -156,24 +164,53 @@ public class ExGameLogic : MonoBehaviour
         int selectedIndex = qData.GetSelectedAnswerIndex();
         int correctIndex = (int)currentQuestion.correctAnswerNumber;
 
-        if (selectedIndex == correctIndex)
+        Question question = currentQuestion;
+
+        if (currentSection.sectionType == Section.SectionType.Type1)
         {
-            Debug.Log("Correct answer!");
-            qData.CheckAnswer(selectedIndex, correctIndex);
-            // Add score, show success animation, etc.
+            if (selectedIndex == correctIndex)
+            {
+                qData.CheckAnswer(selectedIndex, correctIndex);
+
+                // Add score, show success animation, etc.
+                tempScore = tempScore + currentQuestion.rewardAmount;
+
+                Debug.Log("Correct answer! Score: " + tempScore);
+            }
+            else
+            {
+                Debug.Log("Wrong answer!");
+                qData.CheckAnswer(selectedIndex, correctIndex);
+                // Deduct lives, show error animation, etc.
+            }
+
+            if (qCounter < currentSection.questions.Length - 1)
+            {
+                nextButton.interactable = true;
+                nextBtn.RefreshState();
+            }
+            else
+            {
+                ResultProcessing();
+            }
         }
-        else
-        {
-            Debug.Log("Wrong answer!");
-            qData.CheckAnswer(selectedIndex, correctIndex);
-            // Deduct lives, show error animation, etc.
-        }
+    }
+
+    private void ResultProcessing()
+    {
+        sessionDuration = Time.time - sessionStartTime;
+
+        Debug.Log($"Session duration: {sessionDuration:F2} seconds");
+
+        PanelManager.CloseAll();
+        PanelManager.Open("exwin");
     }
 
     private void nextBtnClicked()
     {
         qCounter++;
        
+
         //load next question
         if (qCounter < currentSection.questions.Length)
         {
@@ -185,11 +222,11 @@ public class ExGameLogic : MonoBehaviour
             nextButton.interactable = false;
             nextBtn.RefreshState();
 
-            checkButton.interactable = true;
-            checkBtn.RefreshState();
+/*            checkButton.interactable = true;
+            checkBtn.RefreshState();*/
         }
 
-        Debug.Log(qCounter);
+        //Debug.Log(qCounter);
     }
 
     private void exitBtnClicked()

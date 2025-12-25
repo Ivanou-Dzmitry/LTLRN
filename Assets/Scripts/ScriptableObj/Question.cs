@@ -50,7 +50,7 @@ public class Question : ScriptableObject
     public string questionText;
 
     [Header("Illustration")]
-    public Sprite questionSprite;
+    public string qSpriteFile;
 
     [Header("Answer")]
     public string[] answerVariantsText;
@@ -62,4 +62,14 @@ public class Question : ScriptableObject
 
     [Header("Reward")]
     public int rewardAmount;
+}
+
+[System.Serializable]
+public class DatabaseReference
+{
+    public string tableName;      // e.g., "Numerals"
+    public string columnName;     // e.g., "Word" or "Sound"
+    public int recordID;          // e.g., 1, 2, 3...
+    public string whereColumn;    // e.g., "Digit"
+    public string whereValue;     // e.g., "5"
 }

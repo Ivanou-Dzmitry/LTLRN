@@ -1,9 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static Question;
 
 [CreateAssetMenu(fileName = "Section", menuName = "Scriptable Objects/Section")]
 public class Section : ScriptableObject
 {
+    public enum SectionType
+    {
+        Type1,
+        Type2,
+        Type3
+    }
+
+    //Description:
+    //type1 - with next button
+    //type2 - without next button. Result at the end.
+
+    [Header("Type")]
+    public SectionType sectionType = SectionType.Type1;
+
     [Header("UI")]
     public int sectionNumber;
     public Sprite sectionIcon;
@@ -11,6 +26,8 @@ public class Section : ScriptableObject
     public string sectionDescription;
     public Color sectionHeaderColor;
     public bool isLiked;
+
+
 
     public Question[] questions;
 }

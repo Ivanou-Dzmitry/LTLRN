@@ -14,7 +14,7 @@ public class ExQManager01 : MonoBehaviour
     public Image qImage;
     [SerializeField] public TMP_Text qestionText;
 
-    [Header("Buttons")]
+/*    [Header("Buttons")]
     public Button answer01Btn;
     public Button answer02Btn;
     public Button answer03Btn;
@@ -23,17 +23,17 @@ public class ExQManager01 : MonoBehaviour
     [SerializeField] public string answer01;
     [SerializeField] public string answer02;
     [SerializeField] public string answer03;
-    [SerializeField] public string answer04;
+    [SerializeField] public string answer04;*/
 
     [Header("Sound")]
     public AudioClip qAudioClip;
     //public Button soundBtn;
 
-    //buttons
+/*    //buttons
     private ButtonImage a01Btn;
     private ButtonImage a02Btn;
     private ButtonImage a03Btn;
-    private ButtonImage a04Btn;
+    private ButtonImage a04Btn;*/
 
 
     //new structure for answers
@@ -83,7 +83,7 @@ public class ExQManager01 : MonoBehaviour
         //set answer index in game logic IMPORTANT
         exGameLogic.currentAnswerIndex = index;
 
-        Debug.Log($"Answer {index + 1} clicked");
+        //Debug.Log($"Answer {index + 1} clicked");
 
         // Reset all buttons to Primary
         foreach (var answer in answerButtons)
@@ -94,6 +94,9 @@ public class ExQManager01 : MonoBehaviour
         // Highlight selected button
         answerButtons[index].buttonImage.SetButtonColor(ButtonImage.ButtonColor.SuccessLight);
         selectedAnswerIndex = index;
+
+        //check
+        exGameLogic.Check();
     }
 
     private void playSoundClicked()

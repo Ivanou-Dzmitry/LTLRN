@@ -16,6 +16,9 @@ MonoBehaviour:
   questionLang: 0
   questionDifficulty: 0
   questionType: 0
+  questionDescription: 
+  questionText: Vienas
+  questionSprite: {fileID: 0}
   answerVariantsText:
   - 2
   - 1
@@ -23,7 +26,5 @@ MonoBehaviour:
   - 6
   answerVariantsSprite: []
   correctAnswerNumber: 1
-  questionText: Vienas
-  questionSprite: {fileID: 0}
-  qSound: []
-  rewardAmount: 0
+  qSoundClipName: []
+  rewardAmount: 1

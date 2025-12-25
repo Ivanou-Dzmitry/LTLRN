@@ -27,4 +27,4 @@ MonoBehaviour:
   answerVariantsSprite: []
   correctAnswerNumber: 0
   qSoundClipName: []
-  rewardAmount: 0
+  rewardAmount: 1
