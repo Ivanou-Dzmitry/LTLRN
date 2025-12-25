@@ -242,12 +242,23 @@ public class SoundManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (musicClips == null || musicClips.Length == 0)
+            return;
+
+        if (scene.buildIndex < 0 || scene.buildIndex >= musicClips.Length)
+        {
+            Debug.LogWarning(
+                $"No music clip assigned for scene index {scene.buildIndex}"
+            );
+            return;
+        }
+
         lastPlayedClip = musicClips[scene.buildIndex];
 
-        //avoid errors
         if (gameData != null)
             PlayMusic(lastPlayedClip);
     }
+
 
     public void QuitGame()
     {

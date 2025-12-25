@@ -9,6 +9,7 @@ TagManager:
   - SoundManager
   - ExDataLoader
   - DBUtils
+  - ExGameLogic
   layers:
   - Default
   - TransparentFX

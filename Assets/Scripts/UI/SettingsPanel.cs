@@ -71,14 +71,17 @@ public class SettingsPanel : Panel
         
         LoadData();
 
-        if(dbUtils != null)
-            dbLog.text = "Database: " + dbUtils.CheckConnection();
+        if(dbUtils!=null && dbLog!=null)
+            dbLog.text = "DB: " + dbUtils.CheckConnection();
 
         base.Open();
     }
 
     private void LoadData()
     {
+        if(gameData == null)
+            return;
+
         soundBtnImg = soundButton.GetComponent<ButtonImage>().buttonIcon;
         musicBtnImg = musicButton.GetComponent<ButtonImage>().buttonIcon;
         speedBtnImg = soundSpeedButton.GetComponent<ButtonImage>().buttonIcon;

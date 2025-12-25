@@ -43,6 +43,8 @@ public class EX_MainPanel : Panel
         starsBtnImage = starsBtn.GetComponent<ButtonImage>();
         lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
         crystalsBtnImage = crystalsBtn.GetComponent<ButtonImage>();
+
+        //theme button
         themeButtonData = themeButton.GetComponent<ButtonImage>();
     }
 

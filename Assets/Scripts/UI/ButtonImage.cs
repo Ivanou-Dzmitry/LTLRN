@@ -78,6 +78,7 @@ public class ButtonImage : MonoBehaviour
 
         if (!button.interactable)
         {
+            Debug.Log("Button is disabled, applying disabled color.");
             buttonImage.color = palette.DisabledButton;
             return;
         }

@@ -1,7 +1,20 @@
 using UnityEngine;
 using LTLRN.UI;
+using UnityEngine.UI;
+
 public class Ex_GamePanel : Panel
 {
+    private GameData gameData;
+
+    private ButtonImage starsBtnImage;
+    private ButtonImage lifeBtnImage;
+    private ButtonImage crystalsBtnImage;
+
+    [Header("Game data")]
+    public Button lifeBtn;
+    public Button crystalsBtn;
+    public Button starsBtn;
+
     [Header("UI")]
     public Canvas canvasRoot;
     public RectTransform panel_01;
@@ -9,21 +22,49 @@ public class Ex_GamePanel : Panel
     public RectTransform panel_03;
     
     // for ui layout
-    private const float panel01Height = 128f;
+    private const float panel01Height = 96f;
     private const float panel03Height = 192f;
 
     private const float HEADER_HEIGHT = 152f;
 
+    public override void Initialize()
+    {
+        // Cache components once
+        starsBtnImage = starsBtn.GetComponent<ButtonImage>();
+        lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
+        crystalsBtnImage = crystalsBtn.GetComponent<ButtonImage>();
+    }
 
     public override void Open()
-    {
+    {        
         base.Open();
     }
 
     private void Start()
     {
+        LoadGameData();
         base.Open();
         SetPanelHeight();
+    }
+
+    private void LoadGameData()
+    {
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        
+        if (gameData != null)
+        {
+            UpdateButton(starsBtnImage, gameData.saveData.stars);
+            UpdateButton(lifeBtnImage, gameData.saveData.life);
+            UpdateButton(crystalsBtnImage, gameData.saveData.crystals);
+        }
+    }
+
+    private void UpdateButton(ButtonImage btn, int value)
+    {
+        string str = value.ToString();
+        btn.buttonTextStr = str;
+        btn.SetText(str);
+        btn.RefreshState();
     }
 
     void SetPanelHeight()

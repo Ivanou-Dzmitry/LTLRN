@@ -17,7 +17,7 @@ MonoBehaviour:
   Accent: {r: 0.007843138, g: 0.10980392, b: 0.14509805, a: 1}
   Background: {r: 0, g: 0, b: 0, a: 0}
   Panel01: {r: 0.8509804, g: 0.78431374, b: 0.7137255, a: 1}
-  Panel02: {r: 0, g: 0, b: 0, a: 0}
+  Panel02: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   TransparentPanel: {r: 1, g: 1, b: 1, a: 0}
   TextPrimary: {r: 0, g: 0, b: 0, a: 1}
   TextSecondary: {r: 1, g: 1, b: 1, a: 1}

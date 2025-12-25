@@ -1,28 +1,65 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Diagnostics;
+using UnityEngine.UI;
+using static Question;
+
 
 public class ExGameLogic : MonoBehaviour
 {
     private GameData gameData;
     private DBUtils dbUtils;
 
+    [Header("Game Info")]
+    public Slider progressBar;
+
+    [Header("Data")]
     public Themes themes;
     public SectionManager sectionManager;
     public Section currentSection;
     public Question currentQuestion;
 
+    private GameObject questionInstance;
+
+    [Header("Question Stuff")]
+    public Transform questionArea;
+    public GameObject questionPrefab;
+
+    [Header("Buttons")]
+    public Button checkButton;
+    public Button nextButton;
+    public Button exitGameButton;
+
+    [Header("Answer")]
+    public int currentAnswerIndex = -1;
+
+    private ButtonImage checkBtn;
+    private ButtonImage nextBtn;
+    private ButtonImage exitBtn;
+
     [Header("Log")]
     public TMP_Text log;
+
+    private int qCounter = 0;
+
 
     private void Awake()
     {
         PanelManager.Open("exgamemain");
+
+        //buttons
+        checkBtn = checkButton.GetComponent<ButtonImage>();
+        nextBtn = nextButton.GetComponent<ButtonImage>();
+        exitBtn = exitGameButton.GetComponent<ButtonImage>();
+
+        //button listeners
+        checkButton.onClick.AddListener(checkBtnClicked);
+        nextButton.onClick.AddListener(nextBtnClicked);
+        exitGameButton.onClick.AddListener(exitBtnClicked);
     }
 
     private void Start()
-    {
-      LoadGameData();
+    {        
+        LoadGameData();
     }
 
     private void LoadGameData()
@@ -38,14 +75,126 @@ public class ExGameLogic : MonoBehaviour
                 currentSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];   
 
             if(currentSection != null)
-                currentQuestion = currentSection.questions[0];
-
-            Debug.Log(currentQuestion.uID);
+                currentQuestion = currentSection.questions[0];            
         }
 
         dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
 
-        log.text = dbUtils.CheckConnection();
+        if(log!=null)
+            log.text = dbUtils.CheckConnection();
+
+        if(currentQuestion != null)
+            QuestionLoader(currentQuestion);
+
+        //set progress bar
+        progressBar.maxValue = currentSection.questions.Length;
+        progressBar.value = 1;
+
+        nextButton.interactable = false;
+        nextBtn.RefreshState();
+    }
+
+
+    private void QuestionLoader(Question question)
+    {
+        foreach (Transform child in questionArea)
+        {
+            Destroy(child.gameObject);
+        }
+
+        //question type 1 loader
+        if (question.questionType == QuestionType.Type1)
+        {
+            questionInstance = Instantiate(questionPrefab, questionArea);
+            questionInstance.name = "Q" + question.name;
+
+            RectTransform rt = questionInstance.GetComponent<RectTransform>();
+            rt.localScale = Vector3.one;
+            rt.anchoredPosition = Vector2.zero;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+
+            //load data to prefab
+            ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+
+            if (qData != null)
+            {
+                qData.qestionText.text = question.questionText;
+
+                qData.qestionText.text = question.questionText;
+                qData.SetAnswers(question.answerVariantsText);
+            }
+        }     
+    }
+
+    private void checkBtnClicked()
+    {
+        if (qCounter < currentSection.questions.Length - 1)
+        {
+            checkButton.interactable = false;
+            checkBtn.RefreshState();
+
+            nextButton.interactable = true;
+            nextBtn.RefreshState();
+        }else
+        {
+            checkButton.interactable = false;
+            checkBtn.RefreshState();
+
+            PanelManager.CloseAll();
+            PanelManager.Open("exwin");
+        }
+
+        CheckAnswer();
+    }
+
+    private void CheckAnswer()
+    {
+        //load data to prefab
+        ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+
+        int selectedIndex = qData.GetSelectedAnswerIndex();
+        int correctIndex = (int)currentQuestion.correctAnswerNumber;
+
+        if (selectedIndex == correctIndex)
+        {
+            Debug.Log("Correct answer!");
+            qData.CheckAnswer(selectedIndex, correctIndex);
+            // Add score, show success animation, etc.
+        }
+        else
+        {
+            Debug.Log("Wrong answer!");
+            qData.CheckAnswer(selectedIndex, correctIndex);
+            // Deduct lives, show error animation, etc.
+        }
+    }
+
+    private void nextBtnClicked()
+    {
+        qCounter++;
+       
+        //load next question
+        if (qCounter < currentSection.questions.Length)
+        {
+            progressBar.value = qCounter + 1;
+
+            currentQuestion = currentSection.questions[qCounter];
+            QuestionLoader(currentQuestion);
+
+            nextButton.interactable = false;
+            nextBtn.RefreshState();
+
+            checkButton.interactable = true;
+            checkBtn.RefreshState();
+        }
+
+        Debug.Log(qCounter);
+    }
+
+    private void exitBtnClicked()
+    {
+        Debug.Log("Exit button clicked");
     }
 
 }
