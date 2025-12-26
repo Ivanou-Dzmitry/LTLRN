@@ -31,6 +31,9 @@ public class SettingsPanel : Panel
     public Slider musicSlider;
     private Image musicBtnImg;
 
+    [Header("Feed")]
+    public Button feedbackButton;
+
     [Header("DB")]
     public TMP_Text dbLog;
     private DBUtils dbUtils;
@@ -46,6 +49,9 @@ public class SettingsPanel : Panel
         soundButton.onClick.AddListener(SoundToggle);
 
         musicButton.onClick.AddListener(MusicToggle);
+
+        if(feedbackButton !=null)
+            feedbackButton.onClick.AddListener(OpenFeedbackPage);
 
         base.Initialize();
     }
@@ -191,4 +197,9 @@ public class SettingsPanel : Panel
         }
     }
 
+
+    public void OpenFeedbackPage()
+    {
+        Application.OpenURL("https://forms.gle/ymN8Bg9UsPLd2tJX9");
+    }
 }

@@ -3,6 +3,7 @@ using System;
 using TMPro;
 using Unity.Services.Authentication;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 //name: auth
@@ -16,7 +17,13 @@ public class AuthentificationMenu : Panel
     [Header("Buttons")]
     [SerializeField] private Button signinButton = null;
     [SerializeField] private Button signupButton = null; 
-    [SerializeField] private Button anonymousButton = null; 
+    [SerializeField] private Button anonymousButton = null;
+
+    private ButtonImage signInBtn;
+    private ButtonImage signUpBtn;
+
+    private string userName = string.Empty;
+    private string password = string.Empty;
 
 
     public override void Initialize()
@@ -31,6 +38,9 @@ public class AuthentificationMenu : Panel
         signupButton.onClick.AddListener(SignUp);
         anonymousButton.onClick.AddListener(AnonymousSignIn);
 
+        usernameInput.onValueChanged.AddListener(OnUsernameChanged);
+        passwordInput.onValueChanged.AddListener(OnPasswordChanged);
+
         base.Initialize();
     }
 
@@ -38,8 +48,23 @@ public class AuthentificationMenu : Panel
     {
         usernameInput.text = "";
         passwordInput.text = "";
+
+        userName = usernameInput.text;
+        password = passwordInput.text;
+
+        signInBtn = signinButton.GetComponent<ButtonImage>();
+        signUpBtn = signupButton.GetComponent<ButtonImage>();
+
+        signInBtn.SetButtonColor(ButtonImage.ButtonColor.Disabled);
+        signinButton.interactable = false;
+
+        signUpBtn.SetButtonColor(ButtonImage.ButtonColor.Disabled);
+        signupButton.interactable = false;
+
         base.Open();
     }
+
+
 
     private void AnonymousSignIn()
     {
@@ -88,7 +113,9 @@ public class AuthentificationMenu : Panel
             else
             {
                 ErrorMenu panel = (ErrorMenu)PanelManager.GetSingleton("error");
-                panel.Open(ErrorMenu.Action.None, "Password must be 8-30 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one symbol.", "OK");
+                //Password must be 8-30 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one symbol. Error8
+                string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error08");
+                panel.Open(ErrorMenu.Action.None, errText, "OK");
             }
         }
     }
@@ -129,6 +156,35 @@ public class AuthentificationMenu : Panel
         }
 
         return hasUppercase && hasLowercase && hasDigit && hasSymbol;
+    }
+
+    private void OnUsernameChanged(string value)
+    {
+        userName = value;
+        ValidateForm();
+    }
+
+    private void OnPasswordChanged(string value)
+    {
+        password = value;
+        ValidateForm();
+    }
+
+    private void ValidateForm()
+    {
+        bool isValid =
+            userName.Length >= 3 &&
+            password.Length >= 8;
+
+        signinButton.interactable = isValid;
+        signupButton.interactable = isValid;
+
+        var color = isValid
+            ? ButtonImage.ButtonColor.Primary
+            : ButtonImage.ButtonColor.Disabled;
+
+        signInBtn.SetButtonColor(color);
+        signUpBtn.SetButtonColor(color);
     }
 
 }

@@ -2,7 +2,9 @@ using LTLRN.UI;
 using System;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 
 public class MenuManager : MonoBehaviour
@@ -114,7 +116,8 @@ public class MenuManager : MonoBehaviour
         catch (Exception exception)
         {
             Debug.LogException(exception);
-            string uiMessage = "Failed to sign you up.\n Error: " + FirstSentence(exception.Message);
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error01");
+            string uiMessage = locText + FirstSentence(exception.Message);            
             ShowError(ErrorMenu.Action.StartService, uiMessage, "Retry");
         }
     }
@@ -135,7 +138,7 @@ public class MenuManager : MonoBehaviour
 
             // Check and set default PlayerName if empty
             string timestamp = DateTime.Now.ToString("HHmmss");
-            string playerName = "GuestPlayer" + timestamp;
+            string playerName = "Guest" + timestamp;
             await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
 
             SaveNamePass(playerName, "");
@@ -156,12 +159,16 @@ public class MenuManager : MonoBehaviour
         catch (AuthenticationException exception)
         {
             Debug.LogException(exception);
-            ShowError(ErrorMenu.Action.OpenAuthMenu, "Failed to sign in." + exception, "OK");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error02");
+            ShowError(ErrorMenu.Action.OpenAuthMenu, errText + exception, "OK");
         }
         catch (RequestFailedException exception)
         {
             Debug.LogException(exception);
-            ShowError(ErrorMenu.Action.SignIn, "Failed to connect to the network."+ exception, "Retry");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error03");
+            //retry
+            string btnText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "RetryTxt01");
+            ShowError(ErrorMenu.Action.SignIn, errText + exception, btnText);
         }
     }
 
@@ -187,13 +194,15 @@ public class MenuManager : MonoBehaviour
         catch (AuthenticationException exception)
         {
             Debug.LogException(exception);
-            string uiMessage = "Username or password is wrong. Try again. \n Error: " + FirstSentence(exception.Message);
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error04");
+            string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
         catch (RequestFailedException exception)
         {
             Debug.LogException(exception);
-            string uiMessage = "Failed to login with current name and password. Try again. \n Error: " + FirstSentence(exception.Message);
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error05");
+            string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
     }
@@ -219,13 +228,16 @@ public class MenuManager : MonoBehaviour
         catch (AuthenticationException exception)
         {
             Debug.LogException(exception);
-            string uiMessage = "Failed to sign you up. Try again. \n Error: " + FirstSentence(exception.Message);
+            //Failed to sign you up. Try again. \n Error: 06
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error06");
+            string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
         catch (RequestFailedException exception)
         {
             Debug.LogException(exception);
-            string uiMessage = "Failed to sign you up. Try again. \n Error: " + FirstSentence(exception.Message);
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error06");
+            string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
     }
@@ -307,7 +319,9 @@ public class MenuManager : MonoBehaviour
         }
         catch (AuthenticationException exception)
         {
-            string uiMessage = "Problem with sign in.\n Error: " + FirstSentence(exception.Message);
+            //Problem with sign in.\n Error: Error07
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error07");
+            string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
     }

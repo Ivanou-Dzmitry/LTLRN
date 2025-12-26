@@ -72,6 +72,90 @@ MonoBehaviour:
       If you don't want to register, log in as a guest.
     m_Metadata:
       m_Items: []
+  - m_Id: 3614779467948032
+    m_Localized: Problem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3616172203368448
+    m_Localized: Feedback
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3620489354338304
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3621443713687552
+    m_Localized: How to play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3621867862679552
+    m_Localized: Authors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3622545347633152
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3622624657727488
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3624032920461312
+    m_Localized: Exit game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3630747392991232
+    m_Localized: 'Failed to sign you up.\n Error:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3631543522222080
+    m_Localized: Failed to sign in.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3631816537858048
+    m_Localized: Failed to connect to the network.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3632086642647040
+    m_Localized: 'Username or password is wrong. Try again. \n Error: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3632147686547456
+    m_Localized: 'Failed to login with current name and password. Try again. \n Error: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3632668321308672
+    m_Localized: 'Failed to sign you up. Try again. \n Error:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3633196937830400
+    m_Localized: Retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3633515851735040
+    m_Localized: 'Problem with sign in.\n Error: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644725527633920
+    m_Localized: 'Password must be 8-16 characters long and include at least one
+      uppercase letter, one lowercase letter, one digit, and one symbol.
+
+      Please
+      try again!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3657610689568768
+    m_Localized: Game mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3658425395372032
+    m_Localized: Adventure
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3658534564716544
+    m_Localized: Exercises
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

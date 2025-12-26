@@ -94,6 +94,105 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 3614779467948032
+    m_Key: 'ProblemTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3616172203368448
+    m_Key: 'FeedbackTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3620489354338304
+    m_Key: 'SettingsTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3621443713687552
+    m_Key: 'HowToPlayTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3621867862679552
+    m_Key: 'AuthorsTxt01
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3622545347633152
+    m_Key: 'CancelTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3622624657727488
+    m_Key: SaveTxt01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3624032920461312
+    m_Key: 'ExitGameTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3630747392991232
+    m_Key: Error01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3631543522222080
+    m_Key: Error02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3631816537858048
+    m_Key: Error03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3632086642647040
+    m_Key: Error04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3632147686547456
+    m_Key: Error05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3632668321308672
+    m_Key: Error06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3633196937830400
+    m_Key: RetryTxt01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3633515851735040
+    m_Key: Error07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3644725527633920
+    m_Key: Error08
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3657610689568768
+    m_Key: 'GameModeTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3658425395372032
+    m_Key: 'AdventureTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3658534564716544
+    m_Key: ExercisesTxt
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

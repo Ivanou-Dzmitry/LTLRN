@@ -5,10 +5,15 @@ using LTLRN.UI;
 
 public class ErrorMenu : Panel
 {
-
+    [Header("Error stuff")]
     [SerializeField] private TextMeshProUGUI errorText = null;
     [SerializeField] private TextMeshProUGUI buttonText = null;
+
+    [Header("Buttons")]
     [SerializeField] private Button actionButton = null;
+    [SerializeField] private Button feedbackButton;
+    
+    //error panel
 
     public enum Action
     {
@@ -23,7 +28,10 @@ public class ErrorMenu : Panel
         {
             return;
         }
+        
         actionButton.onClick.AddListener(ButtonAction);
+        feedbackButton.onClick.AddListener(OpenFeedbackPage);
+
         base.Initialize();
     }
 
@@ -64,5 +72,11 @@ public class ErrorMenu : Panel
                 break;
         }
     }
-    
+
+
+    public void OpenFeedbackPage()
+    {
+        Application.OpenURL("https://forms.gle/ymN8Bg9UsPLd2tJX9");
+    }
+
 }
