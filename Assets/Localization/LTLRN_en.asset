@@ -17,7 +17,61 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: a86b47b9336c0714aaab30bf085e0617, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 3524420230504448
+    m_Localized: 'You are logged in under the name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3524639202533376
+    m_Localized: If you want to choose a different name - select "Sign Out".
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3525472950476800
+    m_Localized: Hello!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3538512995475456
+    m_Localized: Sign Out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3542815143419904
+    m_Localized: Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3543308309684224
+    m_Localized: 8-16 characters, uppercase, and lowercase letter, digit, and symbol.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3546549797838848
+    m_Localized: From 3 characters, uppercase, and lowercase letter, and digit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3548290299781120
+    m_Localized: Username...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3548414828666880
+    m_Localized: Password...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3549082847076352
+    m_Localized: Sign In
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3549204238622720
+    m_Localized: Sign In as Guest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3551600532578304
+    m_Localized: Registration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3559327765946368
+    m_Localized: If you have an account, enter your username and password and click
+      Login. If you don't have an account, create a username and password and register.
+      If you don't want to register, log in as a guest.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

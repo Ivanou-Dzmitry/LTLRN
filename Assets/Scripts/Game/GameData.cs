@@ -17,6 +17,8 @@ public class SaveData
     public string playerPass;
     public int playerIconIndex;
 
+    public string lang = "en";
+
     //bonus stuff
     [Header("Resources")]
     public int stars;
@@ -117,6 +119,9 @@ public class GameData : MonoBehaviour
         gameData.saveData.playerName = "DefaultPlayerName";
         gameData.saveData.playerPass = "";
         gameData.saveData.playerIconIndex = 0;
+
+        //language
+        saveData.lang = "en";
 
         //bonus stuff
         gameData.saveData.stars = 0;

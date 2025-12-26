@@ -14,7 +14,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: LTLRN
   m_TableCollectionNameGuidString: a86b47b9336c0714aaab30bf085e0617
-  m_Entries: []
+  m_Entries:
+  - m_Id: 3524420230504448
+    m_Key: 'LogInInfo01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3524639202533376
+    m_Key: 'LogInInfo02
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3525472950476800
+    m_Key: 'HelloTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3538512995475456
+    m_Key: 'SignOutTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3542815143419904
+    m_Key: 'LoginTxt01
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3543308309684224
+    m_Key: 'PassRuleTxt01
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3546549797838848
+    m_Key: 'NameRule01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3548290299781120
+    m_Key: UsernamePlace01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3548414828666880
+    m_Key: 'PassPlace01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3549082847076352
+    m_Key: 'SignInTxt01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3549204238622720
+    m_Key: 'SignInGuestTxt01
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3551600532578304
+    m_Key: 'RegText01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3559327765946368
+    m_Key: 'LogInRuleTxt01
+
+'
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
