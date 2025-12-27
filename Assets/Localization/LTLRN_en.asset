@@ -156,6 +156,10 @@ MonoBehaviour:
     m_Localized: Exercises
     m_Metadata:
       m_Items: []
+  - m_Id: 3868160870637568
+    m_Localized: Leaderboard
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

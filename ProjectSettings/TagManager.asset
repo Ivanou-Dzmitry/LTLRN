@@ -10,6 +10,7 @@ TagManager:
   - ExDataLoader
   - DBUtils
   - ExGameLogic
+  - LeaderboardManager
   layers:
   - Default
   - TransparentFX

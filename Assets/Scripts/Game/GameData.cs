@@ -116,7 +116,7 @@ public class GameData : MonoBehaviour
         //score
         gameData.saveData.totalScore = 0;
 
-        gameData.saveData.playerName = "DefaultPlayerName";
+        gameData.saveData.playerName = "Player";
         gameData.saveData.playerPass = "";
         gameData.saveData.playerIconIndex = 0;
 
@@ -141,6 +141,12 @@ public class GameData : MonoBehaviour
         // Ensure life is at least 1
         if (gameData.saveData.life == 0)
             gameData.saveData.life = 5;
+
+
+        if (saveData.lang == string.Empty)
+        {
+            saveData.lang = "en";
+        }
 
         SaveToFile();
     }

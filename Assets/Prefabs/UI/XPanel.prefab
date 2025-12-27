@@ -550,6 +550,7 @@ GameObject:
   - component: {fileID: 1602875241463836874}
   - component: {fileID: 2121453825127293250}
   - component: {fileID: 8409249465141344169}
+  - component: {fileID: 8389014051892254663}
   m_Layer: 5
   m_Name: XPanel
   m_TagString: Untagged
@@ -642,6 +643,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &8389014051892254663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6409384696753180353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3e21c88f4bcfe4db4c07e9b4e8cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocRefresh
 --- !u!1001 &1464876071836705409
 PrefabInstance:
   m_ObjectHideFlags: 0

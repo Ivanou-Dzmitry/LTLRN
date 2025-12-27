@@ -2,7 +2,6 @@ using LTLRN.UI;
 using System;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
