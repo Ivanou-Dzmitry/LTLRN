@@ -6,7 +6,9 @@ public class BaseTextAsset : MonoBehaviour
     public enum TextColor
     {
         Primary,
-        Secondary
+        Secondary,
+        Gray6Light,
+        Gray6Dark
     }
 
     public enum TextSize
@@ -45,6 +47,8 @@ public class BaseTextAsset : MonoBehaviour
         {
             TextColor.Primary => palette.TextPrimary,
             TextColor.Secondary => palette.TextSecondary,
+            TextColor.Gray6Light => palette.Gray6Ligth,
+            TextColor.Gray6Dark => palette.Gray6Dark,
             _ => palette.TextPrimary
         };
     }

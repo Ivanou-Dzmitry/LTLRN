@@ -21,6 +21,8 @@ MonoBehaviour:
   TransparentPanel: {r: 1, g: 1, b: 1, a: 0}
   TextPrimary: {r: 0, g: 0, b: 0, a: 1}
   TextSecondary: {r: 1, g: 1, b: 1, a: 1}
+  Gray6Ligth: {r: 0.9490196, g: 0.9490196, b: 0.96862745, a: 1}
+  Gray6Dark: {r: 0.10980392, g: 0.10980392, b: 0.11764706, a: 1}
   Success: {r: 0.34901962, g: 0.4509804, b: 0.09803922, a: 1}
   Warning: {r: 0.84705883, g: 0.41568628, b: 0.21568629, a: 1}
   Error: {r: 0.64705884, g: 0.1254902, b: 0.07450981, a: 1}

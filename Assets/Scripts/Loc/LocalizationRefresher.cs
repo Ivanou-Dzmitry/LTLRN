@@ -38,7 +38,7 @@ public class LocalizationRefresher : MonoBehaviour
     {
         var localizedStrings = GetComponentsInChildren<LocalizeStringEvent>(true);
 
-        Debug.Log($"Found {localizedStrings.Length} localized components");
+        //Debug.Log($"Found {localizedStrings.Length} localized components");
 
         foreach (var localizedString in localizedStrings)
         {

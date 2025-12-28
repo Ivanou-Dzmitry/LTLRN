@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using static Question;
+using static QuestionT01;
 
 [CreateAssetMenu(fileName = "Section", menuName = "Scriptable Objects/Section")]
 public class Section : ScriptableObject
@@ -29,5 +29,5 @@ public class Section : ScriptableObject
 
 
 
-    public Question[] questions;
+    public QuestionT01[] questions;
 }

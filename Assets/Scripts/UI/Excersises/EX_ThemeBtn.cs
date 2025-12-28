@@ -9,8 +9,6 @@ public class EX_ThemeBtn : MonoBehaviour
     private ExDataLoader dataLoader;
     private GameData gameData;
 
-    private bool isSelected = false;
-
     [Header("UI")]
     public Button button;
     public TMP_Text themeName;
@@ -35,9 +33,6 @@ public class EX_ThemeBtn : MonoBehaviour
         //sety color
         Image buttonImg = button.GetComponent<Image>();
         buttonImg.color = palette.PrimaryLight;
-
-        //set default colors
-        //SetSelected(false);
     }
 
     private void OnClicked()
@@ -57,26 +52,10 @@ public class EX_ThemeBtn : MonoBehaviour
         PanelManager.Open("exmain");
 
         dataLoader.LoadData();
-
-        isSelected = true;
-
-        //SetSelected(true);
     }
 
-/*    public void SetSelected(bool selected)
+    private void OnDestroy()
     {
-        if (selected)
-        {
-            buttonImage.color = palette.Primary;
-            themeName.color = palette.TextPrimary;
-            themeDescription.color = palette.TextPrimary;
-        }
-        else
-        {
-            buttonImage.color = palette.PrimaryLight;
-            themeName.color = palette.TextSecondary;
-            themeDescription.color = palette.TextSecondary;
-        }
-    }*/
-
+        button.onClick.RemoveListener(OnClicked);        
+    }
 }

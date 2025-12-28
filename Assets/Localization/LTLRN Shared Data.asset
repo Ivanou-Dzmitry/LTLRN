@@ -197,6 +197,60 @@ MonoBehaviour:
     m_Key: LeadBoardTxt
     m_Metadata:
       m_Items: []
+  - m_Id: 4019473675771904
+    m_Key: 'RankTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4019566936121344
+    m_Key: PlayerNameTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4019735530364928
+    m_Key: ScoreTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4041299126706176
+    m_Key: ThemesTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4041682511257600
+    m_Key: 'ChooseThemeTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4250573723459584
+    m_Key: ProgressTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4250646159089664
+    m_Key: BestTimeTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4253196644048896
+    m_Key: RandomTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4267621065220096
+    m_Key: ShopTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4306113321295872
+    m_Key: ExitTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4306477714038784
+    m_Key: 'ReturnTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4306818278940672
+    m_Key: ExitPanelTxt01
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

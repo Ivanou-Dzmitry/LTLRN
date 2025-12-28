@@ -20,6 +20,8 @@ public class UIColorPalette : ScriptableObject
     [Header("Texts")]
     public Color TextPrimary;
     public Color TextSecondary;
+    public Color Gray6Ligth;
+    public Color Gray6Dark;
 
     [Header("Info colors")]
     public Color Success;

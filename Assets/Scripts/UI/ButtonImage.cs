@@ -27,6 +27,16 @@ public class ButtonImage : MonoBehaviour
         Disabled
     }
 
+    public enum ButtonState
+    {
+        Normal,
+        Disabled,
+        Selected
+    }
+
+    [Header("ButtonState")]
+    public ButtonState currentState = ButtonState.Normal;
+
     [Header("Palette")]
     [SerializeField] private UIColorPalette palette;
 
@@ -78,12 +88,21 @@ public class ButtonImage : MonoBehaviour
 
         if (!button.interactable)
         {
-            Debug.Log("Button is disabled, applying disabled color.");
+            //
+            //Debug.Log("Button is disabled, applying disabled color.");
             buttonImage.color = palette.DisabledButton;
             return;
         }
 
-        buttonImage.color = GetButtonColor(selectedButtonColor);
+        if(currentState == ButtonState.Normal)
+        {
+            buttonImage.color = GetButtonColor(selectedButtonColor);
+        }
+        else if(currentState == ButtonState.Selected)
+        {
+            buttonImage.color = GetButtonColor(ButtonColor.PrimaryLight);
+        }
+            
     }
 
     private Color GetButtonColor(ButtonColor color)
@@ -134,6 +153,18 @@ public class ButtonImage : MonoBehaviour
     {
         buttonText.text = text;
         ApplyButtonText();
+    }
+
+    public void SetDisabled(bool disabled)
+    {
+        button.interactable = !disabled;
+        ApplyButtonColor();
+    }
+
+    public void SetSelected(bool selected)
+    {
+        currentState = selected ? ButtonState.Selected : ButtonState.Normal;
+        ApplyButtonColor();
     }
 
     public void RefreshState()

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351b13381c0821045b4f77b8da9f1b62, type: 3}
   m_Name: S02M
   m_EditorClassIdentifier: Assembly-CSharp::SectionManager
-  themeName: Theme 2
+  themeName: Theme 02
   themeIcon: {fileID: 0}
-  themeDescription: Theme 2 description. Just test theme
+  themeDescription: Theme 02 description. Just for example.
   sections:
   - {fileID: 11400000, guid: 4cdf71e0674346f4b8539b198a1ed2b3, type: 2}
   - {fileID: 11400000, guid: d6ceefccca08f6b44b86615af5dce2f4, type: 2}

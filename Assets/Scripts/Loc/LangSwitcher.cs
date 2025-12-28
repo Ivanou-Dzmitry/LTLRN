@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Localization.Settings;
 using TMPro;
 
+//language switcher for multiple dropdowns
+
 public class LanguageSwitcher : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown languageDropdown;

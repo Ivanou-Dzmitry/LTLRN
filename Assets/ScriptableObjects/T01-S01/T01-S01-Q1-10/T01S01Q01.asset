@@ -17,14 +17,48 @@ MonoBehaviour:
   questionDifficulty: 0
   questionType: 0
   questionDescription: 
-  questionText: Vienas
-  questionSprite: {fileID: 0}
-  answerVariantsText:
-  - 2
-  - 1
-  - 8
-  - 6
-  answerVariantsSprite: []
+  isQuestionTextOnly: 0
+  questionText: Vienas text
+  questionReference:
+    tableName: Numerals
+    columnName: Word
+    recordID: 1
+    value: vienas
+    whereColumn: ID
+    whereValue: 
+  qSpriteFile: 
+  answerReferences:
+  - tableName: Numerals
+    columnName: Digit
+    recordID: 2
+    value: 2
+    whereColumn: ID
+    whereValue: 
+  - tableName: Numerals
+    columnName: Digit
+    recordID: 1
+    value: 1
+    whereColumn: ID
+    whereValue: 
+  - tableName: Numerals
+    columnName: Digit
+    recordID: 8
+    value: 8
+    whereColumn: ID
+    whereValue: 
+  - tableName: Numerals
+    columnName: Digit
+    recordID: 6
+    value: 6
+    whereColumn: ID
+    whereValue: 
+  answerImageReferences: []
+  soundReferences:
+  - tableName: Numerals
+    columnName: Sound
+    recordID: 1
+    value: 1_lt.mp3
+    whereColumn: ID
+    whereValue: 
   correctAnswerNumber: 1
-  qSoundClipName: []
   rewardAmount: 1
