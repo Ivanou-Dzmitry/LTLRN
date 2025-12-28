@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class SoundManager : MonoBehaviour
 
     private LogManager logClass;
     private const string className = "SoundManager:";
+
+    //loading
+    private const string AUDIO_ROOT = "Sound/Audio/LT";
+    private static Dictionary<string, AudioClip> audioCache = new Dictionary<string, AudioClip>();
+    private static bool isAudioCacheLoaded = false;
 
     //public static SoundManager Instance;
 
@@ -325,7 +331,53 @@ public class SoundManager : MonoBehaviour
 
     public void SetSoundSpeed(float speed)
     {             
+        //set and save speed
         effectsSource.pitch = speed;
+    }
+
+
+
+    public AudioClip LoadAudioClipByName(string clipName)
+    {
+        if (string.IsNullOrEmpty(clipName))
+            return null;
+
+        // Remove file extension if present
+        clipName = System.IO.Path.GetFileNameWithoutExtension(clipName);
+
+        //Debug.Log(clipName);
+
+        // Load all clips into cache on first use
+        if (!isAudioCacheLoaded)
+        {
+            LoadAudioCache();
+        }
+
+        // Try to get from cache
+        if (audioCache.TryGetValue(clipName, out AudioClip clip))
+        {
+            return clip;
+        }
+
+        Debug.LogWarning($"AudioClip not found: {clipName}");
+        return null;
+    }
+
+    private void LoadAudioCache()
+    {
+        audioCache.Clear();
+        AudioClip[] allClips = Resources.LoadAll<AudioClip>(AUDIO_ROOT);
+
+        foreach (var clip in allClips)
+        {
+            if (!audioCache.ContainsKey(clip.name))
+            {
+                audioCache[clip.name] = clip;
+            }
+        }
+
+        isAudioCacheLoaded = true;
+        Debug.Log($"Loaded {audioCache.Count} audio clips from {AUDIO_ROOT}");
     }
 
 }

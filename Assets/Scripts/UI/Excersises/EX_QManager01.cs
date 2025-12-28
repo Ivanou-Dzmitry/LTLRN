@@ -29,13 +29,6 @@ public class ExQManager01 : MonoBehaviour
     public AudioClip qAudioClip;
     //public Button soundBtn;
 
-/*    //buttons
-    private ButtonImage a01Btn;
-    private ButtonImage a02Btn;
-    private ButtonImage a03Btn;
-    private ButtonImage a04Btn;*/
-
-
     //new structure for answers
     [System.Serializable]
     public class AnswerButton
@@ -156,6 +149,12 @@ public class ExQManager01 : MonoBehaviour
     public int GetSelectedAnswerIndex()
     {
         return selectedAnswerIndex;
+    }
+
+    private void OnDestroy()
+    {
+        //remove listeners
+        soundBtn.onClick.RemoveListener(playSoundClicked);
     }
 
 }

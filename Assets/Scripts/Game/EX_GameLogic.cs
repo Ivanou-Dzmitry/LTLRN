@@ -18,6 +18,7 @@ public class ExGameLogic : MonoBehaviour
 
     private GameData gameData;
     private DBUtils dbUtils;
+    private SoundManager soundManager;
 
     [Header("Game Info")]
     public Slider progressBar;
@@ -95,14 +96,15 @@ public class ExGameLogic : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Database is ready!");
+        //Debug.Log("Database is ready!");
         LoadGameData();
     }
 
     private void LoadGameData()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-     
+        soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+
         //load theme
         if (gameData != null)
         {
@@ -118,7 +120,7 @@ public class ExGameLogic : MonoBehaviour
                 currentQuestion = currentSection.questions[0];            
         }
 
-        //load question
+        //load question IMPORTANT
         if (currentQuestion != null)
             QLoad(currentQuestion);
 
@@ -136,26 +138,33 @@ public class ExGameLogic : MonoBehaviour
     {       
         QuestionData data = new QuestionData();
 
-
-
-        Debug.Log("TX: " + data.questionText);
-
         data.questionText = DBUtils.Instance.ResolveReference(question.questionReference);
 
         // Load answer texts
-        data.answerVariantsText = new string[question.answerReferences.Length];
+        int answersCount = question.answerReferences.Length;
 
-        for (int i = 0; i < question.answerReferences.Length; i++)
+        if (answersCount > 0)
         {
-            data.answerVariantsText[i] = DBUtils.Instance.ResolveReference(question.answerReferences[i]);
+            data.answerVariantsText = new string[answersCount];
+
+            for (int i = 0; i < question.answerReferences.Length; i++)
+            {
+                data.answerVariantsText[i] = DBUtils.Instance.ResolveReference(question.answerReferences[i]);
+            }
         }
 
         // Load sound clips
-/*        data.qSoundClipName = new string[question.soundReferences.Length];
-        for (int i = 0; i < question.soundReferences.Length; i++)
+        int sondCount = question.soundReferences.Length;
+
+        if (sondCount > 0)
         {
-            data.qSoundClipName[i] = DBUtils.Instance.ResolveReference(question.soundReferences[i]);
-        }*/
+            data.qSoundClipName = new string[sondCount];
+
+            for (int i = 0; i < question.soundReferences.Length; i++)
+            {
+                data.qSoundClipName[i] = DBUtils.Instance.ResolveReference(question.soundReferences[i]);
+            }
+        }
 
         // Copy other data
         //data.questionText = question.questionText;
@@ -167,6 +176,7 @@ public class ExGameLogic : MonoBehaviour
 
     private void QLoad(QuestionT01 question)
     {
+        //step 1 - load DB
         QuestionData data = LoadQuestionData(question);
 
         //clear previous question
@@ -175,7 +185,7 @@ public class ExGameLogic : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        //question type 1 loader
+        //step 2 - question type 1 loader
         if (question.questionType == QuestionType.Type1)
         {
             questionInstance = Instantiate(questionPrefab, questionArea);
@@ -203,8 +213,13 @@ public class ExGameLogic : MonoBehaviour
                     qData.qestionText.text = data.questionText;
                 }
 
+                //set answers
                 qData.SetAnswers(data.answerVariantsText);
 
+                //Debug.Log("AC="+data.qSoundClipName[0]);
+
+                //load sound
+                qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
             }
         }
 

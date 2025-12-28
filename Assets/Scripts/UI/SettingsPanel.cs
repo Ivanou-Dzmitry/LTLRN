@@ -41,6 +41,9 @@ public class SettingsPanel : Panel
     //for user avatar
     public CarouselImages userAvatarCarousel;
 
+    private const float NORMAL_SPEED = 1f;
+    private const float FAST_SPEED = 0.75f;
+
     public override void Initialize()
     {
         if (IsInitialized)
@@ -50,7 +53,7 @@ public class SettingsPanel : Panel
 
         musicButton.onClick.AddListener(MusicToggle);
 
-        if(feedbackButton !=null)
+        if(feedbackButton != null)
             feedbackButton.onClick.AddListener(OpenFeedbackPage);
 
         base.Initialize();
@@ -115,8 +118,15 @@ public class SettingsPanel : Panel
         else
             musicBtnImg.sprite = imagesGallery.musicSprites[1];
 
+        float vsliderval = gameData.saveData.soundSpeed;
+
+        if (vsliderval == 1)
+            soundSpeedSlider.value = 1;
+        else
+            soundSpeedSlider.value = 0;
+
         //sound speed
-        soundSpeedSlider.value = gameData.saveData.soundSpeed;
+        //soundSpeedSlider.value = gameData.saveData.soundSpeed;
 
         if (soundSpeedSlider.value == 1)
         {
@@ -158,13 +168,16 @@ public class SettingsPanel : Panel
         if(soundSpeedSlider.value == 1)
         {
             speedBtnImg.sprite = imagesGallery.soundSpeedSprites[0];
-            speed = 1f;
+            speed = NORMAL_SPEED;
         }
         else if(soundSpeedSlider.value == 0)
         {
             speedBtnImg.sprite = imagesGallery.soundSpeedSprites[1];
-            speed = 0.5f;
+            speed = FAST_SPEED;
         }
+
+        gameData.saveData.soundSpeed = speed;
+        gameData.SaveToFile();
 
         soundManager.SetSoundSpeed(speed);
     }
@@ -196,10 +209,17 @@ public class SettingsPanel : Panel
             musicBtnImg.sprite = imagesGallery.musicSprites[1];
         }
     }
-
-
     public void OpenFeedbackPage()
     {
         Application.OpenURL("https://forms.gle/ymN8Bg9UsPLd2tJX9");
+    }
+
+
+    private void OnDestroy()
+    {
+        //remove listeners
+        soundButton.onClick.RemoveListener(SoundToggle);
+        musicButton.onClick.RemoveListener(MusicToggle);        
+        feedbackButton.onClick.RemoveListener(OpenFeedbackPage);
     }
 }
