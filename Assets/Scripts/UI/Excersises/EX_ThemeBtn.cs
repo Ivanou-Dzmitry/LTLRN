@@ -13,8 +13,14 @@ public class EX_ThemeBtn : MonoBehaviour
     public Button button;
     public TMP_Text themeName;
     public TMP_Text themeDescription;
-    public Image buttonImage;
+    public Image themeIcon;
+    public TMP_Text themeDifficulty;
+    //public Image buttonImage;
     public int themeIndex;
+
+    [Header("Panels")]
+    public GameObject topPanel;
+    public GameObject bottomPanel;
 
     [Header("Palette")]
     [SerializeField] private UIColorPalette palette;
@@ -30,9 +36,12 @@ public class EX_ThemeBtn : MonoBehaviour
 
         button.onClick.AddListener(OnClicked);
 
-        //sety color
-        Image buttonImg = button.GetComponent<Image>();
-        buttonImg.color = palette.PrimaryLight;
+        //set colors
+        Image topPnlImg = topPanel.GetComponent<Image>();   
+        Image botPnlImg = bottomPanel.GetComponent<Image>();
+
+        topPnlImg.color = palette.PrimaryLight;
+        botPnlImg.color = palette.Gray6Ligth;
     }
 
     private void OnClicked()

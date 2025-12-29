@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static QuestionT01;
@@ -12,6 +13,13 @@ public class Section : ScriptableObject
         Type3
     }
 
+    public enum DifficultyType
+    {
+        Simple,
+        Medium,
+        Hard
+    }
+
     //Description:
     //type1 - with next button
     //type2 - without next button. Result at the end.
@@ -19,14 +27,27 @@ public class Section : ScriptableObject
     [Header("Type")]
     public SectionType sectionType = SectionType.Type1;
 
+    [Header("Difficulty")]
+    public DifficultyType difficultyType = DifficultyType.Simple;
+
     [Header("UI")]
     public int sectionNumber;
     public Sprite sectionIcon;
-    public string sectionTitle;
-    public string sectionDescription;
     public Color sectionHeaderColor;
     public bool isLiked;
 
+    [Header("Title")]
+    public LocalizedText sectionTitle;
+
+    [System.Serializable]
+    public class LocalizedText
+    {
+        [TextArea] public string ru;
+        [TextArea] public string en;
+    }
+
+    [Header("Description")]
+    public LocalizedText sectionDescription;
 
 
     public QuestionT01[] questions;

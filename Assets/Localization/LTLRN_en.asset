@@ -173,11 +173,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4041299126706176
-    m_Localized: Themes
+    m_Localized: Topics
     m_Metadata:
       m_Items: []
   - m_Id: 4041682511257600
-    m_Localized: 'Choose theme.
+    m_Localized: 'Select a topic to study or review
 
 '
     m_Metadata:

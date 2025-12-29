@@ -1,5 +1,7 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class ExDataLoader : MonoBehaviour
 {
@@ -94,65 +96,62 @@ public class ExDataLoader : MonoBehaviour
 
         for (int i = 0; i < totalSections; i++)
         {
-            GameObject panel = Instantiate(sectionPanelPrefab, sectionsRectTransform);
-           
-            // Ensure correct UI transform values
-            RectTransform rt = panel.GetComponent<RectTransform>();
-            rt.localScale = Vector3.one;
-            rt.localPosition = Vector3.zero;
-
             // OPTIONAL: initialize panel data
             Section section = sectionManager.sections[i];
 
-            //set UI name
-
-            string sectionName = section.name;
-            panel.name = sectionName;
-
-            //db utils
-            dbUtils.EnsureSectionExists(panel.name);
-
-            SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
-            sectionPanel.Initialize(section);
-
-            //fill section data
-            if (section.sectionIcon != null)
-                sectionPanel.sectionImage.sprite = section.sectionIcon;
-
-            //set name and description
-            sectionPanel.sectionHeaderText.text = section.sectionTitle;
-            sectionPanel.sectionDescriptionText.text = section.sectionDescription;
-
-            //set likes
-            bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
-            sectionPanel.SetLikedState(isLiked);
-
-            sectionPanel.currentSection = section;
-            sectionPanel.sectionIndex = i;
-
-            //set progress slider max value
-            //Sections count
             if (section.questions.Length > 0 && section.questions != null)
             {
-                sectionPanel.progressSlider.maxValue = section.questions.Length;
-            }
+                GameObject panel = Instantiate(sectionPanelPrefab, sectionsRectTransform);
 
-            //disable play button if no questions
-            sectionPanel.PlayButtonToggle(section.questions.Length);
+                // Ensure correct UI transform values
+                RectTransform rt = panel.GetComponent<RectTransform>();
+                rt.localScale = Vector3.one;
+                rt.localPosition = Vector3.zero;
 
-            if (section.questions.Length > 0 && section.questions != null)
-            {
-                for (int j = 0; j < section.questions.Length; j++)
+                //set UI name
+                string sectionName = section.name;
+                panel.name = sectionName;
+
+                //db utils
+                dbUtils.EnsureSectionExists(panel.name);
+
+                //get section
+                SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
+                sectionPanel.Initialize(section);
+
+                //fill section data
+                if (section.sectionIcon != null)
+                    sectionPanel.sectionImage.sprite = section.sectionIcon;
+
+                //set name ru en
+                sectionPanel.sectionHeaderText.text = sectionPanel.GetTitle(section);
+
+                //description loader ru en
+                sectionPanel.sectionDescriptionText.text = sectionPanel.GetDescription(section);
+
+                //set likes
+                bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
+                sectionPanel.SetLikedState(isLiked);
+
+                sectionPanel.currentSection = section;
+                sectionPanel.sectionIndex = i;
+
+                //set progress slider max value
+                //Sections count
+                if (section.questions.Length > 0 && section.questions != null)
                 {
-/*                    GameObject button = Instantiate(questionBtnPrefab, sectionPanel.questionsRectTransform);
-                    button.name = "S" + i + "Button" + j.ToString();
+                    sectionPanel.progressSlider.maxValue = section.questions.Length;
+                }
 
-                    QuestionButton btn = button.GetComponent<QuestionButton>();
+                //disable play button if no questions
+                sectionPanel.PlayButtonToggle(section.questions.Length);
 
-                    int fixedNumber = j + 1;
-
-                    if (btn != null)
-                        btn.qBtnText.text = $"{fixedNumber}";*/
+                if (section.questions.Length > 0 && section.questions != null)
+                {
+                    for (int j = 0; j < section.questions.Length; j++)
+                    {
+                        //optional
+                    }
                 }
             }
 

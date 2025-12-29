@@ -1,7 +1,9 @@
 using LTLRN.UI;
-using System.ComponentModel;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -20,7 +22,7 @@ public class EX_MainPanel : Panel
     public Button starsBtn;
 
     [Header("Theme")]
-    public Button themeButton;
+    public Button themeButton; //run theme selector
     private ButtonImage themeButtonData;
 
     [Header("Like filter")]
@@ -63,12 +65,14 @@ public class EX_MainPanel : Panel
     public override void Open()
     {
         LoadGameData();
+
         base.Open();
     }
 
     private void Start()
     {
-        LoadGameData();     
+        LoadGameData(); 
+        
         base.Open();
         SetPanelHeight();
     }
@@ -77,6 +81,7 @@ public class EX_MainPanel : Panel
     {
         //get gamedata
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        
         //get exdataloader
         exDataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
         
@@ -96,9 +101,9 @@ public class EX_MainPanel : Panel
             //update theme button text
             if (currentTheme != null)
             {
-                themeButtonData.buttonTextStr = currentTheme.themeName;
+                themeButtonData.buttonTextStr = GetTitle(currentTheme);
                 themeButtonData.RefreshState();
-            }
+            }            
         }
     }
 
@@ -173,6 +178,40 @@ public class EX_MainPanel : Panel
     {
         //remove listeners
         likeFilterButton.onClick.RemoveListener(ToggleLikeFilter);
+    }
+
+    public string GetTitle(SectionManager theme)
+    {
+        if (theme == null || theme.themeName == null)
+            return string.Empty;
+
+        Locale locale = GetLocale();
+
+        if (locale == null)
+            return theme.themeName.en;
+
+        switch (locale.Identifier.Code)
+        {
+            case "ru":
+                return theme.themeName.ru;
+
+            case "en":
+            default:
+                return theme.themeName.en;
+        }
+    }
+
+    private Locale GetLocale()
+    {
+        string savedLang = gameData.saveData.lang.ToLower();
+
+        Locale locale = LocalizationSettings.AvailableLocales.Locales
+            .FirstOrDefault(l => l.Identifier.Code == savedLang);
+
+        if (locale != null)
+            LocalizationSettings.SelectedLocale = locale;
+
+        return locale;
     }
 
 }

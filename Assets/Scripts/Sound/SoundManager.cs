@@ -122,12 +122,12 @@ public class SoundManager : MonoBehaviour
         if(value)
         {            
             musicSource.mute = false;
-            musicSource.time = savedMusicTime;
+            //musicSource.time = savedMusicTime;
             PlayMusic(lastPlayedClip);
         }
         else
         {
-            savedMusicTime = musicSource.time;            
+            //savedMusicTime = musicSource.time;            
             musicSource.mute = true;
             lastPlayedClip = musicSource.clip;
         }            
@@ -220,7 +220,7 @@ public class SoundManager : MonoBehaviour
             }
 
             musicSource.volume = (fadeType == "fadeIn") ? 0f : originalVolume;
-            musicSource.time = savedMusicTime;
+            //musicSource.time = savedMusicTime;
             musicSource.Play();
 
             if (fadeType == "fadeIn")
@@ -251,15 +251,15 @@ public class SoundManager : MonoBehaviour
         if (musicClips == null || musicClips.Length == 0)
             return;
 
-        if (scene.buildIndex < 0 || scene.buildIndex >= musicClips.Length)
-        {
-            Debug.LogWarning(
-                $"No music clip assigned for scene index {scene.buildIndex}"
-            );
-            return;
-        }
+        /*        if (scene.buildIndex < 0 || scene.buildIndex >= musicClips.Length)
+                {
+                    Debug.LogWarning(
+                        $"No music clip assigned for scene index {scene.buildIndex}"
+                    );
+                    return;
+                }*/
 
-        lastPlayedClip = musicClips[scene.buildIndex];
+        lastPlayedClip = musicClips[0];
 
         if (gameData != null)
             PlayMusic(lastPlayedClip);

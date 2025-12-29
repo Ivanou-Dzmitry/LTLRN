@@ -1,9 +1,11 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 //panel for section
-
 public class SectionPanel : MonoBehaviour
 {
     private ExDataLoader dataLoader;
@@ -47,13 +49,15 @@ public class SectionPanel : MonoBehaviour
         //add listeners
         likeButton.onClick.AddListener(OnLike);
         playSectionButton.onClick.AddListener(OnClicked);
+
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
     }
 
     private void OnClicked()
     {
         //get data loader and game data
         dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        //gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
         //set current section
         if (dataLoader != null)
@@ -106,8 +110,8 @@ public class SectionPanel : MonoBehaviour
             sectionImage.sprite = section.sectionIcon;
 
         //set panel view
-        sectionHeaderText.text = section.sectionTitle;
-        sectionDescriptionText.text = section.sectionDescription;
+        sectionHeaderText.text = GetTitle(section);
+        sectionDescriptionText.text = GetDescription(section);
 
         //color header
         Image headerImage = headerPanel.GetComponent<Image>();
@@ -137,4 +141,61 @@ public class SectionPanel : MonoBehaviour
         likeButton.onClick.RemoveListener(OnLike);
         playSectionButton.onClick.RemoveListener(OnClicked);
     }
+
+    public string GetDescription(Section section)
+    {        
+        if (section == null || section.sectionDescription == null)
+            return string.Empty;
+        
+        Locale locale = GetLocale();
+
+        if (locale == null)
+            return section.sectionDescription.en;
+
+        switch (locale.Identifier.Code)
+        {
+            case "ru":
+                return section.sectionDescription.ru;
+
+            case "en":
+            default:
+                return section.sectionDescription.en;
+        }
+    }
+
+    public string GetTitle(Section section)
+    {        
+        if (section == null || section.sectionTitle == null)
+            return string.Empty;
+
+        Locale locale = GetLocale();
+
+        if (locale == null)
+            return section.sectionTitle.en;
+
+        switch (locale.Identifier.Code)
+        {
+            case "ru":
+                return section.sectionTitle.ru;
+
+            case "en":
+            default:
+                return section.sectionTitle.en;
+        }
+    }
+
+    private Locale GetLocale()
+    {
+        
+        string savedLang = gameData.saveData.lang.ToLower();
+
+        Locale locale = LocalizationSettings.AvailableLocales.Locales
+            .FirstOrDefault(l => l.Identifier.Code == savedLang);
+
+        if (locale != null)
+            LocalizationSettings.SelectedLocale = locale;
+
+        return locale;
+    }
+
 }

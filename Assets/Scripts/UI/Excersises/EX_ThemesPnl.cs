@@ -1,6 +1,9 @@
 using LTLRN.UI;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using System.Linq;
 
 //panel with theme choosed
 
@@ -8,6 +11,7 @@ public class EX_ThemesPanel : Panel
 {
     private GameData gameData;
     private DBUtils dbUtils;
+    private LanguageSwitcher languageSwitcher;
 
     private ExDataLoader dataLoader;
     public GameObject themeButtonPrefab;
@@ -17,6 +21,7 @@ public class EX_ThemesPanel : Panel
 
     public override void Open()
     {
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         base.Open();
     }
 
@@ -90,25 +95,83 @@ public class EX_ThemesPanel : Panel
             EX_ThemeBtn themeBtnComponent = themeButton.GetComponent<EX_ThemeBtn>();
 
             //load data into button component
-            themeBtnComponent.themeName.text = dataLoader.themes.theme[i].themeName;
-            themeBtnComponent.themeDescription.text = dataLoader.themes.theme[i].themeDescription;
+            themeBtnComponent.themeName.text = GetTitle(dataLoader.themes.theme[i]);
+            themeBtnComponent.themeDescription.text = GetDescription(dataLoader.themes.theme[i]);
             themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
-
+            //set icon
+            themeBtnComponent.themeIcon.sprite = dataLoader.themes.theme[i].themeIcon;
             themeBtnComponent.themeIndex = i;
+
+            //dificulty
+            themeBtnComponent.themeDifficulty.text = dataLoader.themes.theme[i].themeDifficulty.ToString(); ;
         }
     }
 
     //IMPORTANT - there we apply theme
     public void ApplySelectedTheme()
-    {
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-
+    {       
         if (dataLoader != null && dataLoader.tempSectionManager != null)
         {
             dataLoader.sectionManager = dataLoader.tempSectionManager;   
             gameData.saveData.selectedThemeIndex = dataLoader.tempThemeIndex;
             gameData.SaveToFile();
         }
+    }
+
+    public string GetDescription(SectionManager theme)
+    {
+        if (theme == null || theme.themeDescription == null)
+            return string.Empty;
+
+        Locale locale = GetLocale();
+
+        if (locale == null)
+            return theme.themeDescription.en;
+
+        switch (locale.Identifier.Code)
+        {
+            case "ru":
+                return theme.themeDescription.ru;
+
+            case "en":
+            default:
+                return theme.themeDescription.en;
+        }
+    }
+
+    public string GetTitle(SectionManager theme)
+    {
+        if (theme == null || theme.themeName == null)
+            return string.Empty;
+
+        Locale locale = GetLocale();
+
+        if (locale == null)
+            return theme.themeName.en;
+
+        switch (locale.Identifier.Code)
+        {
+            case "ru":
+                return theme.themeName.ru;
+
+            case "en":
+            default:
+                return theme.themeName.en;
+        }
+    }
+
+    private Locale GetLocale()
+    {
+
+        string savedLang = gameData.saveData.lang.ToLower();
+
+        Locale locale = LocalizationSettings.AvailableLocales.Locales
+            .FirstOrDefault(l => l.Identifier.Code == savedLang);
+
+        if (locale != null)
+            LocalizationSettings.SelectedLocale = locale;
+
+        return locale;
     }
 
 }

@@ -273,14 +273,6 @@ MonoBehaviour:
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
   qImage: {fileID: 938005955312371592}
   qestionText: {fileID: 7553812950146672215}
-  answer01Btn: {fileID: 5097484445337874948}
-  answer02Btn: {fileID: 6028393853406628772}
-  answer03Btn: {fileID: 1611832168717022130}
-  answer04Btn: {fileID: 9123337156017451564}
-  answer01: 
-  answer02: 
-  answer03: 
-  answer04: 
   qAudioClip: {fileID: 0}
   answerButtons:
   - button: {fileID: 5097484445337874948}
@@ -513,7 +505,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 952, y: 435}
+  m_SizeDelta: {x: 952, y: 512}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &74183819267602175
 CanvasRenderer:

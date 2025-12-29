@@ -1,17 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static Section;
 
 [CreateAssetMenu(fileName = "SectionManager", menuName = "Scriptable Objects/SectionManager")]
 public class SectionManager : ScriptableObject
 {
+    public enum ThemeDifficulty
+    {
+        Simple,
+        Medium,
+        Hard
+    }
+
+    [Header("Difficulty")]
+    public ThemeDifficulty themeDifficulty = ThemeDifficulty.Simple;
+
     [Header("Additional data")]
-    public string themeName;
     public Sprite themeIcon;
-    public string themeDescription;
+    public LocalizedText themeName;    
+    public LocalizedText themeDescription;
 
     [Header("Theme Sections")]
     public Section[] sections;
-    public int questionPerSection = 10;
+    public int questionsCount = 10;
 
 
     public int GetTotalQuestionCount()
