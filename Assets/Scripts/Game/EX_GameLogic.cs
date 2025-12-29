@@ -214,12 +214,20 @@ public class ExGameLogic : MonoBehaviour
                 }
 
                 //set answers
-                qData.SetAnswers(data.answerVariantsText);
-
-                //Debug.Log("AC="+data.qSoundClipName[0]);
+                if(question.isAnswerTextOnly)
+                {
+                    //text from question object
+                    qData.SetAnswers(question.answerVariantsText);
+                }
+                else
+                {
+                    //text from database
+                    qData.SetAnswers(data.answerVariantsText);
+                }                
 
                 //load sound
-                qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
+                if(data.qSoundClipName != null && data.qSoundClipName.Length > 0)
+                    qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
             }
         }
 
@@ -302,7 +310,7 @@ public class ExGameLogic : MonoBehaviour
             }
             else
             {
-                Debug.Log("Wrong answer!");
+                //Debug.Log("Wrong answer!");
                 qData.CheckAnswer(selectedIndex, correctIndex);
                 // Deduct lives, show error animation, etc.
             }

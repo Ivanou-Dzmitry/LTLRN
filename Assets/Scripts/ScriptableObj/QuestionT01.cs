@@ -61,7 +61,12 @@ public class QuestionT01 : ScriptableObject
 
     [Header("TEXT")]
 
-    [Header("Answer Database References")]
+    public bool isAnswerTextOnly = true; // Text or data from DB
+
+    [Header("TEXT: Answer")]
+    public string[] answerVariantsText;
+
+    [Header("TEXT: Answer Database References")]
     public DatabaseReference[] answerReferences;  // References to DB records
 
     [Header("IMAGE")]

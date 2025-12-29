@@ -27,6 +27,12 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   qSpriteFile: 
+  isAnswerTextOnly: 1
+  answerVariantsText:
+  - A1
+  - A2
+  - A3
+  - A4
   answerReferences: []
   answerImageReferences: []
   soundReferences: []

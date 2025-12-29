@@ -27,6 +27,8 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   qSpriteFile: 
+  isAnswerTextOnly: 0
+  answerVariantsText: []
   answerReferences:
   - tableName: Numerals
     columnName: Digit

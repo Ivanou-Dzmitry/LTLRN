@@ -102,7 +102,7 @@ public class ExQManager01 : MonoBehaviour
                 soundManager.PlaySound(qAudioClip);
         }
 
-        Debug.Log("Play sound clicked");
+        //Debug.Log("Play sound clicked");
     }
 
 

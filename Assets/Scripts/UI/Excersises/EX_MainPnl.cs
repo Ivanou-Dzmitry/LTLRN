@@ -41,7 +41,7 @@ public class EX_MainPanel : Panel
     public RectTransform scrollPanel;
 
     // for ui layout
-    private const float panel01Height = 128f;
+    private const float panel01Height = 96f;
     private const float panel03Height = 192f;
 
     private const float HEADER_HEIGHT = 152f;

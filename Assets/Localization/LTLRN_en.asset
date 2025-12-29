@@ -211,6 +211,22 @@ MonoBehaviour:
       lost and you'll lose one life.
     m_Metadata:
       m_Items: []
+  - m_Id: 4609390978166784
+    m_Localized: Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4610975259062272
+    m_Localized: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4611495738634240
+    m_Localized: Valid answers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4612580700221440
+    m_Localized: Replay
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

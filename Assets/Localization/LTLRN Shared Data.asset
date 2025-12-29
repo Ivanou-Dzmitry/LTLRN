@@ -251,6 +251,26 @@ MonoBehaviour:
     m_Key: ExitPanelTxt01
     m_Metadata:
       m_Items: []
+  - m_Id: 4609390978166784
+    m_Key: 'NextTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4610975259062272
+    m_Key: 'TimeTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4611495738634240
+    m_Key: ValidAnswerTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4612580700221440
+    m_Key: ReplayTxt
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
