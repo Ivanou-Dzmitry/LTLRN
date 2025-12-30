@@ -36,8 +36,8 @@ MonoBehaviour:
   answerReferences:
   - tableName: Numerals
     columnName: Digit
-    recordID: 9
-    value: 9
+    recordID: 2
+    value: 2
     whereColumn: ID
     whereValue: 
   - tableName: Numerals

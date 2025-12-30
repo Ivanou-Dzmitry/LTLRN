@@ -54,8 +54,8 @@ MonoBehaviour:
     whereValue: 
   - tableName: Numerals
     columnName: Digit
-    recordID: 7
-    value: 7
+    recordID: 13
+    value: 3
     whereColumn: ID
     whereValue: 
   answerImageReferences: []

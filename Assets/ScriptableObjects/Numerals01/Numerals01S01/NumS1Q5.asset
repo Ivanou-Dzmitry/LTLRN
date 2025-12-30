@@ -35,25 +35,25 @@ MonoBehaviour:
   - Answer 4
   answerReferences:
   - tableName: Numerals
-    columnName: ID
-    recordID: 3
-    value: 3
+    columnName: Digit
+    recordID: 1
+    value: 1
     whereColumn: ID
     whereValue: 
   - tableName: Numerals
-    columnName: ID
+    columnName: Digit
     recordID: 8
     value: 8
     whereColumn: ID
     whereValue: 
   - tableName: Numerals
-    columnName: ID
+    columnName: Digit
     recordID: 5
     value: 5
     whereColumn: ID
     whereValue: 
   - tableName: Numerals
-    columnName: ID
+    columnName: Digit
     recordID: 4
     value: 4
     whereColumn: ID
