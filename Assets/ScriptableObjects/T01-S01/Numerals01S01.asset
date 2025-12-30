@@ -19,12 +19,15 @@ MonoBehaviour:
   sectionHeaderColor: {r: 0, g: 0.7106918, b: 0.39208096, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435"
-    en: Numerals
+    ru: "\u041E\u0442 1 \u0434\u043E 10"
+    en: From 1 to 10
   sectionDescription:
     ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0446\u0438\u0444\u0440\u044B
-      \u043E\u0442 1 \u0434\u043E 10"
-    en: We study numbers from 1 to 10
+      \u043E\u0442 1 \u0434\u043E 10. \u0421\u043E\u043E\u0442\u043D\u043E\u0441\u0438\u043C
+      \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u0435 \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435
+      \u0438 \u0446\u0438\u0444\u0440\u0443"
+    en: We study numbers from 1 to 10. let's correlate the Lithuanian spelling and
+      the number.
   questions:
   - {fileID: 11400000, guid: b1ede00ede9333744ade6f228abb6d0b, type: 2}
   - {fileID: 11400000, guid: 5a15a317fe653c74b81380d68f2cde07, type: 2}
@@ -36,3 +39,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 60e8aae471ce6974d811806f8952fad4, type: 2}
   - {fileID: 11400000, guid: 5fd798bd2a62c77429a9f52a81d64caf, type: 2}
   - {fileID: 11400000, guid: 08cb90526d68d4640802cb83bc6fc37e, type: 2}
+  - {fileID: 11400000, guid: b81c2e8a2fb288c4f97e35b6e1354dfc, type: 2}

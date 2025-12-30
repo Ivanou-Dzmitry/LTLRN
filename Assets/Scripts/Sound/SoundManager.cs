@@ -358,14 +358,19 @@ public class SoundManager : MonoBehaviour
         {
             return clip;
         }
+        else
+        {
+            LoadAudioCache();
+        }
 
-        Debug.LogWarning($"AudioClip not found: {clipName}");
+            Debug.LogWarning($"AudioClip not found: {clipName}");
         return null;
     }
 
     private void LoadAudioCache()
     {
         audioCache.Clear();
+
         AudioClip[] allClips = Resources.LoadAll<AudioClip>(AUDIO_ROOT);
 
         foreach (var clip in allClips)
@@ -377,6 +382,7 @@ public class SoundManager : MonoBehaviour
         }
 
         isAudioCacheLoaded = true;
+
         Debug.Log($"Loaded {audioCache.Count} audio clips from {AUDIO_ROOT}");
     }
 

@@ -42,7 +42,7 @@ public class SettingsPanel : Panel
     public CarouselImages userAvatarCarousel;
 
     private const float NORMAL_SPEED = 1f;
-    private const float FAST_SPEED = 0.75f;
+    private const float SLOW_SPEED = 0.75f;
 
     public override void Initialize()
     {
@@ -173,7 +173,7 @@ public class SettingsPanel : Panel
         else if(soundSpeedSlider.value == 0)
         {
             speedBtnImg.sprite = imagesGallery.soundSpeedSprites[1];
-            speed = FAST_SPEED;
+            speed = SLOW_SPEED;
         }
 
         gameData.saveData.soundSpeed = speed;

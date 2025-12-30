@@ -10,25 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
-  m_Name: NumS1Q1
+  m_Name: NumS1Q2
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  uID: numq1
+  uID: numq2
   questionLang: 0
   questionDifficulty: 0
   questionType: 0
   questionDescription: 
   isQuestionTextOnly: 0
-  questionText: Vienas text
+  questionText: q2
   questionReference:
     tableName: Numerals
     columnName: Word
-    recordID: 1
-    value: vienas
+    recordID: 2
+    value: du
     whereColumn: ID
     whereValue: 
   qSpriteFile: 
   isAnswerTextOnly: 0
-  answerVariantsText: []
+  answerVariantsText:
+  - 0
+  - 0
+  - 0
+  - 0
   answerReferences:
   - tableName: Numerals
     columnName: Digit
@@ -38,8 +42,8 @@ MonoBehaviour:
     whereValue: 
   - tableName: Numerals
     columnName: Digit
-    recordID: 1
-    value: 1
+    recordID: 4
+    value: 4
     whereColumn: ID
     whereValue: 
   - tableName: Numerals
@@ -58,9 +62,9 @@ MonoBehaviour:
   soundReferences:
   - tableName: Numerals
     columnName: Sound
-    recordID: 1
-    value: 1_lt.mp3
+    recordID: 2
+    value: 2_lt.mp3
     whereColumn: ID
     whereValue: 
-  correctAnswerNumber: 1
+  correctAnswerNumber: 0
   rewardAmount: 1

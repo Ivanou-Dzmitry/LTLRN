@@ -271,6 +271,12 @@ MonoBehaviour:
     m_Key: ReplayTxt
     m_Metadata:
       m_Items: []
+  - m_Id: 4970380416675840
+    m_Key: 'DifficultyTxt
+
+'
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

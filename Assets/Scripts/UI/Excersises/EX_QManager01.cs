@@ -14,20 +14,17 @@ public class ExQManager01 : MonoBehaviour
     public Image qImage;
     [SerializeField] public TMP_Text qestionText;
 
-/*    [Header("Buttons")]
-    public Button answer01Btn;
-    public Button answer02Btn;
-    public Button answer03Btn;
-    public Button answer04Btn;
+    [Header("Ansver icons")]
+    public Sprite[] answerIcon;
 
-    [SerializeField] public string answer01;
-    [SerializeField] public string answer02;
-    [SerializeField] public string answer03;
-    [SerializeField] public string answer04;*/
 
     [Header("Sound")]
     public AudioClip qAudioClip;
     //public Button soundBtn;
+
+
+    [Header("Particles")]
+    public ParticleSystem playSoundPart;
 
     //new structure for answers
     [System.Serializable]
@@ -102,6 +99,8 @@ public class ExQManager01 : MonoBehaviour
                 soundManager.PlaySound(qAudioClip);
         }
 
+        playSoundPart.Play();
+
         //Debug.Log("Play sound clicked");
     }
 
@@ -129,14 +128,31 @@ public class ExQManager01 : MonoBehaviour
         }
 
         // Show correct answer in green
-        answerButtons[correctIndex].buttonImage.SetButtonColor(ButtonImage.ButtonColor.Success);
+        ButtonStateSwitcher(correctIndex, true);
 
         // If wrong answer was selected, show it in red
         if (selectedIndex != correctIndex)
         {
-            answerButtons[selectedIndex].buttonImage.SetButtonColor(ButtonImage.ButtonColor.Error);
+            ButtonStateSwitcher(selectedIndex, false);
         }
     }
+
+    private void ButtonStateSwitcher(int index, bool correct)
+    {
+        if (correct)
+        {
+            answerButtons[index].buttonImage.SetButtonColor(ButtonImage.ButtonColor.Success);
+            answerButtons[index].buttonImage.buttonIcon.sprite = answerIcon[0]; // right icon            
+        }
+        else
+        {
+            answerButtons[index].buttonImage.SetButtonColor(ButtonImage.ButtonColor.Disabled);
+            answerButtons[index].buttonImage.buttonIcon.sprite = answerIcon[1]; // wrong icon             
+        }
+
+        answerButtons[index].buttonImage.buttonIcon.color = palette.Gray6Ligth;
+    }
+
 
     public void ResetAnswerColors()
     {
