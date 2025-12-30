@@ -133,6 +133,10 @@ public class ExDataLoader : MonoBehaviour
                 bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
                 sectionPanel.SetLikedState(isLiked);
 
+                int progress = dbUtils.GetSectionProgress(section.name);
+                //get progress from BD
+                sectionPanel.progressSlider.value = progress;
+
                 sectionPanel.currentSection = section;
                 sectionPanel.sectionIndex = i;
 

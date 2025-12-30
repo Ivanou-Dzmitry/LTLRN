@@ -311,6 +311,40 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    public int GetSectionProgress(string sectionName)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return 0;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    return section.QDone;
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                    return 0;
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting section liked status: {ex.Message}");
+            return 0;
+        }
+    }
+
     // Generic method to get value from any table
     public string GetValue(string tableName, string columnName, int recordID)
     {

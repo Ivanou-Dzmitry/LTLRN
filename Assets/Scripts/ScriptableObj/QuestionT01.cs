@@ -8,8 +8,10 @@ public class QuestionT01 : ScriptableObject
     public enum QuestionLang
     {
         RU,
-        BY,
-        EN
+        LT,
+        EN,
+        Image,
+        Number
     }
 
     [Header("lang")]
@@ -51,7 +53,7 @@ public class QuestionT01 : ScriptableObject
     public bool isQuestionTextOnly = true; // Text or data from DB
 
     [Header("Question: text")]
-    public string questionText; // Text of the question
+    [TextArea] public string questionText; // Text of the question
 
     [Header("Question: Database References")]
     public DatabaseReference questionReference;  // References to DB records
@@ -64,7 +66,7 @@ public class QuestionT01 : ScriptableObject
     public bool isAnswerTextOnly = true; // Text or data from DB
 
     [Header("TEXT: Answer")]
-    public string[] answerVariantsText;
+    [TextArea] public string[] answerVariantsText; //text
 
     [Header("TEXT: Answer Database References")]
     public DatabaseReference[] answerReferences;  // References to DB records

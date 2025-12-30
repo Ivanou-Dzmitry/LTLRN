@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.52156866, g: 0.64705884, b: 0.1764706, a: 1}
+  m_Color: {r: 0.007843138, g: 0.18039216, b: 0.24705882, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.52156866, g: 0.64705884, b: 0.1764706, a: 1}
+  m_Color: {r: 0.34901962, g: 0.4509804, b: 0.09803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1497,6 +1497,7 @@ MonoBehaviour:
   sectionDescriptionText: {fileID: 4732318133900515945}
   sectionTimeText: {fileID: 1688882243741841402}
   progressSlider: {fileID: 4633011837233002434}
+  difSlider: {fileID: 3444805041440216107}
   likeButton: {fileID: 2085613482495247714}
   isLiked: 0
   playSectionButton: {fileID: 743033836598245615}
@@ -1588,7 +1589,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 370640465268730562}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 3
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
