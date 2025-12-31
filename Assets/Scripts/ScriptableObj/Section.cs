@@ -51,4 +51,22 @@ public class Section : ScriptableObject
 
 
     public QuestionT01[] questions;
+
+    public float GetSectionDifValue(DifficultyType difficulty)
+    {
+        switch (difficulty)
+        {
+            case DifficultyType.Simple:
+                return 1f;
+
+            case DifficultyType.Medium:
+                return 2f;
+
+            case DifficultyType.Hard:
+                return 3f;
+
+            default:
+                return 1f;
+        }
+    }
 }

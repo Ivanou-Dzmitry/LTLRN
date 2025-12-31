@@ -29,6 +29,9 @@ public class DBUtils : MonoBehaviour
     private bool isInitialized = false;
     private const string dbName = "ltlrn01.db";
 
+    private const int DB_VERSION = 1; // Increment this when you update the database
+    private const string VERSION_KEY = "database_version";
+
 
     private void Awake()
     {
@@ -72,23 +75,30 @@ public class DBUtils : MonoBehaviour
         string sourceDbPath;
 
 #if UNITY_ANDROID
-        // Android: Copy from APK to writable location
         sourceDbPath = Path.Combine(Application.streamingAssetsPath, dbName);
         dbPath = Path.Combine(Application.persistentDataPath, dbName);
 #elif UNITY_EDITOR
-    // Editor: Copy from StreamingAssets to persistentDataPath for testing
     sourceDbPath = Path.Combine(Application.dataPath, "StreamingAssets", dbName);
     dbPath = Path.Combine(Application.persistentDataPath, dbName);
 #else
-    // PC Build: Copy to persistentDataPath
     sourceDbPath = Path.Combine(Application.streamingAssetsPath, dbName);
     dbPath = Path.Combine(Application.persistentDataPath, dbName);
 #endif
 
-        // Always copy database to writable location if not exists
-        if (!File.Exists(dbPath))
+        // Check if database needs update
+        int savedVersion = PlayerPrefs.GetInt(VERSION_KEY, 0);
+        bool needsUpdate = savedVersion < DB_VERSION || !File.Exists(dbPath);
+
+        if (needsUpdate)
         {
-            Debug.Log($"Copying database from {sourceDbPath} to {dbPath}");
+            Debug.Log($"Updating database from version {savedVersion} to {DB_VERSION}");
+
+            // Delete old database if exists
+            if (File.Exists(dbPath))
+            {
+                File.Delete(dbPath);
+                Debug.Log("Old database deleted");
+            }
 
 #if UNITY_ANDROID
             UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(sourceDbPath);
@@ -97,7 +107,9 @@ public class DBUtils : MonoBehaviour
             if (www.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
             {
                 File.WriteAllBytes(dbPath, www.downloadHandler.data);
-                Debug.Log("Database copied successfully");
+                PlayerPrefs.SetInt(VERSION_KEY, DB_VERSION);
+                PlayerPrefs.Save();
+                Debug.Log("Database updated successfully");
             }
             else
             {
@@ -105,11 +117,12 @@ public class DBUtils : MonoBehaviour
                 yield break;
             }
 #else
-        // PC/Editor: Direct file copy
         if (File.Exists(sourceDbPath))
         {
-            File.Copy(sourceDbPath, dbPath);
-            Debug.Log("Database copied successfully");
+            File.Copy(sourceDbPath, dbPath, true); // true = overwrite
+            PlayerPrefs.SetInt(VERSION_KEY, DB_VERSION);
+            PlayerPrefs.Save();
+            Debug.Log("Database updated successfully");
         }
         else
         {
@@ -121,14 +134,11 @@ public class DBUtils : MonoBehaviour
         }
         else
         {
-            Debug.Log("Database already exists at: " + dbPath);
+            Debug.Log("Database is up to date");
         }
 
         Debug.Log("Final Database Path: " + dbPath);
         string result = CheckConnection();
-        
-        //Debug.Log(result);
-
         CreateTablesIfNeeded();
     }
 
@@ -189,7 +199,7 @@ public class DBUtils : MonoBehaviour
                         Name = sectionName,
                         QDone = 0,
                         Liked = "false",
-                        Time = "00:00"
+                        Time = 0
                     };
 
                     int rowsAffected = connection.Insert(newSection);
@@ -240,6 +250,108 @@ public class DBUtils : MonoBehaviour
         catch (System.Exception ex)
         {
             Debug.LogError($"Error ensuring theme exists: {ex.Message}");
+        }
+    }
+
+    public void SetSectionProgress(string sectionName, int value)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    section.QDone = value;
+                    connection.Update(section);
+                    //Debug.Log($"Updated {sectionName} - Liked: {section.Liked}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error updating progress: {ex.Message}");
+        }
+    }
+
+    public void SetSectionTime(string sectionName, float value)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    section.Time = value;
+                    connection.Update(section);
+                    //Debug.Log($"Updated {sectionName} - Liked: {section.Liked}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error updating progress: {ex.Message}");
+        }
+    }
+
+    public float GetSectionTime(string sectionName)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return 0;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    return section.Time;
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                    return 0;
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting section liked status: {ex.Message}");
+            return 0;
         }
     }
 

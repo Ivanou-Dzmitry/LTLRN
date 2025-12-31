@@ -18,6 +18,7 @@ public class SectionPanel : MonoBehaviour
     public GameObject headerPanel;
     public TMP_Text sectionDescriptionText;
     public TMP_Text sectionTimeText;
+
     [Header("Sliders")]
     public Slider progressSlider;
     public Slider difSlider;
@@ -116,7 +117,7 @@ public class SectionPanel : MonoBehaviour
         sectionDescriptionText.text = GetDescription(section);
 
         //set difficulty
-        difSlider.value = GetDifficultyValue(section.difficultyType);
+        difSlider.value = section.GetSectionDifValue(section.difficultyType);
 
         //color header
         Image headerImage = headerPanel.GetComponent<Image>();
@@ -203,22 +204,6 @@ public class SectionPanel : MonoBehaviour
         return locale;
     }
 
-    private float GetDifficultyValue(Section.DifficultyType difficulty)
-    {
-        switch (difficulty)
-        {
-            case Section.DifficultyType.Simple:
-                return 1f;
 
-            case Section.DifficultyType.Medium:
-                return 2f;
-
-            case Section.DifficultyType.Hard:
-                return 3f;
-
-            default:
-                return 1f;
-        }
-    }
 
 }

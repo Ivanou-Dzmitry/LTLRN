@@ -18,9 +18,26 @@ public class ExWinPnl : Panel
     [SerializeField] private TMP_Text score;
     [SerializeField] private TMP_Text time;
 
+    public override void Initialize()
+    {
+        if (IsInitialized)
+        {
+            return;
+        }
+
+        //buttons
+        exitButton.onClick.AddListener(OnExitClick);
+        replayButton.onClick.AddListener(OnReplayClick);
+        nextButton.onClick.AddListener(OnNextClick);
+
+        base.Initialize();
+    }
+
+
     public override void Open()
     {
         LoadResultsData();
+
         base.Open();
     }
 
@@ -31,14 +48,32 @@ public class ExWinPnl : Panel
         if(exGameLogic != null)
         {
             score.text = exGameLogic.tempScore.ToString();
-            time.text = FormatTime(exGameLogic.sessionDuration).ToString();
+            time.text = exGameLogic.FormatTime(exGameLogic.sessionDuration).ToString();
         }
     }
 
-    private string FormatTime(float seconds)
+
+
+    private void OnExitClick()
     {
-        int minutes = Mathf.FloorToInt(seconds / 60f);
-        int secs = Mathf.FloorToInt(seconds % 60f);
-        return $"{minutes:00}:{secs:00}";
+        exGameLogic.ExitGame();
+    }
+
+    private void OnReplayClick()
+    {
+        //reload scene
+        PanelManager.OpenScene("ExGame");
+    }
+
+    private void OnNextClick()
+    {
+        exGameLogic.NextSection();
+    }
+
+    private void OnDestroy()
+    {
+        exitButton.onClick.RemoveListener(OnExitClick);
+        replayButton.onClick.RemoveListener(OnReplayClick);
+        nextButton.onClick.RemoveListener(OnNextClick);
     }
 }

@@ -1,8 +1,17 @@
-using TMPro;
-using UnityEngine;
+using System;
 using System.Collections;
+using TMPro;
+using Unity.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using static QuestionT01;
+
+public enum GameState
+{
+    Play,  
+    Finish,    
+    Pause
+}
 
 public class ExGameLogic : MonoBehaviour
 {
@@ -20,6 +29,9 @@ public class ExGameLogic : MonoBehaviour
     private DBUtils dbUtils;
     private SoundManager soundManager;
 
+    [Header("Game State")]
+    public GameState gameState;
+
     [Header("Game Info")]
     public Slider progressBar;
 
@@ -36,16 +48,15 @@ public class ExGameLogic : MonoBehaviour
     public GameObject questionPrefab;
 
     [Header("Buttons")]
-    public Button checkButton;
+    //public Button checkButton;
     public Button nextButton;
-    public Button exitGameButton;
+    public Button interruptGameButton;
 
     [Header("Answer")]
     public int currentAnswerIndex = -1;
 
-    private ButtonImage checkBtn;
+    //private ButtonImage checkBtn;
     private ButtonImage nextBtn;
-    private ButtonImage exitBtn;
 
     [Header("Score")]
     public int tempScore = 0;
@@ -64,14 +75,13 @@ public class ExGameLogic : MonoBehaviour
         PanelManager.Open("exgamemain");
 
         //buttons
-        checkBtn = checkButton.GetComponent<ButtonImage>();
+        //checkBtn = checkButton.GetComponent<ButtonImage>();
         nextBtn = nextButton.GetComponent<ButtonImage>();
-        exitBtn = exitGameButton.GetComponent<ButtonImage>();
 
         //button listeners
-        checkButton.onClick.AddListener(checkBtnClicked);
+        //checkButton.onClick.AddListener(checkBtnClicked);
         nextButton.onClick.AddListener(nextBtnClicked);
-        exitGameButton.onClick.AddListener(exitBtnClicked);
+        interruptGameButton.onClick.AddListener(OnGameInterrupt);
     }
 
     private void Start()
@@ -96,12 +106,13 @@ public class ExGameLogic : MonoBehaviour
             yield return null;
         }
 
-        //Debug.Log("Database is ready!");
+        // IMPORTANT
         LoadGameData();
     }
 
     private void LoadGameData()
     {
+        //get classes
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
 
@@ -128,25 +139,38 @@ public class ExGameLogic : MonoBehaviour
         progressBar.maxValue = currentSection.questions.Length;
         progressBar.value = 1;
 
-        nextButton.interactable = false;
-        nextBtn.RefreshState();
+        //disable check button
+        if(nextButton != null)
+        {
+            nextButton.interactable = false;
+            nextBtn.RefreshState();
+        }
 
+        //start time
         sessionStartTime = Time.time;
+
+        //start game
+        gameState = GameState.Play;
     }
 
+    //prepare data for question. Step 1
     public static QuestionData LoadQuestionData(QuestionT01 question)
     {       
+        //create question data
         QuestionData data = new QuestionData();
 
+        //load q text from db
         data.questionText = DBUtils.Instance.ResolveReference(question.questionReference);
 
-        // Load answer texts
+        // get answer count
         int answersCount = question.answerReferences.Length;
 
         if (answersCount > 0)
         {
+            //set answers
             data.answerVariantsText = new string[answersCount];
 
+            //load answers
             for (int i = 0; i < question.answerReferences.Length; i++)
             {
                 data.answerVariantsText[i] = DBUtils.Instance.ResolveReference(question.answerReferences[i]);
@@ -176,7 +200,7 @@ public class ExGameLogic : MonoBehaviour
 
     private void QLoad(QuestionT01 question)
     {
-        //step 1 - load DB
+        //step 2 - load prepared data
         QuestionData data = LoadQuestionData(question);
 
         //clear previous question
@@ -185,7 +209,7 @@ public class ExGameLogic : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        //step 2 - question type 1 loader
+        //step 3 - question type 1 loader
         if (question.questionType == QuestionType.Type1)
         {
             questionInstance = Instantiate(questionPrefab, questionArea);
@@ -289,16 +313,24 @@ public class ExGameLogic : MonoBehaviour
 
     public void Check()
     {
+        gameState = GameState.Pause;
+
         //load data to prefab
         ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
 
+        //get index
         int selectedIndex = qData.GetSelectedAnswerIndex();
+        
+        //get correct index
         int correctIndex = (int)currentQuestion.correctAnswerNumber;
 
+        //get question
         QuestionT01 question = currentQuestion;
 
+        //check selected Type 1
         if (currentSection.sectionType == Section.SectionType.Type1)
         {
+            //compare indexes
             if (selectedIndex == correctIndex)
             {
                 qData.CheckAnswer(selectedIndex, correctIndex);
@@ -306,7 +338,7 @@ public class ExGameLogic : MonoBehaviour
                 // Add score, show success animation, etc.
                 tempScore = tempScore + currentQuestion.rewardAmount;
 
-                Debug.Log("Correct answer! Score: " + tempScore);
+                //Debug.Log("Correct answer! Score: " + tempScore);
             }
             else
             {
@@ -322,49 +354,134 @@ public class ExGameLogic : MonoBehaviour
             }
             else
             {
+                gameState = GameState.Finish;
                 ResultProcessing();
             }
         }
     }
 
     private void ResultProcessing()
-    {
-        sessionDuration = Time.time - sessionStartTime;
+    {              
+        GameFinishRoutine();
 
-        Debug.Log($"Session duration: {sessionDuration:F2} seconds");
+        //Debug.Log($"Session duration: {sessionDuration:F2} seconds");
 
         PanelManager.CloseAll();
         PanelManager.Open("exwin");
     }
 
+    private void GameFinishRoutine()
+    {
+        //get time
+        sessionDuration = Time.time - sessionStartTime;
+
+        Debug.Log(sessionDuration);
+    }
+
     private void nextBtnClicked()
     {
+        //srt game state
+        gameState = GameState.Play;
+
+        //increase question
         qCounter++;
        
-
         //load next question
         if (qCounter < currentSection.questions.Length)
         {
+            //set progress
             progressBar.value = qCounter + 1;
 
+            //get question
             currentQuestion = currentSection.questions[qCounter];
+            
+            //question load
             QLoad(currentQuestion);
 
+            //set button state
             nextButton.interactable = false;
             nextBtn.RefreshState();
-
-/*            checkButton.interactable = true;
-            checkBtn.RefreshState();*/
         }
-
-        //Debug.Log(qCounter);
     }
 
-    private void exitBtnClicked()
+    private void OnGameInterrupt()
     {
-        Debug.Log("Exit button clicked");
+        InterruptGame();
     }
 
+    public void InterruptGame()
+    {
+        PanelManager.CloseAll();
 
+        //run panel with choise
+        PanelManager.Open("exit");        
+    }
+
+    public void ExitGame()
+    {
+        //save progress and time
+        SaveGameProgress();
+        SaveScore();
+        SaveTime();
+
+        PanelManager.CloseAll();
+
+        PanelManager.OpenScene("ExscersisesMenu");                
+    }
+
+    public void InterruptedExit()
+    {
+        //save progress only
+        SaveGameProgress();
+
+        PanelManager.CloseAll();
+
+        PanelManager.OpenScene("ExscersisesMenu");
+    }
+
+    private void SaveGameProgress()
+    {
+        if (dbUtils == null) return;
+
+        int currentProgress = (int)progressBar.value;
+
+        int savedProgress = dbUtils.GetSectionProgress(currentSection.name);
+
+        if(currentProgress > savedProgress)
+            dbUtils.SetSectionProgress(currentSection.name, currentProgress);
+    }
+
+    private void SaveScore()
+    {
+        //
+    }
+
+    private void SaveTime()
+    {
+        float currentTime = sessionDuration;
+
+        float savedTime = dbUtils.GetSectionTime(currentSection.name);
+
+        if(currentTime < savedTime)
+            dbUtils.SetSectionTime(currentSection.name, currentTime);
+    }
+
+    public void NextSection()
+    {
+        Debug.Log("Go to next section");
+    }
+
+    private void OnDestroy()
+    {
+        nextButton.onClick.RemoveListener(nextBtnClicked);
+        interruptGameButton.onClick.RemoveListener(OnGameInterrupt);
+    }
+
+    public string FormatTime(float seconds)
+    {
+        int minutes = Mathf.FloorToInt(seconds / 60f);
+        int secs = Mathf.FloorToInt(seconds % 60f);
+        return $"{minutes:00}:{secs:00}";
+    }
 
 }

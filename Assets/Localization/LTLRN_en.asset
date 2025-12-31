@@ -207,8 +207,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4306818278940672
-    m_Localized: You want to exit the game. The crystals you've collected will be
-      lost and you'll lose one life.
+    m_Localized: You want to interrupt the game and exit. Collected crystals will
+      be lost and you will lose one life.
     m_Metadata:
       m_Items: []
   - m_Id: 4609390978166784
@@ -229,6 +229,24 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4970380416675840
     m_Localized: Difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5386851235979264
+    m_Localized: Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5386888187797504
+    m_Localized: Questions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5387188009230336
+    m_Localized: 'Section
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5387346616836096
+    m_Localized: Sections
     m_Metadata:
       m_Items: []
   references:

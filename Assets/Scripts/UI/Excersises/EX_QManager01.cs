@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//panel with question Type 1
 public class ExQManager01 : MonoBehaviour
 {
     private SoundManager soundManager;
@@ -58,6 +59,10 @@ public class ExQManager01 : MonoBehaviour
 
     private void Start()
     {
+        //get game logic
+        exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
+        soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+
         // Set button texts and refresh
         foreach (var answer in answerButtons)
         {
@@ -68,12 +73,12 @@ public class ExQManager01 : MonoBehaviour
 
     private void OnAnswerClicked(int index)
     {
-        exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
-
+        //if logic exist and in play mode
+        if (exGameLogic == null || exGameLogic.gameState == GameState.Pause)
+            return;
+        
         //set answer index in game logic IMPORTANT
         exGameLogic.currentAnswerIndex = index;
-
-        //Debug.Log($"Answer {index + 1} clicked");
 
         // Reset all buttons to Primary
         foreach (var answer in answerButtons)
@@ -87,21 +92,22 @@ public class ExQManager01 : MonoBehaviour
 
         //check
         exGameLogic.Check();
+        
     }
 
     private void playSoundClicked()
     {
-        soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+        if(soundManager == null) return;
 
+        //run sound play
         if (soundManager != null)
         {
             if(qAudioClip != null)
                 soundManager.PlaySound(qAudioClip);
         }
 
+        //run particles
         playSoundPart.Play();
-
-        //Debug.Log("Play sound clicked");
     }
 
 

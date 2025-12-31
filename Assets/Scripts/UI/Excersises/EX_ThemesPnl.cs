@@ -11,17 +11,15 @@ public class EX_ThemesPanel : Panel
 {
     private GameData gameData;
     private DBUtils dbUtils;
-    private LanguageSwitcher languageSwitcher;
 
     private ExDataLoader dataLoader;
     public GameObject themeButtonPrefab;
     public RectTransform themesContainer;
 
-    private SectionManager tempSectionManager;
-
     public override void Open()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
         base.Open();
     }
 
@@ -66,7 +64,7 @@ public class EX_ThemesPanel : Panel
     }
 
 
-    //load panels with themes
+    //load panels with themes IMPORTANT
     public void LoadThemes()
     {
         // Clear old panels (important when reloading)
@@ -77,10 +75,9 @@ public class EX_ThemesPanel : Panel
 
         for (int i = 0; i < dataLoader.themes.theme.Length; i++)
         {
-            GameObject themeButton = Instantiate(themeButtonPrefab, themesContainer.transform);
-
             string themeName = dataLoader.themes.theme[i].name;
-
+            GameObject themeButton = Instantiate(themeButtonPrefab, themesContainer.transform);
+                     
             themeButton.name = themeName;
 
             // Ensure theme exists in DB
@@ -88,22 +85,32 @@ public class EX_ThemesPanel : Panel
 
             // Ensure correct UI transform values
             RectTransform rt = themeButton.GetComponent<RectTransform>();
+
             rt.localScale = Vector3.one;
             rt.localPosition = Vector3.zero;
             
             // Initialize button data            
             EX_ThemeBtn themeBtnComponent = themeButton.GetComponent<EX_ThemeBtn>();
 
+            Locale locale = GetLocale();
+            SectionManager currentTheme = dataLoader.themes.theme[i];
+
             //load data into button component
-            themeBtnComponent.themeName.text = GetTitle(dataLoader.themes.theme[i]);
-            themeBtnComponent.themeDescription.text = GetDescription(dataLoader.themes.theme[i]);
+            themeBtnComponent.themeName.text = currentTheme.GetThemeName(currentTheme, locale);
+            themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
             themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
+            
             //set icon
             themeBtnComponent.themeIcon.sprite = dataLoader.themes.theme[i].themeIcon;
             themeBtnComponent.themeIndex = i;
 
             //dificulty
-            themeBtnComponent.themeDifficulty.text = dataLoader.themes.theme[i].themeDifficulty.ToString(); ;
+            themeBtnComponent.themeDifSlider.value = currentTheme.GetThemeDifValue(currentTheme.themeDifficulty);
+            //themeBtnComponent.themeDifficulty.text = dataLoader.themes.theme[i].themeDifficulty.ToString(); ;
+
+            //load info
+            themeBtnComponent.sectionsCount.text = currentTheme.sections.Length.ToString();
+            themeBtnComponent.questionsCount.text = currentTheme.GetTotalQuestionCount().ToString();
         }
     }
 
@@ -118,51 +125,10 @@ public class EX_ThemesPanel : Panel
         }
     }
 
-    public string GetDescription(SectionManager theme)
-    {
-        if (theme == null || theme.themeDescription == null)
-            return string.Empty;
 
-        Locale locale = GetLocale();
-
-        if (locale == null)
-            return theme.themeDescription.en;
-
-        switch (locale.Identifier.Code)
-        {
-            case "ru":
-                return theme.themeDescription.ru;
-
-            case "en":
-            default:
-                return theme.themeDescription.en;
-        }
-    }
-
-    public string GetTitle(SectionManager theme)
-    {
-        if (theme == null || theme.themeName == null)
-            return string.Empty;
-
-        Locale locale = GetLocale();
-
-        if (locale == null)
-            return theme.themeName.en;
-
-        switch (locale.Identifier.Code)
-        {
-            case "ru":
-                return theme.themeName.ru;
-
-            case "en":
-            default:
-                return theme.themeName.en;
-        }
-    }
 
     private Locale GetLocale()
     {
-
         string savedLang = gameData.saveData.lang.ToLower();
 
         Locale locale = LocalizationSettings.AvailableLocales.Locales

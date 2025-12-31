@@ -10,7 +10,6 @@ using UnityEngine.UI;
 public class EX_MainPanel : Panel
 {
     private GameData gameData;
-    private ExDataLoader exDataLoader;
 
     private ButtonImage starsBtnImage;
     private ButtonImage lifeBtnImage;
@@ -55,36 +54,26 @@ public class EX_MainPanel : Panel
         lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
         crystalsBtnImage = crystalsBtn.GetComponent<ButtonImage>();
 
-        //theme button
-        themeButtonData = themeButton.GetComponent<ButtonImage>();
-
         likeFilterButton.onClick.AddListener(ToggleLikeFilter);
         likeFBtn = likeFilterButton.GetComponent<ButtonImage>();
     }
 
-    public override void Open()
-    {
-        LoadGameData();
-
-        base.Open();
-    }
-
     private void Start()
-    {
-        LoadGameData(); 
-        
-        base.Open();
-        SetPanelHeight();
-    }
-
-    private void LoadGameData()
     {
         //get gamedata
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        if (gameData == null) return;
+
+        LoadGameData();
         
-        //get exdataloader
-        exDataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
+        SetPanelHeight();
         
+        base.Open();        
+    }
+
+    private void LoadGameData()
+    {        
         //update buttons
         if (gameData != null)
         {
@@ -93,18 +82,20 @@ public class EX_MainPanel : Panel
             UpdateButton(crystalsBtnImage, gameData.saveData.crystals);
         }
 
+/*
         //upb theme button text       
         if (exDataLoader != null)
         {
             SectionManager currentTheme = exDataLoader.sectionManager;
-            
+            Locale locale = GetLocale();
+
             //update theme button text
             if (currentTheme != null)
             {
-                themeButtonData.buttonTextStr = GetTitle(currentTheme);
+                themeButtonData.buttonTextStr = currentTheme.GetThemeName(currentTheme, locale);
                 themeButtonData.RefreshState();
             }            
-        }
+        }*/
     }
 
     //game resources buttons update
@@ -178,40 +169,6 @@ public class EX_MainPanel : Panel
     {
         //remove listeners
         likeFilterButton.onClick.RemoveListener(ToggleLikeFilter);
-    }
-
-    public string GetTitle(SectionManager theme)
-    {
-        if (theme == null || theme.themeName == null)
-            return string.Empty;
-
-        Locale locale = GetLocale();
-
-        if (locale == null)
-            return theme.themeName.en;
-
-        switch (locale.Identifier.Code)
-        {
-            case "ru":
-                return theme.themeName.ru;
-
-            case "en":
-            default:
-                return theme.themeName.en;
-        }
-    }
-
-    private Locale GetLocale()
-    {
-        string savedLang = gameData.saveData.lang.ToLower();
-
-        Locale locale = LocalizationSettings.AvailableLocales.Locales
-            .FirstOrDefault(l => l.Identifier.Code == savedLang);
-
-        if (locale != null)
-            LocalizationSettings.SelectedLocale = locale;
-
-        return locale;
     }
 
 }

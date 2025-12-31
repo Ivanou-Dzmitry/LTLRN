@@ -139,8 +139,8 @@ public class SettingsPanel : Panel
     }
 
     public void SaveSettings()
-    {        
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+    {
+        if (gameData == null) return;        
        
         gameData.SaveToFile();
     }
@@ -148,6 +148,8 @@ public class SettingsPanel : Panel
 
     public void OnSoundSliderChanged()
     {
+        if (gameData == null) return;
+
         gameData.saveData.soundVolume = soundSlider.value;
         soundManager.SetVolume("sound");
 
@@ -155,12 +157,17 @@ public class SettingsPanel : Panel
 
     public void OnMuscSliderChange()
     {
+        if (gameData == null) return;
+
         gameData.saveData.musicVolume = musicSlider.value;
         soundManager.SetVolume("music");
     }
 
     public void OnSpeedSliderChange()
     {
+        if (gameData == null)
+            return;
+
         gameData.saveData.soundSpeed = soundSpeedSlider.value;
         
         float speed = 0;

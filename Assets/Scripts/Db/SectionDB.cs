@@ -9,5 +9,5 @@ public class SectionDB
     public string Name { get; set; }
     public int QDone { get; set; }
     public string Liked { get; set; }  // "true" or "false" as text    
-    public string Time { get; set; }
+    public float Time { get; set; }
 }

@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 public class ExDataLoader : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class ExDataLoader : MonoBehaviour
     private DBUtils dbUtils;
 
     public Themes themes;
+
+    public Button themeButton;
 
     //public SectionManager[] themes;
 
@@ -68,8 +72,7 @@ public class ExDataLoader : MonoBehaviour
     //IMPORTANT
     public void LoadData()
     {
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-        
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();        
 
         //load theme
         if (gameData != null)
@@ -80,7 +83,18 @@ public class ExDataLoader : MonoBehaviour
             //get total levels
             totalQuestions = sectionManager.GetTotalQuestionCount();
             totalSections = sectionManager.sections.Length;
-            
+
+            //get data
+            ButtonImage themeBtn = themeButton.GetComponent<ButtonImage>();
+            Locale locale = GetLocale();
+
+            //set theme button name
+            if (locale != null && themeBtn != null)
+            {
+                themeBtn.buttonTextStr = sectionManager.GetThemeName(sectionManager, locale);
+                themeBtn.RefreshState();
+            }
+
             CreateSectionPanels();
         }        
     }
@@ -133,20 +147,26 @@ public class ExDataLoader : MonoBehaviour
                 bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
                 sectionPanel.SetLikedState(isLiked);
 
-                int progress = dbUtils.GetSectionProgress(section.name);
-                //get progress from BD
-                sectionPanel.progressSlider.value = progress;
-
-                sectionPanel.currentSection = section;
-                sectionPanel.sectionIndex = i;
-
                 //set progress slider max value
-                //Sections count
                 if (section.questions.Length > 0 && section.questions != null)
                 {
                     sectionPanel.progressSlider.maxValue = section.questions.Length;
                 }
+                //set progress slider max value
+                Debug.Log("1: " + section.questions.Length);
 
+                //get progress from BD
+                int progress = dbUtils.GetSectionProgress(section.name);
+                Debug.Log("2: "+progress);
+                sectionPanel.progressSlider.value = progress;
+
+                //get time from DB
+                float time = dbUtils.GetSectionTime(section.name);
+                sectionPanel.sectionTimeText.text = FormatTime(time);
+
+                sectionPanel.currentSection = section;
+                sectionPanel.sectionIndex = i;
+              
                 //disable play button if no questions
                 sectionPanel.PlayButtonToggle(section.questions.Length);
 
@@ -158,8 +178,27 @@ public class ExDataLoader : MonoBehaviour
                     }
                 }
             }
-
         }
+    }
+
+    private Locale GetLocale()
+    {
+        string savedLang = gameData.saveData.lang.ToLower();
+
+        Locale locale = LocalizationSettings.AvailableLocales.Locales
+            .FirstOrDefault(l => l.Identifier.Code == savedLang);
+
+        if (locale != null)
+            LocalizationSettings.SelectedLocale = locale;
+
+        return locale;
+    }
+
+    public string FormatTime(float seconds)
+    {
+        int minutes = Mathf.FloorToInt(seconds / 60f);
+        int secs = Mathf.FloorToInt(seconds % 60f);
+        return $"{minutes:00}:{secs:00}";
     }
 
 }
