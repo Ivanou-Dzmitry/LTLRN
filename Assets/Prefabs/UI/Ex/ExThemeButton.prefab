@@ -364,10 +364,12 @@ MonoBehaviour:
   themeName: {fileID: 5290817092622491329}
   themeDescription: {fileID: 8488799371222468052}
   themeIcon: {fileID: 8889664648628504416}
+  topPnlImg: {fileID: 0}
   themeIndex: 0
   sectionsCount: {fileID: 4022503349694386530}
   questionsCount: {fileID: 6168083426874377163}
   themeDifSlider: {fileID: 1708557491284380702}
+  themeProgressSlider: {fileID: 5074986875948672040}
   topPanel: {fileID: 6789302820805508479}
   bottomPanel: {fileID: 5557899442539268725}
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
@@ -707,8 +709,8 @@ RectTransform:
   m_Children:
   - {fileID: 2056891830042105251}
   - {fileID: 8007783812929743465}
-  - {fileID: 5769005229336811319}
   - {fileID: 7684494839308829509}
+  - {fileID: 5769005229336811319}
   m_Father: {fileID: 5939973950159823400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1047,7 +1049,7 @@ GameObject:
   - component: {fileID: 3933681152883553809}
   - component: {fileID: 5074986875948672040}
   m_Layer: 5
-  m_Name: DifSlider
+  m_Name: ProgSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2094,7 +2096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2128513864167417080, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_Name
-      value: DifText
+      value: ProgText
       objectReference: {fileID: 0}
     - target: {fileID: 4789130257236730002, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_Pivot.x

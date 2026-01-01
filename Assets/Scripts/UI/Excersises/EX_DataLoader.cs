@@ -95,6 +95,8 @@ public class ExDataLoader : MonoBehaviour
                 themeBtn.RefreshState();
             }
 
+            themeBtn.buttonIcon.sprite = sectionManager.themeIcon;
+
             CreateSectionPanels();
         }        
     }
@@ -147,22 +149,28 @@ public class ExDataLoader : MonoBehaviour
                 bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
                 sectionPanel.SetLikedState(isLiked);
 
+                int questionsCount = section.questions.Length;
+
                 //set progress slider max value
-                if (section.questions.Length > 0 && section.questions != null)
+                if (questionsCount > 0 && section.questions != null)
                 {
                     sectionPanel.progressSlider.maxValue = section.questions.Length;
                 }
-                //set progress slider max value
-                Debug.Log("1: " + section.questions.Length);
-
+    
                 //get progress from BD
                 int progress = dbUtils.GetSectionProgress(section.name);
-                Debug.Log("2: "+progress);
                 sectionPanel.progressSlider.value = progress;
 
                 //get time from DB
                 float time = dbUtils.GetSectionTime(section.name);
                 sectionPanel.sectionTimeText.text = FormatTime(time);
+
+                //get result from DB
+                string resultText = string.Empty;
+                int result = dbUtils.GetSectionResult(section.name);
+                string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
+                resultText = $"{result} {fromTxt} {questionsCount}";
+                sectionPanel.sectionResultText.text = resultText;
 
                 sectionPanel.currentSection = section;
                 sectionPanel.sectionIndex = i;

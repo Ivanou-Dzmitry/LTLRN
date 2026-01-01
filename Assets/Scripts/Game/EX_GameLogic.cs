@@ -151,6 +151,8 @@ public class ExGameLogic : MonoBehaviour
 
         //start game
         gameState = GameState.Play;
+
+        tempScore = 0;
     }
 
     //prepare data for question. Step 1
@@ -257,60 +259,6 @@ public class ExGameLogic : MonoBehaviour
 
     }
 
-
-/*    private void QuestionLoader(Question question)
-    {
-        foreach (Transform child in questionArea)
-        {
-            Destroy(child.gameObject);
-        }
-
-        //question type 1 loader
-        if (question.questionType == QuestionType.Type1)
-        {
-            questionInstance = Instantiate(questionPrefab, questionArea);
-            questionInstance.name = question.name;
-
-            RectTransform rt = questionInstance.GetComponent<RectTransform>();
-            rt.localScale = Vector3.one;
-            rt.anchoredPosition = Vector2.zero;
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
-
-            //load data to prefab
-            ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
-
-            if (qData != null)
-            {
-                qData.qestionText.text = question.questionText;
-
-                qData.qestionText.text = question.questionText;
-                qData.SetAnswers(question.answerVariantsText);
-            }
-        }     
-    }*/
-
-    private void checkBtnClicked()
-    {
-/*        if (qCounter < currentSection.questions.Length - 1)
-        {
-            checkButton.interactable = false;
-            checkBtn.RefreshState();
-
-            nextButton.interactable = true;
-            nextBtn.RefreshState();
-        }else
-        {
-            checkButton.interactable = false;
-            checkBtn.RefreshState();
-
-            PanelManager.CloseAll();
-            PanelManager.Open("exwin");
-        }
-
-        Check();*/
-    }
-
     public void Check()
     {
         gameState = GameState.Pause;
@@ -373,9 +321,7 @@ public class ExGameLogic : MonoBehaviour
     private void GameFinishRoutine()
     {
         //get time
-        sessionDuration = Time.time - sessionStartTime;
-
-        Debug.Log(sessionDuration);
+        sessionDuration = Time.time - sessionStartTime;        
     }
 
     private void nextBtnClicked()
@@ -421,7 +367,7 @@ public class ExGameLogic : MonoBehaviour
     {
         //save progress and time
         SaveGameProgress();
-        SaveScore();
+        SaveResult();
         SaveTime();
 
         PanelManager.CloseAll();
@@ -451,9 +397,22 @@ public class ExGameLogic : MonoBehaviour
             dbUtils.SetSectionProgress(currentSection.name, currentProgress);
     }
 
-    private void SaveScore()
+    private void SaveResult()
     {
-        //
+        //saved result
+        int savedResult = dbUtils.GetSectionResult(currentSection.name);
+
+        if(tempScore > savedResult)
+            dbUtils.SetSectionResult(currentSection.name, tempScore);
+
+        //questions done
+        int done = dbUtils.GetSectionProgress(currentSection.name);
+
+        //set complete
+        if (tempScore == done)
+            dbUtils.SetSectionComplete(currentSection.name, true);
+        else
+            dbUtils.SetSectionComplete(currentSection.name, false);
     }
 
     private void SaveTime()
@@ -462,8 +421,16 @@ public class ExGameLogic : MonoBehaviour
 
         float savedTime = dbUtils.GetSectionTime(currentSection.name);
 
-        if(currentTime < savedTime)
+        //avoid initial data = 0
+        if(savedTime < 1)
             dbUtils.SetSectionTime(currentSection.name, currentTime);
+        else if (currentTime < savedTime)
+            dbUtils.SetSectionTime(currentSection.name, currentTime);
+    }
+
+    private void SaveProgress()
+    {
+        //int savedScore = dbUtils.GetSectionProgress(currentSection.name);
     }
 
     public void NextSection()

@@ -16,15 +16,18 @@ public class SectionManager : ScriptableObject
     [Header("Difficulty")]
     public ThemeDifficulty themeDifficulty = ThemeDifficulty.Simple;
 
-    [Header("Additional data")]
+    [Header("UI")]
     public Sprite themeIcon;
+    public Color themeHeaderColor;
+
+
+    [Header("Additional data")]
     public LocalizedText themeName;    
     public LocalizedText themeDescription;
 
     [Header("Theme Sections")]
     public Section[] sections;
-    public int questionsCount = 10;
-
+    
     public int GetTotalQuestionCount()
     {
         int totalQuestions = 0;

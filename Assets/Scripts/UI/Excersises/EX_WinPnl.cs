@@ -52,8 +52,6 @@ public class ExWinPnl : Panel
         }
     }
 
-
-
     private void OnExitClick()
     {
         exGameLogic.ExitGame();

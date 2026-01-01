@@ -8,6 +8,8 @@ public class SectionDB
     public int ID { get; set; }
     public string Name { get; set; }
     public int QDone { get; set; }
+    public int QCorrect { get; set; }
     public string Liked { get; set; }  // "true" or "false" as text    
     public float Time { get; set; }
+    public string Complete { get; set; }  // "true" or "false" as text    
 }

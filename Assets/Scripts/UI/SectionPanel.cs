@@ -17,7 +17,10 @@ public class SectionPanel : MonoBehaviour
     public TMP_Text sectionHeaderText;
     public GameObject headerPanel;
     public TMP_Text sectionDescriptionText;
+
+    [Header("DB Data")]
     public TMP_Text sectionTimeText;
+    public TMP_Text sectionResultText;
 
     [Header("Sliders")]
     public Slider progressSlider;

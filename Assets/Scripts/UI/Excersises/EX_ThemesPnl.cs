@@ -109,8 +109,14 @@ public class EX_ThemesPanel : Panel
             //themeBtnComponent.themeDifficulty.text = dataLoader.themes.theme[i].themeDifficulty.ToString(); ;
 
             //load info
-            themeBtnComponent.sectionsCount.text = currentTheme.sections.Length.ToString();
+            int sectionsCount = currentTheme.sections.Length;
+            themeBtnComponent.sectionsCount.text = sectionsCount.ToString();
             themeBtnComponent.questionsCount.text = currentTheme.GetTotalQuestionCount().ToString();
+
+            //Complete slider
+            int completeCount = dbUtils.GetCompleteSectionsCount();
+            themeBtnComponent.themeProgressSlider.maxValue = sectionsCount;
+            themeBtnComponent.themeProgressSlider.value = completeCount;
         }
     }
 

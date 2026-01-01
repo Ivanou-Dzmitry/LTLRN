@@ -14,6 +14,7 @@ public class EX_ThemeBtn : MonoBehaviour
     public TMP_Text themeName;
     public TMP_Text themeDescription;
     public Image themeIcon;
+    public Image topPnlImg;
     //public TMP_Text themeDifficulty;
     //public Image buttonImage;
     public int themeIndex;
@@ -24,6 +25,7 @@ public class EX_ThemeBtn : MonoBehaviour
 
     [Header("Sliders")]
     public Slider themeDifSlider;
+    public Slider themeProgressSlider;
 
     [Header("Panels")]
     public GameObject topPanel;
@@ -44,9 +46,10 @@ public class EX_ThemeBtn : MonoBehaviour
         button.onClick.AddListener(OnClicked);
 
         //set colors
-        Image topPnlImg = topPanel.GetComponent<Image>();   
+        topPnlImg = topPanel.GetComponent<Image>();   
         Image botPnlImg = bottomPanel.GetComponent<Image>();
 
+        //default colors
         topPnlImg.color = palette.PrimaryLight;
         botPnlImg.color = palette.Gray6Ligth;
     }

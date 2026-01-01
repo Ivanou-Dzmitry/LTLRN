@@ -29,7 +29,7 @@ public class DBUtils : MonoBehaviour
     private bool isInitialized = false;
     private const string dbName = "ltlrn01.db";
 
-    private const int DB_VERSION = 1; // Increment this when you update the database
+    private const int DB_VERSION = 2; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
 
@@ -253,6 +253,69 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //COMPLETE COUNT
+    public int GetCompleteSectionsCount()
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return 0;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                int count = connection.Table<SectionDB>()
+                    .Where(s => s.Complete == "true")
+                    .Count();
+
+                return count;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error counting complete sections: {ex.Message}");
+            return 0;
+        }
+    }
+
+
+    //PROGRESS
+    public int GetSectionProgress(string sectionName)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return 0;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    return section.QDone;
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                    return 0;
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting section liked status: {ex.Message}");
+            return 0;
+        }
+    }
+
     public void SetSectionProgress(string sectionName, int value)
     {
         if (!isInitialized)
@@ -287,6 +350,78 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+
+    //RESULR
+    public int GetSectionResult(string sectionName)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return 0;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    return section.QCorrect;
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                    return 0;
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting section liked status: {ex.Message}");
+            return 0;
+        }
+    }
+
+    public void SetSectionResult(string sectionName, int value)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    section.QCorrect = value;
+                    connection.Update(section);
+                    //Debug.Log($"Updated {sectionName} - Liked: {section.Liked}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error updating progress: {ex.Message}");
+        }
+    }
+
+
+    //TIME
     public void SetSectionTime(string sectionName, float value)
     {
         if (!isInitialized)
@@ -355,6 +490,7 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //LIKES
     public void UpdateSectionLiked(string sectionName, bool isLiked)
     {
         if (!isInitialized)
@@ -423,12 +559,13 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    public int GetSectionProgress(string sectionName)
+    //COMPLETE
+    public void SetSectionComplete(string sectionName, bool isComplete)
     {
         if (!isInitialized)
         {
             Debug.LogError("Database not initialized!");
-            return 0;
+            return;
         }
 
         try
@@ -441,19 +578,53 @@ public class DBUtils : MonoBehaviour
 
                 if (section != null)
                 {
-                    return section.QDone;
+                    section.Complete = isComplete ? "true" : "false";
+                    connection.Update(section);
+                    //Debug.Log($"Updated {sectionName} - Complete: {section.Liked}");
                 }
                 else
                 {
                     Debug.LogWarning($"Section not found: {sectionName}");
-                    return 0;
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error updating section liked status: {ex.Message}");
+        }
+    }
+
+    public bool GetSectionComplete(string sectionName)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return false;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    return section.Complete == "true";
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                    return false;
                 }
             }
         }
         catch (System.Exception ex)
         {
             Debug.LogError($"Error getting section liked status: {ex.Message}");
-            return 0;
+            return false;
         }
     }
 
@@ -586,6 +757,37 @@ public class DBUtils : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void ResetAllSections()
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string query = @"
+                UPDATE Sections 
+                SET QDone = 0, 
+                    QCorrect = 0, 
+                    Liked = 'false', 
+                    Time = 0.0, 
+                    Complete = 'false'
+            ";
+
+                int rowsAffected = connection.Execute(query);
+                Debug.Log($"Reset {rowsAffected} sections");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error resetting sections: {ex.Message}");
+        }
     }
 
     public bool IsReady => isInitialized;
