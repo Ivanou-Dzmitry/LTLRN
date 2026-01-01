@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Ex_GamePanel : Panel
 {
     private GameData gameData;
+    private ExGameLogic exGameLogic;
 
     private ButtonImage starsBtnImage;
     private ButtonImage lifeBtnImage;
@@ -20,6 +21,7 @@ public class Ex_GamePanel : Panel
     public RectTransform panel_01;
     public RectTransform panel_02;
     public RectTransform panel_03;
+    public Button infoButton;
     
     // for ui layout
     private const float panel01Height = 96f;
@@ -33,6 +35,8 @@ public class Ex_GamePanel : Panel
         starsBtnImage = starsBtn.GetComponent<ButtonImage>();
         lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
         crystalsBtnImage = crystalsBtn.GetComponent<ButtonImage>();
+
+        infoButton.onClick.AddListener(OnInfoClicked);
     }
 
     public override void Open()
@@ -88,5 +92,22 @@ public class Ex_GamePanel : Panel
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel01Height);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
         panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel03Height);
+    }
+
+    private void OnInfoClicked()
+    {
+        exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
+
+        //pause game
+        if (exGameLogic != null)
+            exGameLogic.gameState = GameState.Pause;
+
+        PanelManager.CloseAll();
+        PanelManager.Open("info");
+    }
+
+    private void OnDestroy()
+    {
+        infoButton.onClick.RemoveListener(OnInfoClicked);
     }
 }

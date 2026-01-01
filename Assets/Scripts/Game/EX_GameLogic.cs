@@ -5,6 +5,7 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static QuestionT01;
+using static System.Collections.Specialized.BitVector32;
 
 public enum GameState
 {
@@ -25,6 +26,12 @@ public class ExGameLogic : MonoBehaviour
         public int correctAnswerNumber;
     }
 
+    [System.Serializable]
+    public class SectionData
+    {
+        public string infoText;
+    }
+
     private GameData gameData;
     private DBUtils dbUtils;
     private SoundManager soundManager;
@@ -40,6 +47,8 @@ public class ExGameLogic : MonoBehaviour
     public SectionManager sectionManager;
     public Section currentSection;
     public QuestionT01 currentQuestion;
+
+    public string sectionInfo;
 
     private GameObject questionInstance;
 
@@ -128,8 +137,14 @@ public class ExGameLogic : MonoBehaviour
 
             //load first question
             if (currentSection != null)
-                currentQuestion = currentSection.questions[0];            
+                currentQuestion = currentSection.questions[0];
+
+            //losd info           
         }
+
+        //load section IMPORTANT
+        if (currentSection != null)
+            SLoad(currentSection);
 
         //load question IMPORTANT
         if (currentQuestion != null)
@@ -154,6 +169,31 @@ public class ExGameLogic : MonoBehaviour
 
         tempScore = 0;
     }
+
+    public static SectionData LoadSectionData(Section section)
+    {
+        SectionData sectionData = new SectionData();
+
+        if (section == null)
+        {
+            sectionData.infoText = "NULL";
+            return sectionData;
+        }
+
+        string resolvedText = null;
+
+        if (section.sectionInfo != null && DBUtils.Instance != null)
+        {
+            resolvedText = DBUtils.Instance.ResolveReference(section.sectionInfo);
+        }
+
+        sectionData.infoText = string.IsNullOrEmpty(resolvedText)
+            ? "NULL"
+            : resolvedText;
+
+        return sectionData;
+    }
+
 
     //prepare data for question. Step 1
     public static QuestionData LoadQuestionData(QuestionT01 question)
@@ -200,11 +240,24 @@ public class ExGameLogic : MonoBehaviour
         return data;
     }
 
+    private void SLoad(Section section)
+    {
+        SectionData sectionData = LoadSectionData(section);
+
+        if (sectionData == null) return;
+
+        //load rule from DB
+        if (sectionData.infoText.Length > 0)
+            sectionInfo = sectionData.infoText;
+        else
+            sectionInfo = "No data";                 
+    }
+
     private void QLoad(QuestionT01 question)
     {
         //step 2 - load prepared data
-        QuestionData data = LoadQuestionData(question);
-
+        QuestionData data = LoadQuestionData(question);               
+       
         //clear previous question
         foreach (Transform child in questionArea)
         {

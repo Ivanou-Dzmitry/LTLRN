@@ -15,7 +15,7 @@ MonoBehaviour:
   sectionType: 0
   difficultyType: 0
   sectionNumber: 1
-  sectionIcon: {fileID: 21300000, guid: bf5f72cda7dbf724dae461d548806ca2, type: 3}
+  sectionIcon: {fileID: 21300000, guid: 1113b94176f96fb4a9116aabfd400a42, type: 3}
   sectionHeaderColor: {r: 0.8509804, g: 0.3019608, b: 0.76878005, a: 1}
   isLiked: 0
   sectionTitle:
@@ -25,6 +25,13 @@ MonoBehaviour:
     ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u0440\u0430\u0437\u043B\u0438\u0447\u043D\u044B\u0435
       \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u0438\u0435 \u0441\u043B\u043E\u0432\u0430"
     en: We repeat various Lithuanian words
+  sectionInfo:
+    tableName: Short_vowels
+    columnName: ID
+    recordID: 0
+    value: 
+    whereColumn: ID
+    whereValue: 
   questions:
   - {fileID: 11400000, guid: 2ef9a38ed8035304c98b0ee7669ba1f4, type: 2}
   - {fileID: 11400000, guid: f6ebdbde2ca6d694ab30a6a0c2702994, type: 2}

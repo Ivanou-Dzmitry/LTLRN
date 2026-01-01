@@ -15,7 +15,7 @@ MonoBehaviour:
   sectionType: 0
   difficultyType: 0
   sectionNumber: 1
-  sectionIcon: {fileID: 21300000, guid: bf5f72cda7dbf724dae461d548806ca2, type: 3}
+  sectionIcon: {fileID: 21300000, guid: 6b57f1ca382a15744b25d56a49f03ad8, type: 3}
   sectionHeaderColor: {r: 0.34901962, g: 0.3019608, b: 0.85098046, a: 1}
   isLiked: 0
   sectionTitle:
@@ -25,6 +25,22 @@ MonoBehaviour:
     ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u0440\u0430\u0437\u043B\u0438\u0447\u043D\u044B\u0435
       \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u0438\u0435 \u0441\u043B\u043E\u0432\u0430"
     en: We repeat various Lithuanian words
+  sectionInfo:
+    tableName: Rules01
+    columnName: RU
+    recordID: 1
+    value: " \u0423\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
+      \u0432\u043C\u0435\u0441\u0442\u0435 \u0441\u043E \u0441\u043B\u043E\u0432\u0430\u043C\u0438
+      \u0432 \u0436\u0435\u043D\u0441\u043A\u043E\u043C \u0438 \u043C\u0443\u0436\u0441\u043A\u043E\u043C
+      \u0440\u043E\u0434\u0435: \u043A\u0430\u043A \u0438 \u0432 \u0440\u0443\u0441\u0441\u043A\u043E\u043C
+      \u044F\u0437\u044B\u043A\u0435, \u0432 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u043C
+      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u0443\u044E\u0442\u0441\u044F
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438
+      \u0432 \u0440\u043E\u0434\u0435, \u0447\u0438\u0441\u043B\u0435, \u043F\u0430\u0434\u0435\u0436\u0435
+      = \u0438\u0437\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u0432\u043C\u0435\u0441\u0442\u0435
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438."
+    whereColumn: ID
+    whereValue: 
   questions:
   - {fileID: 11400000, guid: 2ef9a38ed8035304c98b0ee7669ba1f4, type: 2}
   - {fileID: 11400000, guid: f6ebdbde2ca6d694ab30a6a0c2702994, type: 2}

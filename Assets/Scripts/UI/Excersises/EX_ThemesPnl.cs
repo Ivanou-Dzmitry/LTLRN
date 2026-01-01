@@ -104,6 +104,9 @@ public class EX_ThemesPanel : Panel
             themeBtnComponent.themeIcon.sprite = dataLoader.themes.theme[i].themeIcon;
             themeBtnComponent.themeIndex = i;
 
+            //set color
+            themeBtnComponent.topPnlImg.color = dataLoader.themes.theme[i].themeHeaderColor;
+
             //dificulty
             themeBtnComponent.themeDifSlider.value = currentTheme.GetThemeDifValue(currentTheme.themeDifficulty);
             //themeBtnComponent.themeDifficulty.text = dataLoader.themes.theme[i].themeDifficulty.ToString(); ;

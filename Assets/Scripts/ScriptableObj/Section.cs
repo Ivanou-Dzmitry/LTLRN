@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using static QuestionT01;
 
 [CreateAssetMenu(fileName = "Section", menuName = "Scriptable Objects/Section")]
@@ -49,6 +47,8 @@ public class Section : ScriptableObject
     [Header("Description")]
     public LocalizedText sectionDescription;
 
+    [Header("Info text")]
+    public DatabaseReference sectionInfo;
 
     public QuestionT01[] questions;
 

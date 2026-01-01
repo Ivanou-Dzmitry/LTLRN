@@ -309,6 +309,16 @@ MonoBehaviour:
     m_Key: FromSTxt
     m_Metadata:
       m_Items: []
+  - m_Id: 5805380250689536
+    m_Key: 'InfoTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5823588399636480
+    m_Key: 
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
