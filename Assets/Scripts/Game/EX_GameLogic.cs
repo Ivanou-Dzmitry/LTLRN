@@ -241,7 +241,10 @@ public class ExGameLogic : MonoBehaviour
         }
 
         // Load sound clips
-        int soundCount = question.soundReferences.Length;
+        int soundCount = 0;
+
+        if(question.soundReferences != null)
+            soundCount = question.soundReferences.Length;
 
         if (soundCount > 0)
         {
@@ -254,7 +257,10 @@ public class ExGameLogic : MonoBehaviour
         }
 
         //get image count
-        int imgCount = question.questionImageFile.Length;
+        int imgCount = 0;
+
+        if(question.questionImageFile != null)
+            imgCount = question.questionImageFile.Length;
 
         if (imgCount > 0)
         {
