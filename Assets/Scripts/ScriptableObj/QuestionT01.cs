@@ -30,7 +30,7 @@ public class QuestionT01 : ScriptableObject
     public enum QuestionType
     {
         Type1,
-        Type2,
+        Type2, //image
         Type3
     }
 
@@ -43,33 +43,46 @@ public class QuestionT01 : ScriptableObject
     }
 
     [Header("Type")]
+    [Tooltip("Type1 - question is text, Type2 - question is image")]
     public QuestionType questionType = QuestionType.Type1;
+
+    [Header("Category")]
+    [Tooltip("This is the category of the question. Example: Transport, Animals, etc.")]
+    public DatabaseReference questionCategory;
 
     [Header("Description")]
     public string questionDescription;
 
     [Header("Question")]
 
-    public bool isQuestionTextOnly = true; // Text or data from DB
+    // Text or data from DB
+    public bool isQuestionTextOnly = true;
 
-    [Header("Question: text")]
+    [Header("Q: text")]
     [TextArea] public string questionText; // Text of the question
 
-    [Header("Question: Database References")]
+    [Header("Q: DB")]
     public DatabaseReference questionReference;  // References to DB records
 
-    [Header("Illustration")]
-    public string qSpriteFile;
+    [Header("Image: File")]
+    public Sprite questionImage;
+
+    [Header("Image: DB")]
+    public DatabaseReference[] questionImageFile;
+
+    [Header("Image: Color")]
+    public Color questionImageColor = Color.white;
 
     [Header("TEXT")]
-
     public bool isAnswerTextOnly = true; // Text or data from DB
 
-    [Header("TEXT: Answer")]
+    [Header("TEXT: Answer from text")]
     [TextArea] public string[] answerVariantsText; //text
 
-    [Header("TEXT: Answer Database References")]
+    [Header("TEXT: Answer from DB")]
     public DatabaseReference[] answerReferences;  // References to DB records
+
+    public DatabaseReference[] answerSecondWord;  // References to 2nd word
 
     [Header("IMAGE")]
 
@@ -78,7 +91,7 @@ public class QuestionT01 : ScriptableObject
 
     [Header("SOUND")]
 
-    [Header("SOUND: Answer Database References")]
+    [Header("SOUND: from DB")]
     public DatabaseReference[] soundReferences;   // References to DB records
 
     [Header("Correct Answer")]

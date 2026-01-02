@@ -33,9 +33,10 @@ public class SoundManager : MonoBehaviour
     private LogManager logClass;
     private const string className = "SoundManager:";
 
-    //loading
+    //loading AUDIO
     private const string AUDIO_ROOT = "Sound/Audio/LT";
     private static Dictionary<string, AudioClip> audioCache = new Dictionary<string, AudioClip>();
+
     private static bool isAudioCacheLoaded = false;
 
     //public static SoundManager Instance;

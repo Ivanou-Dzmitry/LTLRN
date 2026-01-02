@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
+  m_Name: NumS2Q3
+  m_EditorClassIdentifier: Assembly-CSharp::Question
+  uID: numq3
+  questionLang: 1
+  questionDifficulty: 0
+  questionType: 1
+  questionCategory:
+    tableName: Human
+    columnName: Category
+    recordID: 1
+    value: Human
+    whereColumn: ID
+    whereValue: 
+  questionDescription: 
+  isQuestionTextOnly: 0
+  questionText: Question 3
+  questionReference:
+    tableName: Numerals
+    columnName: Word
+    recordID: 39
+    value: trys
+    whereColumn: ID
+    whereValue: 
+  questionImage: {fileID: 0}
+  questionImageFile:
+  - tableName: Human
+    columnName: Image
+    recordID: 2
+    value: girl01.png
+    whereColumn: ID
+    whereValue: 
+  - tableName: Human
+    columnName: Image
+    recordID: 2
+    value: girl01.png
+    whereColumn: ID
+    whereValue: 
+  questionImageColor: {r: 0.99371064, g: 0.30936265, b: 0.84260696, a: 1}
+  isAnswerTextOnly: 0
+  answerVariantsText:
+  - Answer 1
+  - Answer 2
+  - Answer 3
+  - Answer 4
+  answerReferences:
+  - tableName: Numerals0_10
+    columnName: Word
+    recordID: 13
+    value: viena
+    whereColumn: ID
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: Word
+    recordID: 14
+    value: dvi
+    whereColumn: ID
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: Word
+    recordID: 17
+    value: penkios
+    whereColumn: ID
+    whereValue: 
+  - tableName: Numerals
+    columnName: Word
+    recordID: 45
+    value: penkiolika
+    whereColumn: ID
+    whereValue: 
+  answerSecondWord:
+  - tableName: Human
+    columnName: NomSing
+    recordID: 2
+    value: "mergait\u0117"
+    whereColumn: ID
+    whereValue: 
+  - tableName: Human
+    columnName: NomPlur
+    recordID: 2
+    value: "mergait\u0117s"
+    whereColumn: ID
+    whereValue: 
+  - tableName: Human
+    columnName: NomPlur
+    recordID: 2
+    value: "mergait\u0117s"
+    whereColumn: ID
+    whereValue: 
+  - tableName: Human
+    columnName: GenPlur
+    recordID: 2
+    value: "mergaiti\u0173"
+    whereColumn: ID
+    whereValue: 
+  answerImageReferences: []
+  soundReferences: []
+  correctAnswerNumber: 1
+  rewardAmount: 1

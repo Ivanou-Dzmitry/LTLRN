@@ -32,6 +32,11 @@ public class DBUtils : MonoBehaviour
     private const int DB_VERSION = 2; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
+    //loading IMAGES
+    private const string IMAGES_ROOT = "Images";
+    private readonly Dictionary<string, Dictionary<string, Sprite>> spriteCache
+        = new Dictionary<string, Dictionary<string, Sprite>>();
+
 
     private void Awake()
     {
@@ -788,6 +793,46 @@ public class DBUtils : MonoBehaviour
         {
             Debug.LogError($"Error resetting sections: {ex.Message}");
         }
+    }
+
+    public Sprite LoadSpriteByName(string folder, string imageName)
+    {
+        if (string.IsNullOrEmpty(folder) || string.IsNullOrEmpty(imageName))
+            return null;
+
+        imageName = Path.GetFileNameWithoutExtension(imageName);
+
+        if (!spriteCache.ContainsKey(folder))
+        {
+            LoadSpriteFolder(folder);
+        }
+
+        if (spriteCache[folder].TryGetValue(imageName, out Sprite sprite))
+        {
+            return sprite;
+        }
+
+        Debug.LogWarning($"Sprite not found: {folder}/{imageName}");
+        return null;
+    }
+
+    private void LoadSpriteFolder(string folder)
+    {
+        if (spriteCache.ContainsKey(folder))
+            return;
+
+        string path = $"{IMAGES_ROOT}/{folder}";
+        Sprite[] sprites = Resources.LoadAll<Sprite>(path);
+
+        var dict = new Dictionary<string, Sprite>();
+
+        foreach (var sprite in sprites)
+        {
+            if (!dict.ContainsKey(sprite.name))
+                dict.Add(sprite.name, sprite);
+        }
+
+        spriteCache.Add(folder, dict);
     }
 
     public bool IsReady => isInitialized;

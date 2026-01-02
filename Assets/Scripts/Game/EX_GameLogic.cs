@@ -1,11 +1,10 @@
-using System;
+
 using System.Collections;
 using TMPro;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static QuestionT01;
-using static System.Collections.Specialized.BitVector32;
+
 
 public enum GameState
 {
@@ -21,9 +20,11 @@ public class ExGameLogic : MonoBehaviour
     {
         public string questionText;
         public string[] answerVariantsText;
+        public string[] answerSecondWord;
         public string[] qSoundClipName;
-        public string qSpriteFile;
+        public string[] questionImageFile;
         public int correctAnswerNumber;
+        public string questionCategory;
     }
 
     [System.Serializable]
@@ -205,7 +206,10 @@ public class ExGameLogic : MonoBehaviour
         data.questionText = DBUtils.Instance.ResolveReference(question.questionReference);
 
         // get answer count
-        int answersCount = question.answerReferences.Length;
+        int answersCount = 0;
+
+        if(question.answerReferences != null)
+            answersCount = question.answerReferences.Length;
 
         if (answersCount > 0)
         {
@@ -219,12 +223,29 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-        // Load sound clips
-        int sondCount = question.soundReferences.Length;
+        int secondWordCount = 0;
 
-        if (sondCount > 0)
+        //optional 2nd word answers
+        if (question.answerSecondWord != null) 
+            secondWordCount = question.answerSecondWord.Length;
+
+        if (secondWordCount > 0)
         {
-            data.qSoundClipName = new string[sondCount];
+            //set answers
+            data.answerSecondWord = new string[secondWordCount];
+            //load answers
+            for (int i = 0; i < question.answerSecondWord.Length; i++)
+            {
+                data.answerSecondWord[i] = DBUtils.Instance.ResolveReference(question.answerSecondWord[i]);
+            }
+        }
+
+        // Load sound clips
+        int soundCount = question.soundReferences.Length;
+
+        if (soundCount > 0)
+        {
+            data.qSoundClipName = new string[soundCount];
 
             for (int i = 0; i < question.soundReferences.Length; i++)
             {
@@ -232,10 +253,22 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-        // Copy other data
-        //data.questionText = question.questionText;
-        data.qSpriteFile = question.qSpriteFile;
+        //get image count
+        int imgCount = question.questionImageFile.Length;
+
+        if (imgCount > 0)
+        {
+            data.questionImageFile = new string[imgCount];
+
+            for (int i = 0; i < question.questionImageFile.Length; i++)
+            {
+                data.questionImageFile[i] = DBUtils.Instance.ResolveReference(question.questionImageFile[i]);
+            }
+        }
+
         data.correctAnswerNumber = (int)question.correctAnswerNumber;
+
+        data.questionCategory = DBUtils.Instance.ResolveReference(question.questionCategory);
 
         return data;
     }
@@ -278,9 +311,13 @@ public class ExGameLogic : MonoBehaviour
 
             //load data to prefab
             ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
-
+            
             if (qData != null)
             {
+                qData.qImagePanel.gameObject.SetActive(false); //hide image in type 1
+
+                qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
+
                 //load question text
                 if (question.isQuestionTextOnly)
                 {
@@ -295,18 +332,78 @@ public class ExGameLogic : MonoBehaviour
                 //set answers
                 if(question.isAnswerTextOnly)
                 {
-                    //text from question object
-                    qData.SetAnswers(question.answerVariantsText);
+                    //text from database 1 and 2 word
+                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
                 }
                 else
                 {
                     //text from database
                     qData.SetAnswers(data.answerVariantsText);
-                }                
+                }
 
                 //load sound
-                if(data.qSoundClipName != null && data.qSoundClipName.Length > 0)
+                if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
                     qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
+                else
+                    qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
+            }
+        }
+
+        if (question.questionType == QuestionType.Type2)
+        {
+            questionInstance = Instantiate(questionPrefab, questionArea);
+            questionInstance.name = question.name;
+
+            RectTransform rt = questionInstance.GetComponent<RectTransform>();
+            rt.localScale = Vector3.one;
+            rt.anchoredPosition = Vector2.zero;
+            rt.offsetMin = Vector2.zero;
+            rt.offsetMax = Vector2.zero;
+
+            //load data to prefab
+            ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+            if (qData != null)
+            {
+                qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
+
+                qData.qestionText.gameObject.SetActive(false); //hide text in type 2
+
+                //load image
+                if (data.questionCategory != null)
+                {
+                    qData.qImagePanel.gameObject.SetActive(true);
+
+                    //load images
+                    for (int i = 0; i < data.questionImageFile.Length; i++)
+                    {
+                        GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
+                        newImg.name = "QImage_"+i;
+                        Image img = newImg.GetComponent<Image>();
+                        img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[i]);
+                        img.SetNativeSize();
+                        img.color = question.questionImageColor;
+                        float randomZ = Random.Range(-5f, 5f);
+                        img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
+                    }
+
+                    //load sound
+                    if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
+                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
+                    else
+                        qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
+                }
+
+                //set answers
+                if (question.isAnswerTextOnly)
+                {
+                    //text from question object
+                    qData.SetAnswers(question.answerVariantsText);
+                }
+                else
+                {
+                    //text from database 1 and 2 word
+                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
+                }
             }
         }
 

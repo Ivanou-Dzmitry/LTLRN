@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-//panel with question Type 1
+//panel with question. Type 1
 public class ExQManager01 : MonoBehaviour
 {
     private SoundManager soundManager;
@@ -12,7 +12,10 @@ public class ExQManager01 : MonoBehaviour
     [SerializeField] private UIColorPalette palette;
 
     [Header("Question Content")]
-    public Image qImage;
+    public GameObject imagePrefab;
+    public Transform qImagePanel;
+
+    //public Image qImage;
     [SerializeField] public TMP_Text qestionText;
 
     [Header("Ansver icons")]
@@ -38,7 +41,7 @@ public class ExQManager01 : MonoBehaviour
 
     [Header("Answer Buttons")]
     [SerializeField] private AnswerButton[] answerButtons;
-    [SerializeField] private Button soundBtn;
+    [SerializeField] public Button soundBtn;
 
     private int selectedAnswerIndex = -1;
 
@@ -111,12 +114,24 @@ public class ExQManager01 : MonoBehaviour
     }
 
 
-    public void SetAnswers(string[] answers)
+    public void SetAnswers(string[] answers, string[] answers2 = null)
     {
         for (int i = 0; i < Mathf.Min(answers.Length, answerButtons.Length); i++)
         {
-            answerButtons[i].answerText = answers[i];
+            //combine two words if second array exist
+            string word1 = answers[i];
 
+            //second word
+            string word2 = string.Empty;
+
+            //check second array
+            if (answers2 != null)
+                word2 = answers2[i];
+
+            //set answer text
+            answerButtons[i].answerText = word1 + " " + word2;
+
+            //update button image
             if (answerButtons[i].buttonImage != null)
             {
                 answerButtons[i].buttonImage.buttonTextStr = answers[i];
