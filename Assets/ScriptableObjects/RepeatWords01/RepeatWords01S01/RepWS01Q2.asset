@@ -16,6 +16,13 @@ MonoBehaviour:
   questionLang: 1
   questionDifficulty: 0
   questionType: 0
+  questionCategory:
+    tableName: Numerals0_10
+    columnName: Category
+    recordID: 1
+    value: Numerals
+    whereColumn: ID
+    whereValue: 
   questionDescription: 
   isQuestionTextOnly: 0
   questionText: q2
@@ -26,7 +33,9 @@ MonoBehaviour:
     value: du
     whereColumn: ID
     whereValue: 
-  qSpriteFile: 
+  questionImage: {fileID: 0}
+  questionImageFile: []
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText:
   - 0
@@ -40,24 +49,25 @@ MonoBehaviour:
     value: "\u0434\u0443\u0431"
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: RU
-    recordID: 2
+    recordID: 3
     value: "\u0434\u0432\u0430"
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: RU
-    recordID: 9
+    recordID: 10
     value: "\u0434\u0435\u0432\u044F\u0442\u044C"
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: RU
-    recordID: 10
+    recordID: 11
     value: "\u0434\u0435\u0441\u044F\u0442\u044C"
     whereColumn: ID
     whereValue: 
+  answerSecondWord: []
   answerImageReferences: []
   soundReferences:
   - tableName: Numerals

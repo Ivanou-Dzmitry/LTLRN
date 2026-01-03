@@ -16,6 +16,13 @@ MonoBehaviour:
   questionLang: 1
   questionDifficulty: 0
   questionType: 0
+  questionCategory:
+    tableName: Numerals0_10
+    columnName: Category
+    recordID: 1
+    value: Numerals
+    whereColumn: ID
+    whereValue: 
   questionDescription: 
   isQuestionTextOnly: 0
   questionText: Vienas text
@@ -26,19 +33,21 @@ MonoBehaviour:
     value: vienas
     whereColumn: ID
     whereValue: 
-  qSpriteFile: 
+  questionImage: {fileID: 0}
+  questionImageFile: []
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText: []
   answerReferences:
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: RU
-    recordID: 1
+    recordID: 2
     value: "\u043E\u0434\u0438\u043D"
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: RU
-    recordID: 8
+    recordID: 9
     value: "\u0432\u043E\u0441\u0435\u043C\u044C"
     whereColumn: ID
     whereValue: 
@@ -54,6 +63,7 @@ MonoBehaviour:
     value: "\u0432\u0435\u043D\u0430"
     whereColumn: ID
     whereValue: 
+  answerSecondWord: []
   answerImageReferences: []
   soundReferences:
   - tableName: Numerals

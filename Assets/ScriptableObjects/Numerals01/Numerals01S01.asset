@@ -24,9 +24,10 @@ MonoBehaviour:
   sectionDescription:
     ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0446\u0438\u0444\u0440\u044B
       \u043E\u0442 0 \u0434\u043E 10. \u0421\u043E\u043E\u0442\u043D\u043E\u0441\u0438\u043C
-      \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u0435 \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435
-      \u0438 \u0446\u0438\u0444\u0440\u0443."
-    en: Study numbers from 0 to 10. Correlate the Lithuanian spelling and the number.
+      \u0446\u0438\u0444\u0440\u0443 \u0438 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u0435
+      \u043D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435."
+    en: Study numbers from 0 to 10. Let's correlate the number and the Lithuanian
+      spelling.
   sectionInfo:
     tableName: Rules01
     columnName: RU
@@ -44,6 +45,7 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   questions:
+  - {fileID: 11400000, guid: b81c2e8a2fb288c4f97e35b6e1354dfc, type: 2}
   - {fileID: 11400000, guid: b1ede00ede9333744ade6f228abb6d0b, type: 2}
   - {fileID: 11400000, guid: 5a15a317fe653c74b81380d68f2cde07, type: 2}
   - {fileID: 11400000, guid: 10a46af94b1421c40ba14bf2f55dda44, type: 2}
@@ -54,4 +56,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 60e8aae471ce6974d811806f8952fad4, type: 2}
   - {fileID: 11400000, guid: 5fd798bd2a62c77429a9f52a81d64caf, type: 2}
   - {fileID: 11400000, guid: 08cb90526d68d4640802cb83bc6fc37e, type: 2}
-  - {fileID: 11400000, guid: b81c2e8a2fb288c4f97e35b6e1354dfc, type: 2}

@@ -16,17 +16,26 @@ MonoBehaviour:
   questionLang: 1
   questionDifficulty: 0
   questionType: 0
+  questionCategory:
+    tableName: Numerals0_10
+    columnName: Category
+    recordID: 1
+    value: Numerals
+    whereColumn: ID
+    whereValue: 
   questionDescription: 
   isQuestionTextOnly: 0
   questionText: Question 10
   questionReference:
-    tableName: Numerals
+    tableName: Numerals0_10
     columnName: Word
-    recordID: 40
+    recordID: 1
     value: nulis
     whereColumn: ID
     whereValue: 
-  qSpriteFile: 
+  questionImage: {fileID: 0}
+  questionImageFile: []
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText:
   - Answer 1
@@ -34,35 +43,36 @@ MonoBehaviour:
   - Answer 3
   - Answer 4
   answerReferences:
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 1
+    recordID: 2
     value: 1
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 8
+    recordID: 9
     value: 8
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 4
+    recordID: 5
     value: 4
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 40
+    recordID: 1
     value: 0
     whereColumn: ID
     whereValue: 
+  answerSecondWord: []
   answerImageReferences: []
   soundReferences:
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Sound
-    recordID: 40
+    recordID: 1
     value: 0_lt.mp3
     whereColumn: ID
     whereValue: 

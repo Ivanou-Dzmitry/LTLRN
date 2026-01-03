@@ -13,52 +13,62 @@ MonoBehaviour:
   m_Name: NumS1Q1
   m_EditorClassIdentifier: Assembly-CSharp::Question
   uID: numq1
-  questionLang: 1
+  questionLang: 4
   questionDifficulty: 0
   questionType: 0
+  questionCategory:
+    tableName: Numerals0_10
+    columnName: Category
+    recordID: 1
+    value: Numerals
+    whereColumn: ID
+    whereValue: 
   questionDescription: 
   isQuestionTextOnly: 0
   questionText: Vienas text
   questionReference:
-    tableName: Numerals
+    tableName: Numerals0_10
     columnName: Word
-    recordID: 1
+    recordID: 2
     value: vienas
     whereColumn: ID
     whereValue: 
-  qSpriteFile: 
+  questionImage: {fileID: 0}
+  questionImageFile: []
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText: []
   answerReferences:
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 4
+    recordID: 5
     value: 4
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 1
+    recordID: 2
     value: 1
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 8
+    recordID: 9
     value: 8
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Digit
-    recordID: 6
+    recordID: 7
     value: 6
     whereColumn: ID
     whereValue: 
+  answerSecondWord: []
   answerImageReferences: []
   soundReferences:
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Sound
-    recordID: 1
+    recordID: 2
     value: 1_lt.mp3
     whereColumn: ID
     whereValue: 
