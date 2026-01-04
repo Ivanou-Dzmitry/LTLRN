@@ -29,7 +29,7 @@ public class DBUtils : MonoBehaviour
     private bool isInitialized = false;
     private const string dbName = "ltlrn01.db";
 
-    private const int DB_VERSION = 2; // Increment this when you update the database
+    private const int DB_VERSION = 1; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES

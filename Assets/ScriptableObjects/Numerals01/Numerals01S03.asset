@@ -10,23 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
-  m_Name: Numerals01S02
+  m_Name: Numerals01S03
   m_EditorClassIdentifier: Assembly-CSharp::Section
   sectionType: 0
   difficultyType: 1
   sectionNumber: 1
-  sectionIcon: {fileID: 21300000, guid: 6b57f1ca382a15744b25d56a49f03ad8, type: 3}
-  sectionHeaderColor: {r: 0.47352985, g: 0.7924528, b: 0.0024918227, a: 1}
+  sectionIcon: {fileID: 21300000, guid: cd9ffa10a7109b04bb2b04dc43cb606d, type: 3}
+  sectionHeaderColor: {r: 0.7921569, g: 0.003921591, b: 0.6706974, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438
-      \u0442\u0435\u043A\u0441\u0442"
-    en: Images and text
+    ru: "\u0412\u0432\u043E\u0434 \u0442\u0435\u043A\u0441\u0442\u0430"
+    en: Text input
   sectionDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0446\u0438\u0444\u0440\u044B.
-      \u0421\u043E\u043E\u0442\u043D\u043E\u0441\u0438\u043C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435
-      \u0438 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u0438\u0439 \u0442\u0435\u043A\u0441\u0442."
-    en: Study numbers. Matching the image and the Lithuanian text.
+    ru: "\u0422\u0435\u0441\u0442 \u0432\u0432\u043E\u0434\u0430 \u0442\u0435\u043A\u0441\u0442\u0430."
+    en: Text input test.
   sectionInfo:
     tableName: Rules01
     columnName: RU
@@ -44,6 +41,5 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   questions:
-  - {fileID: 11400000, guid: 6d676bf04d80d064d861ab5f4fd312ee, type: 2}
-  - {fileID: 11400000, guid: b1b7b6bec85ddfb43884b116d534c3af, type: 2}
-  - {fileID: 11400000, guid: cc4e9f6c271294348b0b4a0240818bff, type: 2}
+  - {fileID: 11400000, guid: 0361b347e8cd57c4195e213f3dba460d, type: 2}
+  - {fileID: 11400000, guid: ad748173934e3bb4591eae9ab079f554, type: 2}

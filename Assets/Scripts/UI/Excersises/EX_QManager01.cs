@@ -1,6 +1,6 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 //panel with question. Type 1
 public class ExQManager01 : MonoBehaviour
@@ -30,6 +30,13 @@ public class ExQManager01 : MonoBehaviour
     [Header("Particles")]
     public ParticleSystem playSoundPart;
 
+    [Header("Input")]
+    public GameObject inputPanel;
+    public TMP_InputField inputField;
+    public Button inputSubmitButton;
+
+    private ButtonImage inputSubmitBtn;
+
     //new structure for answers
     [System.Serializable]
     public class AnswerButton
@@ -42,6 +49,7 @@ public class ExQManager01 : MonoBehaviour
     [Header("Answer Buttons")]
     [SerializeField] private AnswerButton[] answerButtons;
     [SerializeField] public Button soundBtn;
+    public GameObject answerPanel;
 
     private int selectedAnswerIndex = -1;
 
@@ -58,6 +66,13 @@ public class ExQManager01 : MonoBehaviour
         }
 
         soundBtn.onClick.AddListener(playSoundClicked);
+        inputField.onValueChanged.AddListener(OnValueChanged);
+
+        //for submit text input
+        inputSubmitButton.onClick.AddListener(SubmitInput);
+        inputSubmitButton.interactable = false;
+
+        inputSubmitBtn = inputSubmitButton.GetComponent<ButtonImage>();
     }
 
     private void Start()
@@ -158,6 +173,24 @@ public class ExQManager01 : MonoBehaviour
         }
     }
 
+    public void CheckInputAnswer(string value, bool correct)
+    {
+        string tempText = qestionText.text;
+
+        // Remove ALL underscores anywhere, then insert value
+        qestionText.text = tempText.Replace("_", "") + value;
+
+        if (correct)
+        {
+            qestionText.color = palette.Success;
+        }
+        else
+        {
+            qestionText.color = palette.Error;
+        }
+    }
+
+
     private void ButtonStateSwitcher(int index, bool correct)
     {
         if (correct)
@@ -192,6 +225,61 @@ public class ExQManager01 : MonoBehaviour
     {
         //remove listeners
         soundBtn.onClick.RemoveListener(playSoundClicked);
+    }
+
+    public void ActivateInputField(bool activate)
+    {
+        if(inputPanel != null)
+            inputPanel.SetActive(activate);
+    }
+
+    public void ActivateAnswerButtons(bool activate)
+    {
+        if (answerPanel != null)
+            answerPanel.SetActive(activate);
+    }
+
+    private void OnValueChanged(string value)
+    {
+        //if logic exist and in play mode
+        if (exGameLogic == null || exGameLogic.gameState == GameState.Pause)
+            return;
+     
+        //set answer text in game logic IMPORTANT
+        if(value.Length > 0)
+        {
+            inputSubmitButton.interactable = true;
+            inputSubmitBtn.RefreshState();
+        }
+        else
+        {
+            inputSubmitButton.interactable = false;
+            inputSubmitBtn.RefreshState();
+        }            
+    }
+
+    private void SubmitInput()
+    {
+        //if logic exist and in play mode
+        if (exGameLogic == null || exGameLogic.gameState == GameState.Pause)
+            return;
+
+        //disable submit button
+        inputSubmitButton.interactable = false;
+        inputSubmitBtn.RefreshState();
+
+        inputField.interactable = false;
+
+        //enable next button
+        exGameLogic.nextButton.interactable = true;
+        exGameLogic.nextBtn.RefreshState();
+
+        //set answer text in game logic IMPORTANT
+        //exGameLogic.currentAnswerText = inputField.text;
+
+        //check
+        exGameLogic.CheckInput(inputField.text);
+        //exGameLogic.Check();
     }
 
 }

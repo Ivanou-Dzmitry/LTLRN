@@ -66,7 +66,7 @@ public class ExGameLogic : MonoBehaviour
     public int currentAnswerIndex = -1;
 
     //private ButtonImage checkBtn;
-    private ButtonImage nextBtn;
+    public ButtonImage nextBtn;
 
     [Header("Score")]
     public int tempScore = 0;
@@ -79,6 +79,8 @@ public class ExGameLogic : MonoBehaviour
     //timers
     private float sessionStartTime;
     public float sessionDuration;
+
+    private const float CHECK_DELAY = 1f;
 
     private void Awake()
     {
@@ -304,6 +306,8 @@ public class ExGameLogic : MonoBehaviour
         }
 
         //step 3 - question type 1 loader
+
+        // Text only question
         if (question.questionType == QuestionType.Type1)
         {
             questionInstance = Instantiate(questionPrefab, questionArea);
@@ -321,6 +325,7 @@ public class ExGameLogic : MonoBehaviour
             if (qData != null)
             {
                 qData.qImagePanel.gameObject.SetActive(false); //hide image in type 1
+                qData.ActivateInputField(false);
 
                 qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
 
@@ -355,6 +360,7 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
+        //IMAGE
         if (question.questionType == QuestionType.Type2)
         {
             questionInstance = Instantiate(questionPrefab, questionArea);
@@ -373,6 +379,8 @@ public class ExGameLogic : MonoBehaviour
                 qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
 
                 qData.qestionText.gameObject.SetActive(false); //hide text in type 2
+
+                qData.ActivateInputField(false);
 
                 //load image
                 if (data.questionCategory != null)
@@ -413,6 +421,48 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
+        //input
+        if (question.questionType == QuestionType.Type3)
+        {
+            questionLoadStep01(question);
+
+            //load data to prefab
+            ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+            if (qData != null)
+            {
+                qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
+
+                qData.ActivateInputField(true);
+                qData.answerPanel.SetActive(false);
+
+                qData.qImagePanel.gameObject.SetActive(false);
+
+                //load question text
+                if (question.isQuestionTextOnly)
+                {
+                    //text from question object
+                    qData.qestionText.text = question.questionText;
+                }
+                else
+                {
+                    //text from database
+                    qData.qestionText.text = data.questionText;
+                }
+            }
+        }
+
+    }
+
+    private void questionLoadStep01(QuestionT01 question)
+    {
+        questionInstance = Instantiate(questionPrefab, questionArea);
+        questionInstance.name = question.name;
+
+        RectTransform rt = questionInstance.GetComponent<RectTransform>();
+        rt.localScale = Vector3.one;
+        rt.anchoredPosition = Vector2.zero;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
     }
 
     public void Check()
@@ -459,9 +509,63 @@ public class ExGameLogic : MonoBehaviour
             else
             {
                 gameState = GameState.Finish;
-                ResultProcessing();
+                StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
             }
         }
+    }
+
+    public void CheckInput(string input)
+    {
+        gameState = GameState.Pause;
+
+        //load data to prefab
+        ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+
+        //get correct index
+        int correctIndex = (int)currentQuestion.correctAnswerNumber;
+
+        string correctAnswerText = string.Empty;
+
+        if (currentQuestion.answerReferences != null && currentQuestion.answerReferences[correctIndex] != null)
+        {
+            correctAnswerText = currentQuestion.answerReferences[correctIndex].value;
+        }        
+
+        //get question
+        QuestionT01 question = currentQuestion;
+
+        //check selected Type 1
+        if (currentSection.sectionType == Section.SectionType.Type1)
+        {
+            if (input == correctAnswerText)
+            {
+                // Add score, show success animation, etc.
+                tempScore = tempScore + currentQuestion.rewardAmount;
+
+                qData.CheckInputAnswer(input, true);
+            }
+            else
+            {
+                qData.CheckInputAnswer(input, false);                
+            }
+
+            if (qCounter < currentSection.questions.Length - 1)
+            {
+                nextButton.interactable = true;
+                nextBtn.RefreshState();
+            }
+            else
+            {
+                gameState = GameState.Finish;
+                StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
+            }
+        }
+    }
+
+    private IEnumerator ResultProcessingDelayed(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ResultProcessing();
     }
 
     private void ResultProcessing()
@@ -487,7 +591,7 @@ public class ExGameLogic : MonoBehaviour
 
         //increase question
         qCounter++;
-       
+
         //load next question
         if (qCounter < currentSection.questions.Length)
         {
