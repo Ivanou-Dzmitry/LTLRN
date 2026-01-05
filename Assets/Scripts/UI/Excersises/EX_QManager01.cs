@@ -154,7 +154,7 @@ public class ExQManager01 : MonoBehaviour
     {
         if (inputField != null)
         {
-            inputField.ActivateInputField();
+            //inputField.ActivateInputField();
 
 #if UNITY_ANDROID || UNITY_IOS
             // Show keyboard with Lithuanian locale
