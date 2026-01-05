@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 //panel with question. Type 1
 public class ExQManager01 : MonoBehaviour
@@ -83,7 +84,6 @@ public class ExQManager01 : MonoBehaviour
         if (inputField != null)
         {
             inputField.onValueChanged.AddListener(OnValueChanged);
-            ShowLithuanianKeyboard();
         }
             
         //for submit text input TYPE 3
@@ -124,6 +124,23 @@ public class ExQManager01 : MonoBehaviour
         exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
         soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
 
+        //for input field
+        if (inputField != null)
+        {
+            inputField.Select();
+            ShowKeyboard();
+
+            // Force caret visibility
+            inputField.caretWidth = 2; // Make it wider (default is 1)
+            inputField.caretBlinkRate = 0.85f; // Blink speed
+
+            // Set caret color (make sure it's visible)
+            inputField.caretColor = Color.black; // Or whatever contrasts with background
+
+            // Make sure caret is enabled
+            inputField.customCaretColor = true;
+        }
+
         // Set button texts and refresh
         foreach (var answer in answerButtons)
         {
@@ -132,7 +149,8 @@ public class ExQManager01 : MonoBehaviour
         }
     }
 
-    private void ShowLithuanianKeyboard()
+
+    private void ShowKeyboard()
     {
         if (inputField != null)
         {
