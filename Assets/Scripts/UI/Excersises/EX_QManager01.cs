@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +22,6 @@ public class ExQManager01 : MonoBehaviour
     [Header("Ansver icons")]
     public Sprite[] answerIcon;
 
-
     [Header("Sound")]
     public AudioClip qAudioClip;
     //public Button soundBtn;
@@ -36,6 +36,13 @@ public class ExQManager01 : MonoBehaviour
     public Button inputSubmitButton;
 
     private ButtonImage inputSubmitBtn;
+
+    [Header("Input Answer")]
+    [SerializeField] private GameObject inputAnswerPanel;
+    [SerializeField] private GameObject[] answerPanels;
+    [SerializeField] private Image[] answerIcons;
+    [SerializeField] private TMP_Text inputAnswerCorrectText;
+    [SerializeField] private TMP_Text inputAnswerWrongText;
 
     //new structure for answers
     [System.Serializable]
@@ -56,24 +63,60 @@ public class ExQManager01 : MonoBehaviour
 
     private void Awake()
     {
-        // Cache ButtonImage components and setup listeners
-        for (int i = 0; i < answerButtons.Length; i++)
+        //for type 1 and 2 answers
+        if (answerButtons != null)
         {
-            answerButtons[i].buttonImage = answerButtons[i].button.GetComponent<ButtonImage>();
+            // Cache ButtonImage components and setup listeners
+            for (int i = 0; i < answerButtons.Length; i++)
+            {
+                answerButtons[i].buttonImage = answerButtons[i].button.GetComponent<ButtonImage>();
 
-            int index = i; // Capture for closure
-            answerButtons[i].button.onClick.AddListener(() => OnAnswerClicked(index));
+                int index = i; // Capture for closure
+                answerButtons[i].button.onClick.AddListener(() => OnAnswerClicked(index));
+            }
         }
 
-        soundBtn.onClick.AddListener(playSoundClicked);
-        inputField.onValueChanged.AddListener(OnValueChanged);
+        if(soundBtn != null)
+            soundBtn.onClick.AddListener(playSoundClicked);
 
-        //for submit text input
-        inputSubmitButton.onClick.AddListener(SubmitInput);
-        inputSubmitButton.interactable = false;
+        //for submit text input TYPE 3
+        if (inputField != null)
+        {
+            inputField.onValueChanged.AddListener(OnValueChanged);
+            ShowLithuanianKeyboard();
+        }
+            
+        //for submit text input TYPE 3
+        if(inputSubmitButton != null)
+        {
+            inputSubmitButton.onClick.AddListener(SubmitInput);
+            inputSubmitButton.interactable = false;
+            inputSubmitBtn = inputSubmitButton.GetComponent<ButtonImage>();
+        }
 
-        inputSubmitBtn = inputSubmitButton.GetComponent<ButtonImage>();
+        //root answer panel
+        if(inputAnswerPanel != null)
+            inputAnswerPanel.SetActive(false);
+
+        //hide answer panels with text
+        if (inputAnswerCorrectText != null)
+            inputAnswerCorrectText.gameObject.SetActive(false);
+
+        if(inputAnswerWrongText != null)
+            inputAnswerWrongText.gameObject.SetActive(false);
+
+        //colorize answer icons
+        if(answerIcons != null && answerIcons.Length >= 2)
+        {
+            if (answerIcons[0] != null)
+                answerIcons[0].color = palette.Success;
+
+            if (answerIcons[1] != null)
+                answerIcons[1].color = palette.Gray6Dark;
+        }
+
     }
+
 
     private void Start()
     {
@@ -86,6 +129,28 @@ public class ExQManager01 : MonoBehaviour
         {
             answer.buttonImage.buttonTextStr = answer.answerText;
             answer.buttonImage.RefreshState();
+        }
+    }
+
+    private void ShowLithuanianKeyboard()
+    {
+        if (inputField != null)
+        {
+            inputField.ActivateInputField();
+
+#if UNITY_ANDROID || UNITY_IOS
+            // Show keyboard with Lithuanian locale
+            TouchScreenKeyboard.Open(
+                inputField.text,
+                TouchScreenKeyboardType.Default,
+                false, // autocorrection
+                false, // multiline
+                false, // secure
+                false, // alert
+                "", // placeholder
+                0 // character limit (0 = no limit)
+            );
+#endif
         }
     }
 
@@ -173,20 +238,55 @@ public class ExQManager01 : MonoBehaviour
         }
     }
 
-    public void CheckInputAnswer(string value, bool correct)
+    public void CheckInputAnswer(string value, string value2, bool correct)
     {
         string tempText = qestionText.text;
 
+        string styledValue = correct
+            ? $"<u><b>{value}</b></u>"
+            : $"<u><i>{value}</i></u>";
+
         // Remove ALL underscores anywhere, then insert value
-        qestionText.text = tempText.Replace("_", "") + value;
+        string answer = Regex.Replace(tempText, "_+", styledValue);
+
+        string styledCorrectValue = $"<u><b>{value2}</b></u>";
+
+        //get correct answer with second value
+        string rightAnswer = Regex.Replace(tempText, "_+", styledCorrectValue);
+
+        //qestionText.text = answer;
+
+        qestionText.gameObject.SetActive(false);
+
+        if (inputAnswerPanel != null)
+            inputAnswerPanel.SetActive(true);
 
         if (correct)
         {
-            qestionText.color = palette.Success;
+            if (inputAnswerCorrectText != null)
+                inputAnswerCorrectText.text = answer;
+
+            inputAnswerCorrectText.gameObject.SetActive(true);
+            inputAnswerCorrectText.color = palette.Success;
+            answerPanels[1].SetActive(false);
         }
         else
         {
-            qestionText.color = palette.Error;
+            //set correct answer
+            if (inputAnswerCorrectText != null)
+                inputAnswerCorrectText.text = rightAnswer;
+
+            inputAnswerCorrectText.gameObject.SetActive(true);
+            inputAnswerCorrectText.color = palette.Success;            
+            answerPanels[0].SetActive(true);
+
+            //set answer
+            if (inputAnswerWrongText != null)
+                inputAnswerWrongText.text = answer;
+
+            inputAnswerWrongText.gameObject.SetActive(true);
+            inputAnswerWrongText.color = palette.Gray6Dark;
+            answerPanels[1].SetActive(true);            
         }
     }
 
@@ -225,6 +325,12 @@ public class ExQManager01 : MonoBehaviour
     {
         //remove listeners
         soundBtn.onClick.RemoveListener(playSoundClicked);
+
+        if(inputSubmitButton != null)
+            inputSubmitButton.onClick.RemoveListener(SubmitInput);
+        
+        if(inputField != null)
+            inputField.onValueChanged.RemoveListener(OnValueChanged);
     }
 
     public void ActivateInputField(bool activate)
@@ -244,16 +350,21 @@ public class ExQManager01 : MonoBehaviour
         //if logic exist and in play mode
         if (exGameLogic == null || exGameLogic.gameState == GameState.Pause)
             return;
-     
+
+        //always lowercase
+        inputField.text = value.ToLower();
+
         //set answer text in game logic IMPORTANT
-        if(value.Length > 0)
+        if (value.Length > 0)
         {
             inputSubmitButton.interactable = true;
+            inputSubmitBtn.PlayAnimation(true, "Scale");
             inputSubmitBtn.RefreshState();
         }
         else
         {
             inputSubmitButton.interactable = false;
+            inputSubmitBtn.PlayAnimation(false, "Idle");
             inputSubmitBtn.RefreshState();
         }            
     }

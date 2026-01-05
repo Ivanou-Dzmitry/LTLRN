@@ -56,6 +56,9 @@ public class ButtonImage : MonoBehaviour
     private Button button;
     private Image buttonImage;
 
+    [Header("Animator")]
+    [SerializeField] private Animator btnAnimator;
+
     private void Awake()
     {
         button = GetComponent<Button>();
@@ -170,5 +173,23 @@ public class ButtonImage : MonoBehaviour
     public void RefreshState()
     {
         ApplyAll();
+    }
+
+    public void PlayAnimation(bool play, string triggerName)
+    {
+        if (btnAnimator != null)
+        {
+            if (play)
+            {
+                btnAnimator.enabled = true;
+                btnAnimator.ResetTrigger(triggerName);
+                btnAnimator.SetTrigger(triggerName);
+            }
+            else
+            {
+                btnAnimator.enabled = false;
+            }
+                
+        }
     }
 }

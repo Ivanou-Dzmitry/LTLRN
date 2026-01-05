@@ -25,7 +25,7 @@ MonoBehaviour:
     whereValue: 
   questionDescription: 
   isQuestionTextOnly: 1
-  questionText: Lab__
+  questionText: trys automobil___
   questionReference:
     tableName: Numerals
     columnName: Word
@@ -59,26 +59,8 @@ MonoBehaviour:
   answerReferences:
   - tableName: NounEndings
     columnName: Ending
-    recordID: 1
-    value: as
-    whereColumn: ID
-    whereValue: 
-  - tableName: NounEndings
-    columnName: Ending
-    recordID: 2
-    value: ias
-    whereColumn: ID
-    whereValue: 
-  - tableName: NounEndings
-    columnName: Ending
-    recordID: 3
-    value: is
-    whereColumn: ID
-    whereValue: 
-  - tableName: NounEndings
-    columnName: Ending
-    recordID: 16
-    value: uo
+    recordID: 8
+    value: iai
     whereColumn: ID
     whereValue: 
   answerSecondWord: []

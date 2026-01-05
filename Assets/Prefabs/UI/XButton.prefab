@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 8194386917795145026}
   - component: {fileID: 44661466966396951}
   - component: {fileID: 3053018270670761037}
+  - component: {fileID: 464560265644917256}
   m_Layer: 5
   m_Name: XButton
   m_TagString: Untagged
@@ -223,12 +224,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2c122fcb1c2f64599779395c4ee7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonImage
+  currentState: 0
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
   selectedButtonColor: 0
   buttonIcon: {fileID: 7052922696757609624}
   selectedTextColor: 0
   buttonTextStr: Text
   buttonText: {fileID: 3164418077823230374}
+  btnAnimator: {fileID: 464560265644917256}
 --- !u!114 &3053018270670761037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +258,28 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!95 &464560265644917256
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497475377469500009}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9a3e0f7409d92bb4e88ce29c9cbe96bd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8766875472373857089
 GameObject:
   m_ObjectHideFlags: 0

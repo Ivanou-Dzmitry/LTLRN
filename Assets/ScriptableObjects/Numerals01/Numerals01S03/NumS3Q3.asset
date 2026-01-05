@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
-  m_Name: NumS3Q1
+  m_Name: NumS3Q3
   m_EditorClassIdentifier: Assembly-CSharp::Question
   uID: numq1
   questionLang: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     whereValue: 
   questionDescription: 
   isQuestionTextOnly: 1
-  questionText: vien__ berniukas
+  questionText: dvi stotel__
   questionReference:
     tableName: Numerals
     columnName: Word
@@ -59,8 +59,8 @@ MonoBehaviour:
   answerReferences:
   - tableName: NounEndings
     columnName: Ending
-    recordID: 1
-    value: as
+    recordID: 19
+    value: "\u0117s"
     whereColumn: ID
     whereValue: 
   answerSecondWord: []

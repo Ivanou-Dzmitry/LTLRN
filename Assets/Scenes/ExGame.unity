@@ -1553,9 +1553,14 @@ MonoBehaviour:
   sectionInfo: 
   questionArea: {fileID: 1309348790}
   questionPrefab: {fileID: 4482622789210074643, guid: e5d952c48706a16478eb46390fbe8675, type: 3}
+  questionPrefabs:
+  - {fileID: 4482622789210074643, guid: e9f45970301a2f44aa3bdb226ade79fe, type: 3}
+  - {fileID: 4482622789210074643, guid: bac12a7bca8b9714ca5d57d2f8e50dc6, type: 3}
+  - {fileID: 4482622789210074643, guid: 6812cff915dd3a5428699f843ab094c3, type: 3}
   nextButton: {fileID: 759422384}
   interruptGameButton: {fileID: 1157524051}
   currentAnswerIndex: -1
+  nextBtn: {fileID: 0}
   tempScore: 0
   log: {fileID: 363677362}
   sessionDuration: 0
@@ -2836,7 +2841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44661466966396951, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: selectedButtonColor
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2439130107727448447, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId

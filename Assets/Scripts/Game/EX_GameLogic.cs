@@ -57,6 +57,8 @@ public class ExGameLogic : MonoBehaviour
     public Transform questionArea;
     public GameObject questionPrefab;
 
+    public GameObject[] questionPrefabs;
+
     [Header("Buttons")]
     //public Button checkButton;
     public Button nextButton;
@@ -80,7 +82,7 @@ public class ExGameLogic : MonoBehaviour
     private float sessionStartTime;
     public float sessionDuration;
 
-    private const float CHECK_DELAY = 1f;
+    private const float CHECK_DELAY = 3f;
 
     private void Awake()
     {
@@ -161,6 +163,7 @@ public class ExGameLogic : MonoBehaviour
         if(nextButton != null)
         {
             nextButton.interactable = false;
+            nextBtn.PlayAnimation(false, "Idle");
             nextBtn.RefreshState();
         }
 
@@ -310,23 +313,14 @@ public class ExGameLogic : MonoBehaviour
         // Text only question
         if (question.questionType == QuestionType.Type1)
         {
-            questionInstance = Instantiate(questionPrefab, questionArea);
-            questionInstance.name = question.name;
-
-            RectTransform rt = questionInstance.GetComponent<RectTransform>();
-            rt.localScale = Vector3.one;
-            rt.anchoredPosition = Vector2.zero;
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
+            //routine to load UI    
+            QuestionUILoad(question, 0);
 
             //load data to prefab
             ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
             
             if (qData != null)
             {
-                qData.qImagePanel.gameObject.SetActive(false); //hide image in type 1
-                qData.ActivateInputField(false);
-
                 qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
 
                 //load question text
@@ -360,27 +354,18 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-        //IMAGE
+        //IMAGE question
         if (question.questionType == QuestionType.Type2)
         {
-            questionInstance = Instantiate(questionPrefab, questionArea);
-            questionInstance.name = question.name;
-
-            RectTransform rt = questionInstance.GetComponent<RectTransform>();
-            rt.localScale = Vector3.one;
-            rt.anchoredPosition = Vector2.zero;
-            rt.offsetMin = Vector2.zero;
-            rt.offsetMax = Vector2.zero;
+            //routine to load UI    
+            QuestionUILoad(question, 1);
 
             //load data to prefab
             ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+
             if (qData != null)
             {
                 qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
-
-                qData.qestionText.gameObject.SetActive(false); //hide text in type 2
-
-                qData.ActivateInputField(false);
 
                 //load image
                 if (data.questionCategory != null)
@@ -424,21 +409,27 @@ public class ExGameLogic : MonoBehaviour
         //input
         if (question.questionType == QuestionType.Type3)
         {
-            questionLoadStep01(question);
+            //type3
+            QuestionUILoad(question, 2);
 
             //load data to prefab
             ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+
             if (qData != null)
             {
                 qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
 
-                qData.ActivateInputField(true);
-                qData.answerPanel.SetActive(false);
+                if (data.questionCategory != null)
+                {
+                    //load sound
+                    if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
+                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
+                    else
+                        qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
+                }
 
-                qData.qImagePanel.gameObject.SetActive(false);
-
-                //load question text
-                if (question.isQuestionTextOnly)
+                    //load question text
+                    if (question.isQuestionTextOnly)
                 {
                     //text from question object
                     qData.qestionText.text = question.questionText;
@@ -453,9 +444,9 @@ public class ExGameLogic : MonoBehaviour
 
     }
 
-    private void questionLoadStep01(QuestionT01 question)
+    private void QuestionUILoad(QuestionT01 question, int index)
     {
-        questionInstance = Instantiate(questionPrefab, questionArea);
+        questionInstance = Instantiate(questionPrefabs[index], questionArea);
         questionInstance.name = question.name;
 
         RectTransform rt = questionInstance.GetComponent<RectTransform>();
@@ -504,6 +495,7 @@ public class ExGameLogic : MonoBehaviour
             if (qCounter < currentSection.questions.Length - 1)
             {
                 nextButton.interactable = true;
+                nextBtn.PlayAnimation(true, "Scale");
                 nextBtn.RefreshState();
             }
             else
@@ -542,16 +534,17 @@ public class ExGameLogic : MonoBehaviour
                 // Add score, show success animation, etc.
                 tempScore = tempScore + currentQuestion.rewardAmount;
 
-                qData.CheckInputAnswer(input, true);
+                qData.CheckInputAnswer(input, correctAnswerText, true);
             }
             else
             {
-                qData.CheckInputAnswer(input, false);                
+                qData.CheckInputAnswer(input, correctAnswerText, false);                
             }
 
             if (qCounter < currentSection.questions.Length - 1)
             {
                 nextButton.interactable = true;
+                nextBtn.PlayAnimation(true, "Scale");
                 nextBtn.RefreshState();
             }
             else
@@ -606,6 +599,7 @@ public class ExGameLogic : MonoBehaviour
 
             //set button state
             nextButton.interactable = false;
+            nextBtn.PlayAnimation(false, "Idle");
             nextBtn.RefreshState();
         }
     }
