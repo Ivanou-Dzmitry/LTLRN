@@ -27,6 +27,7 @@ public class EX_MainPanel : Panel
     [Header("Like filter")]
     [SerializeField] private Button likeFilterButton;
     private ButtonImage likeFBtn;
+    private bool isProcessing = false;
     private bool filterLikedOnly = false;
     [SerializeField] private Transform contentPanel;
 
@@ -53,6 +54,9 @@ public class EX_MainPanel : Panel
         starsBtnImage = starsBtn.GetComponent<ButtonImage>();
         lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
         crystalsBtnImage = crystalsBtn.GetComponent<ButtonImage>();
+
+        // Remove all existing listeners first
+        likeFilterButton.onClick.RemoveAllListeners();
 
         likeFilterButton.onClick.AddListener(ToggleLikeFilter);
         likeFBtn = likeFilterButton.GetComponent<ButtonImage>();
@@ -137,8 +141,18 @@ public class EX_MainPanel : Panel
 
     private void ToggleLikeFilter()
     {
+        // Prevent multiple calls
+        if (isProcessing)
+        {
+            Debug.Log("Already processing, ignoring");
+            return;
+        }
+
+        isProcessing = true;
+
         // Toggle filter state
         filterLikedOnly = !filterLikedOnly;
+        Debug.Log("Like filter toggled. Now: " + (filterLikedOnly ? "ON" : "OFF"));
 
         // Update button visual state
         likeFBtn.SetSelected(filterLikedOnly);
@@ -146,23 +160,18 @@ public class EX_MainPanel : Panel
         // Update visibility of section panels
         foreach (Transform child in contentPanel)
         {
-            // Ensure it's a SectionPanel
             if (!child.CompareTag("SectionPanel"))
                 continue;
-            
-            // Get SectionPanel component
+
             SectionPanel sectionPanel = child.GetComponent<SectionPanel>();
             if (sectionPanel == null)
                 continue;
 
-            // If filter ON - show only liked
-            // If filter OFF - show all
-            bool shouldBeVisible =
-                !filterLikedOnly || sectionPanel.isLiked;
-
-            // Set visibility
+            bool shouldBeVisible = !filterLikedOnly || sectionPanel.isLiked;
             child.gameObject.SetActive(shouldBeVisible);
         }
+
+        isProcessing = false;
     }
 
     private void OnDestroy()

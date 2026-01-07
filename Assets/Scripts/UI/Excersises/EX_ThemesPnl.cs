@@ -97,6 +97,7 @@ public class EX_ThemesPanel : Panel
 
             //load data into button component
             themeBtnComponent.themeName.text = currentTheme.GetThemeName(currentTheme, locale);
+
             themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
             themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
             

@@ -13,5 +13,16 @@ MonoBehaviour:
   m_Name: Themes
   m_EditorClassIdentifier: Assembly-CSharp::Themes
   theme:
+  - {fileID: 11400000, guid: 4feca93990f8ca3488f083320d666b1e, type: 2}
+  - {fileID: 11400000, guid: 84c71a1a79ef54540872726597cf1ac2, type: 2}
   - {fileID: 11400000, guid: 81bb2ce2b6352404288d26b0c7297051, type: 2}
-  - {fileID: 11400000, guid: adeb32fb02256ea4abe00736a501bae1, type: 2}
+  - {fileID: 11400000, guid: e5c9bb2bdd60a594283249e294992af4, type: 2}
+  - {fileID: 11400000, guid: 2408a4a49d703e7488d8c4f7d5071fe6, type: 2}
+  - {fileID: 11400000, guid: e58321c352b2a674ebe59f46ffb16551, type: 2}
+  - {fileID: 11400000, guid: eff3d4dca61c09d489a3739fccc50280, type: 2}
+  - {fileID: 11400000, guid: 96c52449a4cbb0546a5b4df300e73a53, type: 2}
+  - {fileID: 11400000, guid: 8911d22d11218f54f8649f5e762d88a6, type: 2}
+  - {fileID: 11400000, guid: 9c51e481ee535f84d938a4a44d790412, type: 2}
+  - {fileID: 11400000, guid: ea57ac8722f407943b59dd568e1d3072, type: 2}
+  - {fileID: 11400000, guid: c376074bd53731147877480e4b83a426, type: 2}
+  - {fileID: 11400000, guid: 3e02e629886b70e41a7480591370e233, type: 2}
