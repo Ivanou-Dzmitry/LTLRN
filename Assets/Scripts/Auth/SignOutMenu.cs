@@ -39,7 +39,7 @@ public class SignOutMenu : Panel
 /*        if(playerName.Length == 0)
             playerName = AuthenticationService.Instance.PlayerName;*/
 
-        Debug.Log("Player Name: " + playerName);        
+        //Debug.Log("Player Name: " + playerName);        
 
         nameText.text = playerName;       
     }

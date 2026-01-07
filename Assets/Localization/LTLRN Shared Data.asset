@@ -319,6 +319,10 @@ MonoBehaviour:
     m_Key: InputFieldTxt
     m_Metadata:
       m_Items: []
+  - m_Id: 7680429291266048
+    m_Key: GuestLoginTxt
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

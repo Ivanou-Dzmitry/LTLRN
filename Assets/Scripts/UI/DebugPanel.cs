@@ -1,4 +1,5 @@
 using LTLRN.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class DebugPanel : Panel
     [Header("Buttons")]
     [SerializeField] private Button resetSectionBtn;
     [SerializeField] private Button resetGameBtn;
+    [SerializeField] private TMP_Dropdown debugDrop;
 
     public override void Initialize()
     {
@@ -36,6 +38,19 @@ public class DebugPanel : Panel
     private void OnDestroy()
     {
         resetGameBtn.onClick.RemoveListener(OnResetClicked);       
+    }
+
+
+    public void DebugMode()
+    {
+        if(gameData== null)
+            gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        if (gameData != null)
+        {
+            gameData.saveData.debugMode = debugDrop.value == 0 ? false : true;
+            gameData.SaveToFile();
+        }
     }
 
 }

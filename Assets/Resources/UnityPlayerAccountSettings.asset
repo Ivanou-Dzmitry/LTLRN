@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58a3bc647e70774b8c7225eb3b51e7e, type: 3}
   m_Name: UnityPlayerAccountSettings
   m_EditorClassIdentifier: Unity.Services.Authentication.PlayerAccounts::Unity.Services.Authentication.PlayerAccounts.UnityPlayerAccountSettings
-  clientId: 2126778
+  clientId: <color=#FFFFFFFF><mark=#3169ACAB></mark>Client ID</color>
   scopeMask: 7
   useCustomDeepLinkUri: 0
-  customScheme: 
-  customHost: 
+  customScheme: <color=#FFFFFFFF><mark=#3169ACAB></mark>Custom Scheme</color>
+  customHost: <color=#FFFFFFFF><mark=#3169ACAB></mark>Custom Host</color>

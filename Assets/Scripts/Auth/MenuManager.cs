@@ -4,6 +4,17 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using System.Threading.Tasks;
+
+
+#if UNITY_ANDROID
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+#endif
+
+#if UNITY_IOS
+using Unity.Advertisement.IosSupport;
+#endif
 
 
 public class MenuManager : MonoBehaviour
@@ -18,6 +29,8 @@ public class MenuManager : MonoBehaviour
     public LeaderboardManager leaderboardManager;
 
     private string pendingUsername;
+
+    private string m_GooglePlayGamesToken;
 
     public static MenuManager Singleton
     {
@@ -46,12 +59,182 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+/*    private void Awake()
+    {
+        //Application.runInBackground = true;
+
+        //StartClientService();
+
+
+        //Initialize PlayGamesPlatform
+
+        //PlayGamesPlatform.Activate();
+
+        //LoginGooglePlayGames();
+
+    }*/
+
     private void Awake()
     {
         Application.runInBackground = true;
 
-        StartClientService();
+#if UNITY_ANDROID
+        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.Activate();
+        LoginGooglePlayGames();
+#endif
+
+
     }
+
+    //google play games login
+    public void LoginGooglePlayGames()
+    {
+        PlayGamesPlatform.Instance.Authenticate((success) =>
+        {
+            if (success == SignInStatus.Success)
+            {
+                //Debug.Log("Login with Google Play games successful.");
+
+                if(gameData == null)
+                    gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+                gameData.LoadFromFile();
+
+                //sve name and pass
+                string playerName = PlayGamesPlatform.Instance.GetUserDisplayName();
+                SaveNamePass(playerName, "000000");
+
+                PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
+                {
+                    //Debug.Log("Authorization code: " + code);
+                    m_GooglePlayGamesToken = code;
+
+                    PanelManager.Open("main");
+                    // This token serves as an example to be used for SignInWithGooglePlayGames
+                });
+            }
+            else
+            {
+                string uiMessage = "Failed to retrieve Google play games authorization code";
+
+                //Debug.Log("Login Unsuccessful");
+
+                string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+
+                ShowError(ErrorMenu.Action.SignIn, uiMessage, locText);
+
+                //StartClientService();
+                //StartSignInOrLink();
+            }
+        });
+    }
+
+    //google play games login
+    public void StartSignInOrLink()
+    {
+        if (!PlayGamesPlatform.Instance.IsAuthenticated())
+        {
+            Debug.LogWarning("Not yet authenticated with Google Play Games -- attempting login again");
+            LoginGooglePlayGames();
+            return;
+        }
+
+        // Already authenticated with GPG, proceed with Unity Authentication
+        SignInOrLinkWithGooglePlayGames();
+    }
+
+
+    private async void SignInOrLinkWithGooglePlayGames()
+    {
+        if (string.IsNullOrEmpty(m_GooglePlayGamesToken))
+        {
+            Debug.LogWarning("Authorization code is null or empty!");
+            return;
+        }
+
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            await SignInWithGooglePlayGamesAsync(m_GooglePlayGamesToken);
+        }
+
+        else
+        {
+            await LinkWithGooglePlayGamesAsync(m_GooglePlayGamesToken);
+        }
+    }
+
+
+    private async Task SignInWithGooglePlayGamesAsync(string authCode)
+    {
+        try
+        {
+            await AuthenticationService.Instance.SignInWithGooglePlayGamesAsync(authCode); Debug.Log("SignIn is successful.");
+        }
+
+        catch (AuthenticationException ex)
+        {
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
+
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
+            Debug.LogException(ex);
+        }
+
+        catch (RequestFailedException ex)
+        {
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
+            Debug.LogException(ex);
+        }
+    }
+
+
+    private async Task LinkWithGooglePlayGamesAsync(string authCode)
+    {
+        try
+        {
+            await AuthenticationService.Instance.LinkWithGooglePlayGamesAsync(authCode);
+            Debug.Log("Link is successful.");
+        }
+    
+        catch (AuthenticationException ex) when(ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
+        {
+            // Prompt the player with an error message.
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            string errorM = "This user is already linked with another account. Log in instead.";
+            ShowError(ErrorMenu.Action.SignIn, errorM, locText);
+            Debug.LogWarning(errorM);
+        }
+
+        catch (AuthenticationException ex)
+        {
+            // Compare error code to AuthenticationErrorCodes
+
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
+            Debug.LogException(ex);
+        }
+
+        // Notify the player with the proper error message
+       
+        catch (RequestFailedException ex)
+        {
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
+            Debug.LogException(ex);
+        }
+
+    }
+
+
 
     public async void StartClientService()
     {
@@ -59,6 +242,7 @@ public class MenuManager : MonoBehaviour
      
         try
         {
+            // Initialize Unity Services if not already
             if (UnityServices.State != ServicesInitializationState.Initialized)
             {
                 var options = new InitializationOptions();
@@ -73,7 +257,8 @@ public class MenuManager : MonoBehaviour
 
             if (AuthenticationService.Instance.SessionTokenExists)
             {
-                gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+                if(gameData == null)
+                    gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
                 string name = string.Empty;
                 string pass = string.Empty;
@@ -127,6 +312,15 @@ public class MenuManager : MonoBehaviour
 
         try
         {
+            // Initialize Unity Services if not already
+            if (UnityServices.State != ServicesInitializationState.Initialized)
+            {
+                var options = new InitializationOptions();
+                options.SetProfile("default_profile");
+                await UnityServices.InitializeAsync();
+            }
+
+
             // Force sign out first to ensure a new anonymous session
             if (AuthenticationService.Instance.IsSignedIn)
             {
@@ -138,9 +332,28 @@ public class MenuManager : MonoBehaviour
             // Check and set default PlayerName if empty
             string timestamp = DateTime.Now.ToString("HHmmss");
             string playerName = "Guest" + timestamp;
+
             await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
 
-            SaveNamePass(playerName, "");
+            //save
+            if (AuthenticationService.Instance.SessionTokenExists)
+            {
+                gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+                string name = string.Empty;
+                string pass = string.Empty;
+
+                if (gameData != null)
+                {
+                    gameData.LoadFromFile();
+
+                    name = gameData.saveData.playerName;
+                    pass = gameData.saveData.playerPass;
+                }
+
+                SaveNamePass(playerName, "");
+            }
+             
 
             if (leaderboardManager != null)
                 await leaderboardManager.LoadPlayers(1);
@@ -340,6 +553,9 @@ public class MenuManager : MonoBehaviour
 
     private void SaveNamePass(string playerName, string playerPass)
     {        
+        if(gameData == null)
+            gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
         if (gameData != null)
         {
             gameData.saveData.playerName = playerName;

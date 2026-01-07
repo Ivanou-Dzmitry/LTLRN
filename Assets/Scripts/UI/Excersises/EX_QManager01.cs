@@ -9,6 +9,7 @@ public class ExQManager01 : MonoBehaviour
 {
     private SoundManager soundManager;
     private ExGameLogic exGameLogic;
+    private GameData gameData;
 
     [Header("Palette")]
     [SerializeField] private UIColorPalette palette;
@@ -60,6 +61,9 @@ public class ExQManager01 : MonoBehaviour
     public GameObject answerPanel;
 
     private int selectedAnswerIndex = -1;
+
+    [Header("Debug")]
+    public TMP_Text debugText;
 
 
     private void Awake()
@@ -123,6 +127,7 @@ public class ExQManager01 : MonoBehaviour
         //get game logic
         exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
         soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
         //for input field
         if (inputField != null)
@@ -147,6 +152,11 @@ public class ExQManager01 : MonoBehaviour
             answer.buttonImage.buttonTextStr = answer.answerText;
             answer.buttonImage.RefreshState();
         }
+
+        if (gameData.saveData.debugMode)
+            debugText.gameObject.SetActive(true);
+        else
+            debugText.gameObject.SetActive(false);
     }
 
 
@@ -198,13 +208,20 @@ public class ExQManager01 : MonoBehaviour
 
     private void playSoundClicked()
     {
-        if(soundManager == null) return;
+        debugText.text = $"Aclip: {qAudioClip.name}";
+
+        if (soundManager == null)
+            soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();     
+
+
 
         //run sound play
         if (soundManager != null)
         {
             if(qAudioClip != null)
                 soundManager.PlaySound(qAudioClip);
+
+            debugText.text = $"Aclip: {qAudioClip.name} / {soundManager.effectsSource.volume} / {soundManager.effectsSource.mute}";
         }
 
         //run particles

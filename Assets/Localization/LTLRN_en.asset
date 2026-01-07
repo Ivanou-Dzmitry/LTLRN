@@ -269,6 +269,10 @@ MonoBehaviour:
     m_Localized: Answer input field...
     m_Metadata:
       m_Items: []
+  - m_Id: 7680429291266048
+    m_Localized: Guest Login
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

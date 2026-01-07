@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,8 +11,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager soundManager;
 
-    [SerializeField] private AudioSource effectsSource;
-    [SerializeField] private AudioSource musicSource;
+    [SerializeField] public AudioSource effectsSource;
+    [SerializeField] public AudioSource musicSource;
 
     private AudioClip lastPlayedClip;
 
@@ -35,7 +36,10 @@ public class SoundManager : MonoBehaviour
 
     //loading AUDIO
     private const string AUDIO_ROOT = "Sound/Audio/LT";
-    private static Dictionary<string, AudioClip> audioCache = new Dictionary<string, AudioClip>();
+    private Dictionary<string, Dictionary<string, AudioClip>> audioCache =
+    new Dictionary<string, Dictionary<string, AudioClip>>();
+
+    private HashSet<string> loadedFolders = new HashSet<string>();
 
     private static bool isAudioCacheLoaded = false;
 
@@ -60,12 +64,12 @@ public class SoundManager : MonoBehaviour
         LoadSoundData();        
     }
 
-    private void LoadSoundData()
+    public void LoadSoundData()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         logClass = GameObject.FindWithTag("Log").GetComponent<LogManager>();
 
-        try
+/*        try
         {
             //lastPlayedClip = musicClips[gameDataClass.saveData.currentPlayingClipIndex];
             musicSource.clip = lastPlayedClip;
@@ -73,21 +77,25 @@ public class SoundManager : MonoBehaviour
         catch (System.Exception ex)
         {
             logClass.WriteSysLog($"{className}Failed to set music clip: {ex.Message}\n{ex.StackTrace}");
+        }*/
+
+        if(gameData != null)
+        {
+            MuteSound(gameData.saveData.soundToggle);
+            MuteMusic(gameData.saveData.musicToggle);
+            SetSoundSpeed(gameData.saveData.soundSpeed);
+            SetVolume("sound");
+            SetVolume("music");
         }
 
-        MuteSound(gameData.saveData.soundToggle);
-        MuteMusic(gameData.saveData.musicToggle);
+       
 
-        SetVolume("sound");
-        SetVolume("music");        
-
-        if (lastPlayedClip != null && musicSource.mute == false)
+/*        if (lastPlayedClip != null && musicSource.mute == false)
         {
             PlayMusic(lastPlayedClip);
-        }
+        }*/
 
         //set sound speed
-        SetSoundSpeed(gameData.saveData.soundSpeed);
     }
 
 
@@ -139,10 +147,9 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        if (gameData.saveData.soundToggle == true && clip != lastPlayedClip)
+        if (gameData.saveData.soundToggle == true)
         {
-            effectsSource.PlayOneShot(clip);
-            lastPlayedClip = clip;
+            effectsSource.PlayOneShot(clip);            
             StartCoroutine(ResetLastPlayedClip(clip.length));
         }        
     }
@@ -340,53 +347,46 @@ public class SoundManager : MonoBehaviour
 
 
 
-    public AudioClip LoadAudioClipByName(string clipName)
+    public AudioClip LoadAudioClipByName(string folder, string clipName)
     {
-        if (string.IsNullOrEmpty(clipName))
+        if (string.IsNullOrEmpty(folder) || string.IsNullOrEmpty(clipName))
             return null;
 
-        // Remove file extension if present
-        clipName = System.IO.Path.GetFileNameWithoutExtension(clipName);
+        clipName = Path.GetFileNameWithoutExtension(clipName);
 
-        //Debug.Log(clipName);
-
-        // Load all clips into cache on first use
-        if (!isAudioCacheLoaded)
+        if (!audioCache.ContainsKey(folder))
         {
-            LoadAudioCache();
+            LoadAudioFolder(folder);
         }
 
-        // Try to get from cache
-        if (audioCache.TryGetValue(clipName, out AudioClip clip))
+        if (audioCache[folder].TryGetValue(clipName, out AudioClip clip))
         {
             return clip;
         }
-        else
-        {
-            LoadAudioCache();
-        }
 
-            Debug.LogWarning($"AudioClip not found: {clipName}");
+        Debug.LogWarning($"AudioClip not found: {folder}/{clipName}");
         return null;
     }
 
-    private void LoadAudioCache()
+    private void LoadAudioFolder(string folder)
     {
-        audioCache.Clear();
+        if (audioCache.ContainsKey(folder))
+            return;
 
-        AudioClip[] allClips = Resources.LoadAll<AudioClip>(AUDIO_ROOT);
+        string path = $"{AUDIO_ROOT}/{folder}";
+        AudioClip[] clips = Resources.LoadAll<AudioClip>(path);
 
-        foreach (var clip in allClips)
+        var dict = new Dictionary<string, AudioClip>();
+
+        foreach (var clip in clips)
         {
-            if (!audioCache.ContainsKey(clip.name))
-            {
-                audioCache[clip.name] = clip;
-            }
+            if (!dict.ContainsKey(clip.name))
+                dict.Add(clip.name, clip);
         }
 
-        isAudioCacheLoaded = true;
+        audioCache.Add(folder, dict);
 
-        Debug.Log($"Loaded {audioCache.Count} audio clips from {AUDIO_ROOT}");
-    }
+        Debug.Log($"Loaded {clips.Length} audio clips from {path}");
+    }   
 
 }

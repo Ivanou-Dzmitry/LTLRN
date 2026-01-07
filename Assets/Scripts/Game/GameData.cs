@@ -31,6 +31,9 @@ public class SaveData
     public float soundVolume;
     public float musicVolume;
     public float soundSpeed;
+
+    [Header("Debug")]
+    public bool debugMode = false;
 }
 
 public class GameData : MonoBehaviour
@@ -129,11 +132,13 @@ public class GameData : MonoBehaviour
         gameData.saveData.crystals = 0;
 
         //sound and music settings
-        saveData.soundToggle = true;
+        saveData.soundToggle = false;
         saveData.musicToggle = true;
         saveData.soundVolume = 0.5f;
         saveData.musicVolume = 0.1f;
         saveData.soundSpeed = 1.0f;
+
+        saveData.debugMode = false;
     }
 
     private void PatchSavedData()

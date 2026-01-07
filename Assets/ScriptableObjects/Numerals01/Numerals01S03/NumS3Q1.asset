@@ -25,7 +25,7 @@ MonoBehaviour:
     whereValue: 
   questionDescription: 
   isQuestionTextOnly: 1
-  questionText: vien__ berniukas
+  questionText: vienas berniuk__
   questionReference:
     tableName: Numerals
     columnName: Word

@@ -55,8 +55,6 @@ public class ExGameLogic : MonoBehaviour
 
     [Header("Question Stuff")]
     public Transform questionArea;
-    public GameObject questionPrefab;
-
     public GameObject[] questionPrefabs;
 
     [Header("Buttons")]
@@ -146,6 +144,22 @@ public class ExGameLogic : MonoBehaviour
 
             //losd info           
         }
+        else
+        {
+            Debug.LogError("GameData not found in scene!");            
+        }
+
+        if(soundManager != null)
+        {
+            Debug.Log("SoundManager OK!");
+
+            soundManager.LoadSoundData();
+        }
+        else
+        {
+                       Debug.LogError("SoundManager not found in scene!");
+        }
+
 
         //load section IMPORTANT
         if (currentSection != null)
@@ -284,6 +298,7 @@ public class ExGameLogic : MonoBehaviour
         return data;
     }
 
+    //load section
     private void SLoad(Section section)
     {
         SectionData sectionData = LoadSectionData(section);
@@ -297,6 +312,7 @@ public class ExGameLogic : MonoBehaviour
             sectionInfo = "No data";                 
     }
 
+    //load question
     private void QLoad(QuestionT01 question)
     {
         //step 2 - load prepared data
@@ -348,7 +364,7 @@ public class ExGameLogic : MonoBehaviour
 
                 //load sound
                 if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
-                    qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
+                    qData.qAudioClip = soundManager.LoadAudioClipByName(data.questionCategory, data.qSoundClipName[0]);
                 else
                     qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
             }
@@ -387,7 +403,7 @@ public class ExGameLogic : MonoBehaviour
 
                     //load sound
                     if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
-                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
+                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.questionCategory, data.qSoundClipName[0]);
                     else
                         qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
                 }
@@ -423,7 +439,7 @@ public class ExGameLogic : MonoBehaviour
                 {
                     //load sound
                     if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
-                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.qSoundClipName[0]);
+                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.questionCategory, data.qSoundClipName[0]);
                     else
                         qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
                 }

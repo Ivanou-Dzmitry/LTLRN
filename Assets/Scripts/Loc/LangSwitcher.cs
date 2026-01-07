@@ -31,6 +31,8 @@ public class LanguageSwitcher : MonoBehaviour
 
     private IEnumerator InitializeLanguageDropdown()
     {
+        //Debug.Log("Initializing Language Dropdown...");
+
         yield return LocalizationSettings.InitializationOperation;
 
         // Create options list once
