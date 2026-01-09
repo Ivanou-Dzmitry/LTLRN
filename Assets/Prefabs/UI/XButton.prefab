@@ -348,8 +348,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Very long text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 027d2f1f49e1c3c49bc0a6f7a518450d, type: 2}
-  m_sharedMaterial: {fileID: -5720529033042340761, guid: 027d2f1f49e1c3c49bc0a6f7a518450d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+  m_sharedMaterial: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -379,11 +379,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: -2
+  m_characterSpacing: 0
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0

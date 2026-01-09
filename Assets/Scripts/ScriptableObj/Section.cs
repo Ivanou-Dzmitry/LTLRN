@@ -13,9 +13,12 @@ public class Section : ScriptableObject
 
     public enum DifficultyType
     {
-        Simple,
-        Medium,
-        Hard
+        A1,
+        A2,
+        B1,
+        B2,
+        C1,
+        C2
     }
 
     //Description:
@@ -26,7 +29,7 @@ public class Section : ScriptableObject
     public SectionType sectionType = SectionType.Type1;
 
     [Header("Difficulty")]
-    public DifficultyType difficultyType = DifficultyType.Simple;
+    public DifficultyType difficultyType = DifficultyType.A1;
 
     [Header("UI")]
     public int sectionNumber;
@@ -52,21 +55,30 @@ public class Section : ScriptableObject
 
     public QuestionT01[] questions;
 
-    public float GetSectionDifValue(DifficultyType difficulty)
+/*    public string GetSectionDifValue(DifficultyType difficulty)
     {
         switch (difficulty)
         {
-            case DifficultyType.Simple:
-                return 1f;
+            case DifficultyType.A1:
+                return "1";
 
-            case DifficultyType.Medium:
-                return 2f;
+            case DifficultyType.A2:
+                return "1";
 
-            case DifficultyType.Hard:
-                return 3f;
+            case DifficultyType.B1:
+                return "1";
+
+            case DifficultyType.B2:
+                return "1";
+
+            case DifficultyType.C1:
+                return "1";
+
+            case DifficultyType.C2:
+                return "1";
 
             default:
-                return 1f;
+                return "1";
         }
-    }
+    }*/
 }

@@ -249,8 +249,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+  m_sharedMaterial: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5486,6 +5486,7 @@ MonoBehaviour:
   answerButtons: []
   soundBtn: {fileID: 4059383017460104230}
   answerPanel: {fileID: 0}
+  debugText: {fileID: 0}
 --- !u!1 &5330730717335344777
 GameObject:
   m_ObjectHideFlags: 0

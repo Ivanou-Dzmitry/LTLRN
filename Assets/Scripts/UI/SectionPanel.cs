@@ -21,10 +21,11 @@ public class SectionPanel : MonoBehaviour
     [Header("DB Data")]
     public TMP_Text sectionTimeText;
     public TMP_Text sectionResultText;
+    public TMP_Text diffText;
 
     [Header("Sliders")]
     public Slider progressSlider;
-    public Slider difSlider;
+    //public Slider difSlider;
 
     [Header("Buttons")]
     public Button likeButton;
@@ -120,7 +121,8 @@ public class SectionPanel : MonoBehaviour
         sectionDescriptionText.text = GetDescription(section);
 
         //set difficulty
-        difSlider.value = section.GetSectionDifValue(section.difficultyType);
+        diffText.text = section.difficultyType.ToString();
+        //difSlider.value = section.GetSectionDifValue(section.difficultyType);
 
         //color header
         Image headerImage = headerPanel.GetComponent<Image>();
@@ -130,17 +132,17 @@ public class SectionPanel : MonoBehaviour
     public void PlayButtonToggle(int questions)
     {
         //toggle play button interactable state based on questions count
-        ButtonImage buttonImage = playSectionButton.GetComponent<ButtonImage>();
+       // ButtonImage buttonImage = playSectionButton.GetComponent<ButtonImage>();
 
         if (questions > 0)
         {
             playSectionButton.interactable = true;
-            buttonImage.SetDisabled(false);
+            //buttonImage.SetDisabled(false);
         }
         else
         {
             playSectionButton.interactable = false;
-            buttonImage.SetDisabled(true);
+            //buttonImage.SetDisabled(true);
         }
     }
 
