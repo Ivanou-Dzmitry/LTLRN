@@ -27,10 +27,10 @@ MonoBehaviour:
   isQuestionTextOnly: 0
   questionText: q2
   questionReference:
-    tableName: Numerals
-    columnName: Word
+    tableName: Short_vowels
+    columnName: ID
     recordID: 2
-    value: du
+    value: 2
     whereColumn: ID
     whereValue: 
   questionImage: {fileID: 0}
@@ -49,25 +49,25 @@ MonoBehaviour:
   - 0
   - 0
   answerReferences:
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Word
-    recordID: 1
+    recordID: 2
     value: vienas
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Word
-    recordID: 5
+    recordID: 6
     value: penki
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals0_10
     columnName: Word
-    recordID: 10
+    recordID: 11
     value: "de\u0161imt"
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals20_100
     columnName: Word
     recordID: 29
     value: "\u0161imtas"

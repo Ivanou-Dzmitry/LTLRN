@@ -14,14 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Localization-String-Tables-Belarusian
   m_GUID: dc842d06751563f4fba07dd71298a279
-  m_SerializeEntries:
-  - m_GUID: 47ec3b68706db2a44bbb7a0e5f2e196f
-    m_Address: LTLRN_be
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-be
-    - Preload
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ea771d12a2e87f941bca41859df96dda, type: 2}
   m_SchemaSet:

@@ -59,8 +59,8 @@ public class BaseTextAsset : MonoBehaviour
         {
             TextSize.Header => 80f,
             TextSize.Medium => 50f,
-            TextSize.Base => 26f,
-            _ => 26f
+            TextSize.Base => 30f,
+            _ => 30f
         };
     }
 

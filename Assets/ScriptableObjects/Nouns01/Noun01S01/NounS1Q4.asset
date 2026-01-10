@@ -41,8 +41,8 @@ MonoBehaviour:
   answerReferences:
   - tableName: Meat01
     columnName: RU
-    recordID: 2
-    value: "\u0433\u043E\u0432\u044F\u0434\u0438\u043D\u0430"
+    recordID: 5
+    value: "\u0442\u0435\u043B\u044F\u0442\u0438\u043D\u0430"
     whereColumn: ID
     whereValue: 
   - tableName: Meat01

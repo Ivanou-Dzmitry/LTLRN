@@ -13,6 +13,7 @@ public class ExWinPnl : Panel
     public Button exitButton;
     public Button replayButton;
     public Button nextButton;
+    public ButtonImage nextBtn;
 
     [Header("Result")]
     [SerializeField] private TMP_Text score;
@@ -30,15 +31,17 @@ public class ExWinPnl : Panel
         replayButton.onClick.AddListener(OnReplayClick);
         nextButton.onClick.AddListener(OnNextClick);
 
+        nextBtn = nextButton.GetComponent<ButtonImage>();
+
         base.Initialize();
     }
 
 
     public override void Open()
-    {
-        LoadResultsData();
-
+    {        
         base.Open();
+
+        LoadResultsData();
     }
 
     private void LoadResultsData()
@@ -50,6 +53,14 @@ public class ExWinPnl : Panel
             score.text = exGameLogic.tempScore.ToString();
             time.text = exGameLogic.FormatTime(exGameLogic.sessionDuration).ToString();
         }
+
+        bool next = exGameLogic.NextSection();
+
+        Debug.Log(next);
+        if (next)
+            nextBtn.SetDisabled(false);
+        
+        nextBtn.RefreshState();
     }
 
     private void OnExitClick()
@@ -65,7 +76,20 @@ public class ExWinPnl : Panel
 
     private void OnNextClick()
     {
-        exGameLogic.NextSection();
+        bool next = exGameLogic.NextSection();
+
+        if (next)
+        {
+            nextButton.interactable = true;
+            //reload scene
+            //PanelManager.OpenScene("ExGame");
+        }
+        else
+        {
+            nextButton.interactable = false;
+            //go to main menu
+            //PanelManager.OpenScene("MainMenu");
+        }
     }
 
     private void OnDestroy()

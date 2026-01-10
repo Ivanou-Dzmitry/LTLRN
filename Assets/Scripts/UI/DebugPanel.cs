@@ -14,6 +14,7 @@ public class DebugPanel : Panel
     [SerializeField] private Button resetSectionBtn;
     [SerializeField] private Button resetGameBtn;
     [SerializeField] private TMP_Dropdown debugDrop;
+    [SerializeField] private TMP_Text debugText;
 
     public override void Initialize()
     {
@@ -27,12 +28,21 @@ public class DebugPanel : Panel
         base.Initialize();
     }
 
-    private void OnResetClicked()
+    public override void Open()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
+        debugDrop.value = gameData.saveData.debugMode ? 1 : 0;
+
+        base.Open();
+    }
+
+    private void OnResetClicked()
+    {       
         if (gameData != null )
             gameData.AddDefaultData();
+
+        debugText.text = "Game Data Reset to Default Values.";
     }
 
     private void OnDestroy()
@@ -50,7 +60,11 @@ public class DebugPanel : Panel
         {
             gameData.saveData.debugMode = debugDrop.value == 0 ? false : true;
             gameData.SaveToFile();
+
+            debugText.text = "Debug: " + debugDrop.value;
         }
+
+        
     }
 
 }

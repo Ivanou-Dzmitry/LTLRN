@@ -153,6 +153,19 @@ public class ExQManager01 : MonoBehaviour
             answer.buttonImage.RefreshState();
         }
 
+        ShowDebugFeatures();
+    }
+
+    private void OnEnable()
+    {
+        ShowDebugFeatures();
+    }
+
+    private void ShowDebugFeatures()
+    {
+        if (gameData == null || debugText == null)
+            return;
+
         if (gameData.saveData.debugMode)
             debugText.gameObject.SetActive(true);
         else

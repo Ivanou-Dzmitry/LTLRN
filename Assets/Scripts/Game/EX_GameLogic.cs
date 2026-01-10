@@ -1,5 +1,6 @@
 
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,12 +43,17 @@ public class ExGameLogic : MonoBehaviour
 
     [Header("Game Info")]
     public Slider progressBar;
+    private Coroutine progressRoutine;
 
     [Header("Data")]
     public Themes themes;
     public SectionManager sectionManager;
     public Section currentSection;
+    private Section nextSection;
     public QuestionT01 currentQuestion;
+
+    //shuffle questions
+    private List<QuestionT01> tempQuestions;
 
     public string sectionInfo;
 
@@ -138,9 +144,18 @@ public class ExGameLogic : MonoBehaviour
             if (sectionManager != null)
                 currentSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
 
+
+            // Create runtime copy of questions
+            tempQuestions = new List<QuestionT01>(currentSection.questions);
+
+            ShuffleQuestions(tempQuestions);
+
+            if (tempQuestions != null && tempQuestions.Count > 0)
+                currentQuestion = tempQuestions[0];
+
             //load first question
-            if (currentSection != null)
-                currentQuestion = currentSection.questions[0];
+            /*            if (currentSection != null)
+                            currentQuestion = currentSection.questions[0];*/
 
             //losd info           
         }
@@ -157,7 +172,7 @@ public class ExGameLogic : MonoBehaviour
         }
         else
         {
-                       Debug.LogError("SoundManager not found in scene!");
+            Debug.LogError("SoundManager not found in scene!");
         }
 
 
@@ -188,6 +203,19 @@ public class ExGameLogic : MonoBehaviour
         gameState = GameState.Play;
 
         tempScore = 0;
+    }
+
+
+    void ShuffleQuestions(List<QuestionT01> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+
+            QuestionT01 temp = list[i];
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
+        }
     }
 
     public static SectionData LoadSectionData(Section section)
@@ -602,14 +630,17 @@ public class ExGameLogic : MonoBehaviour
         qCounter++;
 
         //load next question
-        if (qCounter < currentSection.questions.Length)
+        if (qCounter < currentSection.questions.Length && qCounter < tempQuestions.Count)
         {
             //set progress
-            progressBar.value = qCounter + 1;
+            int targetValue = qCounter + 1;
+            AnimateProgress(progressBar.value, targetValue, 1f);
 
             //get question
-            currentQuestion = currentSection.questions[qCounter];
-            
+            currentQuestion = tempQuestions[qCounter];
+
+            //currentQuestion = currentSection.questions[qCounter];            
+
             //question load
             QLoad(currentQuestion);
 
@@ -618,6 +649,30 @@ public class ExGameLogic : MonoBehaviour
             nextBtn.PlayAnimation(false, "Idle");
             nextBtn.RefreshState();
         }
+    }
+
+    void AnimateProgress(float from, float to, float duration)
+    {
+        if (progressRoutine != null)
+            StopCoroutine(progressRoutine);
+
+        progressRoutine = StartCoroutine(AnimateProgressRoutine(from, to, duration));
+    }
+
+    IEnumerator AnimateProgressRoutine(float from, float to, float duration)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+
+            progressBar.value = Mathf.Lerp(from, to, t);
+            yield return null;
+        }
+
+        progressBar.value = to;
     }
 
     private void OnGameInterrupt()
@@ -703,9 +758,24 @@ public class ExGameLogic : MonoBehaviour
         //int savedScore = dbUtils.GetSectionProgress(currentSection.name);
     }
 
-    public void NextSection()
+    public bool NextSection()
     {
-        Debug.Log("Go to next section");
+        int nextIndex = gameData.saveData.selectedThemeIndex + 1;
+
+        try
+        {
+            //try to get next section
+            nextSection = sectionManager.sections[nextIndex];
+            Debug.Log("Go to next section");
+            return true;
+        }
+        catch
+        {
+            Debug.Log("No more themes available.");
+            return false;
+        }
+
+        
     }
 
     private void OnDestroy()

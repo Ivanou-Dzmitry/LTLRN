@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviour
 
     private HashSet<string> loadedFolders = new HashSet<string>();
 
-    private static bool isAudioCacheLoaded = false;
+    //private static bool isAudioCacheLoaded = false;
 
     //public static SoundManager Instance;
 

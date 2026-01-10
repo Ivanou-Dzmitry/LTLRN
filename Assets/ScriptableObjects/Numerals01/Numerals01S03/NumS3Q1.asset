@@ -27,10 +27,10 @@ MonoBehaviour:
   isQuestionTextOnly: 1
   questionText: vienas berniuk__
   questionReference:
-    tableName: Numerals
-    columnName: Word
+    tableName: Short_vowels
+    columnName: ID
     recordID: 1
-    value: vienas
+    value: 1
     whereColumn: ID
     whereValue: 
   questionImage: {fileID: 0}

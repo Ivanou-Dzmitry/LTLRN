@@ -27,10 +27,10 @@ MonoBehaviour:
   isQuestionTextOnly: 0
   questionText: Question 3
   questionReference:
-    tableName: Numerals
-    columnName: Word
-    recordID: 39
-    value: trys
+    tableName: Short_vowels
+    columnName: ID
+    recordID: 1
+    value: 1
     whereColumn: ID
     whereValue: 
   questionImage: {fileID: 0}
@@ -73,9 +73,9 @@ MonoBehaviour:
     value: penkios
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
+  - tableName: Numerals11_19
     columnName: Word
-    recordID: 45
+    recordID: 5
     value: penkiolika
     whereColumn: ID
     whereValue: 

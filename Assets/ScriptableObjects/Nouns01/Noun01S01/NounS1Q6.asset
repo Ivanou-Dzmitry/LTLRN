@@ -29,8 +29,8 @@ MonoBehaviour:
   questionReference:
     tableName: Meat01
     columnName: NomSing
-    recordID: 1
-    value: kiauliena
+    recordID: 6
+    value: kumpis
     whereColumn: ID
     whereValue: 
   questionImage: {fileID: 0}
@@ -41,14 +41,14 @@ MonoBehaviour:
   answerReferences:
   - tableName: Meat01
     columnName: RU
-    recordID: 2
-    value: "\u0433\u043E\u0432\u044F\u0434\u0438\u043D\u0430"
+    recordID: 1
+    value: "\u0441\u0432\u0438\u043D\u0438\u043D\u0430"
     whereColumn: ID
     whereValue: 
   - tableName: Meat01
     columnName: RU
-    recordID: 1
-    value: "\u0441\u0432\u0438\u043D\u0438\u043D\u0430"
+    recordID: 6
+    value: "\u0432\u0435\u0442\u0447\u0438\u043D\u0430"
     whereColumn: ID
     whereValue: 
   - tableName: Meat01
@@ -65,6 +65,12 @@ MonoBehaviour:
     whereValue: 
   answerSecondWord: []
   answerImageReferences: []
-  soundReferences: []
+  soundReferences:
+  - tableName: Meat01
+    columnName: Sound
+    recordID: 6
+    value: ham01_lt.mp3
+    whereColumn: ID
+    whereValue: 
   correctAnswerNumber: 1
   rewardAmount: 1

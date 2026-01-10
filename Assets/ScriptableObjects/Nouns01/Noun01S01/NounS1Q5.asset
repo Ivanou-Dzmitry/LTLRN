@@ -59,8 +59,8 @@ MonoBehaviour:
     whereValue: 
   - tableName: Meat01
     columnName: RU
-    recordID: 4
-    value: "\u0431\u0430\u0440\u0430\u043D\u0438\u043D\u0430"
+    recordID: 14
+    value: "\u0440\u0451\u0431\u0440\u0430"
     whereColumn: ID
     whereValue: 
   answerSecondWord: []
