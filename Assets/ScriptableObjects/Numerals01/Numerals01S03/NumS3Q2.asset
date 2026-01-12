@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NumS3Q2
   m_EditorClassIdentifier: Assembly-CSharp::Question
   uID: numq1
-  questionLang: 0
+  questionLang: 1
   questionDifficulty: 1
   questionType: 2
   questionCategory:
@@ -27,32 +27,14 @@ MonoBehaviour:
   isQuestionTextOnly: 1
   questionText: trys automobil___
   questionReference:
-    tableName: Numerals
-    columnName: Word
+    tableName: Short_vowels
+    columnName: ID
     recordID: 1
-    value: vienas
+    value: 1
     whereColumn: ID
     whereValue: 
   questionImage: {fileID: 0}
-  questionImageFile:
-  - tableName: Transport
-    columnName: Image
-    recordID: 1
-    value: car01.png
-    whereColumn: ID
-    whereValue: 
-  - tableName: Transport
-    columnName: Image
-    recordID: 1
-    value: car01.png
-    whereColumn: ID
-    whereValue: 
-  - tableName: Transport
-    columnName: Image
-    recordID: 1
-    value: car01.png
-    whereColumn: ID
-    whereValue: 
+  questionImageFile: []
   questionImageColor: {r: 0.38364768, g: 0.38364768, b: 0.38364768, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText: []

@@ -9,6 +9,7 @@ public class EX_ExitGamePnl : Panel
     [Header("Buttons")]
     public Button exitButton;
     public Button returnButton;
+    private ButtonImage returnBtn;
 
     public override void Initialize()
     {
@@ -20,6 +21,7 @@ public class EX_ExitGamePnl : Panel
         //buttons
         exitButton.onClick.AddListener(OnExitClick);
         returnButton.onClick.AddListener(OnReturnClick);
+        returnBtn = returnButton.GetComponent<ButtonImage>();
 
         base.Initialize();
     }
@@ -27,8 +29,11 @@ public class EX_ExitGamePnl : Panel
     public override void Open()
     {
         exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
-
+        
         base.Open();
+
+        //run animation
+        returnBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
     }
 
     private void OnExitClick()
@@ -40,6 +45,13 @@ public class EX_ExitGamePnl : Panel
     {
         PanelManager.CloseAll();
         PanelManager.Open("exgamemain");
+    }
+
+    private void OnDestroy()
+    {
+        //remove listeners
+        exitButton.onClick.RemoveListener(OnExitClick);
+        returnButton.onClick.RemoveListener(OnReturnClick);
     }
 
 }

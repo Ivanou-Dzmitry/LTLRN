@@ -1,8 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 //panel with question. Type 1
 public class ExQManager01 : MonoBehaviour
@@ -15,36 +17,41 @@ public class ExQManager01 : MonoBehaviour
     [SerializeField] private UIColorPalette palette;
 
     [Header("Question Content")]
+    public RectTransform questionContainer;
     public GameObject imagePrefab;
     public Transform qImagePanel;
 
     //public Image qImage;
     [SerializeField] public TMP_Text qestionText;
 
-    [Header("Ansver icons")]
+    [Header("Prefabs")]
+    public GameObject inputPrefab;
+    public GameObject textPrefab;
+
+    [Header("Answer icons")]
     public Sprite[] answerIcon;
 
     [Header("Sound")]
     public AudioClip qAudioClip;
     //public Button soundBtn;
 
-
     [Header("Particles")]
     public ParticleSystem playSoundPart;
 
     [Header("Input")]
     public GameObject inputPanel;
-    public TMP_InputField inputField;
+    private TMP_InputField inputField;
     public Button inputSubmitButton;
 
+    //submit answer
     private ButtonImage inputSubmitBtn;
 
     [Header("Input Answer")]
     [SerializeField] private GameObject inputAnswerPanel;
-    [SerializeField] private GameObject[] answerPanels;
-    [SerializeField] private Image[] answerIcons;
     [SerializeField] private TMP_Text inputAnswerCorrectText;
-    [SerializeField] private TMP_Text inputAnswerWrongText;
+    [SerializeField] private Image[] answerIcons;
+    private Image labelIcon;    
+    private string tempText; //for correct answer
 
     //new structure for answers
     [System.Serializable]
@@ -83,12 +90,6 @@ public class ExQManager01 : MonoBehaviour
 
         if(soundBtn != null)
             soundBtn.onClick.AddListener(playSoundClicked);
-
-        //for submit text input TYPE 3
-        if (inputField != null)
-        {
-            inputField.onValueChanged.AddListener(OnValueChanged);
-        }
             
         //for submit text input TYPE 3
         if(inputSubmitButton != null)
@@ -98,16 +99,9 @@ public class ExQManager01 : MonoBehaviour
             inputSubmitBtn = inputSubmitButton.GetComponent<ButtonImage>();
         }
 
-        //root answer panel
+        //answer panel for input questions
         if(inputAnswerPanel != null)
             inputAnswerPanel.SetActive(false);
-
-        //hide answer panels with text
-        if (inputAnswerCorrectText != null)
-            inputAnswerCorrectText.gameObject.SetActive(false);
-
-        if(inputAnswerWrongText != null)
-            inputAnswerWrongText.gameObject.SetActive(false);
 
         //colorize answer icons
         if(answerIcons != null && answerIcons.Length >= 2)
@@ -128,23 +122,6 @@ public class ExQManager01 : MonoBehaviour
         exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
         soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-
-        //for input field
-        if (inputField != null)
-        {
-            inputField.Select();
-            ShowKeyboard();
-
-            // Force caret visibility
-            inputField.caretWidth = 2; // Make it wider (default is 1)
-            inputField.caretBlinkRate = 0.85f; // Blink speed
-
-            // Set caret color (make sure it's visible)
-            inputField.caretColor = Color.black; // Or whatever contrasts with background
-
-            // Make sure caret is enabled
-            inputField.customCaretColor = true;
-        }
 
         // Set button texts and refresh
         foreach (var answer in answerButtons)
@@ -173,7 +150,7 @@ public class ExQManager01 : MonoBehaviour
     }
 
 
-    private void ShowKeyboard()
+    public void ShowKeyboard()
     {
         if (inputField != null)
         {
@@ -215,8 +192,7 @@ public class ExQManager01 : MonoBehaviour
         selectedAnswerIndex = index;
 
         //check
-        exGameLogic.Check();
-        
+        exGameLogic.Check();        
     }
 
     private void playSoundClicked()
@@ -225,8 +201,6 @@ public class ExQManager01 : MonoBehaviour
 
         if (soundManager == null)
             soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();     
-
-
 
         //run sound play
         if (soundManager != null)
@@ -286,55 +260,47 @@ public class ExQManager01 : MonoBehaviour
         }
     }
 
+    //from input field
     public void CheckInputAnswer(string value, string value2, bool correct)
     {
-        string tempText = qestionText.text;
-
-        string styledValue = correct
-            ? $"<u><b>{value}</b></u>"
-            : $"<u><i>{value}</i></u>";
-
-        // Remove ALL underscores anywhere, then insert value
-        string answer = Regex.Replace(tempText, "_+", styledValue);
-
         string styledCorrectValue = $"<u><b>{value2}</b></u>";
-
-        //get correct answer with second value
         string rightAnswer = Regex.Replace(tempText, "_+", styledCorrectValue);
-
-        //qestionText.text = answer;
-
-        qestionText.gameObject.SetActive(false);
-
-        if (inputAnswerPanel != null)
-            inputAnswerPanel.SetActive(true);
 
         if (correct)
         {
-            if (inputAnswerCorrectText != null)
-                inputAnswerCorrectText.text = answer;
+            if(inputField != null)
+                inputField.image.color = palette.SuccessLight;
 
-            inputAnswerCorrectText.gameObject.SetActive(true);
-            inputAnswerCorrectText.color = palette.Success;
-            answerPanels[1].SetActive(false);
+            //show icon
+            if (labelIcon != null)
+            {
+                labelIcon.enabled = true;
+                labelIcon.sprite = answerIcon[0];
+                labelIcon.color = palette.Success;
+            }
+
         }
         else
         {
-            //set correct answer
-            if (inputAnswerCorrectText != null)
-                inputAnswerCorrectText.text = rightAnswer;
+            //input color
+            if (inputField != null)
+                inputField.image.color = palette.Gray2Dark;
 
-            inputAnswerCorrectText.gameObject.SetActive(true);
-            inputAnswerCorrectText.color = palette.Success;            
-            answerPanels[0].SetActive(true);
+            //label color
+            if (labelIcon != null)
+            {
+                labelIcon.enabled = true;
+                labelIcon.sprite = answerIcon[1];
+                labelIcon.color = palette.Gray3Dark;
+            }
 
-            //set answer
-            if (inputAnswerWrongText != null)
-                inputAnswerWrongText.text = answer;
+            //show correct answer panel
+            if (inputAnswerPanel != null)
+                inputAnswerPanel.SetActive(true);
 
-            inputAnswerWrongText.gameObject.SetActive(true);
-            inputAnswerWrongText.color = palette.Gray6Dark;
-            answerPanels[1].SetActive(true);            
+            //set correct answer text
+            inputAnswerCorrectText.text = rightAnswer;
+            inputAnswerCorrectText.color = palette.Success;
         }
     }
 
@@ -439,6 +405,159 @@ public class ExQManager01 : MonoBehaviour
         //check
         exGameLogic.CheckInput(inputField.text);
         //exGameLogic.Check();
+
+        inputSubmitButton.interactable = false;
+        inputSubmitBtn.PlayAnimation(false, "Idle");
+        inputSubmitBtn.RefreshState();
+    }
+
+    public void AddDataToQuestionContainer(string source)
+    {
+        //save source
+        tempText = source;
+
+        Debug.Log($"Source: {source}");
+
+        var parts = SplitSource(source);
+
+        AddIcon();
+
+        inputAnswerCorrectText.text = string.Empty;
+
+        //add parts
+        foreach (var p in parts)
+        {
+            if (Regex.IsMatch(p, "^_+$"))
+            {
+                GameObject inp = Instantiate(inputPrefab, questionContainer);
+                inp.name = "InputField";
+
+                inputField = inp.GetComponent<TMP_InputField>();
+
+                inputField.characterLimit = 3; // Set character limit based on underscores p.Length
+
+                //inputField = inputFld; // Cache for later use
+
+                // Configure size
+                RectTransform rt = inp.GetComponent<RectTransform>();
+                float width = Mathf.Max(80, p.Length * 10); // Width based on underscores
+                rt.sizeDelta = new Vector2(width, 60);
+
+                // Add/configure LayoutElement ONLY (no ContentSizeFitter)
+                LayoutElement le = inp.GetComponent<LayoutElement>();
+                if (le == null)
+                    le = inp.AddComponent<LayoutElement>();
+
+                le.minWidth = width;
+
+                if (inputField != null)
+                {
+                    inputField.onValueChanged.AddListener(OnValueChanged);
+                    inputField.Select();
+                    ShowKeyboard();
+                }
+            }
+            else
+            {
+                // Create text block
+                GameObject textObj = Instantiate(textPrefab, questionContainer);
+                TextMeshProUGUI txt = textObj.GetComponent<TextMeshProUGUI>();                
+
+                //add spaces
+                if (p == " ")
+                {
+                    textObj.name = "Space";
+                    txt.text = "-";
+                    txt.color = new Color(0, 0, 0, 0);
+                }
+                else
+                {
+                    textObj.name = p;
+                    txt.text = p;
+                }
+                    
+                txt.alignment = TextAlignmentOptions.Center;
+                txt.enableAutoSizing = false;
+                txt.fontSize = 50; // Set fixed font size
+                txt.overflowMode = TextOverflowModes.Overflow;
+                txt.textWrappingMode = TextWrappingModes.NoWrap; // Updated property
+            }
+        }
+
+        StartCoroutine(ForceLayoutRebuild(questionContainer));
+    }
+
+
+    private IEnumerator ForceLayoutRebuild(RectTransform container)
+    {
+        yield return new WaitForEndOfFrame();
+
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(container);
+
+        yield return null;
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(container);
+
+        if (inputField != null)
+        {
+            inputField.Select();
+            ShowKeyboard();
+        }
+    }
+    List<string> SplitSource(string source)
+    {
+        var result = new List<string>();
+
+        // Split by underscores while keeping them
+        var parts = Regex.Split(source, @"(_+)");
+
+        foreach (var part in parts)
+        {
+            if (string.IsNullOrEmpty(part))
+                continue;
+
+            if (Regex.IsMatch(part, @"^_+$"))
+            {
+                // It's underscores
+                result.Add(part);
+            }
+            else
+            {
+                // It's text - split by spaces but keep them
+                var words = Regex.Split(part, @"( +)");
+
+                foreach (var word in words)
+                {
+                    if (!string.IsNullOrEmpty(word))
+                    {
+                        result.Add(word);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+
+    private void AddIcon()
+    {
+        //image for icon
+        GameObject goIcon = new GameObject("LabelIcon", typeof(RectTransform));
+        goIcon.transform.SetParent(questionContainer, false);
+
+        // Get RectTransform and set size
+        RectTransform iconRect = goIcon.GetComponent<RectTransform>();
+        iconRect.sizeDelta = new Vector2(64, 64);
+        iconRect.anchorMin = new Vector2(0.5f, 0.5f);
+        iconRect.anchorMax = new Vector2(0.5f, 0.5f);
+        iconRect.pivot = new Vector2(0.5f, 0.5f);
+
+        labelIcon = goIcon.AddComponent<Image>();
+        labelIcon.sprite = null;
+        labelIcon.preserveAspect = true;
+        labelIcon.enabled = false;
     }
 
 }

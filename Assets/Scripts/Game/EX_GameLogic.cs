@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,6 +38,7 @@ public class ExGameLogic : MonoBehaviour
     private GameData gameData;
     private DBUtils dbUtils;
     private SoundManager soundManager;
+    private ScoreManager scoreManager;
 
     [Header("Game State")]
     public GameState gameState;
@@ -88,6 +90,8 @@ public class ExGameLogic : MonoBehaviour
 
     private const float CHECK_DELAY = 3f;
 
+    private ExQManager01 qData;
+
     private void Awake()
     {
         PanelManager.Open("exgamemain");
@@ -133,6 +137,7 @@ public class ExGameLogic : MonoBehaviour
         //get classes
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
+        scoreManager = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
 
         //load theme
         if (gameData != null)
@@ -143,8 +148,7 @@ public class ExGameLogic : MonoBehaviour
             //load selected section
             if (sectionManager != null)
                 currentSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
-
-
+            
             // Create runtime copy of questions
             tempQuestions = new List<QuestionT01>(currentSection.questions);
 
@@ -354,6 +358,8 @@ public class ExGameLogic : MonoBehaviour
 
         //step 3 - question type 1 loader
 
+
+
         // Text only question
         if (question.questionType == QuestionType.Type1)
         {
@@ -361,8 +367,8 @@ public class ExGameLogic : MonoBehaviour
             QuestionUILoad(question, 0);
 
             //load data to prefab
-            ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
-            
+            qData = questionInstance.GetComponent<ExQManager01>();
+
             if (qData != null)
             {
                 qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
@@ -405,7 +411,7 @@ public class ExGameLogic : MonoBehaviour
             QuestionUILoad(question, 1);
 
             //load data to prefab
-            ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+            qData = questionInstance.GetComponent<ExQManager01>();
 
             if (qData != null)
             {
@@ -457,7 +463,7 @@ public class ExGameLogic : MonoBehaviour
             QuestionUILoad(question, 2);
 
             //load data to prefab
-            ExQManager01 qData = questionInstance.GetComponent<ExQManager01>();
+            qData = questionInstance.GetComponent<ExQManager01>();
 
             if (qData != null)
             {
@@ -472,11 +478,14 @@ public class ExGameLogic : MonoBehaviour
                         qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
                 }
 
-                    //load question text
-                    if (question.isQuestionTextOnly)
+                //load question text
+                if (question.isQuestionTextOnly)
                 {
                     //text from question object
-                    qData.qestionText.text = question.questionText;
+                    //
+                    //qData.qestionText.text = question.questionText;
+
+                    BuildQuestionWithInputs(question.questionText, qData.questionContainer);
                 }
                 else
                 {
@@ -485,8 +494,17 @@ public class ExGameLogic : MonoBehaviour
                 }
             }
         }
-
     }
+
+    void BuildQuestionWithInputs(string source, RectTransform container)
+    {
+        // Clear previous content
+        foreach (Transform child in container)
+            Destroy(child.gameObject);        
+
+        qData.AddDataToQuestionContainer(source);
+    }
+
 
     private void QuestionUILoad(QuestionT01 question, int index)
     {
@@ -565,7 +583,9 @@ public class ExGameLogic : MonoBehaviour
         if (currentQuestion.answerReferences != null && currentQuestion.answerReferences[correctIndex] != null)
         {
             correctAnswerText = currentQuestion.answerReferences[correctIndex].value;
-        }        
+        }
+
+        Debug.Log(correctAnswerText);
 
         //get question
         QuestionT01 question = currentQuestion;
@@ -612,7 +632,7 @@ public class ExGameLogic : MonoBehaviour
         //Debug.Log($"Session duration: {sessionDuration:F2} seconds");
 
         PanelManager.CloseAll();
-        PanelManager.Open("exwin");
+        PanelManager.Open("exwin"); //run win panel
     }
 
     private void GameFinishRoutine()
@@ -727,15 +747,24 @@ public class ExGameLogic : MonoBehaviour
         //saved result
         int savedResult = dbUtils.GetSectionResult(currentSection.name);
 
-        if(tempScore > savedResult)
+        //save only if increased
+        if (tempScore > savedResult)
+        {
             dbUtils.SetSectionResult(currentSection.name, tempScore);
-
+            scoreManager.SaveCrystals(tempScore);
+        }
+            
         //questions done
         int done = dbUtils.GetSectionProgress(currentSection.name);
 
-        //set complete
-        if (tempScore == done)
+        bool complete = dbUtils.GetSectionComplete(currentSection.name);
+
+        //set complete and stars
+        if (tempScore == done && complete == false)
+        {
             dbUtils.SetSectionComplete(currentSection.name, true);
+            scoreManager.AddStar(1);
+        }            
         else
             dbUtils.SetSectionComplete(currentSection.name, false);
     }
@@ -758,13 +787,13 @@ public class ExGameLogic : MonoBehaviour
         //int savedScore = dbUtils.GetSectionProgress(currentSection.name);
     }
 
-    public bool NextSection()
+
+    public bool GetNextSection()
     {
-        int nextIndex = gameData.saveData.selectedThemeIndex + 1;
+        int nextIndex = gameData.saveData.selectedSectionIndex + 1;
 
         try
         {
-            //try to get next section
             nextSection = sectionManager.sections[nextIndex];
             Debug.Log("Go to next section");
             return true;
@@ -774,8 +803,26 @@ public class ExGameLogic : MonoBehaviour
             Debug.Log("No more themes available.");
             return false;
         }
+    }
 
-        
+
+    public void NextSection()
+    {
+        bool hasNext = GetNextSection();
+
+        int nextIndex = gameData.saveData.selectedSectionIndex + 1;
+
+        if (hasNext)
+        {
+            currentSection = sectionManager.sections[nextIndex];
+            //set selected section index
+            gameData.saveData.selectedSectionIndex = nextIndex;
+            //save data
+            gameData.SaveToFile();
+            //load next section
+            PanelManager.CloseAll();
+            PanelManager.OpenScene("ExGame");
+        }
     }
 
     private void OnDestroy()

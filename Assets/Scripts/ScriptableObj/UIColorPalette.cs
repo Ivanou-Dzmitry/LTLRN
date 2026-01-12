@@ -32,4 +32,8 @@ public class UIColorPalette : ScriptableObject
     public Color DisabledButton;
     public Color PrimaryLight;
     public Color SuccessLight;
+
+    [Header("Grays")]
+    public Color Gray3Dark;
+    public Color Gray2Dark;
 }

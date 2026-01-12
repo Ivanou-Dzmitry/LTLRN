@@ -34,6 +34,12 @@ public class ButtonImage : MonoBehaviour
         Selected
     }
 
+    public enum ButtonAnimation
+    {
+        Idle,
+        Scale        
+    }
+
     [Header("ButtonState")]
     public ButtonState currentState = ButtonState.Normal;
 

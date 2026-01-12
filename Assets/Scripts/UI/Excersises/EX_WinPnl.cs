@@ -54,12 +54,20 @@ public class ExWinPnl : Panel
             time.text = exGameLogic.FormatTime(exGameLogic.sessionDuration).ToString();
         }
 
-        bool next = exGameLogic.NextSection();
+        bool next = exGameLogic.GetNextSection();
 
-        Debug.Log(next);
         if (next)
+        {
             nextBtn.SetDisabled(false);
-        
+            nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
+        }
+        else
+        {
+            nextBtn.SetDisabled(true);
+            nextBtn.PlayAnimation(false, ButtonImage.ButtonAnimation.Idle.ToString());
+        }
+            
+
         nextBtn.RefreshState();
     }
 
@@ -76,19 +84,11 @@ public class ExWinPnl : Panel
 
     private void OnNextClick()
     {
-        bool next = exGameLogic.NextSection();
+        bool next = exGameLogic.GetNextSection();
 
         if (next)
         {
-            nextButton.interactable = true;
-            //reload scene
-            //PanelManager.OpenScene("ExGame");
-        }
-        else
-        {
-            nextButton.interactable = false;
-            //go to main menu
-            //PanelManager.OpenScene("MainMenu");
+            exGameLogic.NextSection();
         }
     }
 

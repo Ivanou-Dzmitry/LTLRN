@@ -12,6 +12,7 @@ TagManager:
   - ExGameLogic
   - LeaderboardManager
   - SectionPanel
+  - ScoreManager
   layers:
   - Default
   - TransparentFX
