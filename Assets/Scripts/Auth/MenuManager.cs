@@ -82,6 +82,8 @@ public class MenuManager : MonoBehaviour
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
         LoginGooglePlayGames();
+#else
+    GuestLogin()    
 #endif
 
 
@@ -118,8 +120,6 @@ public class MenuManager : MonoBehaviour
             {
                 string uiMessage = "Failed to retrieve Google play games authorization code";
 
-                //Debug.Log("Login Unsuccessful");
-
                 string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
 
                 ShowError(ErrorMenu.Action.SignIn, uiMessage, locText);
@@ -128,6 +128,29 @@ public class MenuManager : MonoBehaviour
                 //StartSignInOrLink();
             }
         });
+    }
+
+    private async void GuestLogin()
+    {
+        try
+        {
+            // Initialize Unity Services if not already
+            if (UnityServices.State != ServicesInitializationState.Initialized)
+            {
+                var options = new InitializationOptions();
+                options.SetProfile("default_profile");
+                await UnityServices.InitializeAsync();
+            }
+
+            SignInAnonymouslyAsync();
+        }
+        catch (Exception exception)
+        {
+            Debug.LogException(exception);
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error01");
+            string uiMessage = locText + FirstSentence(exception.Message);
+            ShowError(ErrorMenu.Action.StartService, uiMessage, "Retry");
+        }
     }
 
     //google play games login
@@ -145,6 +168,7 @@ public class MenuManager : MonoBehaviour
     }
 
 
+    //google play games login
     private async void SignInOrLinkWithGooglePlayGames()
     {
         if (string.IsNullOrEmpty(m_GooglePlayGamesToken))
@@ -164,7 +188,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-
+    //google play games login
     private async Task SignInWithGooglePlayGamesAsync(string authCode)
     {
         try
@@ -193,7 +217,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-
+    //google play games login
     private async Task LinkWithGooglePlayGamesAsync(string authCode)
     {
         try
@@ -233,7 +257,6 @@ public class MenuManager : MonoBehaviour
         }
 
     }
-
 
 
     public async void StartClientService()
