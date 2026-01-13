@@ -1,5 +1,6 @@
 using UnityEngine;
 using static QuestionT01;
+using static QuestionT02;
 
 [CreateAssetMenu(fileName = "Section", menuName = "Scriptable Objects/Section")]
 public class Section : ScriptableObject
@@ -35,6 +36,9 @@ public class Section : ScriptableObject
     public int sectionNumber;
     public Sprite sectionIcon;
     public Color sectionHeaderColor;
+
+    [Header("Like")]
+    [Tooltip("Auto. System.")]
     public bool isLiked;
 
     [Header("Title")]
@@ -53,32 +57,36 @@ public class Section : ScriptableObject
     [Header("Info text")]
     public DatabaseReference sectionInfo;
 
+    [Header("Type01")]
     public QuestionT01[] questions;
 
-/*    public string GetSectionDifValue(DifficultyType difficulty)
-    {
-        switch (difficulty)
+    [Header("Type02 Auto")]
+    public QuestionT02[] questionsT2;
+
+    /*    public string GetSectionDifValue(DifficultyType difficulty)
         {
-            case DifficultyType.A1:
-                return "1";
+            switch (difficulty)
+            {
+                case DifficultyType.A1:
+                    return "1";
 
-            case DifficultyType.A2:
-                return "1";
+                case DifficultyType.A2:
+                    return "1";
 
-            case DifficultyType.B1:
-                return "1";
+                case DifficultyType.B1:
+                    return "1";
 
-            case DifficultyType.B2:
-                return "1";
+                case DifficultyType.B2:
+                    return "1";
 
-            case DifficultyType.C1:
-                return "1";
+                case DifficultyType.C1:
+                    return "1";
 
-            case DifficultyType.C2:
-                return "1";
+                case DifficultyType.C2:
+                    return "1";
 
-            default:
-                return "1";
-        }
-    }*/
+                default:
+                    return "1";
+            }
+        }*/
 }

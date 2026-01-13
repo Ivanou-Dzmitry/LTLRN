@@ -416,7 +416,7 @@ public class ExQManager01 : MonoBehaviour
         //save source
         tempText = source;
 
-        Debug.Log($"Source: {source}");
+        //Debug.Log($"Source: {source}");
 
         var parts = SplitSource(source);
 

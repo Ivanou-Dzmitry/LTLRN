@@ -4,9 +4,17 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using static System.Collections.Specialized.BitVector32;
 
 public class ExDataLoader : MonoBehaviour
 {
+    private enum QuestionDataType
+    {
+        None,
+        Type1,
+        Type2
+    }
+
     private GameData gameData;
     private DBUtils dbUtils;
 
@@ -83,6 +91,7 @@ public class ExDataLoader : MonoBehaviour
             //get total levels
             totalQuestions = sectionManager.GetTotalQuestionCount();
             totalSections = sectionManager.sections.Length;
+            
 
             //get data
             ButtonImage themeBtn = themeButton.GetComponent<ButtonImage>();
@@ -95,7 +104,8 @@ public class ExDataLoader : MonoBehaviour
                 themeBtn.RefreshState();
             }
 
-            themeBtn.buttonIcon.sprite = sectionManager.themeIcon;
+            //Open theme button menu icon
+            //themeBtn.buttonIcon.sprite = sectionManager.themeIcon;
 
             CreateSectionPanels();
         }        
@@ -117,74 +127,11 @@ public class ExDataLoader : MonoBehaviour
 
             if (section.questions.Length > 0 && section.questions != null)
             {
-                GameObject panel = Instantiate(sectionPanelPrefab, sectionsRectTransform);
-
-                // Ensure correct UI transform values
-                RectTransform rt = panel.GetComponent<RectTransform>();
-                rt.localScale = Vector3.one;
-                rt.localPosition = Vector3.zero;
-
-                //set UI name
-                string sectionName = section.name;
-                panel.name = sectionName;
-
-                //db utils
-                dbUtils.EnsureSectionExists(panel.name);
-
-                //get section
-                SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
-                sectionPanel.Initialize(section);
-
-                //fill section data
-                if (section.sectionIcon != null)
-                    sectionPanel.sectionImage.sprite = section.sectionIcon;
-
-                //set name ru en
-                sectionPanel.sectionHeaderText.text = sectionPanel.GetTitle(section);
-
-                //description loader ru en
-                sectionPanel.sectionDescriptionText.text = sectionPanel.GetDescription(section);
-
-                //set likes
-                bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
-                sectionPanel.SetLikedState(isLiked);
-
-                int questionsCount = section.questions.Length;
-
-                //set progress slider max value
-                if (questionsCount > 0 && section.questions != null)
-                {
-                    sectionPanel.progressSlider.maxValue = section.questions.Length;
-                }
-    
-                //get progress from BD
-                int progress = dbUtils.GetSectionProgress(section.name);
-                sectionPanel.progressSlider.value = progress;
-
-                //get time from DB
-                float time = dbUtils.GetSectionTime(section.name);
-                sectionPanel.sectionTimeText.text = FormatTime(time);
-
-                //get result from DB
-                string resultText = string.Empty;
-                int result = dbUtils.GetSectionResult(section.name);
-                string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
-                resultText = $"{result} {fromTxt} {questionsCount}";
-                sectionPanel.sectionResultText.text = resultText;
-
-                sectionPanel.currentSection = section;
-                sectionPanel.sectionIndex = i;
-              
-                //disable play button if no questions
-                sectionPanel.PlayButtonToggle(section.questions.Length);
-
-                if (section.questions.Length > 0 && section.questions != null)
-                {
-                    for (int j = 0; j < section.questions.Length; j++)
-                    {
-                        //optional
-                    }
-                }
+                LoadSections(section, i); //section type1
+            }
+            else if (section.questionsT2.Length > 0 && section.questionsT2 != null)
+            {
+                LoadSections(section, i); //section type2
             }
         }
     }
@@ -207,6 +154,80 @@ public class ExDataLoader : MonoBehaviour
         int minutes = Mathf.FloorToInt(seconds / 60f);
         int secs = Mathf.FloorToInt(seconds % 60f);
         return $"{minutes:00}:{secs:00}";
+    }
+
+    private void LoadSections(Section section, int i)
+    {
+        GameObject panel = Instantiate(sectionPanelPrefab, sectionsRectTransform);
+        RectTransform rt = panel.GetComponent<RectTransform>();
+        rt.localScale = Vector3.one;
+        rt.localPosition = Vector3.zero;
+
+        string sectionName = section.name;
+        panel.name = sectionName;
+
+        dbUtils.EnsureSectionExists(panel.name);
+
+        SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
+        sectionPanel.Initialize(section);
+
+        if (section.sectionIcon != null)
+            sectionPanel.sectionImage.sprite = section.sectionIcon;
+
+        sectionPanel.sectionHeaderText.text = sectionPanel.GetTitle(section);
+        sectionPanel.sectionDescriptionText.text = sectionPanel.GetDescription(section);
+
+        bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
+        sectionPanel.SetLikedState(isLiked);
+
+        // Get question count regardless of type
+        int questionsCount = GetQuestionCount(section);
+
+        // Set progress slider
+        if (questionsCount > 0)
+        {
+            sectionPanel.progressSlider.maxValue = questionsCount;
+        }
+
+        int progress = dbUtils.GetSectionProgress(section.name);
+        sectionPanel.progressSlider.value = progress;
+
+        float time = dbUtils.GetSectionTime(section.name);
+        sectionPanel.sectionTimeText.text = FormatTime(time);
+
+        int result = dbUtils.GetSectionResult(section.name);
+        string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
+        string resultText = $"{result} {fromTxt} {questionsCount}";
+        sectionPanel.sectionResultText.text = resultText;
+
+        sectionPanel.currentSection = section;
+        sectionPanel.sectionIndex = i;
+
+        sectionPanel.PlayButtonToggle(questionsCount);
+    }
+
+    // Helper method to get question count
+    private int GetQuestionCount(Section section)
+    {
+        if (section.questions != null && section.questions.Length > 0)
+            return section.questions.Length;
+
+        if (section.questionsT2 != null && section.questionsT2.Length > 0)
+            return section.questionsT2.Length;
+
+        return 0;
+    }
+
+    // Helper method to get question type
+    private QuestionDataType GetQuestionType(Section section)
+    {
+        if (section.questions != null && section.questions.Length > 0)
+            return QuestionDataType.Type1;
+
+        if (section.questionsT2 != null && section.questionsT2.Length > 0)
+            return QuestionDataType.Type2;
+
+        return QuestionDataType.None;
     }
 
 }

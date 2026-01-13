@@ -12,21 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NumS2Q4
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  uID: numq4
-  questionLang: 1
+  isAutomated: 0
+  questionLang: 3
   questionDifficulty: 0
   questionType: 0
+  questionCategory:
+    tableName: 
+    columnName: 
+    recordID: 0
+    value: 
+    whereColumn: 
+    whereValue: 
   questionDescription: 
   isQuestionTextOnly: 0
   questionText: Question 4
   questionReference:
-    tableName: Numerals
-    columnName: Word
+    tableName: Short_vowels
+    columnName: ID
     recordID: 4
-    value: keturi
+    value: 4
     whereColumn: ID
     whereValue: 
-  qSpriteFile: 
+  questionImage: {fileID: 0}
+  questionImageFile: []
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText:
   - Answer 1
@@ -58,9 +67,10 @@ MonoBehaviour:
     value: 2
     whereColumn: ID
     whereValue: 
+  answerSecondWord: []
   answerImageReferences: []
   soundReferences:
-  - tableName: Numerals
+  - tableName: Short_vowels
     columnName: Sound
     recordID: 4
     value: 4_lt.mp3

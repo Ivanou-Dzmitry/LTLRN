@@ -765,6 +765,18 @@ public class DBUtils : MonoBehaviour
         return null;
     }
 
+    public string GetQuestionTableName(DatabaseReference dbRef)
+    {
+        if (dbRef == null) return null;
+
+        if (dbRef.recordID > 0)
+        {
+            return dbRef.tableName;
+        }
+
+         return null;
+    }
+
     public void ResetAllSections()
     {
         if (!isInitialized)
@@ -834,6 +846,61 @@ public class DBUtils : MonoBehaviour
         }
 
         spriteCache.Add(folder, dict);
+    }
+
+    public string GetSound(string tableName, string nomSingValue)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(nomSingValue))
+            return null;
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string query = $"SELECT Sound FROM [{tableName}] WHERE NomSing = ?";
+                var result = connection.ExecuteScalar<string>(query, nomSingValue);
+                return result;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting sound: {ex.Message}");
+            return null;
+        }
+    }
+
+    // Get Image by NomSing value
+    public string GetImage(string tableName, string nomSingValue)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(nomSingValue))
+            return null;
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string query = $"SELECT Image FROM [{tableName}] WHERE NomSing = ?";
+                var result = connection.ExecuteScalar<string>(query, nomSingValue);
+                return result;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting image: {ex.Message}");
+            return null;
+        }
     }
 
     public bool IsReady => isInitialized;

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NumS3Q2
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  uID: numq1
-  questionLang: 1
+  isAutomated: 0
+  questionLang: 2
   questionDifficulty: 1
   questionType: 2
   questionCategory:
@@ -33,6 +33,7 @@ MonoBehaviour:
     value: 1
     whereColumn: ID
     whereValue: 
+  imagesCount: 1
   questionImage: {fileID: 0}
   questionImageFile: []
   questionImageColor: {r: 0.38364768, g: 0.38364768, b: 0.38364768, a: 1}

@@ -24,7 +24,8 @@ namespace LTLRN.UI
         {
             Panel01 = 0,
             Panel02 = 1,
-            Transparent = 2
+            Transparent = 2,
+            Transparent50 = 3
         }
 
         [Header("Style")]
@@ -96,6 +97,7 @@ namespace LTLRN.UI
                 PanelColor.Panel01 => palette.Panel01,
                 PanelColor.Panel02 => palette.Panel02,
                 PanelColor.Transparent => palette.TransparentPanel,
+                PanelColor.Transparent50 => palette.Transparent50Panel,
                 _ => palette.Panel01
             };
         }

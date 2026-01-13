@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -23,7 +24,7 @@ public class ExGameLogic : MonoBehaviour
         public string questionText;
         public string[] answerVariantsText;
         public string[] answerSecondWord;
-        public string[] qSoundClipName;
+        public string[] qSoundClipName;        
         public string[] questionImageFile;
         public int correctAnswerNumber;
         public string questionCategory;
@@ -97,11 +98,13 @@ public class ExGameLogic : MonoBehaviour
         PanelManager.Open("exgamemain");
 
         //buttons
+        nextButton.gameObject.SetActive(true);
+
         //checkBtn = checkButton.GetComponent<ButtonImage>();
         nextBtn = nextButton.GetComponent<ButtonImage>();
 
         //button listeners
-        //checkButton.onClick.AddListener(checkBtnClicked);
+        //checkButton.onClick.AddListener(checkBtnClicked);        
         nextButton.onClick.AddListener(nextBtnClicked);
         interruptGameButton.onClick.AddListener(OnGameInterrupt);
     }
@@ -152,26 +155,21 @@ public class ExGameLogic : MonoBehaviour
             // Create runtime copy of questions
             tempQuestions = new List<QuestionT01>(currentSection.questions);
 
+            //shuffle
             ShuffleQuestions(tempQuestions);
 
+            //load first
             if (tempQuestions != null && tempQuestions.Count > 0)
-                currentQuestion = tempQuestions[0];
-
-            //load first question
-            /*            if (currentSection != null)
-                            currentQuestion = currentSection.questions[0];*/
-
-            //losd info           
+                currentQuestion = tempQuestions[0];       
         }
         else
         {
             Debug.LogError("GameData not found in scene!");            
         }
 
+        //load sound
         if(soundManager != null)
         {
-            Debug.Log("SoundManager OK!");
-
             soundManager.LoadSoundData();
         }
         else
@@ -214,7 +212,7 @@ public class ExGameLogic : MonoBehaviour
     {
         for (int i = list.Count - 1; i > 0; i--)
         {
-            int randomIndex = Random.Range(0, i + 1);
+            int randomIndex = UnityEngine.Random.Range(0, i + 1);
 
             QuestionT01 temp = list[i];
             list[i] = list[randomIndex];
@@ -253,8 +251,17 @@ public class ExGameLogic : MonoBehaviour
         //create question data
         QuestionData data = new QuestionData();
 
+        //get auto flag
+        bool isAuto = question.isAutomated;
+
         //load q text from db
         data.questionText = DBUtils.Instance.ResolveReference(question.questionReference);
+
+        //table name for automation
+        string tableName = string.Empty;
+
+        if (data.questionText.Length > 0)
+            tableName = DBUtils.Instance.GetQuestionTableName(question.questionReference);        
 
         // get answer count
         int answersCount = 0;
@@ -294,32 +301,69 @@ public class ExGameLogic : MonoBehaviour
         // Load sound clips
         int soundCount = 0;
 
-        if(question.soundReferences != null)
-            soundCount = question.soundReferences.Length;
-
-        if (soundCount > 0)
+        if (isAuto)
         {
-            data.qSoundClipName = new string[soundCount];
+            string soundFileName = DBUtils.Instance.GetSound(tableName, data.questionText);
 
-            for (int i = 0; i < question.soundReferences.Length; i++)
+            if (!string.IsNullOrEmpty(soundFileName))
             {
-                data.qSoundClipName[i] = DBUtils.Instance.ResolveReference(question.soundReferences[i]);
+                data.qSoundClipName = new[] { soundFileName }; // Length = 1
+            }
+            else
+            {
+                data.qSoundClipName = Array.Empty<string>();   // Length = 0
             }
         }
+        else
+        {
+            //manual data
+            if (question.soundReferences != null)
+                soundCount = question.soundReferences.Length;
+
+            if (soundCount > 0)
+            {
+                //clip file name
+                data.qSoundClipName = new string[soundCount];
+
+                for (int i = 0; i < question.soundReferences.Length; i++)
+                {
+                    //get clip file name
+                    data.qSoundClipName[i] = DBUtils.Instance.ResolveReference(question.soundReferences[i]);
+                }
+            }
+        }
+
 
         //get image count
         int imgCount = 0;
 
-        if(question.questionImageFile != null)
-            imgCount = question.questionImageFile.Length;
-
-        if (imgCount > 0)
+        if (isAuto)
         {
-            data.questionImageFile = new string[imgCount];
+            //auto data
+            string imageFileName = DBUtils.Instance.GetImage(tableName, data.questionText);
 
-            for (int i = 0; i < question.questionImageFile.Length; i++)
+            if (!string.IsNullOrEmpty(imageFileName))
             {
-                data.questionImageFile[i] = DBUtils.Instance.ResolveReference(question.questionImageFile[i]);
+                data.questionImageFile = new[] { imageFileName }; // Length = 1
+            }
+            else
+            {
+                data.questionImageFile = Array.Empty<string>();   // Length = 0
+            }
+        }
+        else
+        {
+            if (question.questionImageFile != null)
+                imgCount = question.questionImageFile.Length;
+
+            if (imgCount > 0)
+            {
+                data.questionImageFile = new string[imgCount];
+
+                for (int i = 0; i < question.questionImageFile.Length; i++)
+                {
+                    data.questionImageFile[i] = DBUtils.Instance.ResolveReference(question.questionImageFile[i]);
+                }
             }
         }
 
@@ -348,8 +392,10 @@ public class ExGameLogic : MonoBehaviour
     private void QLoad(QuestionT01 question)
     {
         //step 2 - load prepared data
-        QuestionData data = LoadQuestionData(question);               
-       
+        QuestionData data = LoadQuestionData(question);      
+        
+        bool isAuto = question.isAutomated;
+
         //clear previous question
         foreach (Transform child in questionArea)
         {
@@ -357,7 +403,6 @@ public class ExGameLogic : MonoBehaviour
         }
 
         //step 3 - question type 1 loader
-
 
 
         // Text only question
@@ -422,19 +467,36 @@ public class ExGameLogic : MonoBehaviour
                 {
                     qData.qImagePanel.gameObject.SetActive(true);
 
-                    //load images
-                    for (int i = 0; i < data.questionImageFile.Length; i++)
+                    if (isAuto)
                     {
-                        GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
-                        newImg.name = "QImage_"+i;
-                        Image img = newImg.GetComponent<Image>();
-                        img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[i]);
-                        img.SetNativeSize();
-                        img.color = question.questionImageColor;
-                        float randomZ = Random.Range(-5f, 5f);
-                        img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
+                        for (int i = 0; i < question.imagesCount; i++)
+                        {
+                            GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
+                            newImg.name = "QImage_" + i;
+                            Image img = newImg.GetComponent<Image>();
+                            img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[0]);
+                            img.SetNativeSize();
+                            img.color = question.questionImageColor;
+                            float randomZ = UnityEngine.Random.Range(-5f, 5f);
+                            img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
+                        }
                     }
-
+                    else
+                    {
+                        //load images
+                        for (int i = 0; i < data.questionImageFile.Length; i++)
+                        {
+                            GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
+                            newImg.name = "QImage_" + i;
+                            Image img = newImg.GetComponent<Image>();
+                            img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[i]);
+                            img.SetNativeSize();
+                            img.color = question.questionImageColor;
+                            float randomZ = UnityEngine.Random.Range(-5f, 5f);
+                            img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
+                        }
+                    }
+      
                     //load sound
                     if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
                         qData.qAudioClip = soundManager.LoadAudioClipByName(data.questionCategory, data.qSoundClipName[0]);
@@ -585,7 +647,7 @@ public class ExGameLogic : MonoBehaviour
             correctAnswerText = currentQuestion.answerReferences[correctIndex].value;
         }
 
-        Debug.Log(correctAnswerText);
+        //Debug.Log(correctAnswerText);
 
         //get question
         QuestionT01 question = currentQuestion;
@@ -619,8 +681,13 @@ public class ExGameLogic : MonoBehaviour
         }
     }
 
+    //wait
     private IEnumerator ResultProcessingDelayed(float delay)
     {
+        //open wait panel
+        PanelManager.Open("waiting");
+        nextButton.gameObject.SetActive(false);
+
         yield return new WaitForSeconds(delay);
         ResultProcessing();
     }

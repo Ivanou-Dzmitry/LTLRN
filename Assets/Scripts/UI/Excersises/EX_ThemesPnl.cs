@@ -101,7 +101,7 @@ public class EX_ThemesPanel : Panel
             themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
             themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
             
-            //set icon
+            //set theme button icon
             themeBtnComponent.themeIcon.sprite = dataLoader.themes.theme[i].themeIcon;
             themeBtnComponent.themeIndex = i;
 

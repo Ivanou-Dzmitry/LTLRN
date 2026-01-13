@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NumS2Q3
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  uID: numq3
-  questionLang: 1
+  isAutomated: 1
+  questionLang: 3
   questionDifficulty: 0
   questionType: 1
   questionCategory:
@@ -27,26 +27,15 @@ MonoBehaviour:
   isQuestionTextOnly: 0
   questionText: Question 3
   questionReference:
-    tableName: Short_vowels
-    columnName: ID
-    recordID: 1
-    value: 1
+    tableName: Human
+    columnName: NomSing
+    recordID: 2
+    value: "mergait\u0117"
     whereColumn: ID
     whereValue: 
+  imagesCount: 2
   questionImage: {fileID: 0}
-  questionImageFile:
-  - tableName: Human
-    columnName: Image
-    recordID: 2
-    value: girl01.png
-    whereColumn: ID
-    whereValue: 
-  - tableName: Human
-    columnName: Image
-    recordID: 2
-    value: girl01.png
-    whereColumn: ID
-    whereValue: 
+  questionImageFile: []
   questionImageColor: {r: 0.99371064, g: 0.30936265, b: 0.84260696, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText:

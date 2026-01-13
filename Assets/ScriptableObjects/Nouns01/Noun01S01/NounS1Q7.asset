@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NounS1Q7
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  uID: numq1
-  questionLang: 4
+  isAutomated: 1
+  questionLang: 1
   questionDifficulty: 0
   questionType: 0
   questionCategory:

@@ -1,7 +1,8 @@
-using UnityEngine;
 using LTLRN.UI;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 //win panel Excersises
 
@@ -48,9 +49,16 @@ public class ExWinPnl : Panel
     {
         exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
 
-        if(exGameLogic != null)
+        //get question count
+        int scoreValue = exGameLogic.tempScore;
+        string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
+        int qCount = exGameLogic.currentSection.questions.Length;
+
+        string scoreText = $"{scoreValue} {fromTxt} {qCount}";
+
+        if (exGameLogic != null)
         {
-            score.text = exGameLogic.tempScore.ToString();
+            score.text = scoreText;
             time.text = exGameLogic.FormatTime(exGameLogic.sessionDuration).ToString();
         }
 

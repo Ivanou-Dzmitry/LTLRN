@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NumS2Q2
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  uID: numq2
-  questionLang: 1
+  isAutomated: 1
+  questionLang: 3
   questionDifficulty: 0
   questionType: 1
   questionCategory:
@@ -27,20 +27,15 @@ MonoBehaviour:
   isQuestionTextOnly: 0
   questionText: q2
   questionReference:
-    tableName: Short_vowels
-    columnName: ID
-    recordID: 2
-    value: 2
-    whereColumn: ID
-    whereValue: 
-  questionImage: {fileID: 0}
-  questionImageFile:
-  - tableName: Human
-    columnName: Image
+    tableName: Human
+    columnName: NomSing
     recordID: 1
-    value: boy01.png
+    value: berniukas
     whereColumn: ID
     whereValue: 
+  imagesCount: 1
+  questionImage: {fileID: 0}
+  questionImageFile: []
   questionImageColor: {r: 0.19811308, g: 0.31907126, b: 1, a: 1}
   isAnswerTextOnly: 0
   answerVariantsText:

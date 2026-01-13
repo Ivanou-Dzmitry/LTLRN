@@ -16,6 +16,7 @@ public class UIColorPalette : ScriptableObject
     public Color Panel01;
     public Color Panel02;
     public Color TransparentPanel;
+    public Color Transparent50Panel;
 
     [Header("Texts")]
     public Color TextPrimary;
