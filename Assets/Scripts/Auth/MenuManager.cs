@@ -83,15 +83,14 @@ public class MenuManager : MonoBehaviour
         PlayGamesPlatform.Activate();
         LoginGooglePlayGames();
 #else
-    GuestLogin()    
+    GuestLogin();    
 #endif
-
-
     }
 
     //google play games login
     public void LoginGooglePlayGames()
     {
+        #if UNITY_ANDROID
         PlayGamesPlatform.Instance.Authenticate((success) =>
         {
             if (success == SignInStatus.Success)
@@ -128,6 +127,7 @@ public class MenuManager : MonoBehaviour
                 //StartSignInOrLink();
             }
         });
+        #endif
     }
 
     private async void GuestLogin()
@@ -156,6 +156,7 @@ public class MenuManager : MonoBehaviour
     //google play games login
     public void StartSignInOrLink()
     {
+        #if UNITY_ANDROID
         if (!PlayGamesPlatform.Instance.IsAuthenticated())
         {
             Debug.LogWarning("Not yet authenticated with Google Play Games -- attempting login again");
@@ -165,6 +166,7 @@ public class MenuManager : MonoBehaviour
 
         // Already authenticated with GPG, proceed with Unity Authentication
         SignInOrLinkWithGooglePlayGames();
+        #endif
     }
 
 

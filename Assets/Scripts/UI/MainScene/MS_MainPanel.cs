@@ -36,7 +36,7 @@ public class MainPanel : Panel
 
     private void OpenExercisesMenu()
     {
-        PanelManager.OpenScene("ExscersisesMenu");
+        PanelManager.OpenScene("ExMenu");
     }
 
     private void Start()

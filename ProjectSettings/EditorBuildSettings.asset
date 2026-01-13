@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GameBoard.unity
     guid: 1f56b73dcc84424488ff109e86f64738
   - enabled: 1
-    path: Assets/Scenes/ExscersisesMenu.unity
+    path: Assets/Scenes/ExMenu.unity
     guid: 6ac96c6d279c0f6498dce80f2aed4408
   - enabled: 1
     path: Assets/Scenes/AdventureMenu.unity

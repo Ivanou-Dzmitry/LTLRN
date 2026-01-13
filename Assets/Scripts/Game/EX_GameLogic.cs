@@ -717,7 +717,7 @@ public class ExGameLogic : MonoBehaviour
 
         PanelManager.CloseAll();
 
-        PanelManager.OpenScene("ExscersisesMenu");                
+        PanelManager.OpenScene("ExMenu");                
     }
 
     public void InterruptedExit()
@@ -727,7 +727,7 @@ public class ExGameLogic : MonoBehaviour
 
         PanelManager.CloseAll();
 
-        PanelManager.OpenScene("ExscersisesMenu");
+        PanelManager.OpenScene("ExMenu");
     }
 
     private void SaveGameProgress()
