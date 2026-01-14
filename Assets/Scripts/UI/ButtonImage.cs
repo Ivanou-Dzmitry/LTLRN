@@ -167,6 +167,7 @@ public class ButtonImage : MonoBehaviour
     public void SetDisabled(bool disabled)
     {
         button.interactable = !disabled;
+        currentState = disabled ? ButtonState.Disabled : ButtonState.Normal;
         ApplyButtonColor();
     }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NumRepS01Q8
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  isAutomated: 0
+  isAutomated: 1
   questionLang: 1
   questionDifficulty: 0
   questionType: 0
@@ -28,11 +28,12 @@ MonoBehaviour:
   questionText: Question 8
   questionReference:
     tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 9
     value: "a\u0161tuoni"
     whereColumn: ID
     whereValue: 
+  imagesCount: 1
   questionImage: {fileID: 0}
   questionImageFile: []
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}
@@ -69,12 +70,6 @@ MonoBehaviour:
     whereValue: 
   answerSecondWord: []
   answerImageReferences: []
-  soundReferences:
-  - tableName: Numerals0_10
-    columnName: Sound
-    recordID: 9
-    value: 8_lt.mp3
-    whereColumn: ID
-    whereValue: 
+  soundReferences: []
   correctAnswerNumber: 1
   rewardAmount: 1

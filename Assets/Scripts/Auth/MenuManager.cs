@@ -78,13 +78,15 @@ public class MenuManager : MonoBehaviour
     {
         Application.runInBackground = true;
 
+        PanelManager.Open("waiting");
+
 #if UNITY_ANDROID
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
         LoginGooglePlayGames();
 #else
     GuestLogin();    
-#endif
+#endif        
     }
 
     //google play games login

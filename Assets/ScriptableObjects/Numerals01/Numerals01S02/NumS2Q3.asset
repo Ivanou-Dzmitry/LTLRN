@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NumS2Q3
   m_EditorClassIdentifier: Assembly-CSharp::Question
   isAutomated: 1
-  questionLang: 3
+  questionLang: 2
   questionDifficulty: 0
   questionType: 1
   questionCategory:
@@ -45,25 +45,25 @@ MonoBehaviour:
   - Answer 4
   answerReferences:
   - tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 13
     value: viena
     whereColumn: ID
     whereValue: 
   - tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 14
     value: dvi
     whereColumn: ID
     whereValue: 
   - tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 17
     value: penkios
     whereColumn: ID
     whereValue: 
   - tableName: Numerals11_19
-    columnName: Word
+    columnName: NomSing
     recordID: 5
     value: penkiolika
     whereColumn: ID

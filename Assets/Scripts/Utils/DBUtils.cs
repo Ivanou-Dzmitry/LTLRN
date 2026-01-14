@@ -25,11 +25,17 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //main database
     private string dbPath;
     private bool isInitialized = false;
-    private const string dbName = "ltlrn01.db";
+    private const string dbName = "ltlrn01.db"; 
 
-    private const int DB_VERSION = 2; // Increment this when you update the database
+    //game data
+    private string dbDataPath;
+    private bool isDataInitialized = false;
+    private const string dbDataName = "keliasdata.db"; 
+
+    private const int DB_VERSION = 1; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES
@@ -56,7 +62,7 @@ public class DBUtils : MonoBehaviour
         StartCoroutine(InitializeDatabase());
     }
 
-    private void CreateTablesIfNeeded()
+/*    private void CreateTablesIfNeeded()
     {
         if (!isInitialized) return;
 
@@ -73,21 +79,65 @@ public class DBUtils : MonoBehaviour
         {
             Debug.LogError($"Error creating tables: {ex.Message}");
         }
+    }*/
+
+    //check game data table
+    private bool CreateGameDataTables()
+    {
+        if (!isDataInitialized)
+        {
+            Debug.LogWarning("CreateGameDataTables skipped: data not initialized");
+            return false;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbDataPath))
+            {
+                // Create tables if it doesn't exist
+                connection.CreateTable<SectionDB>();
+                connection.CreateTable<ThemesDB>();
+                connection.CreateTable<QuestionsDataDB>();
+            }
+
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error creating game data tables: {ex.Message}");
+            return false;
+        }
     }
+
 
     private IEnumerator InitializeDatabase()
     {
         string sourceDbPath;
+        string sourceDataDbPath;
 
 #if UNITY_ANDROID
+        //main database
         sourceDbPath = Path.Combine(Application.streamingAssetsPath, dbName);
         dbPath = Path.Combine(Application.persistentDataPath, dbName);
+        //game data
+        sourceDataDbPath = Path.Combine(Application.streamingAssetsPath, dbDataName);
+        dbDataPath = Path.Combine(Application.persistentDataPath, dbDataName);
 #elif UNITY_EDITOR
+    //main database
     sourceDbPath = Path.Combine(Application.dataPath, "StreamingAssets", dbName);
     dbPath = Path.Combine(Application.persistentDataPath, dbName);
+    
+    //game data
+    sourceDataDbPath = Path.Combine(Application.dataPath, "StreamingAssets", dbDataName);
+    dbDataPath = Path.Combine(Application.persistentDataPath, dbDataName);
 #else
+    //main database
     sourceDbPath = Path.Combine(Application.streamingAssetsPath, dbName);
     dbPath = Path.Combine(Application.persistentDataPath, dbName);
+    
+    //game data
+    sourceDataDbPath = Path.Combine(Application.streamingAssetsPath, dbDataName);
+    dbDataPath = Path.Combine(Application.persistentDataPath, dbDataName);
 #endif
 
         // Check if database needs update
@@ -143,45 +193,57 @@ public class DBUtils : MonoBehaviour
         }
 
         Debug.Log("Final Database Path: " + dbPath);
-        string result = CheckConnection();
-        CreateTablesIfNeeded();
+
+        string result = string.Empty;
+
+        isInitialized = CheckConnection(dbPath);
+        Debug.Log("DB1 Connection Result: " + isInitialized);
+
+        isDataInitialized = CheckConnection(dbDataPath);
+        Debug.Log("DB2 Connection Result: " + isDataInitialized);
+
+        //create main tables
+        //CreateTablesIfNeeded();
+
+        bool res = CreateGameDataTables();
+        Debug.Log("DB2 create tables: " + res);
+
     }
 
-    public string CheckConnection()
+    public bool CheckConnection(string path)
     {
-        if (!File.Exists(dbPath))
+        if (!File.Exists(path))
         {
-            string error = $"Database file not found: {dbPath}";
+            string error = $"Database file not found: {path}";
             Debug.LogError(error);
-            return error;
+            return false;
         }
 
-        FileInfo fileInfo = new FileInfo(dbPath);
-       //Debug.Log($"Database file size: {fileInfo.Length} bytes");
+        //check size
+        FileInfo fileInfo = new FileInfo(path);
+        Debug.Log($"Database file size: {fileInfo.Length} bytes");
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(path))
             {
                 var result = connection.ExecuteScalar<int>("SELECT 1");
-                isInitialized = true;
-                Debug.Log("Connection ok");
-                return "ok";
+                Debug.Log($"Connection with: {path} OK");
+                return true;
             }
         }
         catch (System.Exception ex)
         {
             string error = $"SQLite connection failed: {ex.Message}";
-            Debug.LogError(error);
-            isInitialized = false;
-            return error;
+            Debug.LogError($"{error}, Path: {path}");
+            return false;
         }
     }
 
-    //section
+    //section DATA table
     public void EnsureSectionExists(string sectionName)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized! Wait for initialization to complete.");
             return;
@@ -189,7 +251,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath)) //data table path
             {
                 // Check if exists
                 var existing = connection.Table<SectionDB>()
@@ -222,10 +284,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    //theme
+    //theme DATA Table
     public void EnsureThemeExists(string themeName)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized! Wait for initialization to complete.");
             return;
@@ -233,7 +295,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 // Check if exists
                 var existing = connection.Table<ThemesDB>()
@@ -258,10 +320,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    //COMPLETE COUNT
+    //COMPLETE COUNT - DATA table
     public int GetCompleteSectionsCount()
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return 0;
@@ -269,7 +331,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 int count = connection.Table<SectionDB>()
                     .Where(s => s.Complete == "true")
@@ -286,10 +348,10 @@ public class DBUtils : MonoBehaviour
     }
 
 
-    //PROGRESS
+    //PROGRESS - Data table
     public int GetSectionProgress(string sectionName)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return 0;
@@ -297,7 +359,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -321,9 +383,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //set progress - data table
     public void SetSectionProgress(string sectionName, int value)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return;
@@ -331,7 +394,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -341,7 +404,6 @@ public class DBUtils : MonoBehaviour
                 {
                     section.QDone = value;
                     connection.Update(section);
-                    //Debug.Log($"Updated {sectionName} - Liked: {section.Liked}");
                 }
                 else
                 {
@@ -356,10 +418,10 @@ public class DBUtils : MonoBehaviour
     }
 
 
-    //RESULR
+    //RESULT - Data table
     public int GetSectionResult(string sectionName)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return 0;
@@ -367,7 +429,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -391,17 +453,18 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //set progress - data table
     public void SetSectionResult(string sectionName, int value)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
-            Debug.LogError("Database not initialized!");
+            Debug.LogError("DATA: Database not initialized!");
             return;
         }
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -415,7 +478,7 @@ public class DBUtils : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"Section not found: {sectionName}");
+                    Debug.LogWarning($"DATA: Section not found: {sectionName}");
                 }
             }
         }
@@ -429,15 +492,15 @@ public class DBUtils : MonoBehaviour
     //TIME
     public void SetSectionTime(string sectionName, float value)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
-            Debug.LogError("Database not initialized!");
+            Debug.LogError("DATA: Database not initialized!");
             return;
         }
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -461,9 +524,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //get time - data table
     public float GetSectionTime(string sectionName)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return 0;
@@ -471,7 +535,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -495,10 +559,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    //LIKES
+    //LIKES - Data table
     public void UpdateSectionLiked(string sectionName, bool isLiked)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return;
@@ -506,7 +570,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -530,9 +594,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //get likes - data table
     public bool GetSectionLikedStatus(string sectionName)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return false;
@@ -540,7 +605,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -564,10 +629,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    //COMPLETE
+    //COMPLETE - data table
     public void SetSectionComplete(string sectionName, bool isComplete)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return;
@@ -575,7 +640,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)
@@ -584,8 +649,7 @@ public class DBUtils : MonoBehaviour
                 if (section != null)
                 {
                     section.Complete = isComplete ? "true" : "false";
-                    connection.Update(section);
-                    //Debug.Log($"Updated {sectionName} - Complete: {section.Liked}");
+                    connection.Update(section);                    
                 }
                 else
                 {
@@ -599,9 +663,10 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    //get complete status - data table
     public bool GetSectionComplete(string sectionName)
     {
-        if (!isInitialized)
+        if (!isDataInitialized)
         {
             Debug.LogError("Database not initialized!");
             return false;
@@ -609,7 +674,7 @@ public class DBUtils : MonoBehaviour
 
         try
         {
-            using (var connection = new SQLiteConnection(dbPath))
+            using (var connection = new SQLiteConnection(dbDataPath))
             {
                 var section = connection.Table<SectionDB>()
                     .Where(s => s.Name == sectionName)

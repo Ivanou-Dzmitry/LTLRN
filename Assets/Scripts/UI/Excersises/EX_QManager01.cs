@@ -64,7 +64,8 @@ public class ExQManager01 : MonoBehaviour
 
     [Header("Answer Buttons")]
     [SerializeField] private AnswerButton[] answerButtons;
-    [SerializeField] public Button soundBtn;
+    [SerializeField] public Button soundPlayButton;
+    public ButtonImage soundBtn;
     public GameObject answerPanel;
 
     private int selectedAnswerIndex = -1;
@@ -88,11 +89,14 @@ public class ExQManager01 : MonoBehaviour
             }
         }
 
-        if(soundBtn != null)
-            soundBtn.onClick.AddListener(playSoundClicked);
-            
+        //setup sound button
+        if (soundPlayButton != null)
+            soundPlayButton.onClick.AddListener(playSoundClicked);
+
+        soundBtn = soundPlayButton.GetComponent<ButtonImage>();
+
         //for submit text input TYPE 3
-        if(inputSubmitButton != null)
+        if (inputSubmitButton != null)
         {
             inputSubmitButton.onClick.AddListener(SubmitInput);
             inputSubmitButton.interactable = false;
@@ -338,7 +342,7 @@ public class ExQManager01 : MonoBehaviour
     private void OnDestroy()
     {
         //remove listeners
-        soundBtn.onClick.RemoveListener(playSoundClicked);
+        soundPlayButton.onClick.RemoveListener(playSoundClicked);
 
         if(inputSubmitButton != null)
             inputSubmitButton.onClick.RemoveListener(SubmitInput);

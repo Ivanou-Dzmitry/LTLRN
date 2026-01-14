@@ -25,14 +25,15 @@ MonoBehaviour:
     whereValue: 
   questionDescription: 
   isQuestionTextOnly: 0
-  questionText: Vienas text
+  questionText: 
   questionReference:
     tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 2
     value: vienas
     whereColumn: ID
     whereValue: 
+  imagesCount: 1
   questionImage: {fileID: 0}
   questionImageFile: []
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}

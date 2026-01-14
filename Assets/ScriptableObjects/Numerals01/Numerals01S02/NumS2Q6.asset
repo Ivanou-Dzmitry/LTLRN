@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NumS2Q6
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  isAutomated: 0
+  isAutomated: 1
   questionLang: 3
   questionDifficulty: 0
   questionType: 0
   questionCategory:
-    tableName: 
-    columnName: 
+    tableName: Short_vowels
+    columnName: ID
     recordID: 0
     value: 
-    whereColumn: 
+    whereColumn: ID
     whereValue: 
   questionDescription: 
   isQuestionTextOnly: 0
@@ -33,6 +33,7 @@ MonoBehaviour:
     value: 1
     whereColumn: ID
     whereValue: 
+  imagesCount: 1
   questionImage: {fileID: 0}
   questionImageFile: []
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}
@@ -43,38 +44,32 @@ MonoBehaviour:
   - Answer 3
   - Answer 4
   answerReferences:
-  - tableName: Numerals
-    columnName: Digit
+  - tableName: Short_vowels
+    columnName: ID
     recordID: 6
     value: 6
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
-    columnName: Digit
+  - tableName: Short_vowels
+    columnName: ID
     recordID: 5
     value: 5
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
-    columnName: Digit
+  - tableName: Short_vowels
+    columnName: ID
     recordID: 8
     value: 8
     whereColumn: ID
     whereValue: 
-  - tableName: Numerals
-    columnName: Digit
+  - tableName: Short_vowels
+    columnName: ID
     recordID: 13
     value: 3
     whereColumn: ID
     whereValue: 
   answerSecondWord: []
   answerImageReferences: []
-  soundReferences:
-  - tableName: Short_vowels
-    columnName: Sound
-    recordID: 6
-    value: 6_lt.mp3
-    whereColumn: ID
-    whereValue: 
+  soundReferences: []
   correctAnswerNumber: 0
   rewardAmount: 1

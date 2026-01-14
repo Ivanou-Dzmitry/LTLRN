@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b0ad16008fd33b488be1fef414bee57, type: 3}
   m_Name: NumS1Q6
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  uID: q1
+  isAutomated: 0
   questionLang: 1
   questionDifficulty: 0
   questionType: 0
@@ -28,11 +28,12 @@ MonoBehaviour:
   questionText: Question 6
   questionReference:
     tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 7
     value: "\u0161e\u0161i"
     whereColumn: ID
     whereValue: 
+  imagesCount: 1
   questionImage: {fileID: 0}
   questionImageFile: []
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}

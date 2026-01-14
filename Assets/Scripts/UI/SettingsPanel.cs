@@ -80,8 +80,8 @@ public class SettingsPanel : Panel
         
         LoadData();
 
-        if(dbUtils!=null && dbLog!=null)
-            dbLog.text = "DB: " + dbUtils.CheckConnection();
+/*        if(dbUtils!=null && dbLog!=null)
+            dbLog.text = "DB: " + dbUtils.CheckConnection();*/
 
         base.Open();
     }

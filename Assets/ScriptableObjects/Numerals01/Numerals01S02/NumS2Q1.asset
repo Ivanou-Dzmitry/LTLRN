@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NumS2Q1
   m_EditorClassIdentifier: Assembly-CSharp::Question
   isAutomated: 1
-  questionLang: 3
+  questionLang: 2
   questionDifficulty: 0
   questionType: 1
   questionCategory:
@@ -41,25 +41,25 @@ MonoBehaviour:
   answerVariantsText: []
   answerReferences:
   - tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 2
     value: vienas
     whereColumn: ID
     whereValue: 
   - tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 4
     value: trys
     whereColumn: ID
     whereValue: 
   - tableName: Numerals0_10
-    columnName: Word
+    columnName: NomSing
     recordID: 6
     value: penki
     whereColumn: ID
     whereValue: 
   - tableName: Numerals11_19
-    columnName: Word
+    columnName: NomSing
     recordID: 1
     value: vienuolika
     whereColumn: ID

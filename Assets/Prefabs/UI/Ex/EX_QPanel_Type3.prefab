@@ -5557,7 +5557,8 @@ MonoBehaviour:
   - {fileID: 6593392382456862847}
   - {fileID: 7463130570503544477}
   answerButtons: []
-  soundBtn: {fileID: 4059383017460104230}
+  soundPlayButton: {fileID: 4059383017460104230}
+  soundBtn: {fileID: 0}
   answerPanel: {fileID: 0}
   debugText: {fileID: 0}
 --- !u!1 &5330730717335344777

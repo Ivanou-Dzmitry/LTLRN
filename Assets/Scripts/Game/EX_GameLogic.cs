@@ -416,7 +416,7 @@ public class ExGameLogic : MonoBehaviour
 
             if (qData != null)
             {
-                qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
+                qData.soundPlayButton.GetComponent<ButtonImage>().SetDisabled(false);
 
                 //load question text
                 if (question.isQuestionTextOnly)
@@ -441,11 +441,8 @@ public class ExGameLogic : MonoBehaviour
                     qData.SetAnswers(data.answerVariantsText);
                 }
 
-                //load sound
-                if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
-                    qData.qAudioClip = soundManager.LoadAudioClipByName(data.questionCategory, data.qSoundClipName[0]);
-                else
-                    qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
+                //load sound. Avoid load name - but clip is not ready. In db just name.
+                qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
             }
         }
 
@@ -460,8 +457,6 @@ public class ExGameLogic : MonoBehaviour
 
             if (qData != null)
             {
-                qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
-
                 //load image
                 if (data.questionCategory != null)
                 {
@@ -496,12 +491,9 @@ public class ExGameLogic : MonoBehaviour
                             img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
                         }
                     }
-      
-                    //load sound
-                    if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
-                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.questionCategory, data.qSoundClipName[0]);
-                    else
-                        qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
+
+                    //load sound. Avoid load name - but clip is not ready. In db just name.                    
+                    qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
                 }
 
                 //set answers
@@ -529,16 +521,8 @@ public class ExGameLogic : MonoBehaviour
 
             if (qData != null)
             {
-                qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(false);
-
-                if (data.questionCategory != null)
-                {
-                    //load sound
-                    if (data.qSoundClipName != null && data.qSoundClipName.Length > 0)
-                        qData.qAudioClip = soundManager.LoadAudioClipByName(data.questionCategory, data.qSoundClipName[0]);
-                    else
-                        qData.soundBtn.GetComponent<ButtonImage>().SetDisabled(true);
-                }
+                //load sound. Avoid load name - but clip is not ready. In db just name.
+                qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
 
                 //load question text
                 if (question.isQuestionTextOnly)
@@ -903,6 +887,32 @@ public class ExGameLogic : MonoBehaviour
         int minutes = Mathf.FloorToInt(seconds / 60f);
         int secs = Mathf.FloorToInt(seconds % 60f);
         return $"{minutes:00}:{secs:00}";
+    }
+
+    private AudioClip LoadAudioAndSetButton(string category, string[] soundNames, ButtonImage soundButton, int index = 0)
+    {
+        // Validate input
+        if (soundNames == null || soundNames.Length == 0 || index >= soundNames.Length || string.IsNullOrEmpty(soundNames[index]))
+        {
+            soundButton?.SetDisabled(true);
+            return null;
+        }
+
+        // Try to load audio
+        AudioClip audio = soundManager.LoadAudioClipByName(category, soundNames[index]);
+
+        // Update button state based on result
+        if (audio != null)
+        {
+            soundButton?.SetDisabled(false);
+        }
+        else
+        {
+            soundButton?.SetDisabled(true);
+            Debug.LogWarning($"Failed to load audio: {soundNames[index]} from category: {category}");
+        }
+
+        return audio;
     }
 
 }

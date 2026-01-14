@@ -5095,22 +5095,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExQManager01
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
+  questionContainer: {fileID: 0}
   imagePrefab: {fileID: 5353082978834572282, guid: f61b338cc85f8e34d8a33d128ca0f2fc, type: 3}
   qImagePanel: {fileID: 6224700800636824355}
   qestionText: {fileID: 0}
+  inputPrefab: {fileID: 0}
+  textPrefab: {fileID: 0}
   answerIcon:
   - {fileID: 21300000, guid: 6f5eb376d66de31449a0ebeaec3137f2, type: 3}
   - {fileID: 21300000, guid: b932d45867bb03c4ebb660ebb8077864, type: 3}
   qAudioClip: {fileID: 0}
   playSoundPart: {fileID: 432671849936145419}
   inputPanel: {fileID: 0}
-  inputField: {fileID: 0}
   inputSubmitButton: {fileID: 0}
   inputAnswerPanel: {fileID: 0}
-  answerPanels: []
-  answerIcons: []
   inputAnswerCorrectText: {fileID: 0}
-  inputAnswerWrongText: {fileID: 0}
+  answerIcons: []
   answerButtons:
   - button: {fileID: 5097484445337874948}
     buttonImage: {fileID: 0}
@@ -5124,7 +5124,7 @@ MonoBehaviour:
   - button: {fileID: 9123337156017451564}
     buttonImage: {fileID: 0}
     answerText: 
-  soundBtn: {fileID: 4059383017460104230}
+  soundPlayButton: {fileID: 4059383017460104230}
   answerPanel: {fileID: 5135833805653868611}
   debugText: {fileID: 0}
 --- !u!1 &5135833805653868611
