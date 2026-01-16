@@ -222,6 +222,9 @@ public class ExQManager01 : MonoBehaviour
 
     public void SetAnswers(string[] answers, string[] answers2 = null)
     {
+        Debug.Log(answers);
+        Debug.Log(answers2);
+
         for (int i = 0; i < Mathf.Min(answers.Length, answerButtons.Length); i++)
         {
             //combine two words if second array exist

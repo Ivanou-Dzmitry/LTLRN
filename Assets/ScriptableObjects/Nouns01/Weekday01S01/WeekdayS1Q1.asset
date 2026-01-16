@@ -12,16 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
   m_Name: WeekdayS1Q1
   m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
-  uID: 
+  isAutomated: 1
+  questionCategory:
+    tableName: Weekdays
+    columnName: Category
+    recordID: 1
+    value: Date
+    whereColumn: ID
+    whereValue: 
   questionLang: 0
   questionDifficulty: 0
   questionType: 0
-  questionDescription: 
-  questionText: 
-  qSpriteFile: 
-  answerVariantsText: []
-  isImageTextOnly: 1
-  answerVarSpriteName: []
-  qSoundClipName: []
+  questionReference:
+    tableName: Weekdays
+    columnName: NomSing
+    recordID: 1
+    value: pirmadienis
+    whereColumn: ID
+    whereValue: 
+  answerReferences: []
+  answerSecondWord: []
+  soundReferences: []
+  questionImageFile: []
+  imagesCount: 1
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   correctAnswerNumber: 0
   rewardAmount: 1
+  questionDescription: 

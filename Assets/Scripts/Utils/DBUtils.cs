@@ -35,7 +35,7 @@ public class DBUtils : MonoBehaviour
     private bool isDataInitialized = false;
     private const string dbDataName = "keliasdata.db"; 
 
-    private const int DB_VERSION = 1; // Increment this when you update the database
+    private const int DB_VERSION = 2; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES
@@ -61,25 +61,6 @@ public class DBUtils : MonoBehaviour
     {
         StartCoroutine(InitializeDatabase());
     }
-
-/*    private void CreateTablesIfNeeded()
-    {
-        if (!isInitialized) return;
-
-        try
-        {
-            using (var connection = new SQLiteConnection(dbPath))
-            {
-                // Create Sections table if it doesn't exist
-                connection.CreateTable<SectionDB>();
-                connection.CreateTable<ThemesDB>();
-            }
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"Error creating tables: {ex.Message}");
-        }
-    }*/
 
     //check game data table
     private bool CreateGameDataTables()
@@ -112,103 +93,128 @@ public class DBUtils : MonoBehaviour
 
     private IEnumerator InitializeDatabase()
     {
-        string sourceDbPath;
-        string sourceDataDbPath;
+        // Initialize main database
+        yield return InitializeSingleDatabase(dbName, DB_VERSION, VERSION_KEY,
+            (path) => dbPath = path);
 
-#if UNITY_ANDROID
-        //main database
-        sourceDbPath = Path.Combine(Application.streamingAssetsPath, dbName);
-        dbPath = Path.Combine(Application.persistentDataPath, dbName);
-        //game data
-        sourceDataDbPath = Path.Combine(Application.streamingAssetsPath, dbDataName);
-        dbDataPath = Path.Combine(Application.persistentDataPath, dbDataName);
-#elif UNITY_EDITOR
-    //main database
-    sourceDbPath = Path.Combine(Application.dataPath, "StreamingAssets", dbName);
-    dbPath = Path.Combine(Application.persistentDataPath, dbName);
-    
-    //game data
-    sourceDataDbPath = Path.Combine(Application.dataPath, "StreamingAssets", dbDataName);
-    dbDataPath = Path.Combine(Application.persistentDataPath, dbDataName);
-#else
-    //main database
-    sourceDbPath = Path.Combine(Application.streamingAssetsPath, dbName);
-    dbPath = Path.Combine(Application.persistentDataPath, dbName);
-    
-    //game data
-    sourceDataDbPath = Path.Combine(Application.streamingAssetsPath, dbDataName);
-    dbDataPath = Path.Combine(Application.persistentDataPath, dbDataName);
-#endif
+        // Initialize data database
+        yield return InitializeSingleDatabase(dbDataName, DB_VERSION, VERSION_KEY,
+            (path) => dbDataPath = path);
+
+        // Check connections
+        Debug.Log("Final Main Database Path: " + dbPath);
+        isInitialized = CheckConnection(dbPath);
+        Debug.Log("DB1 Connection Result: " + isInitialized);
+
+        Debug.Log("Final Data Database Path: " + dbDataPath);
+        isDataInitialized = CheckConnection(dbDataPath);
+        Debug.Log("DB2 Connection Result: " + isDataInitialized);
+
+        // Create tables
+        bool res = CreateGameDataTables();
+        Debug.Log("DB2 create tables: " + res);
+    }
+
+
+    private IEnumerator InitializeSingleDatabase(string databaseName, int targetVersion,
+    string versionKey, System.Action<string> setPath)
+    {
+        string sourceDbPath = GetSourcePath(databaseName);
+        string destDbPath = GetDestinationPath(databaseName);
+
+        // Set the path using callback
+        setPath(destDbPath);
 
         // Check if database needs update
-        int savedVersion = PlayerPrefs.GetInt(VERSION_KEY, 0);
-        bool needsUpdate = savedVersion < DB_VERSION || !File.Exists(dbPath);
+        int savedVersion = PlayerPrefs.GetInt(versionKey, 0);
+        bool needsUpdate = savedVersion < targetVersion || !File.Exists(destDbPath);
 
         if (needsUpdate)
         {
-            Debug.Log($"Updating database from version {savedVersion} to {DB_VERSION}");
+            Debug.Log($"Updating {databaseName} from version {savedVersion} to {targetVersion}");
 
             // Delete old database if exists
-            if (File.Exists(dbPath))
+            if (File.Exists(destDbPath))
             {
-                File.Delete(dbPath);
-                Debug.Log("Old database deleted");
+                File.Delete(destDbPath);
+                Debug.Log($"Old {databaseName} deleted");
             }
+
+            // Copy database
+            yield return CopyDatabase(sourceDbPath, destDbPath, databaseName, versionKey, targetVersion);
+        }
+        else
+        {
+            Debug.Log($"{databaseName} is up to date (version {savedVersion})");
+            yield return null;
+        }
+    }
+
+    private string GetDestinationPath(string databaseName)
+    {
+        return Path.Combine(Application.persistentDataPath, databaseName);
+    }
+
+    private string GetSourcePath(string databaseName)
+    {
+#if UNITY_ANDROID
+        return Path.Combine(Application.streamingAssetsPath, databaseName);
+#elif UNITY_EDITOR
+        return Path.Combine(Application.dataPath, "StreamingAssets", databaseName);
+#else
+        return Path.Combine(Application.streamingAssetsPath, databaseName);
+#endif
+    }
+
+    private IEnumerator CopyDatabase(string sourceDbPath, string destDbPath,
+    string databaseName, string versionKey, int targetVersion)
+    {
+#if UNITY_ANDROID
+        yield return CopyDatabaseAndroid(sourceDbPath, destDbPath, databaseName, versionKey, targetVersion);
+#else
+        yield return CopyDatabaseStandalone(sourceDbPath, destDbPath, databaseName, versionKey, targetVersion);
+#endif
+    }
 
 #if UNITY_ANDROID
-            UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(sourceDbPath);
-            yield return www.SendWebRequest();
+    private IEnumerator CopyDatabaseAndroid(string sourceDbPath, string destDbPath,
+        string databaseName, string versionKey, int targetVersion)
+    {
+        UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(sourceDbPath);
+        yield return www.SendWebRequest();
 
-            if (www.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
-            {
-                File.WriteAllBytes(dbPath, www.downloadHandler.data);
-                PlayerPrefs.SetInt(VERSION_KEY, DB_VERSION);
-                PlayerPrefs.Save();
-                Debug.Log("Database updated successfully");
-            }
-            else
-            {
-                Debug.LogError($"Failed to copy database: {www.error}");
-                yield break;
-            }
+        if (www.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
+        {
+            File.WriteAllBytes(destDbPath, www.downloadHandler.data);
+            PlayerPrefs.SetInt(versionKey, targetVersion);
+            PlayerPrefs.Save();
+            Debug.Log($"{databaseName} updated successfully");
+        }
+        else
+        {
+            Debug.LogError($"Failed to copy {databaseName}: {www.error}");
+        }
+    }
 #else
+    private IEnumerator CopyDatabaseStandalone(string sourceDbPath, string destDbPath, 
+        string databaseName, string versionKey, int targetVersion)
+    {
         if (File.Exists(sourceDbPath))
         {
-            File.Copy(sourceDbPath, dbPath, true); // true = overwrite
-            PlayerPrefs.SetInt(VERSION_KEY, DB_VERSION);
+            File.Copy(sourceDbPath, destDbPath, true);
+            PlayerPrefs.SetInt(versionKey, targetVersion);
             PlayerPrefs.Save();
-            Debug.Log("Database updated successfully");
+            Debug.Log($"{databaseName} updated successfully");
         }
         else
         {
             Debug.LogError($"Source database not found: {sourceDbPath}");
-            yield break;
         }
+        
         yield return null;
-#endif
-        }
-        else
-        {
-            Debug.Log("Database is up to date");
-        }
-
-        Debug.Log("Final Database Path: " + dbPath);
-
-        string result = string.Empty;
-
-        isInitialized = CheckConnection(dbPath);
-        Debug.Log("DB1 Connection Result: " + isInitialized);
-
-        isDataInitialized = CheckConnection(dbDataPath);
-        Debug.Log("DB2 Connection Result: " + isDataInitialized);
-
-        //create main tables
-        //CreateTablesIfNeeded();
-
-        bool res = CreateGameDataTables();
-        Debug.Log("DB2 create tables: " + res);
-
     }
+#endif
+
 
     public bool CheckConnection(string path)
     {
@@ -968,5 +974,5 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    public bool IsReady => isInitialized;
+    public bool IsReady => isInitialized && isDataInitialized;
 }

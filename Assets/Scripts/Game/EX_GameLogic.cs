@@ -53,10 +53,10 @@ public class ExGameLogic : MonoBehaviour
     public SectionManager sectionManager;
     public Section currentSection;
     private Section nextSection;
-    public QuestionT01 currentQuestion;
+    public QuestionBase currentQuestion;
 
     //shuffle questions
-    private List<QuestionT01> tempQuestions;
+    private List<QuestionBase> tempQuestions;
 
     public string sectionInfo;
 
@@ -153,7 +153,7 @@ public class ExGameLogic : MonoBehaviour
                 currentSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
             
             // Create runtime copy of questions
-            tempQuestions = new List<QuestionT01>(currentSection.questions);
+            tempQuestions = new List<QuestionBase>(currentSection.questions);
 
             //shuffle
             ShuffleQuestions(tempQuestions);
@@ -208,13 +208,13 @@ public class ExGameLogic : MonoBehaviour
     }
 
 
-    void ShuffleQuestions(List<QuestionT01> list)
+    void ShuffleQuestions(List<QuestionBase> list)
     {
         for (int i = list.Count - 1; i > 0; i--)
         {
             int randomIndex = UnityEngine.Random.Range(0, i + 1);
 
-            QuestionT01 temp = list[i];
+            QuestionBase temp = list[i];
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
         }
@@ -246,10 +246,17 @@ public class ExGameLogic : MonoBehaviour
 
 
     //prepare data for question. Step 1
-    public static QuestionData LoadQuestionData(QuestionT01 question)
-    {       
+    public static QuestionData LoadQuestionData(QuestionBase question)
+    {
         //create question data
         QuestionData data = new QuestionData();
+        /*        QuestionData data = new QuestionData
+                {
+                    answerVariantsText = Array.Empty<string>(),
+                    answerSecondWord = Array.Empty<string>(),
+                    qSoundClipName = Array.Empty<string>(),
+                    questionImageFile = Array.Empty<string>()
+                };*/
 
         //get auto flag
         bool isAuto = question.isAutomated;
@@ -389,8 +396,9 @@ public class ExGameLogic : MonoBehaviour
     }
 
     //load question
-    private void QLoad(QuestionT01 question)
+    private void QLoad(QuestionBase question)
     {
+
         //step 2 - load prepared data
         QuestionData data = LoadQuestionData(question);      
         
@@ -406,7 +414,7 @@ public class ExGameLogic : MonoBehaviour
 
 
         // Text only question
-        if (question.questionType == QuestionType.Type1)
+        if (question.questionType == QuestionBase.QuestionType.Type1)
         {
             //routine to load UI    
             QuestionUILoad(question, 0);
@@ -419,7 +427,7 @@ public class ExGameLogic : MonoBehaviour
                 qData.soundPlayButton.GetComponent<ButtonImage>().SetDisabled(false);
 
                 //load question text
-                if (question.isQuestionTextOnly)
+/*                if (question.isQuestionTextOnly)
                 {
                     //text from question object
                     qData.qestionText.text = question.questionText;                         
@@ -427,19 +435,23 @@ public class ExGameLogic : MonoBehaviour
                 {
                     //text from database
                     qData.qestionText.text = data.questionText;
-                }
+                }*/
+
+                currentQuestion.ApplyQuestionText(data, qData.qestionText);
 
                 //set answers
-                if(question.isAnswerTextOnly)
-                {
-                    //text from database 1 and 2 word
-                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
-                }
-                else
-                {
-                    //text from database
-                    qData.SetAnswers(data.answerVariantsText);
-                }
+                currentQuestion.ApplyAnswers(data, qData);
+
+                /*                if (question.isAnswerTextOnly)
+                                {
+                                    //text from database 1 and 2 word
+                                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
+                                }
+                                else
+                                {
+                                    //text from database
+                                    qData.SetAnswers(data.answerVariantsText);
+                                }*/
 
                 //load sound. Avoid load name - but clip is not ready. In db just name.
                 qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
@@ -447,7 +459,7 @@ public class ExGameLogic : MonoBehaviour
         }
 
         //IMAGE question
-        if (question.questionType == QuestionType.Type2)
+        if (question.questionType == QuestionBase.QuestionType.Type2)
         {
             //routine to load UI    
             QuestionUILoad(question, 1);
@@ -497,21 +509,23 @@ public class ExGameLogic : MonoBehaviour
                 }
 
                 //set answers
-                if (question.isAnswerTextOnly)
-                {
-                    //text from question object
-                    qData.SetAnswers(question.answerVariantsText);
-                }
-                else
-                {
-                    //text from database 1 and 2 word
-                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
-                }
+                currentQuestion.ApplyAnswers(data, qData);
+
+                /*                if (question.isAnswerTextOnly)
+                                {
+                                    //text from question object
+                                    qData.SetAnswers(question.answerVariantsText);
+                                }
+                                else
+                                {
+                                    //text from database 1 and 2 word
+                                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
+                                }*/
             }
         }
 
         //input
-        if (question.questionType == QuestionType.Type3)
+        if (question.questionType == QuestionBase.QuestionType.Type3)
         {
             //type3
             QuestionUILoad(question, 2);
@@ -525,19 +539,25 @@ public class ExGameLogic : MonoBehaviour
                 qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
 
                 //load question text
-                if (question.isQuestionTextOnly)
-                {
-                    //text from question object
-                    //
-                    //qData.qestionText.text = question.questionText;
+                currentQuestion.ApplyQuestionText(data, qData.qestionText);
 
-                    BuildQuestionWithInputs(question.questionText, qData.questionContainer);
-                }
-                else
-                {
-                    //text from database
-                    qData.qestionText.text = data.questionText;
-                }
+                if(qData.qestionText.text != null)
+                    BuildQuestionWithInputs(qData.qestionText.text, qData.questionContainer);
+
+
+                /*                if (question.isQuestionTextOnly)
+                                {
+                                    //text from question object
+                                    //
+                                    //qData.qestionText.text = question.questionText;
+
+                                    BuildQuestionWithInputs(question.questionText, qData.questionContainer);
+                                }
+                                else
+                                {
+                                    //text from database
+                                    qData.qestionText.text = data.questionText;
+                                }*/
             }
         }
     }
@@ -552,7 +572,7 @@ public class ExGameLogic : MonoBehaviour
     }
 
 
-    private void QuestionUILoad(QuestionT01 question, int index)
+    private void QuestionUILoad(QuestionBase question, int index)
     {
         questionInstance = Instantiate(questionPrefabs[index], questionArea);
         questionInstance.name = question.name;
@@ -578,7 +598,7 @@ public class ExGameLogic : MonoBehaviour
         int correctIndex = (int)currentQuestion.correctAnswerNumber;
 
         //get question
-        QuestionT01 question = currentQuestion;
+        QuestionBase question = currentQuestion;
 
         //check selected Type 1
         if (currentSection.sectionType == Section.SectionType.Type1)
@@ -634,7 +654,7 @@ public class ExGameLogic : MonoBehaviour
         //Debug.Log(correctAnswerText);
 
         //get question
-        QuestionT01 question = currentQuestion;
+        QuestionBase question = currentQuestion;
 
         //check selected Type 1
         if (currentSection.sectionType == Section.SectionType.Type1)
@@ -713,7 +733,9 @@ public class ExGameLogic : MonoBehaviour
             //currentQuestion = currentSection.questions[qCounter];            
 
             //question load
-            QLoad(currentQuestion);
+            QuestionBase question = currentQuestion;
+
+            QLoad(question);
 
             //set button state
             nextButton.interactable = false;

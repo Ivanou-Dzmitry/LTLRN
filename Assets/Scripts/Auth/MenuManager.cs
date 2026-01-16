@@ -78,6 +78,7 @@ public class MenuManager : MonoBehaviour
     {
         Application.runInBackground = true;
 
+        //open waiting panel
         PanelManager.Open("waiting");
 
 #if UNITY_ANDROID
@@ -113,6 +114,7 @@ public class MenuManager : MonoBehaviour
                     //Debug.Log("Authorization code: " + code);
                     m_GooglePlayGamesToken = code;
 
+                    PanelManager.CloseAll();
                     PanelManager.Open("main");
                     // This token serves as an example to be used for SignInWithGooglePlayGames
                 });

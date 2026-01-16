@@ -13,19 +13,16 @@ MonoBehaviour:
   m_Name: NumS3Q1
   m_EditorClassIdentifier: Assembly-CSharp::Question
   isAutomated: 0
-  questionLang: 2
-  questionDifficulty: 1
-  questionType: 2
   questionCategory:
-    tableName: Transport
+    tableName: Human
     columnName: Category
     recordID: 1
-    value: Transport
+    value: Human
     whereColumn: ID
     whereValue: 
-  questionDescription: 
-  isQuestionTextOnly: 1
-  questionText: vienas berniuk__
+  questionLang: 0
+  questionDifficulty: 1
+  questionType: 2
   questionReference:
     tableName: Short_vowels
     columnName: ID
@@ -33,12 +30,6 @@ MonoBehaviour:
     value: 1
     whereColumn: ID
     whereValue: 
-  imagesCount: 1
-  questionImage: {fileID: 0}
-  questionImageFile: []
-  questionImageColor: {r: 0.38364768, g: 0.38364768, b: 0.38364768, a: 1}
-  isAnswerTextOnly: 0
-  answerVariantsText: []
   answerReferences:
   - tableName: NounEndings
     columnName: Ending
@@ -47,7 +38,16 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   answerSecondWord: []
-  answerImageReferences: []
   soundReferences: []
+  questionImageFile: []
+  imagesCount: 1
+  questionImageColor: {r: 0.38364768, g: 0.38364768, b: 0.38364768, a: 1}
   correctAnswerNumber: 0
   rewardAmount: 1
+  questionDescription: 
+  isQuestionTextOnly: 1
+  questionText: vienas berniuk__
+  questionImage: {fileID: 0}
+  isAnswerTextOnly: 0
+  answerVariantsText: []
+  answerImageReferences: []

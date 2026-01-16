@@ -168,6 +168,7 @@ public class ExDataLoader : MonoBehaviour
 
         //Debug.Log("Loading section: " + panel.name);
 
+        //upd section data in db
         dbUtils.EnsureSectionExists(panel.name);
 
         SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
