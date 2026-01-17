@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static ExGameLogic;
 
@@ -6,43 +7,39 @@ using static ExGameLogic;
 [CreateAssetMenu(fileName = "QuestionT02", menuName = "Scriptable Objects/QuestionT02")]
 public class QuestionT02 : QuestionBase
 {
-    //public string uID;
-/*    public enum QuestionLang
-    {
-        SYS,
-        LT,
-        IMG,
-        NUM
+    //text only from base
+    public override void ApplyQuestionText(QuestionData data, TMPro.TMP_Text targetText)
+    {        
+        targetText.text = data.questionText;
     }
 
-    [Header("lang")]
-    [Tooltip("Optional field. System.")]
-    public QuestionLang questionLang = QuestionLang.SYS;*/
-    
-/*    public enum QuestionDifficulty
+    public override void ApplyAnswers(QuestionData data, ExQManager01 qData)
     {
-        Simple,
-        Medium,
-        Hard
+        qData.SetAnswers(data.answerFirstWord, data.answerSecondWord);
     }
 
-    [Header("Difficulty")]
-    [Tooltip("Optional field. For backlog")]
-    public QuestionDifficulty questionDifficulty = QuestionDifficulty.Simple;*/
+    public override string[] GetAnswerColumns()
+    {
+        //Debug.Log($"{answerColumn}, {answerColumn.Length}");
+
+        if (answerColumn == null || answerColumn.Length == 0)
+            return Array.Empty<string>();
+
+        var columns = new string[answerColumn.Length];
+
+        for (int i = 0; i < answerColumn.Length; i++)
+            columns[i] = answerColumn[i].columnName;
+
+        return columns;
+    }
+
+    //where answers saved
+    [Header("Answer Word Columns")]
+    public DatabaseColumnReference[] answerColumn;    
 
     [Header("Description")]
     [Tooltip("Optional field. For backlog")]
     public string questionDescription;
-
-    /*   public enum QuestionType
-       {
-           Type1,
-           Type2,
-           Type3
-       }
-
-       [Header("Type")]
-       public QuestionType questionType = QuestionType.Type1;*/
 
     public enum CorrectAnswer
        {
@@ -51,11 +48,4 @@ public class QuestionT02 : QuestionBase
            Element2 = 2,
            Element3 = 3
        }
-
-    /*    [Header("Q: DB")]
-        [Tooltip("Question text - reference to string from database")]
-        public DatabaseReference questionReference;  // References to DB records*/
-
-/*    [Header("Reward")]
-    public int rewardAmount = 1;*/
 }

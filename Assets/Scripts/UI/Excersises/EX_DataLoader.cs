@@ -17,6 +17,7 @@ public class ExDataLoader : MonoBehaviour
 
     private GameData gameData;
     private DBUtils dbUtils;
+    private LanguageSwitcher locManager;
 
     public Themes themes;
 
@@ -80,7 +81,8 @@ public class ExDataLoader : MonoBehaviour
     //IMPORTANT
     public void LoadData()
     {
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();        
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();
 
         //load theme
         if (gameData != null)
@@ -95,7 +97,11 @@ public class ExDataLoader : MonoBehaviour
 
             //get data
             ButtonImage themeBtn = themeButton.GetComponent<ButtonImage>();
-            Locale locale = GetLocale();
+            Locale locale = null;
+
+            //get locale
+            if (locManager != null)
+                locale = locManager.GetLocale();
 
             //set theme button name
             if (locale != null && themeBtn != null)
@@ -129,24 +135,7 @@ public class ExDataLoader : MonoBehaviour
             {
                 LoadSections(section, i); //section type1
             }
-            else if (section.questionsT2.Length > 0 && section.questionsT2 != null)
-            {
-                LoadSections(section, i); //section type2
-            }
         }
-    }
-
-    private Locale GetLocale()
-    {
-        string savedLang = gameData.saveData.lang.ToLower();
-
-        Locale locale = LocalizationSettings.AvailableLocales.Locales
-            .FirstOrDefault(l => l.Identifier.Code == savedLang);
-
-        if (locale != null)
-            LocalizationSettings.SelectedLocale = locale;
-
-        return locale;
     }
 
     public string FormatTime(float seconds)
@@ -215,22 +204,7 @@ public class ExDataLoader : MonoBehaviour
         if (section.questions != null && section.questions.Length > 0)
             return section.questions.Length;
 
-        if (section.questionsT2 != null && section.questionsT2.Length > 0)
-            return section.questionsT2.Length;
-
         return 0;
-    }
-
-    // Helper method to get question type
-    private QuestionDataType GetQuestionType(Section section)
-    {
-        if (section.questions != null && section.questions.Length > 0)
-            return QuestionDataType.Type1;
-
-        if (section.questionsT2 != null && section.questionsT2.Length > 0)
-            return QuestionDataType.Type2;
-
-        return QuestionDataType.None;
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static ExGameLogic;
 
@@ -13,6 +14,13 @@ public abstract class QuestionBase : ScriptableObject
     {
         // do nothing by default
     }
+
+    public virtual string[] GetAnswerColumns()
+    {
+        // do nothing by default
+        return Array.Empty<string>();
+    }
+
 
     [Header("Automatization")]
     public bool isAutomated;
@@ -75,7 +83,7 @@ public abstract class QuestionBase : ScriptableObject
     public Color questionImageColor = Color.white;
 
     [Header("Correct Answer")]
-    public int correctAnswerNumber;
+    public int correctAnswerNumber = -1;
 
     [Header("Reward")]
     [Tooltip("Optional. For backlog")]
@@ -91,4 +99,12 @@ public class DatabaseReference
     public string value;            // e.g., "Five" or "five.mp3"
     public string whereColumn;    // e.g., "Digit"
     public string whereValue;     // e.g., "5"
+}
+
+[System.Serializable]
+public class DatabaseColumnReference
+{
+    public int recordID;
+    public string tableName;      // e.g., "Numerals"
+    public string columnName;     // e.g., "Word" or "Sound"    
 }

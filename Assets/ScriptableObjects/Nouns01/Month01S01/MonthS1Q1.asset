@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
   m_Name: MonthS1Q1
   m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
-  isAutomated: 0
+  isAutomated: 1
   questionCategory:
     tableName: Month
     columnName: Category
@@ -20,14 +20,14 @@ MonoBehaviour:
     value: Date
     whereColumn: ID
     whereValue: 
-  questionLang: 0
+  questionLang: 1
   questionDifficulty: 0
   questionType: 0
   questionReference:
-    tableName: Weekdays
+    tableName: Month
     columnName: NomSing
     recordID: 1
-    value: pirmadienis
+    value: sausis
     whereColumn: ID
     whereValue: 
   answerReferences: []
@@ -36,6 +36,10 @@ MonoBehaviour:
   questionImageFile: []
   imagesCount: 1
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}
-  correctAnswerNumber: 0
+  correctAnswerNumber: -1
   rewardAmount: 1
+  answerColumn:
+  - recordID: 1
+    tableName: Month
+    columnName: NomSing
   questionDescription: 

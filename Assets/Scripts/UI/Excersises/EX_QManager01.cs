@@ -222,29 +222,34 @@ public class ExQManager01 : MonoBehaviour
 
     public void SetAnswers(string[] answers, string[] answers2 = null)
     {
-        Debug.Log(answers);
-        Debug.Log(answers2);
-
-        for (int i = 0; i < Mathf.Min(answers.Length, answerButtons.Length); i++)
+        if(answers == null)
         {
-            //combine two words if second array exist
-            string word1 = answers[i];
-
-            //second word
-            string word2 = string.Empty;
-
-            //check second array
-            if (answers2 != null)
-                word2 = answers2[i];
-
-            //set answer text
-            answerButtons[i].answerText = word1 + " " + word2;
-
-            //update button image
-            if (answerButtons[i].buttonImage != null)
+            Debug.Log(answers);
+            Debug.Log(answers2);
+        }
+        else
+        {
+            for (int i = 0; i < Mathf.Min(answers.Length, answerButtons.Length); i++)
             {
-                answerButtons[i].buttonImage.buttonTextStr = answers[i];
-                answerButtons[i].buttonImage.RefreshState();
+                //combine two words if second array exist
+                string word1 = answers[i];
+
+                //second word
+                string word2 = string.Empty;
+
+                //check second array
+                if (answers2 != null)
+                    word2 = answers2[i];
+
+                //set answer text
+                answerButtons[i].answerText = word1 + " " + word2;
+
+                //update button image
+                if (answerButtons[i].buttonImage != null)
+                {
+                    answerButtons[i].buttonImage.buttonTextStr = answers[i];
+                    answerButtons[i].buttonImage.RefreshState();
+                }
             }
         }
     }

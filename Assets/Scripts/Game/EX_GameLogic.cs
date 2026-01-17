@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using static QuestionT01;
 
@@ -22,7 +25,7 @@ public class ExGameLogic : MonoBehaviour
     public class QuestionData
     {
         public string questionText;
-        public string[] answerVariantsText;
+        public string[] answerFirstWord;
         public string[] answerSecondWord;
         public string[] qSoundClipName;        
         public string[] questionImageFile;
@@ -40,6 +43,7 @@ public class ExGameLogic : MonoBehaviour
     private DBUtils dbUtils;
     private SoundManager soundManager;
     private ScoreManager scoreManager;
+    private LanguageSwitcher locManager;
 
     [Header("Game State")]
     public GameState gameState;
@@ -90,7 +94,9 @@ public class ExGameLogic : MonoBehaviour
     public float sessionDuration;
 
     private const float CHECK_DELAY = 3f;
+    private const int QUESTIONS_COUNT = 4;
 
+    //question data handler
     private ExQManager01 qData;
 
     private void Awake()
@@ -141,6 +147,7 @@ public class ExGameLogic : MonoBehaviour
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         soundManager = GameObject.FindWithTag("SoundManager").GetComponent<SoundManager>();
         scoreManager = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
+        locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();
 
         //load theme
         if (gameData != null)
@@ -210,6 +217,7 @@ public class ExGameLogic : MonoBehaviour
 
     void ShuffleQuestions(List<QuestionBase> list)
     {
+        //Debug.Log("Shuffling questions..." + list.Count);
         for (int i = list.Count - 1; i > 0; i--)
         {
             int randomIndex = UnityEngine.Random.Range(0, i + 1);
@@ -246,63 +254,131 @@ public class ExGameLogic : MonoBehaviour
 
 
     //prepare data for question. Step 1
-    public static QuestionData LoadQuestionData(QuestionBase question)
+    public static QuestionData LoadQuestionData(QuestionBase question, string sysLang)
     {
+        string questionLang = question.questionLang.ToString();
+
         //create question data
         QuestionData data = new QuestionData();
-        /*        QuestionData data = new QuestionData
-                {
-                    answerVariantsText = Array.Empty<string>(),
-                    answerSecondWord = Array.Empty<string>(),
-                    qSoundClipName = Array.Empty<string>(),
-                    questionImageFile = Array.Empty<string>()
-                };*/
 
         //get auto flag
         bool isAuto = question.isAutomated;
 
         //load q text from db
-        data.questionText = DBUtils.Instance.ResolveReference(question.questionReference);
+        if(questionLang == "LT")
+            data.questionText = DBUtils.Instance.ResolveReference(question.questionReference);
+        else
+            data.questionText = DBUtils.Instance.ResolveLangReference(question.questionReference, sysLang); ;
 
-        //table name for automation
+            //table name for automation
         string tableName = string.Empty;
+        string columnName = string.Empty;
+        int qID = -1;
 
-        if (data.questionText.Length > 0)
-            tableName = DBUtils.Instance.GetQuestionTableName(question.questionReference);        
+        //get question params based on question reference
+        var qp = DBUtils.Instance.GetQuestionParams(question.questionReference);
+
+        tableName = qp.Value.TableName;
+        columnName = qp.Value.ColumnName;
+        qID = qp.Value.RecordID;
+
+        //get answer word count
+        int wordCount = 0;
+        wordCount = question.GetAnswerColumns().Length;
+        string[] answerColumns = question.GetAnswerColumns();
+
+        string firstColumnName = string.Empty;
+        string secondColumnName = string.Empty;
+
+        //get names
+        if (answerColumns.Length > 0)
+            firstColumnName = answerColumns[0];
+
+        if (answerColumns.Length > 1)
+            secondColumnName = answerColumns[1];
+
+        Debug.Log($"FC: {firstColumnName}, SC: {secondColumnName}, Count: {wordCount}, Lang: {sysLang}, Qlang:{questionLang}");
 
         // get answer count
-        int answersCount = 0;
+        int firstAnswerWordsCount = 0;
 
-        if(question.answerReferences != null)
-            answersCount = question.answerReferences.Length;
+        //if no answers defined - set default
+        if (question.answerReferences != null)
+            firstAnswerWordsCount = question.answerReferences.Length;
+        
+        //set auto default
+        if (firstAnswerWordsCount == 0)
+            firstAnswerWordsCount = QUESTIONS_COUNT; //default 4
 
-        if (answersCount > 0)
+        //set answers
+        data.answerFirstWord = new string[firstAnswerWordsCount];
+
+        //load answers
+        for (int i = 0; i < question.answerReferences.Length; i++)
         {
-            //set answers
-            data.answerVariantsText = new string[answersCount];
-
-            //load answers
-            for (int i = 0; i < question.answerReferences.Length; i++)
-            {
-                data.answerVariantsText[i] = DBUtils.Instance.ResolveReference(question.answerReferences[i]);
-            }
+            data.answerFirstWord[i] = DBUtils.Instance.ResolveReference(question.answerReferences[i]);
         }
 
-        int secondWordCount = 0;
+        //load auto answers if null
+        if (data.answerFirstWord[0] == null)
+        {
+            string dynamicColumnName = string.Empty;
+
+            //for columns not equal NomSing
+            if (firstColumnName != qp.Value.ColumnName)
+                dynamicColumnName = firstColumnName;
+            else
+                dynamicColumnName = qp.Value.ColumnName;
+
+                data.answerFirstWord = DBUtils.Instance.AutoResolveReference(
+                    qp.Value.TableName,
+                    dynamicColumnName,
+                    qp.Value.RecordID,
+                    questionLang,
+                    sysLang
+                );
+
+            //set correct answer
+            data.correctAnswerNumber = DBUtils.Instance.GetCorrectIndex();
+        }
+        else
+        {
+            //set correct answer
+            data.correctAnswerNumber = (int)question.correctAnswerNumber;
+        }
+
+            //load second word
+            int secondAnswerWordsCount = 0;        
 
         //optional 2nd word answers
         if (question.answerSecondWord != null) 
-            secondWordCount = question.answerSecondWord.Length;
+            secondAnswerWordsCount = question.answerSecondWord.Length;
 
-        if (secondWordCount > 0)
+        //set auto default second word
+        if (secondAnswerWordsCount == 0)
+            secondAnswerWordsCount = QUESTIONS_COUNT; //default 4
+
+        data.answerSecondWord = new string[secondAnswerWordsCount];
+                      
+        //load answers
+        for (int i = 0; i < question.answerSecondWord.Length; i++)
         {
-            //set answers
-            data.answerSecondWord = new string[secondWordCount];
-            //load answers
-            for (int i = 0; i < question.answerSecondWord.Length; i++)
-            {
-                data.answerSecondWord[i] = DBUtils.Instance.ResolveReference(question.answerSecondWord[i]);
-            }
+            data.answerSecondWord[i] = DBUtils.Instance.ResolveReference(question.answerSecondWord[i]);
+        }
+
+        //load auto answers if null and 2 words
+        if (wordCount == 2 &&
+            (data.answerSecondWord == null ||
+                data.answerSecondWord.Length == 0 ||
+                    string.IsNullOrWhiteSpace(data.answerSecondWord[0])))
+        {
+            data.answerSecondWord = DBUtils.Instance.AutoResolveReference(
+                qp.Value.TableName,
+                secondColumnName,
+                qp.Value.RecordID,
+                questionLang,
+                sysLang
+            );
         }
 
         // Load sound clips
@@ -310,8 +386,19 @@ public class ExGameLogic : MonoBehaviour
 
         if (isAuto)
         {
-            string soundFileName = DBUtils.Instance.GetSound(tableName, data.questionText);
+            string soundFileName = string.Empty;
 
+            //try to get sound
+            try
+            {
+                soundFileName = DBUtils.Instance.GetSound(tableName, data.questionText);
+            }
+            catch(Exception e)
+            {
+                Debug.LogError("Error getting sound file name: " + e.Message);
+            }
+
+            //assign clip
             if (!string.IsNullOrEmpty(soundFileName))
             {
                 data.qSoundClipName = new[] { soundFileName }; // Length = 1
@@ -374,8 +461,9 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-        data.correctAnswerNumber = (int)question.correctAnswerNumber;
 
+
+        //cat for sound and img
         data.questionCategory = DBUtils.Instance.ResolveReference(question.questionCategory);
 
         return data;
@@ -398,9 +486,11 @@ public class ExGameLogic : MonoBehaviour
     //load question
     private void QLoad(QuestionBase question)
     {
+        //get current language
+        Languages currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
 
-        //step 2 - load prepared data
-        QuestionData data = LoadQuestionData(question);      
+        //step 2 - load prepared data with selected language IMPORTANT
+        QuestionData data = LoadQuestionData(question, currentLang.ToString());      
         
         bool isAuto = question.isAutomated;
 
@@ -416,7 +506,7 @@ public class ExGameLogic : MonoBehaviour
         // Text only question
         if (question.questionType == QuestionBase.QuestionType.Type1)
         {
-            //routine to load UI    
+            //routine to load UI Prefab    
             QuestionUILoad(question, 0);
 
             //load data to prefab
@@ -426,17 +516,7 @@ public class ExGameLogic : MonoBehaviour
             {
                 qData.soundPlayButton.GetComponent<ButtonImage>().SetDisabled(false);
 
-                //load question text
-/*                if (question.isQuestionTextOnly)
-                {
-                    //text from question object
-                    qData.qestionText.text = question.questionText;                         
-                }else
-                {
-                    //text from database
-                    qData.qestionText.text = data.questionText;
-                }*/
-
+                //set question text
                 currentQuestion.ApplyQuestionText(data, qData.qestionText);
 
                 //set answers
@@ -584,6 +664,7 @@ public class ExGameLogic : MonoBehaviour
         rt.offsetMax = Vector2.zero;
     }
 
+    //check button click
     public void Check()
     {
         gameState = GameState.Pause;
@@ -593,9 +674,14 @@ public class ExGameLogic : MonoBehaviour
 
         //get index
         int selectedIndex = qData.GetSelectedAnswerIndex();
+
+        //Debug.Log($"selectedIndex={selectedIndex}");
         
         //get correct index
         int correctIndex = (int)currentQuestion.correctAnswerNumber;
+
+        if( correctIndex < 0 )
+            correctIndex = DBUtils.Instance.GetCorrectIndex();
 
         //get question
         QuestionBase question = currentQuestion;

@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 365298955}
   m_Layer: 0
   m_Name: LangSwitcher
-  m_TagString: Untagged
+  m_TagString: LangSwitcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

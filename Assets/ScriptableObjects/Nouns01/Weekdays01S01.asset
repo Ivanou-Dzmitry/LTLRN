@@ -41,8 +41,11 @@ MonoBehaviour:
       \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438."
     whereColumn: ID
     whereValue: 
-  questions: []
-  questionsT2:
+  questions:
   - {fileID: 11400000, guid: 30143fa861d57dc4c88c257062ebfac0, type: 2}
   - {fileID: 11400000, guid: 770d9e155e9261b4f94d850135af00a0, type: 2}
   - {fileID: 11400000, guid: a01186a1ab5188c44bcad4ab4915f31f, type: 2}
+  - {fileID: 11400000, guid: eafd5b91225ccbf4791e01a6c0b04141, type: 2}
+  - {fileID: 11400000, guid: 45aba9e0ecbf8ca4d893c09709d7440a, type: 2}
+  - {fileID: 11400000, guid: 8078e886dfc7970458be174d618957f6, type: 2}
+  - {fileID: 11400000, guid: a65042c2717c23749809d7a055c1a9a4, type: 2}

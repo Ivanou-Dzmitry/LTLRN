@@ -20,14 +20,14 @@ MonoBehaviour:
     value: Date
     whereColumn: ID
     whereValue: 
-  questionLang: 0
+  questionLang: 1
   questionDifficulty: 0
   questionType: 0
   questionReference:
     tableName: Weekdays
     columnName: NomSing
-    recordID: 1
-    value: pirmadienis
+    recordID: 2
+    value: antradienis
     whereColumn: ID
     whereValue: 
   answerReferences: []
@@ -36,6 +36,7 @@ MonoBehaviour:
   questionImageFile: []
   imagesCount: 1
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}
-  correctAnswerNumber: 0
+  correctAnswerNumber: -1
   rewardAmount: 1
+  answerColumn: []
   questionDescription: 

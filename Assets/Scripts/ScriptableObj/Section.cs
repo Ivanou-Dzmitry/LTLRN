@@ -57,11 +57,8 @@ public class Section : ScriptableObject
     [Header("Info text")]
     public DatabaseReference sectionInfo;
 
-    [Header("Type01")]
-    public QuestionT01[] questions;
-
-    [Header("Type02 Auto")]
-    public QuestionT02[] questionsT2;
+    [Header("Type01 and Type02")]
+    public QuestionBase[] questions;
 
     /*    public string GetSectionDifValue(DifficultyType difficulty)
         {

@@ -13,6 +13,7 @@ TagManager:
   - LeaderboardManager
   - SectionPanel
   - ScoreManager
+  - LangSwitcher
   layers:
   - Default
   - TransparentFX

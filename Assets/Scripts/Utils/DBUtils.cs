@@ -1,4 +1,5 @@
 using SQLite;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -35,7 +36,7 @@ public class DBUtils : MonoBehaviour
     private bool isDataInitialized = false;
     private const string dbDataName = "keliasdata.db"; 
 
-    private const int DB_VERSION = 2; // Increment this when you update the database
+    private const int DB_VERSION = 1; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES
@@ -43,6 +44,29 @@ public class DBUtils : MonoBehaviour
     private readonly Dictionary<string, Dictionary<string, Sprite>> spriteCache
         = new Dictionary<string, Dictionary<string, Sprite>>();
 
+    private int correctAnswerIndex = -1;
+
+    //for sound
+    private enum SoundColumn
+    {
+        Sound,
+        Sound01,
+        Sound02
+    }
+
+    //for words
+    private enum WordColumn
+    {
+        NomSing,
+        NomPlur
+    }
+
+    public struct QuestionParams
+    {
+        public string TableName;
+        public string ColumnName;
+        public int RecordID;
+    }
 
     private void Awake()
     {
@@ -836,46 +860,146 @@ public class DBUtils : MonoBehaviour
         return null;
     }
 
-    public string GetQuestionTableName(DatabaseReference dbRef)
+    public string ResolveLangReference(DatabaseReference dbRef, string lang)
     {
         if (dbRef == null) return null;
 
+        // If using ID
         if (dbRef.recordID > 0)
         {
-            return dbRef.tableName;
+            return GetValue(dbRef.tableName, lang, dbRef.recordID);
         }
 
-         return null;
+        return null;
     }
 
-    public void ResetAllSections()
+    public QuestionParams? GetQuestionParams(DatabaseReference dbRef)
+    {
+        if (dbRef == null || dbRef.recordID <= 0)
+            return null;
+
+        return new QuestionParams
+        {
+            TableName = dbRef.tableName,
+            ColumnName = dbRef.columnName,
+            RecordID = dbRef.recordID
+        };
+    }
+
+    class SingleValueRow
+    {
+        public string Value { get; set; }
+    }
+
+    public string[] AutoResolveReference(
+        string tableName,
+        string columnName,
+        int recordID,
+        string qLang,
+        string sysLang,
+        int totalCount = 4
+        )
     {
         if (!isInitialized)
+            return Array.Empty<string>();
+
+        //importnant! get correct language column. If question lt - then sys lang
+        if (qLang == "LT")
         {
-            Debug.LogError("Database not initialized!");
-            return;
-        }
+            if(ColumnExists(tableName, sysLang))
+                columnName = sysLang;
+        }                           
 
         try
         {
             using (var connection = new SQLiteConnection(dbPath))
             {
-                string query = @"
-                UPDATE Sections 
-                SET QDone = 0, 
-                    QCorrect = 0, 
-                    Liked = 'false', 
-                    Time = 0.0, 
-                    Complete = 'false'
-            ";
+                var results = new List<string>();
 
-                int rowsAffected = connection.Execute(query);
-                Debug.Log($"Reset {rowsAffected} sections");
+                // correct answer
+                string correct = connection.ExecuteScalar<string>(
+                    $"SELECT {columnName} FROM {tableName} WHERE ID = ?", recordID);
+
+                if (!string.IsNullOrWhiteSpace(correct))
+                    results.Add(correct);
+
+                int remaining = totalCount - results.Count;
+                if (remaining <= 0)
+                    return results.ToArray();
+
+                // random answers
+                var randomQuery = $@"
+                SELECT {columnName} AS Value
+                FROM {tableName}
+                WHERE ID != ?
+                  AND {columnName} IS NOT NULL
+                  AND {columnName} != ''
+                ORDER BY RANDOM()
+                LIMIT ?";
+
+                var randomRows = connection.Query<SingleValueRow>(
+                    randomQuery, recordID, remaining);
+
+                foreach (var row in randomRows)
+                {
+                    results.Add(row.Value);
+                }
+
+                //random answers
+                ShuffleList(results);
+
+                correctAnswerIndex = -1;
+
+                // find correct index AFTER shuffle
+                correctAnswerIndex = results.IndexOf(correct);
+
+                Debug.Log($"correctIndex = {correctAnswerIndex}");
+
+                return results.ToArray();
             }
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
-            Debug.LogError($"Error resetting sections: {ex.Message}");
+            Debug.LogError($"AutoResolveReference failed: {ex.Message}");
+            return Array.Empty<string>();
+        }
+    }
+
+    public int GetCorrectIndex()
+    {
+        return correctAnswerIndex;
+    }
+
+    private void ShuffleList<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = UnityEngine.Random.Range(0, i + 1);
+            T temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
+    }
+
+    private class TableColumnInfo
+    {
+        public int cid { get; set; }
+        public string name { get; set; }
+        public string type { get; set; }
+        public int notnull { get; set; }
+        public string dflt_value { get; set; }
+        public int pk { get; set; }
+    }
+
+
+    private bool ColumnExists(string tableName, string columnName)
+    {
+        using (var connection = new SQLiteConnection(dbPath))
+        {
+            // get table schema
+            var query = $"PRAGMA table_info([{tableName}]);";
+            var columns = connection.Query<TableColumnInfo>(query);
+            return columns.Any(c => c.name == columnName);
         }
     }
 
@@ -934,7 +1058,9 @@ public class DBUtils : MonoBehaviour
         {
             using (var connection = new SQLiteConnection(dbPath))
             {
+                //request sound by nomSing
                 string query = $"SELECT Sound FROM [{tableName}] WHERE NomSing = ?";
+
                 var result = connection.ExecuteScalar<string>(query, nomSingValue);
                 return result;
             }

@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Linq;
-using UnityEngine;
-using UnityEngine.Localization.Settings;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 //language switcher for multiple dropdowns
+
+
+//important - its columns names from DB
+public enum Languages
+{
+    RU,
+    EN
+}
 
 public class LanguageSwitcher : MonoBehaviour
 {
@@ -105,6 +114,39 @@ public class LanguageSwitcher : MonoBehaviour
         foreach (var dropdown in dropdowns)
         {
             dropdown.onValueChanged.RemoveListener(OnLanguageChanged);
+        }
+    }
+
+    public Locale GetLocale()
+    {
+        if(gameData == null)
+            gameData = GameObject.FindWithTag("GameData")?.GetComponent<GameData>();
+
+        string savedLang = gameData.saveData.lang.ToLower();
+
+        Locale locale = LocalizationSettings.AvailableLocales.Locales
+            .FirstOrDefault(l => l.Identifier.Code == savedLang);
+
+        if (locale != null)
+            LocalizationSettings.SelectedLocale = locale;
+
+        return locale;
+    }
+
+    public static Languages GetLanguageFromLocale(Locale locale)
+    {
+        if (locale == null)
+            return Languages.EN; // default fallback
+
+        string code = locale.Identifier.Code.ToLower(); // usually "ru", "en", etc.
+
+        switch (code)
+        {
+            case "ru": return Languages.RU;
+            case "en": return Languages.EN;
+            default:
+                Debug.LogWarning($"Unknown locale code '{code}', defaulting to EN");
+                return Languages.EN;
         }
     }
 }

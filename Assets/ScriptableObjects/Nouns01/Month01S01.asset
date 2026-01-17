@@ -41,8 +41,16 @@ MonoBehaviour:
       \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438."
     whereColumn: ID
     whereValue: 
-  questions: []
-  questionsT2:
+  questions:
   - {fileID: 11400000, guid: e86338708a6819047acef44f5aef7f63, type: 2}
   - {fileID: 11400000, guid: a8ce4a05c41476c4fb6d9d7cb783600c, type: 2}
   - {fileID: 11400000, guid: 832f016435fa58941b0cbb80fe9817ee, type: 2}
+  - {fileID: 11400000, guid: 16bc60a047e17fb41b50a7a199ee94b7, type: 2}
+  - {fileID: 11400000, guid: 86532bd32eb3988418f4ca8a4bceef5c, type: 2}
+  - {fileID: 11400000, guid: 9eaf7558251b44d4788a432dc783d334, type: 2}
+  - {fileID: 11400000, guid: e19fa304f62c11a4fb7be0ed100baf3d, type: 2}
+  - {fileID: 11400000, guid: 1980d6b7a149bef41b4ffc43f1e30dee, type: 2}
+  - {fileID: 11400000, guid: 9e7c90ef068ab984f87191f1413f36d2, type: 2}
+  - {fileID: 11400000, guid: 872b98b4b987c2a4f9e44d0790cc8a69, type: 2}
+  - {fileID: 11400000, guid: 6b6500f02bdd30a458d3be761122fab5, type: 2}
+  - {fileID: 11400000, guid: e9d543de6401ad4408a2c0d550f5f59e, type: 2}
