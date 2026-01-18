@@ -33,7 +33,13 @@ MonoBehaviour:
   answerReferences: []
   answerSecondWord: []
   soundReferences: []
-  questionImageFile: []
+  questionImageFile:
+  - tableName: Human
+    columnName: Image
+    recordID: 2
+    value: girl01.png
+    whereColumn: ID
+    whereValue: 
   imagesCount: -1
   questionImageColor: {r: 1, g: 0.5411765, b: 0.7647059, a: 1}
   correctAnswerNumber: -1

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
-  m_Name: NumTask02Q9
+  m_Name: NumTask01Q9
   m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
   isAutomated: 1
   questionCategory:
@@ -36,19 +36,19 @@ MonoBehaviour:
   questionImageFile:
   - tableName: Human
     columnName: Image
-    recordID: 2
-    value: girl01.png
+    recordID: 1
+    value: boy01.png
     whereColumn: ID
     whereValue: 
   imagesCount: -1
-  questionImageColor: {r: 1, g: 0.5411765, b: 0.7647059, a: 1}
+  questionImageColor: {r: 0.09803922, g: 0.5411765, b: 0.98039216, a: 1}
   correctAnswerNumber: -1
   rewardAmount: 1
   answerColumn:
   - recordID: 0
     tableName: NumTask01
-    columnName: NumeralF
+    columnName: Numeral
   - recordID: 0
     tableName: NumTask01
-    columnName: Word02
+    columnName: Word01
   questionDescription: 

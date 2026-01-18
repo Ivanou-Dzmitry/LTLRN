@@ -15,18 +15,18 @@ MonoBehaviour:
   sectionType: 0
   difficultyType: 1
   sectionNumber: 1
-  sectionIcon: {fileID: 21300000, guid: 6b57f1ca382a15744b25d56a49f03ad8, type: 3}
-  sectionHeaderColor: {r: 0.47352985, g: 0.7924528, b: 0.0024918227, a: 1}
+  sectionIcon: {fileID: 21300000, guid: 39e7a009e8adc424dad637bcb30e0277, type: 3}
+  sectionHeaderColor: {r: 0.098039225, g: 0.5411765, b: 0.9803922, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u0418\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u044F \u0438
-      \u0442\u0435\u043A\u0441\u0442"
-    en: Images and text
+    ru: "\u0421\u0447\u0438\u0442\u0430\u0435\u043C \u043C\u0430\u043B\u044C\u0447\u0438\u043A\u043E\u0432"
+    en: Counting boys
   sectionDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0446\u0438\u0444\u0440\u044B.
-      \u0421\u043E\u043E\u0442\u043D\u043E\u0441\u0438\u043C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435
-      \u0438 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u0438\u0439 \u0442\u0435\u043A\u0441\u0442."
-    en: Study numbers. Matching the image and the Lithuanian text.
+    ru: "\u0418\u0437\u0443\u0447\u0435\u043D\u0438\u0435 \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0445
+      \u0447\u0435\u0440\u0435\u0437 \u0441\u043E\u043F\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435
+      \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0439 \u0438 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u0433\u043E
+      \u0442\u0435\u043A\u0441\u0442\u0430"
+    en: Learning numerals through comparison of images and Lithuanian text.
   sectionInfo:
     tableName: Rules01
     columnName: RU
@@ -54,3 +54,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 876745576e098c9498d5960c73572a19, type: 2}
   - {fileID: 11400000, guid: 617d68971fde4f147b5192f51a2fd21e, type: 2}
   - {fileID: 11400000, guid: d24fa3ce898dd1b45a4558c36d68eea2, type: 2}
+  - {fileID: 11400000, guid: 267561e4fd095fc419a2e5e8be3395ae, type: 2}
+  - {fileID: 11400000, guid: 33d47f717b7992e42945ca1af29d6a64, type: 2}
+  - {fileID: 11400000, guid: 1d305f7c0a83299478215bedc5ca6a0d, type: 2}
+  - {fileID: 11400000, guid: df12c3ec20d39dc4c84c0fa8765869da, type: 2}
+  - {fileID: 11400000, guid: 5fe176beff4b401429f36e5366340a7a, type: 2}
+  - {fileID: 11400000, guid: 4739c1f613c6a154dbba7f278d38332d, type: 2}
+  - {fileID: 11400000, guid: f73168f6e92adae41b063c50151e8976, type: 2}
+  - {fileID: 11400000, guid: 143ea831056e53c4e80d4c2ebf84054f, type: 2}
+  - {fileID: 11400000, guid: ea7b40f298d67874698476c97369d35b, type: 2}
+  - {fileID: 11400000, guid: 95865a10c2242a8448beaa7b35212c5e, type: 2}

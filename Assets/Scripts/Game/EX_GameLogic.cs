@@ -443,20 +443,28 @@ public class ExGameLogic : MonoBehaviour
 
         if (isAuto)
         {
-
             
-            //auto data
+            //auto data - get image based on selected question
             string imageFileName = DBUtils.Instance.GetImage(tableName, data.questionText, columnName);
 
-            
-
+            //Debug.Log($"imageFileName: {imageFileName}");
+           
             if (!string.IsNullOrEmpty(imageFileName))
             {
                 data.questionImageFile = new[] { imageFileName }; // Length = 1                
             }
             else
             {
-                data.questionImageFile = Array.Empty<string>();   // Length = 0
+                //try get image for complex questions with many pictures
+                try
+                {
+                    data.questionImageFile = new[] { DBUtils.Instance.ResolveReference(question.questionImageFile[0]) };                    
+                }
+                catch (Exception ex)
+                {
+                    //Debug.LogException(ex);
+                    data.questionImageFile = Array.Empty<string>();   // Length = 0
+                }                
             }
         }
         else
@@ -481,7 +489,11 @@ public class ExGameLogic : MonoBehaviour
         else
             data.imagesCount = DBUtils.Instance.GetImagesCount(tableName, data.questionText, columnName);
 
-        
+        if (data.imagesCount > 10)
+        {
+            //
+        }
+
 
         //cat for sound and img
         data.questionCategory = DBUtils.Instance.ResolveReference(question.questionCategory);
@@ -567,18 +579,36 @@ public class ExGameLogic : MonoBehaviour
             //load data to prefab
             qData = questionInstance.GetComponent<ExQManager01>();
 
-            Debug.Log($"Loading Type 2 question...IMG: {data.questionImageFile[0]}, CAT:{data.questionCategory}, IMGCOUNT: {question.imagesCount}");
+            //Debug.Log($"Loading Type 2 question...IMG: {data.questionImageFile.Length}, CAT:{data.questionCategory}, IMGCOUNT: {question.imagesCount}");
+
+            int imagesCount = data.imagesCount;
+            QImage01 qImage = qData.imagePrefab.GetComponent<QImage01>();
+
+            //after 10 show 1 image
+            if (imagesCount > 10)
+            {
+                imagesCount = 1;                
+                string countText = $"x{data.imagesCount}";
+                qImage.ShowImagesCountText(countText);
+            }
+            else
+            {
+                qImage.ShowImagesCountText("");
+            }
+
 
             if (qData != null)
             {
                 //load image
-                if (data.questionCategory != null)
+                if (data.questionCategory != null && data.questionImageFile.Length > 0)
                 {
                     qData.qImagePanel.gameObject.SetActive(true);
 
                     if (isAuto)
                     {
-                        for (int i = 0; i < data.imagesCount; i++)
+
+
+                        for (int i = 0; i < imagesCount; i++)
                         {
                             GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
                             newImg.name = "QImage_" + i;

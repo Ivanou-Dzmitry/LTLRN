@@ -2202,11 +2202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44661466966396951, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: selectedButtonColor
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2439130107727448447, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 4306113321295872
+      value: 11861729099177984
       objectReference: {fileID: 0}
     - target: {fileID: 2439130107727448447, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
@@ -2337,7 +2337,7 @@ PrefabInstance:
     - target: {fileID: 7052922696757609624, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: abd17e281b2c6d04f9f55f42cf6f8797, type: 3}
+      objectReference: {fileID: 21300000, guid: 7b85ca2118f2eba4f89148c268295a17, type: 3}
     - target: {fileID: 7944452123671262299, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
