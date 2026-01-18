@@ -9,6 +9,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
+using static QuestionBase;
 using static QuestionT01;
 
 
@@ -29,6 +30,7 @@ public class ExGameLogic : MonoBehaviour
         public string[] answerSecondWord;
         public string[] qSoundClipName;        
         public string[] questionImageFile;
+        public int imagesCount;
         public int correctAnswerNumber;
         public string questionCategory;
     }
@@ -264,13 +266,15 @@ public class ExGameLogic : MonoBehaviour
         //get auto flag
         bool isAuto = question.isAutomated;
 
+        
+
         //load q text from db
-        if(questionLang == "LT")
+        if (questionLang == QuestionLang.LT.ToString() || questionLang == QuestionLang.IMG.ToString())
             data.questionText = DBUtils.Instance.ResolveReference(question.questionReference);
         else
             data.questionText = DBUtils.Instance.ResolveLangReference(question.questionReference, sysLang); ;
 
-            //table name for automation
+        //table name for automation
         string tableName = string.Empty;
         string columnName = string.Empty;
         int qID = -1;
@@ -298,6 +302,8 @@ public class ExGameLogic : MonoBehaviour
             secondColumnName = answerColumns[1];
 
         Debug.Log($"FC: {firstColumnName}, SC: {secondColumnName}, Count: {wordCount}, Lang: {sysLang}, Qlang:{questionLang}");
+
+        /*  FIRST START */
 
         // get answer count
         int firstAnswerWordsCount = 0;
@@ -334,8 +340,9 @@ public class ExGameLogic : MonoBehaviour
                     qp.Value.TableName,
                     dynamicColumnName,
                     qp.Value.RecordID,
-                    questionLang,
-                    sysLang
+                    questionLang,                    
+                    sysLang,
+                    true
                 );
 
             //set correct answer
@@ -347,8 +354,13 @@ public class ExGameLogic : MonoBehaviour
             data.correctAnswerNumber = (int)question.correctAnswerNumber;
         }
 
-            //load second word
-            int secondAnswerWordsCount = 0;        
+        /*  FIRST END */
+
+
+        /*  SECOND START */
+
+        //load second word
+        int secondAnswerWordsCount = 0;        
 
         //optional 2nd word answers
         if (question.answerSecondWord != null) 
@@ -372,14 +384,12 @@ public class ExGameLogic : MonoBehaviour
                 data.answerSecondWord.Length == 0 ||
                     string.IsNullOrWhiteSpace(data.answerSecondWord[0])))
         {
-            data.answerSecondWord = DBUtils.Instance.AutoResolveReference(
-                qp.Value.TableName,
-                secondColumnName,
-                qp.Value.RecordID,
-                questionLang,
-                sysLang
-            );
+            //get second based on first word
+            data.answerSecondWord = DBUtils.Instance.GetSecondWord(tableName, data.answerFirstWord, firstColumnName, secondColumnName);
+            //Debug.Log($"Auto loaded second word: {data.answerSecondWord[0]}, {data.answerSecondWord[1]}, {data.answerSecondWord[2]}, {data.answerSecondWord[3]}");
         }
+
+        /*  SECOND END */
 
         // Load sound clips
         int soundCount = 0;
@@ -390,8 +400,8 @@ public class ExGameLogic : MonoBehaviour
 
             //try to get sound
             try
-            {
-                soundFileName = DBUtils.Instance.GetSound(tableName, data.questionText);
+            {                
+                soundFileName = DBUtils.Instance.GetSound(tableName, data.questionText, columnName);
             }
             catch(Exception e)
             {
@@ -433,12 +443,16 @@ public class ExGameLogic : MonoBehaviour
 
         if (isAuto)
         {
+
+            
             //auto data
-            string imageFileName = DBUtils.Instance.GetImage(tableName, data.questionText);
+            string imageFileName = DBUtils.Instance.GetImage(tableName, data.questionText, columnName);
+
+            
 
             if (!string.IsNullOrEmpty(imageFileName))
             {
-                data.questionImageFile = new[] { imageFileName }; // Length = 1
+                data.questionImageFile = new[] { imageFileName }; // Length = 1                
             }
             else
             {
@@ -461,7 +475,13 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
+        //get count of images
+        if (question.imagesCount > 0)
+            data.imagesCount = question.imagesCount;
+        else
+            data.imagesCount = DBUtils.Instance.GetImagesCount(tableName, data.questionText, columnName);
 
+        
 
         //cat for sound and img
         data.questionCategory = DBUtils.Instance.ResolveReference(question.questionCategory);
@@ -547,6 +567,8 @@ public class ExGameLogic : MonoBehaviour
             //load data to prefab
             qData = questionInstance.GetComponent<ExQManager01>();
 
+            Debug.Log($"Loading Type 2 question...IMG: {data.questionImageFile[0]}, CAT:{data.questionCategory}, IMGCOUNT: {question.imagesCount}");
+
             if (qData != null)
             {
                 //load image
@@ -556,7 +578,7 @@ public class ExGameLogic : MonoBehaviour
 
                     if (isAuto)
                     {
-                        for (int i = 0; i < question.imagesCount; i++)
+                        for (int i = 0; i < data.imagesCount; i++)
                         {
                             GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
                             newImg.name = "QImage_" + i;
@@ -709,7 +731,7 @@ public class ExGameLogic : MonoBehaviour
             if (qCounter < currentSection.questions.Length - 1)
             {
                 nextButton.interactable = true;
-                nextBtn.PlayAnimation(true, "Scale");
+                nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
                 nextBtn.RefreshState();
             }
             else
@@ -775,6 +797,8 @@ public class ExGameLogic : MonoBehaviour
     private IEnumerator ResultProcessingDelayed(float delay)
     {
         //open wait panel
+        yield return new WaitForSeconds(delay/2);
+
         PanelManager.Open("waiting");
         nextButton.gameObject.SetActive(false);
 

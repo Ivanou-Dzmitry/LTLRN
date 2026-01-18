@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 600}
+  m_SizeDelta: {x: 1000, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4703274516587551582
 CanvasRenderer:
@@ -5016,7 +5016,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 1355}
+  m_SizeDelta: {x: 1080, y: 1450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5264446830160896571
 CanvasRenderer:
@@ -5125,6 +5125,7 @@ MonoBehaviour:
     buttonImage: {fileID: 0}
     answerText: 
   soundPlayButton: {fileID: 4059383017460104230}
+  soundBtn: {fileID: 0}
   answerPanel: {fileID: 5135833805653868611}
   debugText: {fileID: 0}
 --- !u!1 &5135833805653868611
@@ -5343,7 +5344,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 952, y: 512}
+  m_SizeDelta: {x: 952, y: 624}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &74183819267602175
 CanvasRenderer:
@@ -5420,7 +5421,7 @@ GameObject:
   - component: {fileID: 6224700800636824355}
   - component: {fileID: 3679597558585767435}
   - component: {fileID: 3595374086142178690}
-  - component: {fileID: 3894574073058596555}
+  - component: {fileID: 7582086317364273881}
   m_Layer: 5
   m_Name: ImagePanel
   m_TagString: Untagged
@@ -5445,7 +5446,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 952, y: 320}
+  m_SizeDelta: {x: 952, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3679597558585767435
 CanvasRenderer:
@@ -5485,7 +5486,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3894574073058596555
+--- !u!114 &7582086317364273881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5494,23 +5495,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 8162409124931459226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
   m_Padding:
     m_Left: 0
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1001 &1091231970844956526
 PrefabInstance:
   m_ObjectHideFlags: 0

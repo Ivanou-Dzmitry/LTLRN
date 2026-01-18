@@ -54,6 +54,13 @@ public class DBUtils : MonoBehaviour
         Sound02
     }
 
+    private enum ImageColumn
+    {
+        Image,
+        Image01,
+        Image02
+    }
+
     //for words
     private enum WordColumn
     {
@@ -897,6 +904,7 @@ public class DBUtils : MonoBehaviour
         int recordID,
         string qLang,
         string sysLang,
+        bool firstWord,
         int totalCount = 4
         )
     {
@@ -948,12 +956,13 @@ public class DBUtils : MonoBehaviour
                 //random answers
                 ShuffleList(results);
 
-                correctAnswerIndex = -1;
-
-                // find correct index AFTER shuffle
-                correctAnswerIndex = results.IndexOf(correct);
-
-                Debug.Log($"correctIndex = {correctAnswerIndex}");
+                // find correct index AFTER shuffle only for first word, because second connected to first
+                if (firstWord)
+                {
+                    correctAnswerIndex = -1;
+                    correctAnswerIndex = results.IndexOf(correct);
+                    Debug.Log($"correctIndex = {correctAnswerIndex}");
+                }                                   
 
                 return results.ToArray();
             }
@@ -1043,7 +1052,8 @@ public class DBUtils : MonoBehaviour
         spriteCache.Add(folder, dict);
     }
 
-    public string GetSound(string tableName, string nomSingValue)
+    //get sound based on column name
+    public string GetSound(string tableName, string nomSingValue, string columnName = null)
     {
         if (!isInitialized)
         {
@@ -1051,29 +1061,40 @@ public class DBUtils : MonoBehaviour
             return null;
         }
 
+        //return if no value
         if (string.IsNullOrEmpty(nomSingValue))
             return null;
 
-        try
-        {
-            using (var connection = new SQLiteConnection(dbPath))
-            {
-                //request sound by nomSing
-                string query = $"SELECT Sound FROM [{tableName}] WHERE NomSing = ?";
+        //for custom columns
+        string customColumnName = string.Empty;
 
-                var result = connection.ExecuteScalar<string>(query, nomSingValue);
-                return result;
+        //custom or default
+        if (columnName != null && columnName != WordColumn.NomSing.ToString())
+            customColumnName = columnName;
+        else
+            customColumnName = WordColumn.NomSing.ToString();
+
+        try
+            {
+                using (var connection = new SQLiteConnection(dbPath))
+                {
+                    //request sound by nomSing
+                    string query = $"SELECT {SoundColumn.Sound} FROM [{tableName}] WHERE {customColumnName} = ?";
+
+                    var result = connection.ExecuteScalar<string>(query, nomSingValue);
+                    return result;
+                }
             }
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"Error getting sound: {ex.Message}");
-            return null;
-        }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Error getting sound: {ex.Message}");
+                return null;
+            }
     }
 
+
     // Get Image by NomSing value
-    public string GetImage(string tableName, string nomSingValue)
+    public string GetImage(string tableName, string nomSingValue, string columnName = null)
     {
         if (!isInitialized)
         {
@@ -1084,11 +1105,21 @@ public class DBUtils : MonoBehaviour
         if (string.IsNullOrEmpty(nomSingValue))
             return null;
 
+
+        //for custom columns
+        string customColumnName = string.Empty;
+
+        //custom or default
+        if (columnName != null && columnName != WordColumn.NomSing.ToString())
+            customColumnName = columnName;
+        else
+            customColumnName = WordColumn.NomSing.ToString();
+
         try
         {
             using (var connection = new SQLiteConnection(dbPath))
             {
-                string query = $"SELECT Image FROM [{tableName}] WHERE NomSing = ?";
+                string query = $"SELECT {ImageColumn.Image} FROM [{tableName}] WHERE {customColumnName} = ?";
                 var result = connection.ExecuteScalar<string>(query, nomSingValue);
                 return result;
             }
@@ -1099,6 +1130,106 @@ public class DBUtils : MonoBehaviour
             return null;
         }
     }
+
+    public int GetImagesCount(string tableName, string value, string columnName = null)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return -1;
+        }
+
+        if (string.IsNullOrEmpty(value))
+            return -1;
+
+
+        //for custom columns
+        string customColumnName = string.Empty;
+
+        //custom or default
+        if (columnName != null && columnName != WordColumn.NomSing.ToString())
+            customColumnName = columnName;
+        else
+            customColumnName = WordColumn.NomSing.ToString();
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string query = $"SELECT Number FROM [{tableName}] WHERE {customColumnName} = ?";
+                var result = connection.ExecuteScalar<int>(query, value);
+                return result;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting image: {ex.Message}");
+            return -1;
+        }
+    }
+
+    public string[] GetSecondWord(
+        string tableName,
+        string[] firstWords,
+        string firstColumnName,
+        string secondColumnName
+    )
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return Array.Empty<string>();
+        }
+
+        if (firstWords == null || firstWords.Length == 0)
+            return Array.Empty<string>();
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string placeholders = string.Join(
+                    ",",
+                    Enumerable.Repeat("?", firstWords.Length)
+                );
+
+                string query = $@"
+                SELECT [{firstColumnName}] AS FirstValue,
+                       [{secondColumnName}] AS SecondValue
+                FROM [{tableName}]
+                WHERE [{firstColumnName}] IN ({placeholders})
+            ";
+
+                var rows = connection.Query<RowPair>(query, firstWords);
+
+                // map first to second
+                var map = rows.ToDictionary(r => r.FirstValue, r => r.SecondValue);
+
+                // preserve order
+                string[] result = new string[firstWords.Length];
+                for (int i = 0; i < firstWords.Length; i++)
+                {
+                    map.TryGetValue(firstWords[i], out result[i]);
+                }
+
+                return result;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"GetSecondWord failed: {ex.Message}");
+            return Array.Empty<string>();
+        }
+    }
+
+
+    private class RowPair
+    {
+        public string FirstValue { get; set; }
+        public string SecondValue { get; set; }
+    }
+
+
 
     public bool IsReady => isInitialized && isDataInitialized;
 }

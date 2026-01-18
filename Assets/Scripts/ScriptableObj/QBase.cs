@@ -28,12 +28,19 @@ public abstract class QuestionBase : ScriptableObject
     [Header("Category")]
     public DatabaseReference questionCategory;
 
+
+    /*sys - its system languages (RU, EN),
+     * lt - lithuanian, 
+     * img - image based question, 
+     * num - numeral based question, 
+     * sound - sound based question*/
     public enum QuestionLang
     {
         SYS,
         LT,
         IMG,
-        NUM
+        NUM,
+        SOUND
     }
 
     [Header("lang")]
@@ -77,7 +84,7 @@ public abstract class QuestionBase : ScriptableObject
     public DatabaseReference[] questionImageFile;
 
     [Header("Image: Count")]
-    public int imagesCount = 1;
+    public int imagesCount = -1;
 
     [Header("Image: Color")]
     public Color questionImageColor = Color.white;

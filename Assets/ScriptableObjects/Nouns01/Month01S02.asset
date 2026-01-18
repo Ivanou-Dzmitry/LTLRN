@@ -19,12 +19,12 @@ MonoBehaviour:
   sectionHeaderColor: {r: 0.09166953, g: 0.3709701, b: 0.64779866, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u041C\u0435\u0441\u044F\u0446\u044B. \u041D\u0430\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
-    en: Months. Writing
+    ru: "\u041C\u0435\u0441\u044F\u0446\u044B"
+    en: Months
   sectionDescription:
     ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
-      \u043C\u0435\u0441\u044F\u0446\u0435\u0432."
-    en: Repeat the names of the months.
+      \u043C\u0435\u0441\u044F\u0446\u0435\u0432. \u0422\u0435\u043A\u0441\u0442."
+    en: Repeat the names of the months. Text.
   sectionInfo:
     tableName: Rules01
     columnName: RU

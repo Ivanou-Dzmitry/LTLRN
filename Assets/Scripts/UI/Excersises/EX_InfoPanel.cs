@@ -10,6 +10,7 @@ public class EX_InfoPanel : Panel
     [Header("UI")]
     public TMP_Text excersiseInfo;
     public Button okButton;
+    private ButtonImage okBtn;
 
     public override void Initialize()
     {
@@ -19,6 +20,8 @@ public class EX_InfoPanel : Panel
         }
 
         okButton.onClick.AddListener(OnOKClicked);
+
+        okBtn = okButton.GetComponent<ButtonImage>();
 
         base.Initialize();
     }
@@ -33,6 +36,9 @@ public class EX_InfoPanel : Panel
             LoadInfoData();
 
         base.Open();
+
+        okBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
+        okBtn.RefreshState();
     }
 
     private void LoadInfoData()
