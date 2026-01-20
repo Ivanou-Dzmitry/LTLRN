@@ -483,17 +483,13 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-        //get count of images
+        
+
+        //get count of images - question with images Type2
         if (question.imagesCount > 0)
             data.imagesCount = question.imagesCount;
-        else
+        else if(question.questionType == QuestionType.Type2)
             data.imagesCount = DBUtils.Instance.GetImagesCount(tableName, data.questionText, columnName);
-
-        if (data.imagesCount > 10)
-        {
-            //
-        }
-
 
         //cat for sound and img
         data.questionCategory = DBUtils.Instance.ResolveReference(question.questionCategory);
