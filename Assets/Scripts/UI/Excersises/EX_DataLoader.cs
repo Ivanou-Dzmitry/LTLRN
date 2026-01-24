@@ -38,15 +38,18 @@ public class ExDataLoader : MonoBehaviour
 
     [Header("UI Prefabs")]
     public GameObject sectionPanelPrefab;
-    public GameObject questionBtnPrefab;
+    //public GameObject questionBtnPrefab;
 
+    [Header("Bundel UI Prefab")]
+    public GameObject bundlePanelPrefab;
+
+    [Header("Content Area")]
     public RectTransform sectionsRectTransform;
 
     private void Start()
     {
         StartCoroutine(WaitAndLoadData());
     }
-
     private IEnumerator WaitAndLoadData()
     {
         // Find DBUtils (with safety check)
@@ -74,7 +77,7 @@ public class ExDataLoader : MonoBehaviour
 
         //Debug.Log("Database is ready! Loading data...");
 
-        // Now load your data
+        // Now load your data IMPORTANT
         LoadData();
     }
 
@@ -134,6 +137,12 @@ public class ExDataLoader : MonoBehaviour
             if (section.questions.Length > 0 && section.questions != null)
             {
                 LoadSections(section, i); //section type1
+            }
+            
+            //load bundle sections            
+            if (section.isBundle && section.bundleSections.Length > 0 && section.bundleSections != null)
+            {
+                LoadBundle(section, i);
             }
         }
     }
@@ -195,8 +204,59 @@ public class ExDataLoader : MonoBehaviour
         sectionPanel.currentSection = section;
         sectionPanel.sectionIndex = i;
 
-        sectionPanel.PlayButtonToggle(questionsCount);
+        //sectionPanel.PlayButtonToggle(questionsCount);
     }
+
+    private void LoadBundle(Section section, int i)
+    {
+        GameObject panel = Instantiate(bundlePanelPrefab, sectionsRectTransform);
+        RectTransform rt = panel.GetComponent<RectTransform>();
+        rt.localScale = Vector3.one;
+        rt.localPosition = Vector3.zero;
+
+        //setname
+        string sectionName = section.name;
+        panel.name = sectionName;
+
+        //get controller
+        SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
+        sectionPanel.Initialize(section);
+
+        //set bundel flag
+        sectionPanel.isBundleSection = true;
+
+        //get icon
+        if (section.sectionIcon != null)
+            sectionPanel.sectionImage.sprite = section.sectionIcon;
+
+        int bundleLenght = section.bundleSections.Length;
+
+        //BACKLOGIC: get total questions in bundle
+        for (int j = 0; j < bundleLenght; j++)
+        {
+            //get/set progress
+            int progress = dbUtils.GetSectionProgress(section.bundleSections[j].name);
+            sectionPanel.progressSlider.value = progress;
+
+            //get-set time
+            float time = dbUtils.GetSectionTime(section.bundleSections[j].name);
+            sectionPanel.sectionTimeText.text = FormatTime(time);
+
+            //transfer bundle sections
+            sectionPanel.bundleSections = section.bundleSections;
+        }
+
+        sectionPanel.currentSection = section;
+
+        /*        int result = dbUtils.GetSectionResult(section.name);
+                string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
+                string resultText = $"{result} {fromTxt} {questionsCount}";
+                sectionPanel.sectionResultText.text = resultText;*/
+
+        // Implement bundle loading logic here
+        //Debug.Log("Loading bundled sections...");
+    }
+
 
     // Helper method to get question count
     private int GetQuestionCount(Section section)

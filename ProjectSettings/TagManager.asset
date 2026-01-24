@@ -14,6 +14,7 @@ TagManager:
   - SectionPanel
   - ScoreManager
   - LangSwitcher
+  - BundlePanel
   layers:
   - Default
   - TransparentFX

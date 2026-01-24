@@ -7,9 +7,19 @@ public class Section : ScriptableObject
 {
     public enum SectionType
     {
-        Type1,
-        Type2,
-        Type3
+        Text,
+        Image,
+        Sound,
+        Input,
+        Exam
+    }
+
+    //sys - system language, target - target learning language
+    public enum SectionLanguage
+    {
+        NONE,
+        SYS,
+        TARGET
     }
 
     public enum DifficultyType
@@ -27,7 +37,10 @@ public class Section : ScriptableObject
     //type2 - without next button. Result at the end.
 
     [Header("Type")]
-    public SectionType sectionType = SectionType.Type1;
+    public SectionType sectionType = SectionType.Text;
+
+    [Header("Language")]
+    public SectionLanguage sectionLanguage = SectionLanguage.NONE;
 
     [Header("Difficulty")]
     public DifficultyType difficultyType = DifficultyType.A1;
@@ -57,33 +70,12 @@ public class Section : ScriptableObject
     [Header("Info text")]
     public DatabaseReference sectionInfo;
 
+    [Header("Bundle")]
+    public bool isBundle;
+
+    public Section[] bundleSections;
+
     [Header("Type01 and Type02")]
     public QuestionBase[] questions;
 
-    /*    public string GetSectionDifValue(DifficultyType difficulty)
-        {
-            switch (difficulty)
-            {
-                case DifficultyType.A1:
-                    return "1";
-
-                case DifficultyType.A2:
-                    return "1";
-
-                case DifficultyType.B1:
-                    return "1";
-
-                case DifficultyType.B2:
-                    return "1";
-
-                case DifficultyType.C1:
-                    return "1";
-
-                case DifficultyType.C2:
-                    return "1";
-
-                default:
-                    return "1";
-            }
-        }*/
 }

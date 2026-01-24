@@ -12,6 +12,8 @@ public class SaveData
     public int selectedThemeIndex;
     public int selectedSectionIndex;
 
+    public Section sectionToLoad;
+
     [Header("Player")]
     public string playerName;
     public string playerPass;

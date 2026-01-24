@@ -12,6 +12,8 @@ public class SectionPanel : MonoBehaviour
     private GameData gameData;
     private DBUtils dbUtils;
 
+    private EX_BundleMenu bundlePanel;
+
     [Header("UI")]    
     public Image sectionImage;
     public TMP_Text sectionHeaderText;
@@ -34,14 +36,18 @@ public class SectionPanel : MonoBehaviour
     public Button playSectionButton;
 
     [Header("Section")]
-    public Section currentSection;
+    public Section currentSection; //important
     public int sectionIndex;
 
     public RectTransform questionsRectTransform;
 
     [Header("Palette")]
-    [SerializeField] private UIColorPalette palette;    
-    
+    [SerializeField] private UIColorPalette palette;
+
+    [Header("Bundle")]
+    public bool isBundleSection = false;
+    public Section[] bundleSections; 
+
 
     private void Awake()
     {
@@ -55,32 +61,52 @@ public class SectionPanel : MonoBehaviour
 
         //add listeners
         likeButton.onClick.AddListener(OnLike);
-        playSectionButton.onClick.AddListener(OnClicked);
+
+        if (playSectionButton != null)
+            playSectionButton.onClick.AddListener(OnClicked);
 
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
     }
 
     private void OnClicked()
     {
-        //get data loader and game data
-        dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
-        //gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-
-        //set current section
-        if (dataLoader != null)
+        if (isBundleSection)
         {
-            dataLoader.sectionClass = currentSection;
-        }
+            //Debug.Log("Loading bundle section: ");
 
-        //save section
-        if (gameData != null)
+            PanelManager.Open("bundlemenu");
+
+            //get bundle panel
+            bundlePanel = GameObject.FindWithTag("BundlePanel").GetComponent<EX_BundleMenu>();
+
+            //load sections into bundle panel
+            if (bundlePanel != null)
+            {
+                bundlePanel.SectionLoader(bundleSections, sectionHeaderText.text);
+            }
+        }
+        else
         {
-            gameData.saveData.selectedSectionIndex = sectionIndex;
-            gameData.SaveToFile();
-        }
+            //get data loader and game data
+            dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
 
-        //load game
-        PanelManager.OpenScene("ExGame");
+            //set current section
+            if (dataLoader != null)
+            {
+                dataLoader.sectionClass = currentSection;
+            }
+
+            //save section
+            if (gameData != null)
+            {
+                gameData.saveData.selectedSectionIndex = sectionIndex;
+                gameData.saveData.sectionToLoad = currentSection;
+                gameData.SaveToFile();
+            }
+
+            //load game
+            PanelManager.OpenScene("ExGame");
+        }
     }
 
     private void OnLike()
@@ -129,7 +155,7 @@ public class SectionPanel : MonoBehaviour
         headerImage.color = section.sectionHeaderColor;
     }
 
-    public void PlayButtonToggle(int questions)
+/*    public void PlayButtonToggle(int questions)
     {
         //toggle play button interactable state based on questions count
        // ButtonImage buttonImage = playSectionButton.GetComponent<ButtonImage>();
@@ -144,7 +170,7 @@ public class SectionPanel : MonoBehaviour
             playSectionButton.interactable = false;
             //buttonImage.SetDisabled(true);
         }
-    }
+    }*/
 
     private void OnDestroy()
     {
@@ -208,7 +234,5 @@ public class SectionPanel : MonoBehaviour
 
         return locale;
     }
-
-
 
 }

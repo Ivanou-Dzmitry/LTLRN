@@ -22,5 +22,4 @@ MonoBehaviour:
     ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u043F\u0440\u0438\u043B\u0430\u0433\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0435. "
     en: We study adjectives.
   sections:
-  - {fileID: 11400000, guid: 8b1d7210594db924e9ae972dd7685f0d, type: 2}
-  - {fileID: 11400000, guid: aae0509f55ea6b54fb8ac3fe3f189353, type: 2}
+  - {fileID: 11400000, guid: 8b36c274555a19149ad774f4b278b8a0, type: 2}

@@ -159,10 +159,23 @@ public class ExGameLogic : MonoBehaviour
 
             //load selected section
             if (sectionManager != null)
-                currentSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
-            
+            {
+                try
+                {
+                    currentSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
+                }
+                catch
+                {
+                    Debug.LogError("Selected section index is out of range. Resetting to first section.");
+                    currentSection = sectionManager.sections[0];
+                }
+            }
+
             // Create runtime copy of questions
-            tempQuestions = new List<QuestionBase>(currentSection.questions);
+            if (currentSection.questions.Length > 0)                       
+                tempQuestions = new List<QuestionBase>(currentSection.questions);
+            else
+                tempQuestions = new List<QuestionBase>(gameData.saveData.sectionToLoad.questions);
 
             //shuffle
             ShuffleQuestions(tempQuestions);
@@ -735,7 +748,7 @@ public class ExGameLogic : MonoBehaviour
         QuestionBase question = currentQuestion;
 
         //check selected Type 1
-        if (currentSection.sectionType == Section.SectionType.Type1)
+        if (currentSection.sectionType == Section.SectionType.Text)
         {
             //compare indexes
             if (selectedIndex == correctIndex)
@@ -790,8 +803,8 @@ public class ExGameLogic : MonoBehaviour
         //get question
         QuestionBase question = currentQuestion;
 
-        //check selected Type 1
-        if (currentSection.sectionType == Section.SectionType.Type1)
+        //check selected Type Input
+        if (currentSection.sectionType == Section.SectionType.Input)
         {
             if (input == correctAnswerText)
             {
@@ -945,9 +958,13 @@ public class ExGameLogic : MonoBehaviour
 
         int currentProgress = (int)progressBar.value;
 
-        int savedProgress = dbUtils.GetSectionProgress(currentSection.name);
+        int savedProgress = 0;
 
-        if(currentProgress > savedProgress)
+        //avoid empty section and bundles
+        if (currentSection != null && !currentSection.isBundle)
+            savedProgress = dbUtils.GetSectionProgress(currentSection.name);
+
+        if(currentProgress > savedProgress && currentSection != null)
             dbUtils.SetSectionProgress(currentSection.name, currentProgress);
     }
 
