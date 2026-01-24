@@ -162,12 +162,20 @@ public class ExGameLogic : MonoBehaviour
             {
                 try
                 {
-                    currentSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
+                    Section tempSection = null;
+
+                    tempSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
+
+                    //avoid bundle
+                    if(tempSection.isBundle)
+                        tempSection = gameData.saveData.sectionToLoad;
+
+                    currentSection = tempSection;
                 }
                 catch
                 {
                     Debug.LogError("Selected section index is out of range. Resetting to first section.");
-                    currentSection = sectionManager.sections[0];
+                    currentSection = gameData.saveData.sectionToLoad;
                 }
             }
 

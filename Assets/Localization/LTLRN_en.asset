@@ -278,7 +278,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14127444141436928
-    m_Localized: Select the type of questions
+    m_Localized: Select the type of question
     m_Metadata:
       m_Items: []
   references:
