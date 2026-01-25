@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
   m_Name: Color03
   m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 0
   sectionType: 2
   sectionLanguage: 0
   difficultyType: 0
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: d6bd577c83e72c245ac1bd353701a9d5, type: 3}
-  sectionHeaderColor: {r: 1, g: 0.4790849, b: 0, a: 1}
+  sectionHeaderColor: {r: 0.24705882, g: 0.4627451, b: 0.5411765, a: 1}
   isLiked: 0
   sectionTitle:
     ru: "\u0426\u0432\u0435\u0442\u0430"
@@ -45,18 +46,17 @@ MonoBehaviour:
       \u043F\u0430\u0434\u0435\u0436\u0435."
     whereColumn: ID
     whereValue: 
-  isBundle: 0
   bundleSections: []
   questions:
-  - {fileID: 11400000, guid: e017dd0b9401c30489961d5a7d6a64d3, type: 2}
-  - {fileID: 11400000, guid: b7e56e49aa2f0f148a8f100fb81d7171, type: 2}
-  - {fileID: 11400000, guid: 02eb0ded1031f8341af903285cc08f1f, type: 2}
-  - {fileID: 11400000, guid: fa7f9071122c7714e800b7b6e11dc8e6, type: 2}
-  - {fileID: 11400000, guid: 068efd36f795f9a4d924702ac3137088, type: 2}
-  - {fileID: 11400000, guid: 635d4a150c36e0d4c8479383f59a7c88, type: 2}
-  - {fileID: 11400000, guid: c5fa08511b4deae4b8bde642ebf9f96a, type: 2}
-  - {fileID: 11400000, guid: 04373e3e049db4f4ca548c67be3f48e5, type: 2}
-  - {fileID: 11400000, guid: cd9d6c0dce6594c45b2ef1453e88c653, type: 2}
-  - {fileID: 11400000, guid: 53ca349b6d236e64a9cdfcd55365c9cb, type: 2}
-  - {fileID: 11400000, guid: 61d468f05a8c432459d9eb264e69c615, type: 2}
-  - {fileID: 11400000, guid: 25d73f53c10081243bc3053a2f17b8ac, type: 2}
+  - {fileID: 11400000, guid: adc673805b510e44eba60d1befc90a28, type: 2}
+  - {fileID: 11400000, guid: c5df5927e418e94459733314dbf5454d, type: 2}
+  - {fileID: 11400000, guid: 144547ca07f495a4b8ab87448572c1a9, type: 2}
+  - {fileID: 11400000, guid: 5c8ffb70335fbd44c86b2d0aa8fd6f47, type: 2}
+  - {fileID: 11400000, guid: 8be0fc9695f731647a56300600252e7f, type: 2}
+  - {fileID: 11400000, guid: 8b7881673d635f74cac84468f605759d, type: 2}
+  - {fileID: 11400000, guid: 1ae6178a3a13d484fb23462620469b12, type: 2}
+  - {fileID: 11400000, guid: 1a46fdd576314914d9a87bea47648a9a, type: 2}
+  - {fileID: 11400000, guid: e3a4e2d7269dddb49a756ea92c1aafbb, type: 2}
+  - {fileID: 11400000, guid: ab98177fe6164ec4995d903c86eb490a, type: 2}
+  - {fileID: 11400000, guid: a2bcdc87a3f23614eaa4fd39e050fa7c, type: 2}
+  - {fileID: 11400000, guid: 49fa1a9bf26b51144852075b822d5a3a, type: 2}

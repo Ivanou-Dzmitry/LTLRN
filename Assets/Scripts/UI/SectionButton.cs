@@ -45,4 +45,9 @@ public class SectionButton : MonoBehaviour
         PanelManager.OpenScene("ExGame");
     }
 
+    private void OnDestroy()
+    {
+        button.onClick.RemoveListener(OnClicked);
+    }
+
 }

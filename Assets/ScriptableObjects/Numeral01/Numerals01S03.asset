@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
   m_Name: Numerals01S03
   m_EditorClassIdentifier: Assembly-CSharp::Section
-  sectionType: 0
+  isBundle: 0
+  sectionType: 3
+  sectionLanguage: 0
   difficultyType: 1
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: cd9ffa10a7109b04bb2b04dc43cb606d, type: 3}
@@ -33,6 +35,7 @@ MonoBehaviour:
       \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C."
     whereColumn: ID
     whereValue: 
+  bundleSections: []
   questions:
   - {fileID: 11400000, guid: 0361b347e8cd57c4195e213f3dba460d, type: 2}
   - {fileID: 11400000, guid: ad748173934e3bb4591eae9ab079f554, type: 2}

@@ -4,6 +4,7 @@ using static ExGameLogic;
 [CreateAssetMenu(fileName = "QuestionT01", menuName = "Scriptable Objects/QuestionT01")]
 public class QuestionT01 : QuestionBase
 {
+    //get question text from text or database
     public override void ApplyQuestionText(QuestionData data, TMPro.TMP_Text targetText)
     {
         if (isQuestionTextOnly)
@@ -16,6 +17,7 @@ public class QuestionT01 : QuestionBase
         }
     }
 
+    //get answers from text or database
     public override void ApplyAnswers(QuestionData data, ExQManager01 qData)
     {
         if (isAnswerTextOnly)

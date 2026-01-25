@@ -71,6 +71,7 @@ public class EX_BundleMenu : Panel
         bundleSections = section;
         headerText.text = bundleName;
 
+        //button instances
         foreach (Section sec in bundleSections)
         {
             GameObject sectionBtnObj = Instantiate(sectionButonPrefab, sectionsRectTransform);
@@ -78,6 +79,10 @@ public class EX_BundleMenu : Panel
 
             SectionButton sectionButton = sectionBtnObj.GetComponent<SectionButton>();
             sectionButton.sectionName = sec;
+
+            //set colors
+            Image backColor = sectionBtnObj.GetComponent<Image>();
+            backColor.color = sec.sectionHeaderColor;
 
             ApplySectionType(sec, sectionButton);
         }        

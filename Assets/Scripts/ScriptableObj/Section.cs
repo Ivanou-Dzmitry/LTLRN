@@ -5,6 +5,8 @@ using static QuestionT02;
 [CreateAssetMenu(fileName = "Section", menuName = "Scriptable Objects/Section")]
 public class Section : ScriptableObject
 {
+    [Header("Bundle")]
+    public bool isBundle;
     public enum SectionType
     {
         Text,
@@ -70,8 +72,7 @@ public class Section : ScriptableObject
     [Header("Info text")]
     public DatabaseReference sectionInfo;
 
-    [Header("Bundle")]
-    public bool isBundle;
+
 
     public Section[] bundleSections;
 

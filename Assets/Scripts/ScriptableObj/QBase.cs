@@ -61,14 +61,15 @@ public abstract class QuestionBase : ScriptableObject
 
     public enum QuestionType
     {
-        Type1,
-        Type2, //image
-        Type3
+        Text,
+        Image, //image
+        Input,
+        Sound
     }
 
     [Header("Type")]
     [Tooltip("Type1 - question is text, Type2 - question is image, Type3 - with input field.")]
-    public QuestionType questionType = QuestionType.Type1;
+    public QuestionType questionType = QuestionType.Text;
 
     [Header("Question")]
     public DatabaseReference questionReference;

@@ -195,8 +195,7 @@ public class ButtonImage : MonoBehaviour
             else
             {
                 btnAnimator.enabled = false;
-            }
-                
+            }                
         }
     }
 }

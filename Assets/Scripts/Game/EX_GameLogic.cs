@@ -10,7 +10,6 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using static QuestionBase;
-using static QuestionT01;
 
 
 public enum GameState
@@ -76,6 +75,7 @@ public class ExGameLogic : MonoBehaviour
     //public Button checkButton;
     public Button nextButton;
     public Button interruptGameButton;
+    public Button finishButton;
 
     [Header("Answer")]
     public int currentAnswerIndex = -1;
@@ -95,7 +95,9 @@ public class ExGameLogic : MonoBehaviour
     private float sessionStartTime;
     public float sessionDuration;
 
-    private const float CHECK_DELAY = 3f;
+    //finish stuff
+    private const float CHECK_DELAY = 10f;
+    private Coroutine resultRoutine;
     private const int QUESTIONS_COUNT = 4;
 
     //question data handler
@@ -107,6 +109,7 @@ public class ExGameLogic : MonoBehaviour
 
         //buttons
         nextButton.gameObject.SetActive(true);
+        finishButton.gameObject.SetActive(false);
 
         //checkBtn = checkButton.GetComponent<ButtonImage>();
         nextBtn = nextButton.GetComponent<ButtonImage>();
@@ -285,9 +288,7 @@ public class ExGameLogic : MonoBehaviour
         QuestionData data = new QuestionData();
 
         //get auto flag
-        bool isAuto = question.isAutomated;
-
-        
+        bool isAuto = question.isAutomated;        
 
         //load q text from db
         if (questionLang == QuestionLang.LT.ToString() || questionLang == QuestionLang.IMG.ToString())
@@ -505,11 +506,10 @@ public class ExGameLogic : MonoBehaviour
         }
 
         
-
         //get count of images - question with images Type2
         if (question.imagesCount > 0)
             data.imagesCount = question.imagesCount;
-        else if(question.questionType == QuestionType.Type2)
+        else if(question.questionType == QuestionType.Image)
             data.imagesCount = DBUtils.Instance.GetImagesCount(tableName, data.questionText, columnName);
 
         //cat for sound and img
@@ -550,10 +550,8 @@ public class ExGameLogic : MonoBehaviour
         }
 
         //step 3 - question type 1 loader
-
-
         // Text only question
-        if (question.questionType == QuestionBase.QuestionType.Type1)
+        if (question.questionType == QuestionType.Text)
         {
             //routine to load UI Prefab    
             QuestionUILoad(question, 0);
@@ -571,24 +569,13 @@ public class ExGameLogic : MonoBehaviour
                 //set answers
                 currentQuestion.ApplyAnswers(data, qData);
 
-                /*                if (question.isAnswerTextOnly)
-                                {
-                                    //text from database 1 and 2 word
-                                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
-                                }
-                                else
-                                {
-                                    //text from database
-                                    qData.SetAnswers(data.answerVariantsText);
-                                }*/
-
                 //load sound. Avoid load name - but clip is not ready. In db just name.
                 qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
             }
         }
 
         //IMAGE question
-        if (question.questionType == QuestionBase.QuestionType.Type2)
+        if (question.questionType == QuestionType.Image)
         {
             //routine to load UI    
             QuestionUILoad(question, 1);
@@ -623,24 +610,14 @@ public class ExGameLogic : MonoBehaviour
 
                     if (isAuto)
                     {
-
-
-                        for (int i = 0; i < imagesCount; i++)
-                        {
-                            GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
-                            newImg.name = "QImage_" + i;
-                            Image img = newImg.GetComponent<Image>();
-                            img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[0]);
-                            img.SetNativeSize();
-                            img.color = question.questionImageColor;
-                            float randomZ = UnityEngine.Random.Range(-5f, 5f);
-                            img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
-                        }
+                        LoadImages(imagesCount, question, data);
                     }
                     else
                     {
                         //load images
-                        for (int i = 0; i < data.questionImageFile.Length; i++)
+                        LoadImages(data.questionImageFile.Length, question, data);
+
+/*                        for (int i = 0; i < data.questionImageFile.Length; i++)
                         {
                             GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
                             newImg.name = "QImage_" + i;
@@ -650,7 +627,7 @@ public class ExGameLogic : MonoBehaviour
                             img.color = question.questionImageColor;
                             float randomZ = UnityEngine.Random.Range(-5f, 5f);
                             img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
-                        }
+                        }*/
                     }
 
                     //load sound. Avoid load name - but clip is not ready. In db just name.                    
@@ -659,22 +636,11 @@ public class ExGameLogic : MonoBehaviour
 
                 //set answers
                 currentQuestion.ApplyAnswers(data, qData);
-
-                /*                if (question.isAnswerTextOnly)
-                                {
-                                    //text from question object
-                                    qData.SetAnswers(question.answerVariantsText);
-                                }
-                                else
-                                {
-                                    //text from database 1 and 2 word
-                                    qData.SetAnswers(data.answerVariantsText, data.answerSecondWord);
-                                }*/
             }
         }
 
-        //input
-        if (question.questionType == QuestionBase.QuestionType.Type3)
+        //INPUT question
+        if (question.questionType == QuestionType.Input)
         {
             //type3
             QuestionUILoad(question, 2);
@@ -690,25 +656,48 @@ public class ExGameLogic : MonoBehaviour
                 //load question text
                 currentQuestion.ApplyQuestionText(data, qData.qestionText);
 
+                //build inputs
                 if(qData.qestionText.text != null)
                     BuildQuestionWithInputs(qData.qestionText.text, qData.questionContainer);
-
-
-                /*                if (question.isQuestionTextOnly)
-                                {
-                                    //text from question object
-                                    //
-                                    //qData.qestionText.text = question.questionText;
-
-                                    BuildQuestionWithInputs(question.questionText, qData.questionContainer);
-                                }
-                                else
-                                {
-                                    //text from database
-                                    qData.qestionText.text = data.questionText;
-                                }*/
             }
         }
+        //INPUT question END
+
+        // SOUND only question
+        if (question.questionType == QuestionType.Sound)
+        {
+            //routine to load UI Prefab    
+            QuestionUILoad(question, 3);
+
+            //load data to prefab
+            qData = questionInstance.GetComponent<ExQManager01>();
+
+            if (qData != null)
+            {
+                ButtonImage soundButton = qData.soundPlayButton.GetComponent<ButtonImage>();
+                soundButton.SetDisabled(false);
+                soundButton.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
+                soundButton.RefreshState();
+
+                //set question text
+                try
+                {
+                    currentQuestion.ApplyQuestionText(data, qData.qestionText);
+                }
+                catch(Exception e)
+                {
+                    Debug.LogError("Error setting question text: " + e.Message);
+                }
+
+                //set answers
+                currentQuestion.ApplyAnswers(data, qData);
+
+                //load sound. Avoid load name - but clip is not ready. In db just name.
+                qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
+            }
+        }
+
+
     }
 
     void BuildQuestionWithInputs(string source, RectTransform container)
@@ -755,26 +744,21 @@ public class ExGameLogic : MonoBehaviour
         //get question
         QuestionBase question = currentQuestion;
 
-        //check selected Type 1
-        if (currentSection.sectionType == Section.SectionType.Text)
+        //check selected Text, Sound IMPORTANT
+        if (currentSection.sectionType == Section.SectionType.Text || currentSection.sectionType == Section.SectionType.Sound || currentSection.sectionType == Section.SectionType.Image)
         {
             //compare indexes
             if (selectedIndex == correctIndex)
             {
                 qData.CheckAnswer(selectedIndex, correctIndex);
-
-                // Add score, show success animation, etc.
                 tempScore = tempScore + currentQuestion.rewardAmount;
-
-                //Debug.Log("Correct answer! Score: " + tempScore);
             }
             else
             {
-                //Debug.Log("Wrong answer!");
                 qData.CheckAnswer(selectedIndex, correctIndex);
-                // Deduct lives, show error animation, etc.
             }
 
+            //next question or finish
             if (qCounter < currentSection.questions.Length - 1)
             {
                 nextButton.interactable = true;
@@ -784,7 +768,7 @@ public class ExGameLogic : MonoBehaviour
             else
             {
                 gameState = GameState.Finish;
-                StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
+                resultRoutine = StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
             }
         }
     }
@@ -835,7 +819,7 @@ public class ExGameLogic : MonoBehaviour
             else
             {
                 gameState = GameState.Finish;
-                StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
+                resultRoutine = StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
             }
         }
     }
@@ -844,12 +828,32 @@ public class ExGameLogic : MonoBehaviour
     private IEnumerator ResultProcessingDelayed(float delay)
     {
         //open wait panel
-        yield return new WaitForSeconds(delay/2);
+        //yield return new WaitForSeconds(delay/2);
 
-        PanelManager.Open("waiting");
+        //PanelManager.Open("waiting");
         nextButton.gameObject.SetActive(false);
 
+        //open progress
+        finishButton.gameObject.SetActive(true);
+        EX_ProgressButton progressButton = finishButton.GetComponent<EX_ProgressButton>();
+        
+        // Subscribe
+        progressButton.OnProgressClicked += ResultProcessingImmediate;
+
+        progressButton.StartProgress(delay);
+
         yield return new WaitForSeconds(delay);
+        ResultProcessing();
+    }
+
+    private void ResultProcessingImmediate()
+    {
+        if (resultRoutine != null)
+        {
+            StopCoroutine(resultRoutine);
+            resultRoutine = null;
+        }
+
         ResultProcessing();
     }
 
@@ -1096,6 +1100,21 @@ public class ExGameLogic : MonoBehaviour
         }
 
         return audio;
+    }
+
+    private void LoadImages(int imagesCount, QuestionBase question, QuestionData data)
+    {        
+        for (int i = 0; i < imagesCount; i++)
+        {
+            GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
+            newImg.name = "QImage_" + i;
+            Image img = newImg.GetComponent<Image>();
+            img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[0]);
+            img.SetNativeSize();
+            img.color = question.questionImageColor;
+            float randomZ = UnityEngine.Random.Range(-5f, 5f);
+            img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
+        }
     }
 
 }

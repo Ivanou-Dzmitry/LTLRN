@@ -93,7 +93,8 @@ public class ExQManager01 : MonoBehaviour
         if (soundPlayButton != null)
             soundPlayButton.onClick.AddListener(playSoundClicked);
 
-        soundBtn = soundPlayButton.GetComponent<ButtonImage>();
+        if(soundPlayButton != null)
+            soundBtn = soundPlayButton.GetComponent<ButtonImage>();
 
         //for submit text input TYPE 3
         if (inputSubmitButton != null)
