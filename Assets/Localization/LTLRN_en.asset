@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4306818278940672
     m_Localized: You want to exit to the menu. The crystals you collected will be
-      lost, and you will lose one life.
+      lost.
     m_Metadata:
       m_Items: []
   - m_Id: 4609390978166784

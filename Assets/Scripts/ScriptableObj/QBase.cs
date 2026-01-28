@@ -64,7 +64,8 @@ public abstract class QuestionBase : ScriptableObject
         Text,
         Image, //image
         Input,
-        Sound
+        Sound,
+        Learn
     }
 
     [Header("Type")]

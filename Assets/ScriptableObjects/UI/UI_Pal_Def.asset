@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30f1fc429648a1418a3518bc12cebd0, type: 3}
   m_Name: UI_Pal_Def
   m_EditorClassIdentifier: Assembly-CSharp::UIColorPalette
-  Primary: {r: 0.17254902, g: 0.3254902, b: 0.38039216, a: 1}
+  Primary: {r: 0.10588236, g: 0.3529412, b: 0.6392157, a: 1}
   Secondary: {r: 1, g: 1, b: 1, a: 1}
   Accent: {r: 0.007843138, g: 0.10980392, b: 0.14509805, a: 1}
   Background: {r: 0, g: 0, b: 0, a: 0}

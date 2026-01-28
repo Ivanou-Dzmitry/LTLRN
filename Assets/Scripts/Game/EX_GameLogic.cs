@@ -51,6 +51,8 @@ public class ExGameLogic : MonoBehaviour
 
     [Header("Game Info")]
     public Slider progressBar;
+    public TMP_Text progressText;
+    private int questionsCount = 0;
     private Coroutine progressRoutine;
 
     [Header("Data")]
@@ -86,6 +88,10 @@ public class ExGameLogic : MonoBehaviour
     [Header("Score")]
     public int tempScore = 0;
 
+
+    [Header("UI")]
+    public GameObject panelUI;
+
     [Header("Log")]
     public TMP_Text log;
 
@@ -105,7 +111,7 @@ public class ExGameLogic : MonoBehaviour
 
     private void Awake()
     {
-        PanelManager.Open("exgamemain");
+        PanelManager.Open("waiting");
 
         //buttons
         nextButton.gameObject.SetActive(true);
@@ -140,7 +146,7 @@ public class ExGameLogic : MonoBehaviour
         while (!dbUtils.IsReady)
         {
             yield return null;
-        }
+        }                
 
         // IMPORTANT
         LoadGameData();
@@ -219,9 +225,15 @@ public class ExGameLogic : MonoBehaviour
         if (currentQuestion != null)
             QLoad(currentQuestion);
 
+        //get questions count
+        questionsCount = currentSection.questions.Length;
+
         //set progress bar
-        progressBar.maxValue = currentSection.questions.Length;
+        progressBar.maxValue = questionsCount;
         progressBar.value = 1;
+
+        //set text
+        progressText.text = $"0/{questionsCount}";
 
         //disable check button
         if(nextButton != null)
@@ -238,6 +250,19 @@ public class ExGameLogic : MonoBehaviour
         gameState = GameState.Play;
 
         tempScore = 0;
+
+        //show panel
+        PanelManager.CloseAll();
+        PanelManager.Open("exgamemain");
+
+        Ex_GamePanel gamePanel= panelUI.gameObject.GetComponent<Ex_GamePanel>();
+
+        //get current language
+        Languages currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
+
+        Debug.Log(currentLang.ToString());
+
+        gamePanel.SetUIData(currentLang.ToString());
     }
 
 
@@ -842,6 +867,9 @@ public class ExGameLogic : MonoBehaviour
 
         progressButton.StartProgress(delay);
 
+        //set text        
+        progressText.text = $"{questionsCount}/{questionsCount}";
+
         yield return new WaitForSeconds(delay);
         ResultProcessing();
     }
@@ -887,6 +915,9 @@ public class ExGameLogic : MonoBehaviour
             //set progress
             int targetValue = qCounter + 1;
             AnimateProgress(progressBar.value, targetValue, 1f);
+
+            //set text
+            progressText.text = $"{qCounter}/{currentSection.questions.Length}";
 
             //get question
             currentQuestion = tempQuestions[qCounter];

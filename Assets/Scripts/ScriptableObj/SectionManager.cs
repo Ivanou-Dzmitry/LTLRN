@@ -22,6 +22,7 @@ public class SectionManager : ScriptableObject
 
 
     [Header("Additional data")]
+    public string themeNameTargetLang;
     public LocalizedText themeName;    
     public LocalizedText themeDescription;
 
