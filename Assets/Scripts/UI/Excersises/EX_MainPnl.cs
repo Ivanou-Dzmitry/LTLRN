@@ -21,8 +21,8 @@ public class EX_MainPanel : Panel
     public Button starsBtn;
 
     [Header("Theme")]
-    public Button themeButton; //run theme selector
-    private ButtonImage themeButtonData;
+    //public Button themeButton; //run theme selector
+    //private ButtonImage themeButtonData;    
 
     [Header("Like filter")]
     [SerializeField] private Button likeFilterButton;
@@ -43,10 +43,10 @@ public class EX_MainPanel : Panel
     public RectTransform scrollPanel;
 
     // for ui layout
-    private const float panel01Height = 96f;
-    private const float panel03Height = 192f;
+    private const float PANEL01_HEIGHT = 160f;
+    private const float panel03Height = 152f;
 
-    private const float HEADER_HEIGHT = 152f;
+    private const float HEADER_HEIGHT = 96f;
 
     public override void Initialize()
     {
@@ -117,7 +117,7 @@ public class EX_MainPanel : Panel
         Rect safeArea = Screen.safeArea;
 
         // Set main panel bottom padding to safe area
-        base.SetBottom(safeArea.yMin/2);
+        //base.SetBottom(safeArea.yMin/2);
 
         // Get canvas scale factor
         float scaleFactor = canvasRoot.scaleFactor;
@@ -126,11 +126,11 @@ public class EX_MainPanel : Panel
         float safeAreaHeight = safeArea.height / scaleFactor;
 
         // Calculate panel_02 height
-        float panel02Height = safeAreaHeight - panel01Height - panel03Height;
+        float panel02Height = safeAreaHeight - PANEL01_HEIGHT - panel03Height;
         panel02Height = Mathf.Max(panel02Height, 0f);
 
         // Set heights
-        panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel01Height);
+        panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL01_HEIGHT);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
         panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel03Height);
 
@@ -152,10 +152,10 @@ public class EX_MainPanel : Panel
 
         // Toggle filter state
         filterLikedOnly = !filterLikedOnly;
-        Debug.Log("Like filter toggled. Now: " + (filterLikedOnly ? "ON" : "OFF"));
+        //Debug.Log("Like filter toggled. Now: " + (filterLikedOnly ? "ON" : "OFF"));
 
         // Update button visual state
-        likeFBtn.SetSelected(filterLikedOnly);
+        //likeFBtn.SetSelected(filterLikedOnly);
 
         // Update visibility of section panels
         foreach (Transform child in contentPanel)

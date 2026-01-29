@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
-using static System.Collections.Specialized.BitVector32;
 
 public class ExDataLoader : MonoBehaviour
 {
@@ -22,6 +22,7 @@ public class ExDataLoader : MonoBehaviour
     public Themes themes;
 
     public Button themeButton;
+    [SerializeField] private TMP_Text themeNameTargetLangTxt;
 
     //public SectionManager[] themes;
 
@@ -97,7 +98,6 @@ public class ExDataLoader : MonoBehaviour
             totalQuestions = sectionManager.GetTotalQuestionCount();
             totalSections = sectionManager.sections.Length;
             
-
             //get data
             ButtonImage themeBtn = themeButton.GetComponent<ButtonImage>();
             Locale locale = null;
@@ -112,6 +112,9 @@ public class ExDataLoader : MonoBehaviour
                 themeBtn.buttonTextStr = sectionManager.GetThemeName(sectionManager, locale);
                 themeBtn.RefreshState();
             }
+
+            //set name on target lang
+            themeNameTargetLangTxt.text = sectionManager.themeNameTargetLang;
 
             //Open theme button menu icon
             //themeBtn.buttonIcon.sprite = sectionManager.themeIcon;

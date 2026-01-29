@@ -3425,7 +3425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3283295442374873662, guid: defa4b5822cfc734bae974e6af44b90e, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 270
       objectReference: {fileID: 0}
     - target: {fileID: 3283295442374873662, guid: defa4b5822cfc734bae974e6af44b90e, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4709,6 +4709,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 931788431}
     m_Modifications:
+    - target: {fileID: 1388339389390198419, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 15653396872851456
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388339389390198419, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:a86b47b9336c0714aaab30bf085e0617
+      objectReference: {fileID: 0}
     - target: {fileID: 2128513864167417080, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_Name
       value: DescText
