@@ -1,9 +1,10 @@
 using LTLRN.UI;
 using System.Collections;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using System.Linq;
 
 //panel with theme choosed
 
@@ -12,16 +13,11 @@ public class EX_ThemesPanel : Panel
     private GameData gameData;
     private DBUtils dbUtils;
 
+    public TMP_Text userName;
+    
     private ExDataLoader dataLoader;
     public GameObject themeButtonPrefab;
     public RectTransform themesContainer;
-
-    public override void Open()
-    {
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-
-        base.Open();
-    }
 
     private void Start()
     {
@@ -67,6 +63,13 @@ public class EX_ThemesPanel : Panel
     //load panels with themes IMPORTANT
     public void LoadThemes()
     {
+        //load player name
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        //final string
+        if (gameData != null)
+            userName.text = $", {gameData.saveData.playerName}!";        
+
         // Clear old panels (important when reloading)
         foreach (Transform child in themesContainer)
         {
@@ -134,8 +137,6 @@ public class EX_ThemesPanel : Panel
             gameData.SaveToFile();
         }
     }
-
-
 
     private Locale GetLocale()
     {

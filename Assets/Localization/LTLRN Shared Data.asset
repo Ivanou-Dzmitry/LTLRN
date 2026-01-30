@@ -345,6 +345,12 @@ MonoBehaviour:
     m_Key: TestingLevelTxt
     m_Metadata:
       m_Items: []
+  - m_Id: 16287825827885056
+    m_Key: 'GreetingsTxt
+
+'
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

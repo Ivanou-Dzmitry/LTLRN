@@ -43,9 +43,9 @@ public class EX_MainPanel : Panel
     public RectTransform scrollPanel;
 
     // for ui layout
-    private const float PANEL01_HEIGHT = 160f;
-    private const float panel03Height = 152f;
-
+    private const float PANEL01_HEIGHT = 230f;
+    private const float PANEL03_HEIGHT = 152f;
+    private const float SPACING = 24;
     private const float HEADER_HEIGHT = 96f;
 
     public override void Initialize()
@@ -126,16 +126,18 @@ public class EX_MainPanel : Panel
         float safeAreaHeight = safeArea.height / scaleFactor;
 
         // Calculate panel_02 height
-        float panel02Height = safeAreaHeight - PANEL01_HEIGHT - panel03Height;
+        float panel02Height = safeAreaHeight - PANEL01_HEIGHT - PANEL03_HEIGHT;
         panel02Height = Mathf.Max(panel02Height, 0f);
+
+        Debug.Log($"{safeAreaHeight}, {PANEL01_HEIGHT}, {panel02Height}, {PANEL03_HEIGHT}");
 
         // Set heights
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL01_HEIGHT);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
-        panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel03Height);
+        panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL03_HEIGHT);
 
         // Set scroll panel height
-        float scrollPanelHeight = panel02Height - HEADER_HEIGHT;
+        float scrollPanelHeight = panel02Height - HEADER_HEIGHT - SPACING;
         scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, scrollPanelHeight);
     }
 

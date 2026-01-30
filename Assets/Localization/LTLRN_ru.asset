@@ -324,6 +324,10 @@ MonoBehaviour:
       \u043D\u0430 \u0443\u0440\u043E\u0432\u0435\u043D\u044C:"
     m_Metadata:
       m_Items: []
+  - m_Id: 16287825827885056
+    m_Localized: Labukas
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
