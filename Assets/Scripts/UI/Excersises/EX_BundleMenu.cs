@@ -100,6 +100,10 @@ public class EX_BundleMenu : Panel
                 SetupImageSection(sec, button);
                 break;
 
+            case Section.SectionType.LearnType01:
+                SetupLearnSection(sec, button);
+                break;
+
             case Section.SectionType.Sound:
                 SetupSoundSection(sec, button);
                 break;
@@ -131,24 +135,42 @@ public class EX_BundleMenu : Panel
         }
 
         button.sectionIcon.gameObject.SetActive(false);
+
+        button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
     private void SetupImageSection(Section sec, SectionButton button)
     {
-        button.sectionIcon.sprite = sec.sectionIcon;
+        button.sectionIcon.sprite = sectionTypeIcons[1]; //image icon
+        button.sectionIcon.gameObject.SetActive(true); //show icon
         button.sectionText.gameObject.SetActive(false);
+
+        button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
     private void SetupSoundSection(Section sec, SectionButton button)
     {
         button.sectionText.gameObject.SetActive(false);
-        button.sectionIcon.gameObject.SetActive(true);
+        button.sectionIcon.gameObject.SetActive(true); //show icon
         button.sectionIcon.sprite = sectionTypeIcons[0]; //hear icon
+
+        button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
     private void SetupInputSection(Section sec, SectionButton button)
     {
         ///
+
+        button.sectionDifficulty.text = sec.difficultyType.ToString();
+    }
+
+    private void SetupLearnSection(Section sec, SectionButton button)
+    {
+        button.sectionIcon.sprite = sectionTypeIcons[3]; //image icon
+        button.sectionIcon.gameObject.SetActive(true); //show icon
+        button.sectionText.gameObject.SetActive(false);
+
+        button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
     private void SetupExamSection(Section sec, SectionButton button)
@@ -156,6 +178,8 @@ public class EX_BundleMenu : Panel
         button.sectionText.gameObject.SetActive(false);
         button.sectionIcon.gameObject.SetActive(true);
         button.sectionIcon.sprite = sectionTypeIcons[2]; //exam icon
+
+        button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
     private Locale GetLocale()

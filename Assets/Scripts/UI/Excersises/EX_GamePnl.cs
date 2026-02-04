@@ -110,7 +110,7 @@ public class Ex_GamePanel : Panel
         float panel02Height = safeAreaHeight - PANEL_01_HEIGHT - PANEL_03_HEIGHT;
         panel02Height = Mathf.Max(panel02Height, 0f);
 
-        Debug.Log($"{safeAreaHeight}/ {panel02Height}");
+        //Debug.Log($"{safeAreaHeight}/ {panel02Height}");
 
         // Set heights
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_01_HEIGHT);

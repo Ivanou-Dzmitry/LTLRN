@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
+  m_Name: NumBundle01
+  m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 1
+  sectionType: 5
+  sectionLanguage: 3
+  difficultyType: 7
+  sectionNumber: 0
+  sectionIcon: {fileID: 21300000, guid: d6bd577c83e72c245ac1bd353701a9d5, type: 3}
+  sectionHeaderColor: {r: 0.6792453, g: 0, b: 0.5142625, a: 1}
+  isLiked: 0
+  sectionTitle:
+    ru: "\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435"
+    en: Numerals
+  sectionDescription:
+    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C  \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
+      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435"
+    en: Study and repeat numerals
+  sectionInfo:
+    tableName: Short_vowels
+    columnName: ID
+    recordID: 0
+    value: 
+    whereColumn: ID
+    whereValue: 
+  bundleSections:
+  - {fileID: 11400000, guid: 4e55c46576db8c8449d47ce25ddfe2bb, type: 2}
+  - {fileID: 11400000, guid: aa5a675aac82ad14ca40620c12515158, type: 2}
+  - {fileID: 11400000, guid: 78dcb263e4e497b419c996bec8e53cf5, type: 2}
+  - {fileID: 11400000, guid: 930c85486595d8040beb8c445c0e270f, type: 2}
+  - {fileID: 11400000, guid: 4cdf71e0674346f4b8539b198a1ed2b3, type: 2}
+  questions: []

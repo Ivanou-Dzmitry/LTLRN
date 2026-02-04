@@ -64,7 +64,7 @@ public class ExQManager01 : MonoBehaviour
 
     [Header("Answer Buttons")]
     [SerializeField] private AnswerButton[] answerButtons;
-    [SerializeField] public Button soundPlayButton;
+    [SerializeField] public Button soundPlayButton; //important button
     public ButtonImage soundBtn;
     public GameObject answerPanel;
 

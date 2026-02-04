@@ -75,7 +75,7 @@ public class ExGameLogic : MonoBehaviour
 
     [Header("Buttons")]
     //public Button checkButton;
-    public Button nextButton;
+    public Button nextButton; //important button
     public Button interruptGameButton;
     public Button finishButton;
 
@@ -87,7 +87,6 @@ public class ExGameLogic : MonoBehaviour
 
     [Header("Score")]
     public int tempScore = 0;
-
 
     [Header("UI")]
     public GameObject panelUI;
@@ -108,6 +107,8 @@ public class ExGameLogic : MonoBehaviour
 
     //question data handler
     private ExQManager01 qData;
+
+    private bool isLearnSection = false;
 
     private void Awake()
     {
@@ -235,13 +236,16 @@ public class ExGameLogic : MonoBehaviour
         //set text
         progressText.text = $"0/{questionsCount}";
 
-        //disable check button
-        if(nextButton != null)
-        {
-            nextButton.interactable = false;
-            nextBtn.PlayAnimation(false, "Idle");
-            nextBtn.RefreshState();
-        }
+        //get section type: question or learn
+        if (currentSection.sectionType == Section.SectionType.LearnType01)
+            isLearnSection = true;
+
+        Debug.Log($"Section type: {currentSection.sectionType}, isLearnSection: {isLearnSection}");
+
+        if (!isLearnSection)
+            NextButtonRoutine(ButtonImage.ButtonAnimation.Idle.ToString()); //question
+        else
+            NextButtonRoutine(ButtonImage.ButtonAnimation.Scale.ToString()); //learn
 
         //start time
         sessionStartTime = Time.time;
@@ -260,7 +264,7 @@ public class ExGameLogic : MonoBehaviour
         //get current language
         Languages currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
 
-        Debug.Log(currentLang.ToString());
+        //Debug.Log(currentLang.ToString());
 
         gamePanel.SetUIData(currentLang.ToString());
     }
@@ -722,7 +726,42 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
+        // Learn type 01
+        if (question.questionType == QuestionType.Learn)
+        {
+            for(int i = 0; i < tempQuestions.Count; i++)
+            {
+                QuestionUILoad(tempQuestions[i], 4);
 
+                currentQuestion = tempQuestions[i];
+
+                //step 2 - load prepared data with selected language IMPORTANT
+                QuestionData learnData = LoadQuestionData(currentQuestion, currentLang.ToString());
+
+                //load data to prefab
+                qData = questionInstance.GetComponent<ExQManager01>();
+
+                if (qData != null)
+                {
+                    ButtonImage soundButton = qData.soundPlayButton.GetComponent<ButtonImage>();
+                    soundButton.SetDisabled(false);
+                    soundButton.RefreshState();
+
+                    //set question text
+                    try
+                    {
+                        currentQuestion.ApplyQuestionText(learnData, qData.qestionText);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError("Error setting question text: " + e.Message);
+                    }
+
+                    //load sound. Avoid load name - but clip is not ready. In db just name.
+                    qData.qAudioClip = LoadAudioAndSetButton(learnData.questionCategory, learnData.qSoundClipName, qData.soundBtn);
+                }
+            }
+        }
     }
 
     void BuildQuestionWithInputs(string source, RectTransform container)
@@ -769,6 +808,8 @@ public class ExGameLogic : MonoBehaviour
         //get question
         QuestionBase question = currentQuestion;
 
+        Debug.Log(currentSection.sectionType.ToString());
+
         //check selected Text, Sound IMPORTANT
         if (currentSection.sectionType == Section.SectionType.Text || currentSection.sectionType == Section.SectionType.Sound || currentSection.sectionType == Section.SectionType.Image)
         {
@@ -782,6 +823,23 @@ public class ExGameLogic : MonoBehaviour
             {
                 qData.CheckAnswer(selectedIndex, correctIndex);
             }
+
+            //next question or finish
+            if (qCounter < currentSection.questions.Length - 1)
+            {
+                nextButton.interactable = true;
+                nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
+                nextBtn.RefreshState();
+            }
+            else
+            {
+                gameState = GameState.Finish;
+                resultRoutine = StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
+            }
+        }
+        else if (currentSection.sectionType == Section.SectionType.LearnType01 || currentSection.sectionType == Section.SectionType.Exam)
+        {
+            Debug.Log("Checking LearnType01 or Exam question...");
 
             //next question or finish
             if (qCounter < currentSection.questions.Length - 1)
@@ -901,13 +959,15 @@ public class ExGameLogic : MonoBehaviour
         sessionDuration = Time.time - sessionStartTime;        
     }
 
-    private void nextBtnClicked()
+    public void nextBtnClicked()
     {
         //srt game state
         gameState = GameState.Play;
 
         //increase question
         qCounter++;
+
+        Debug.Log($"qCounter = {qCounter}");
 
         //load next question
         if (qCounter < currentSection.questions.Length && qCounter < tempQuestions.Count)
@@ -930,10 +990,57 @@ public class ExGameLogic : MonoBehaviour
             QLoad(question);
 
             //set button state
-            nextButton.interactable = false;
-            nextBtn.PlayAnimation(false, "Idle");
-            nextBtn.RefreshState();
+            if(!isLearnSection)
+                NextButtonRoutine(ButtonImage.ButtonAnimation.Idle.ToString());
+            else
+                NextButtonRoutine(ButtonImage.ButtonAnimation.Scale.ToString());
         }
+    }
+
+    public void SwipeBack()
+    {
+        //srt game state
+        gameState = GameState.Play;
+
+        // decrement and clamp (0-based)
+        qCounter = Mathf.Max(qCounter - 1, 0);
+
+        // bounds check
+        if (!isLearnSection)
+            return;
+
+        if (qCounter >= currentSection.questions.Length)
+            return;
+
+        if (qCounter >= tempQuestions.Count)
+            return;
+
+        //set progress
+        int targetValue = qCounter + 1;
+
+        // clamp
+        targetValue = Mathf.Max(targetValue, 1);
+
+        // animate only if value actually changes
+        if (progressBar.value != targetValue)
+        {
+            AnimateProgress(progressBar.value, targetValue, 1f);
+        }
+
+        //set text
+        progressText.text = $"{qCounter}/{currentSection.questions.Length}";
+
+        //get question
+        currentQuestion = tempQuestions[qCounter];            
+
+        //question load
+        QuestionBase question = currentQuestion;
+
+        QLoad(question);
+
+        //set button state
+        NextButtonRoutine(ButtonImage.ButtonAnimation.Scale.ToString());
+        
     }
 
     void AnimateProgress(float from, float to, float duration)
@@ -1145,6 +1252,25 @@ public class ExGameLogic : MonoBehaviour
             img.color = question.questionImageColor;
             float randomZ = UnityEngine.Random.Range(-5f, 5f);
             img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
+        }
+    }
+
+    private void NextButtonRoutine(string animationName)
+    {
+        //disable check button for question and enable for learn
+        if (nextButton != null & isLearnSection == false)
+        {
+            Debug.Log("HERE1");
+            nextButton.interactable = false;
+            nextBtn.PlayAnimation(false, animationName);
+            nextBtn.RefreshState();
+        }
+        else if (nextButton != null & isLearnSection == true)
+        {            
+            Debug.Log("HERE2");
+            nextButton.interactable = true;
+            nextBtn.PlayAnimation(true, animationName);
+            nextBtn.RefreshState();
         }
     }
 

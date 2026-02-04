@@ -13,7 +13,9 @@ public class Section : ScriptableObject
         Image,
         Sound,
         Input,
-        Exam
+        Exam,
+        Bundle,
+        LearnType01
     }
 
     //sys - system language, target - target learning language
@@ -21,17 +23,20 @@ public class Section : ScriptableObject
     {
         NONE,
         SYS,
-        TARGET
+        TARGET,
+        BUNDLE
     }
 
     public enum DifficultyType
     {
+        A0,
         A1,
         A2,
         B1,
         B2,
         C1,
-        C2
+        C2,
+        Bundle
     }
 
     //Description:

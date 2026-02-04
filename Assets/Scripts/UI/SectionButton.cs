@@ -10,6 +10,7 @@ public class SectionButton : MonoBehaviour
     [Header("UI")]
     public TMP_Text sectionText;
     public Image sectionIcon;
+    public TMP_Text sectionDifficulty;
     public Button button;
 
     [Header("Data")]

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
   m_Name: Color04
   m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 0
   sectionType: 4
-  sectionLanguage: 0
-  difficultyType: 0
+  sectionLanguage: 2
+  difficultyType: 1
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: d6bd577c83e72c245ac1bd353701a9d5, type: 3}
   sectionHeaderColor: {r: 1, g: 0.4790849, b: 0, a: 1}
@@ -45,7 +46,6 @@ MonoBehaviour:
       \u043F\u0430\u0434\u0435\u0436\u0435."
     whereColumn: ID
     whereValue: 
-  isBundle: 0
   bundleSections: []
   questions:
   - {fileID: 11400000, guid: e017dd0b9401c30489961d5a7d6a64d3, type: 2}

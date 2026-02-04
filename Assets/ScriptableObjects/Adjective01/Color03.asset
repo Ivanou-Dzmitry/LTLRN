@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Section
   isBundle: 0
   sectionType: 2
-  sectionLanguage: 0
-  difficultyType: 0
+  sectionLanguage: 2
+  difficultyType: 1
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: d6bd577c83e72c245ac1bd353701a9d5, type: 3}
   sectionHeaderColor: {r: 0.24705882, g: 0.4627451, b: 0.5411765, a: 1}
