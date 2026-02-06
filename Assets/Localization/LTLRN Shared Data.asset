@@ -351,6 +351,16 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 18856296931553280
+    m_Key: 'TakeTestTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18877640507289600
+    m_Key: LangLevel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

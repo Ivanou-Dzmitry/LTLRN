@@ -293,6 +293,14 @@ MonoBehaviour:
     m_Localized: Labukas
     m_Metadata:
       m_Items: []
+  - m_Id: 18856296931553280
+    m_Localized: Take test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18877640507289600
+    m_Localized: 'Language proficiency level:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

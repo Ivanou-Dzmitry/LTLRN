@@ -70,6 +70,12 @@ public class ExQManager01 : MonoBehaviour
 
     private int selectedAnswerIndex = -1;
 
+    //data for laern sections
+    [Header("Learn data")]
+    public Image learnImage;
+    public TMP_Text learnData01;
+    public TMP_Text learnData02;
+
     [Header("Debug")]
     public TMP_Text debugText;
 

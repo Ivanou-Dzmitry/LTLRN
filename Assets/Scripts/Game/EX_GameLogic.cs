@@ -46,12 +46,13 @@ public class ExGameLogic : MonoBehaviour
     private ScoreManager scoreManager;
     private LanguageSwitcher locManager;
 
-    [Header("Game State")]
+    [Header("App State")]
     public GameState gameState;
 
-    [Header("Game Info")]
+    [Header("Data Info")]
     public Slider progressBar;
     public TMP_Text progressText;
+    public TMP_Text skillLevelText; //Language proficiency level, or test difficulty level
     private int questionsCount = 0;
     private Coroutine progressRoutine;
 
@@ -70,7 +71,7 @@ public class ExGameLogic : MonoBehaviour
     private GameObject questionInstance;
 
     [Header("Question Stuff")]
-    public Transform questionArea;
+    public RectTransform questionArea;
     public GameObject[] questionPrefabs;
 
     [Header("Buttons")]
@@ -90,6 +91,7 @@ public class ExGameLogic : MonoBehaviour
 
     [Header("UI")]
     public GameObject panelUI;
+    public GameObject panelScroll;
 
     [Header("Log")]
     public TMP_Text log;
@@ -104,6 +106,7 @@ public class ExGameLogic : MonoBehaviour
     private const float CHECK_DELAY = 10f;
     private Coroutine resultRoutine;
     private const int QUESTIONS_COUNT = 4;
+    private const int LEARN_PANEL_PADDING = 24;
 
     //question data handler
     private ExQManager01 qData;
@@ -147,7 +150,7 @@ public class ExGameLogic : MonoBehaviour
         while (!dbUtils.IsReady)
         {
             yield return null;
-        }                
+        }        
 
         // IMPORTANT
         LoadGameData();
@@ -172,8 +175,10 @@ public class ExGameLogic : MonoBehaviour
             {
                 try
                 {
+                    //temporary section
                     Section tempSection = null;
 
+                    //set temp from selected index
                     tempSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
 
                     //avoid bundle
@@ -189,14 +194,21 @@ public class ExGameLogic : MonoBehaviour
                 }
             }
 
+            //get section type: question or learn
+            if (currentSection.sectionType == Section.SectionType.LearnType01)
+                isLearnSection = true;
+
+            //Debug.Log($"{currentSection.name}");
+
             // Create runtime copy of questions
             if (currentSection.questions.Length > 0)                       
                 tempQuestions = new List<QuestionBase>(currentSection.questions);
             else
                 tempQuestions = new List<QuestionBase>(gameData.saveData.sectionToLoad.questions);
 
-            //shuffle
-            ShuffleQuestions(tempQuestions);
+            //shuffle if not learn section
+            if(!isLearnSection)
+                ShuffleQuestions(tempQuestions);
 
             //load first
             if (tempQuestions != null && tempQuestions.Count > 0)
@@ -217,14 +229,13 @@ public class ExGameLogic : MonoBehaviour
             Debug.LogError("SoundManager not found in scene!");
         }
 
-
         //load section IMPORTANT
         if (currentSection != null)
-            SLoad(currentSection);
+            SectionLoad(currentSection);
 
         //load question IMPORTANT
         if (currentQuestion != null)
-            QLoad(currentQuestion);
+            QuestionDataLoadUI(currentQuestion);
 
         //get questions count
         questionsCount = currentSection.questions.Length;
@@ -236,17 +247,11 @@ public class ExGameLogic : MonoBehaviour
         //set text
         progressText.text = $"0/{questionsCount}";
 
-        //get section type: question or learn
-        if (currentSection.sectionType == Section.SectionType.LearnType01)
-            isLearnSection = true;
+        //Debug.Log($"Section type: {currentSection.sectionType}, isLearnSection: {isLearnSection}");
 
-        Debug.Log($"Section type: {currentSection.sectionType}, isLearnSection: {isLearnSection}");
-
-        if (!isLearnSection)
-            NextButtonRoutine(ButtonImage.ButtonAnimation.Idle.ToString()); //question
-        else
-            NextButtonRoutine(ButtonImage.ButtonAnimation.Scale.ToString()); //learn
-
+        //set UI depends on type - test or learn
+        StartCoroutine(SetupUI());
+                   
         //start time
         sessionStartTime = Time.time;
 
@@ -266,6 +271,7 @@ public class ExGameLogic : MonoBehaviour
 
         //Debug.Log(currentLang.ToString());
 
+        //set UI lang
         gamePanel.SetUIData(currentLang.ToString());
     }
 
@@ -548,7 +554,7 @@ public class ExGameLogic : MonoBehaviour
     }
 
     //load section
-    private void SLoad(Section section)
+    private void SectionLoad(Section section)
     {
         SectionData sectionData = LoadSectionData(section);
 
@@ -562,7 +568,7 @@ public class ExGameLogic : MonoBehaviour
     }
 
     //load question
-    private void QLoad(QuestionBase question)
+    private void QuestionDataLoadUI(QuestionBase question)
     {
         //get current language
         Languages currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
@@ -614,6 +620,7 @@ public class ExGameLogic : MonoBehaviour
 
             //Debug.Log($"Loading Type 2 question...IMG: {data.questionImageFile.Length}, CAT:{data.questionCategory}, IMGCOUNT: {question.imagesCount}");
 
+            //get count of images - question with images
             int imagesCount = data.imagesCount;
             QImage01 qImage = qData.imagePrefab.GetComponent<QImage01>();
 
@@ -747,6 +754,8 @@ public class ExGameLogic : MonoBehaviour
                     soundButton.SetDisabled(false);
                     soundButton.RefreshState();
 
+                    qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);
+
                     //set question text
                     try
                     {
@@ -756,7 +765,7 @@ public class ExGameLogic : MonoBehaviour
                     {
                         Debug.LogError("Error setting question text: " + e.Message);
                     }
-
+                    
                     //load sound. Avoid load name - but clip is not ready. In db just name.
                     qData.qAudioClip = LoadAudioAndSetButton(learnData.questionCategory, learnData.qSoundClipName, qData.soundBtn);
                 }
@@ -987,7 +996,7 @@ public class ExGameLogic : MonoBehaviour
             //question load
             QuestionBase question = currentQuestion;
 
-            QLoad(question);
+            QuestionDataLoadUI(question);
 
             //set button state
             if(!isLearnSection)
@@ -1036,7 +1045,7 @@ public class ExGameLogic : MonoBehaviour
         //question load
         QuestionBase question = currentQuestion;
 
-        QLoad(question);
+        QuestionDataLoadUI(question);
 
         //set button state
         NextButtonRoutine(ButtonImage.ButtonAnimation.Scale.ToString());
@@ -1271,6 +1280,50 @@ public class ExGameLogic : MonoBehaviour
             nextButton.interactable = true;
             nextBtn.PlayAnimation(true, animationName);
             nextBtn.RefreshState();
+        }
+    }
+
+    IEnumerator SetupUI()
+    {
+        yield return LocalizationSettings.InitializationOperation;
+
+        // Get localized string from table - test
+        string textForTest = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestingLevelTxt");
+
+        // Get localized string from table - learning
+        string textForLearn = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "LangLevel");
+
+
+        Debug.Log($"{textForTest}, {textForLearn}");
+
+        //avoid scroll for question sections
+        ScrollRect scRect = panelScroll.GetComponent<ScrollRect>();
+
+        //get height of question container
+        ExQManager01 uiPrefab = questionPrefabs[4].GetComponent<ExQManager01>();
+        float learnPanelHeight = uiPrefab.questionContainer.rect.height + LEARN_PANEL_PADDING;
+
+        //UI diff in learn mode
+        if (!isLearnSection)
+        {
+            NextButtonRoutine(ButtonImage.ButtonAnimation.Idle.ToString()); //question
+            scRect.vertical = false;
+
+            skillLevelText.text = textForTest;
+        }
+        else
+        {
+            //hide unnecessary buttons and progress
+            nextButton.gameObject.SetActive(false);
+            progressBar.gameObject.SetActive(false);
+            progressText.gameObject.SetActive(false);
+            scRect.vertical = true;
+
+            //set height of question container based on questions count
+            float height = currentSection.questions.Length * learnPanelHeight;
+            questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);
+
+            skillLevelText.text = textForLearn;
         }
     }
 

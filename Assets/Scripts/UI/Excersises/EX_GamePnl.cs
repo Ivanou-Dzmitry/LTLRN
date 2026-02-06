@@ -8,6 +8,7 @@ public class Ex_GamePanel : Panel
     private GameData gameData;
     private ExGameLogic exGameLogic;
 
+    //buttons
     private ButtonImage starsBtnImage;
     private ButtonImage lifeBtnImage;
     private ButtonImage crystalsBtnImage;
@@ -19,6 +20,7 @@ public class Ex_GamePanel : Panel
     public TMP_Text themeNameSysLang;
     public TMP_Text themeNameTargetLang;
     public TMP_Text sectionDifficulty;
+    public TMP_Text sectionDescribeTxt;
 
     [Header("UI")]
     public Canvas canvasRoot;
@@ -81,7 +83,7 @@ public class Ex_GamePanel : Panel
             themeNameTargetLang.text = exGameLogic.sectionManager.themeNameTargetLang;
 
             //difficulty
-            sectionDifficulty.text = exGameLogic.currentSection.difficultyType.ToString();
+            sectionDifficulty.text = exGameLogic.currentSection.difficultyType.ToString();            
         }
     }
 
