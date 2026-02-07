@@ -13,6 +13,7 @@ public class SaveData
     public int selectedSectionIndex;
 
     public Section sectionToLoad;
+    public Section[] bundleSections;
 
     [Header("Player")]
     public string playerName;

@@ -5016,7 +5016,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 1450}
+  m_SizeDelta: {x: 1, y: 1450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5264446830160896571
 CanvasRenderer:
@@ -5127,6 +5127,9 @@ MonoBehaviour:
   soundPlayButton: {fileID: 4059383017460104230}
   soundBtn: {fileID: 0}
   answerPanel: {fileID: 5135833805653868611}
+  learnImage: {fileID: 0}
+  learnData01: {fileID: 0}
+  learnData02: {fileID: 0}
   debugText: {fileID: 0}
 --- !u!1 &5135833805653868611
 GameObject:

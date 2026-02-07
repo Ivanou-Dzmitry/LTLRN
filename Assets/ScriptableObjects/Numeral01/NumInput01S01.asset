@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
-  m_Name: Numerals01S03
+  m_Name: NumInput01S01
   m_EditorClassIdentifier: Assembly-CSharp::Section
   isBundle: 0
   sectionType: 3

@@ -15,7 +15,9 @@ public class BaseTextAsset : MonoBehaviour
     {
         Header = 0,
         Base = 1,
-        Medium = 2
+        Medium = 2,
+        BasePlus = 3,
+        MediumPlus = 4
     }
 
     [Header("References")]
@@ -60,6 +62,8 @@ public class BaseTextAsset : MonoBehaviour
             TextSize.Header => 80f,
             TextSize.Medium => 50f,
             TextSize.Base => 30f,
+            TextSize.BasePlus => 40f,
+            TextSize.MediumPlus => 65f,
             _ => 30f
         };
     }

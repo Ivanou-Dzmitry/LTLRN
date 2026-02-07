@@ -62,50 +62,24 @@ public class SectionPanel : MonoBehaviour
         //add listeners
         likeButton.onClick.AddListener(OnLike);
 
+        //play section
         if (playSectionButton != null)
             playSectionButton.onClick.AddListener(OnClicked);
 
+        //get game data
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
     }
 
     private void OnClicked()
     {
+        //for bundle sections, open bundle menu and load sections into it, otherwise load game directly with selected section
         if (isBundleSection)
         {
-            //Debug.Log("Loading bundle section: ");
-
-            PanelManager.Open("bundlemenu");
-
-            //get bundle panel
-            bundlePanel = GameObject.FindWithTag("BundlePanel").GetComponent<EX_BundleMenu>();
-
-            //load sections into bundle panel
-            if (bundlePanel != null)
-            {
-                bundlePanel.SectionLoader(bundleSections, sectionHeaderText.text);
-            }
+            LoadBundle();
         }
         else
         {
-            //get data loader and game data
-            dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
-
-            //set current section
-            if (dataLoader != null)
-            {
-                dataLoader.sectionClass = currentSection;
-            }
-
-            //save section
-            if (gameData != null)
-            {
-                gameData.saveData.selectedSectionIndex = sectionIndex;
-                gameData.saveData.sectionToLoad = currentSection;
-                gameData.SaveToFile();
-            }
-
-            //load game
-            PanelManager.OpenScene("ExGame");
+            LoadBasic();
         }
     }
 
@@ -233,6 +207,50 @@ public class SectionPanel : MonoBehaviour
             LocalizationSettings.SelectedLocale = locale;
 
         return locale;
+    }
+
+    private void LoadBundle()
+    {
+        //Debug.Log("Loading bundle section: ");
+        PanelManager.Open("bundlemenu");
+
+        //get bundle panel
+        bundlePanel = GameObject.FindWithTag("BundlePanel").GetComponent<EX_BundleMenu>();
+
+        //load sections into bundle panel
+        if (bundlePanel != null)
+        {
+            bundlePanel.SectionLoader(bundleSections, sectionHeaderText.text);
+
+            //save bundles
+            if (gameData != null)
+                gameData.saveData.bundleSections = bundleSections;
+
+            gameData.SaveToFile();
+        }
+    }
+
+    private void LoadBasic()
+    {
+        //get data loader and game data
+        dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
+
+        //set current section
+        if (dataLoader != null)
+        {
+            dataLoader.sectionClass = currentSection;
+        }
+
+        //save section
+        if (gameData != null)
+        {
+            gameData.saveData.selectedSectionIndex = sectionIndex;
+            gameData.saveData.sectionToLoad = currentSection;
+            gameData.SaveToFile();
+        }
+
+        //load game
+        PanelManager.OpenScene("ExGame");
     }
 
 }

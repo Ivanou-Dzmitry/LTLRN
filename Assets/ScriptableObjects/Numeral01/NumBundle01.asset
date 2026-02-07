@@ -17,27 +17,29 @@ MonoBehaviour:
   sectionLanguage: 3
   difficultyType: 7
   sectionNumber: 0
-  sectionIcon: {fileID: 21300000, guid: d6bd577c83e72c245ac1bd353701a9d5, type: 3}
-  sectionHeaderColor: {r: 0.6792453, g: 0, b: 0.5142625, a: 1}
+  sectionIcon: {fileID: 21300000, guid: 6b57f1ca382a15744b25d56a49f03ad8, type: 3}
+  sectionHeaderColor: {r: 0, g: 0.21176471, b: 0.5803922, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435"
-    en: Numerals
+    ru: "\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
+      \u043E\u0442 0 \u0434\u043E 10"
+    en: Numerals from 0 to 10
   sectionDescription:
     ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C  \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
-      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435"
-    en: Study and repeat numerals
+      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043E\u0442
+      0 \u0434\u043E 10"
+    en: Study and repeat numerals from 0 to 10
   sectionInfo:
     tableName: Short_vowels
     columnName: ID
-    recordID: 0
-    value: 
+    recordID: 1
+    value: 1
     whereColumn: ID
     whereValue: 
   bundleSections:
   - {fileID: 11400000, guid: 4e55c46576db8c8449d47ce25ddfe2bb, type: 2}
   - {fileID: 11400000, guid: aa5a675aac82ad14ca40620c12515158, type: 2}
-  - {fileID: 11400000, guid: 78dcb263e4e497b419c996bec8e53cf5, type: 2}
-  - {fileID: 11400000, guid: 930c85486595d8040beb8c445c0e270f, type: 2}
+  - {fileID: 11400000, guid: ce6ad44ed59036346a932d3e47af6177, type: 2}
+  - {fileID: 11400000, guid: d8f02cd64a8ff0145aae03a7a20042fe, type: 2}
   - {fileID: 11400000, guid: 4cdf71e0674346f4b8539b198a1ed2b3, type: 2}
   questions: []

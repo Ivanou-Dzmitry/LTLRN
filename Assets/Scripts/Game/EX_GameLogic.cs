@@ -79,6 +79,7 @@ public class ExGameLogic : MonoBehaviour
     public Button nextButton; //important button
     public Button interruptGameButton;
     public Button finishButton;
+    public Button takeTestButton;
 
     [Header("Answer")]
     public int currentAnswerIndex = -1;
@@ -120,14 +121,15 @@ public class ExGameLogic : MonoBehaviour
         //buttons
         nextButton.gameObject.SetActive(true);
         finishButton.gameObject.SetActive(false);
+        takeTestButton.gameObject.SetActive(false);
 
         //checkBtn = checkButton.GetComponent<ButtonImage>();
         nextBtn = nextButton.GetComponent<ButtonImage>();
 
-        //button listeners
-        //checkButton.onClick.AddListener(checkBtnClicked);        
+        //button listeners        
         nextButton.onClick.AddListener(nextBtnClicked);
         interruptGameButton.onClick.AddListener(OnGameInterrupt);
+        takeTestButton.onClick.AddListener(OnTakeTest);
     }
 
     private void Start()
@@ -754,18 +756,21 @@ public class ExGameLogic : MonoBehaviour
                     soundButton.SetDisabled(false);
                     soundButton.RefreshState();
 
-                    qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);
+                    qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);                    
 
                     //set question text
                     try
                     {
-                        currentQuestion.ApplyQuestionText(learnData, qData.qestionText);
+                        currentQuestion.ApplyQuestionText(learnData, qData.qestionText); //set question text
                     }
                     catch (Exception e)
                     {
                         Debug.LogError("Error setting question text: " + e.Message);
                     }
-                    
+
+                    qData.learnData01.text = dbUtils.GetLearnData(currentQuestion.questionReference, learnData.questionText);
+                    qData.learnData02.text = dbUtils.GetTranslate(currentQuestion.questionReference, learnData.questionText);
+
                     //load sound. Avoid load name - but clip is not ready. In db just name.
                     qData.qAudioClip = LoadAudioAndSetButton(learnData.questionCategory, learnData.qSoundClipName, qData.soundBtn);
                 }
@@ -976,7 +981,7 @@ public class ExGameLogic : MonoBehaviour
         //increase question
         qCounter++;
 
-        Debug.Log($"qCounter = {qCounter}");
+        //Debug.Log($"qCounter = {qCounter}");
 
         //load next question
         if (qCounter < currentSection.questions.Length && qCounter < tempQuestions.Count)
@@ -1078,7 +1083,10 @@ public class ExGameLogic : MonoBehaviour
 
     private void OnGameInterrupt()
     {
-        InterruptGame();
+        if (!isLearnSection)
+            InterruptGame();
+        else
+            InerruptLearn();
     }
 
     public void InterruptGame()
@@ -1087,6 +1095,15 @@ public class ExGameLogic : MonoBehaviour
 
         //run panel with choise
         PanelManager.Open("exit");        
+    }
+
+    private void InerruptLearn()
+    {
+        PanelManager.CloseAll();
+
+        PanelManager.CloseAll();
+
+        PanelManager.OpenScene("ExMenu");
     }
 
     public void ExitGame()
@@ -1190,6 +1207,24 @@ public class ExGameLogic : MonoBehaviour
         }
     }
 
+    public bool GetNextBundleSection()
+    {
+        Section[] bundleSections = gameData.saveData.bundleSections;
+
+        int curentBundleIndex = gameData.saveData.selectedSectionIndex;
+        int nextIndex = curentBundleIndex + 1;
+
+        try
+        {
+            nextSection = bundleSections[nextIndex];            
+            return true;
+        }
+        catch
+        {
+            Debug.Log("No more themes in bundle available.");
+            return false;
+        }
+    }
 
     public void NextSection()
     {
@@ -1197,17 +1232,49 @@ public class ExGameLogic : MonoBehaviour
 
         int nextIndex = gameData.saveData.selectedSectionIndex + 1;
 
-        if (hasNext)
+        if (!hasNext)
+            return;
+        
+        currentSection = sectionManager.sections[nextIndex];
+        
+        //set selected section index
+        gameData.saveData.selectedSectionIndex = nextIndex;
+        
+        //save data
+        gameData.SaveToFile();
+        //load next section
+        PanelManager.CloseAll();
+        PanelManager.OpenScene("ExGame");
+    }
+
+    public void NextBundleSection()
+    {
+        bool hasNext = GetNextBundleSection();
+
+        int curentBundleIndex = gameData.saveData.selectedSectionIndex;
+        int nextIndex = curentBundleIndex + 1;
+
+        if (!hasNext)
+            return;
+
+        Section[] bundleSections = gameData.saveData.bundleSections;
+
+        if (bundleSections == null)
+            return;
+
+        if (gameData == null)
+            return;
+        else
         {
-            currentSection = sectionManager.sections[nextIndex];
-            //set selected section index
             gameData.saveData.selectedSectionIndex = nextIndex;
-            //save data
+            gameData.saveData.sectionToLoad = bundleSections[nextIndex];
             gameData.SaveToFile();
-            //load next section
-            PanelManager.CloseAll();
-            PanelManager.OpenScene("ExGame");
         }
+
+        PanelManager.CloseAll();
+
+        //load game
+        PanelManager.OpenScene("ExGame");
     }
 
     private void OnDestroy()
@@ -1293,8 +1360,7 @@ public class ExGameLogic : MonoBehaviour
         // Get localized string from table - learning
         string textForLearn = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "LangLevel");
 
-
-        Debug.Log($"{textForTest}, {textForLearn}");
+        //Debug.Log($"{textForTest}, {textForLearn}");
 
         //avoid scroll for question sections
         ScrollRect scRect = panelScroll.GetComponent<ScrollRect>();
@@ -1324,7 +1390,32 @@ public class ExGameLogic : MonoBehaviour
             questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);
 
             skillLevelText.text = textForLearn;
+
+            //show button
+            takeTestButton.gameObject.SetActive(true);
         }
+    }
+
+
+    private void OnTakeTest()
+    {
+        Section[] bundleSections = gameData.saveData.bundleSections;
+
+        if (bundleSections == null)
+            return;
+
+        if (gameData == null)
+            return;
+        else
+        {
+            gameData.saveData.selectedSectionIndex = 1;
+            gameData.saveData.sectionToLoad = bundleSections[1];
+            gameData.SaveToFile();
+        }
+
+        PanelManager.CloseAll();
+        //load game
+        PanelManager.OpenScene("ExGame");
     }
 
 }

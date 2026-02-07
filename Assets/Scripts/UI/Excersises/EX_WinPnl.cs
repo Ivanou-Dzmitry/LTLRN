@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 //win panel Excersises
 
@@ -62,9 +63,21 @@ public class ExWinPnl : Panel
             time.text = exGameLogic.FormatTime(exGameLogic.sessionDuration).ToString();
         }
 
+        //get next section availability
         bool next = exGameLogic.GetNextSection();
+        bool nextBundle = exGameLogic.GetNextBundleSection();
 
+        //turn button on/off based on next section availability
         if (next)
+            NextSectionButton(next);
+
+        if(nextBundle)
+            NextSectionButton(nextBundle);        
+    }
+    
+    private void NextSectionButton(bool isNextEsists)
+    {
+        if (isNextEsists)
         {
             nextBtn.SetDisabled(false);
             nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
@@ -74,7 +87,6 @@ public class ExWinPnl : Panel
             nextBtn.SetDisabled(true);
             nextBtn.PlayAnimation(false, ButtonImage.ButtonAnimation.Idle.ToString());
         }
-            
 
         nextBtn.RefreshState();
     }
@@ -92,11 +104,20 @@ public class ExWinPnl : Panel
 
     private void OnNextClick()
     {
+        //standart next section
         bool next = exGameLogic.GetNextSection();
 
         if (next)
         {
             exGameLogic.NextSection();
+        }
+
+        //bundle next section
+        bool nextInBundle = exGameLogic.GetNextBundleSection();
+
+        if (nextInBundle)
+        {
+            exGameLogic.NextBundleSection();
         }
     }
 

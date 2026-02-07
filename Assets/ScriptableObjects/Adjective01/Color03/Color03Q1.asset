@@ -27,7 +27,7 @@ MonoBehaviour:
     tableName: Colors01
     columnName: NomSing
     recordID: 1
-    value: Raudona
+    value: raudona
     whereColumn: ID
     whereValue: 
   answerReferences: []

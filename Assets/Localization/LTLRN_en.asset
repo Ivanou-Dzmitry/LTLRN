@@ -274,7 +274,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11861729099177984
-    m_Localized: To the menu
+    m_Localized: To menu
     m_Metadata:
       m_Items: []
   - m_Id: 14127444141436928
@@ -299,6 +299,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 18877640507289600
     m_Localized: 'Language proficiency level:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19177633021485056
+    m_Localized: Select mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19181873710292992
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19184408475000832
+    m_Localized: Learn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19184465832108032
+    m_Localized: Listen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19185812757340160
+    m_Localized: Test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19188651357429760
+    m_Localized: Iamge
     m_Metadata:
       m_Items: []
   references:

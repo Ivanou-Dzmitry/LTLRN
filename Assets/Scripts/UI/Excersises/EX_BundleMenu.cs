@@ -1,10 +1,11 @@
 using LTLRN.UI;
+using NUnit.Framework.Internal;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
-using System.Linq;
 
 public class EX_BundleMenu : Panel
 {
@@ -52,6 +53,10 @@ public class EX_BundleMenu : Panel
         //get game data
         if (gameData == null)
             gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        //run animation
+        ButtonImage exitBtn = exitButton.GetComponent<ButtonImage>();
+        exitBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
     }   
 
     private void OnExitClick()
@@ -125,16 +130,19 @@ public class EX_BundleMenu : Panel
         string btnText02 = string.Empty;
         btnText02 = LangList.LT.ToString();
 
+        string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
+
         if (sec.sectionLanguage == Section.SectionLanguage.TARGET)
         {            
-            button.sectionText.text = $"{btnText02}{ARROW_RIGHT}{btnText01}";
+            button.sectionText.text = $"{test}.\n{btnText02}{ARROW_RIGHT}{btnText01}";
         }
         else if(sec.sectionLanguage == Section.SectionLanguage.SYS)
         {         
-            button.sectionText.text = $"{btnText01}{ARROW_RIGHT}{btnText02}";
+            button.sectionText.text = $"{test}.\n{btnText01}{ARROW_RIGHT}{btnText02}";
         }
 
-        button.sectionIcon.gameObject.SetActive(false);
+        button.sectionIcon.sprite = sectionTypeIcons[4];
+        //button.sectionIcon.gameObject.SetActive(false);
 
         button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
@@ -143,18 +151,28 @@ public class EX_BundleMenu : Panel
     {
         button.sectionIcon.sprite = sectionTypeIcons[1]; //image icon
         button.sectionIcon.gameObject.SetActive(true); //show icon
-        button.sectionText.gameObject.SetActive(false);
+        //button.sectionText.gameObject.SetActive(false);
+
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ImageTxt");
+        string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
+
+        button.sectionText.text = $"{test}. {text}";
 
         button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
     private void SetupSoundSection(Section sec, SectionButton button)
     {
-        button.sectionText.gameObject.SetActive(false);
+        //button.sectionText.gameObject.SetActive(false);
         button.sectionIcon.gameObject.SetActive(true); //show icon
         button.sectionIcon.sprite = sectionTypeIcons[0]; //hear icon
 
         button.sectionDifficulty.text = sec.difficultyType.ToString();
+
+        string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ListenTxt");
+
+        button.sectionText.text = $"{test}. {text}";
     }
 
     private void SetupInputSection(Section sec, SectionButton button)
@@ -168,7 +186,11 @@ public class EX_BundleMenu : Panel
     {
         button.sectionIcon.sprite = sectionTypeIcons[3]; //image icon
         button.sectionIcon.gameObject.SetActive(true); //show icon
-        button.sectionText.gameObject.SetActive(false);
+        //button.sectionText.gameObject.SetActive(false);
+
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "LearnTxt");
+
+        button.sectionText.text = text;
 
         button.sectionDifficulty.text = sec.difficultyType.ToString();
     }

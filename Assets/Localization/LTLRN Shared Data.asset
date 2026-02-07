@@ -361,6 +361,34 @@ MonoBehaviour:
     m_Key: LangLevel
     m_Metadata:
       m_Items: []
+  - m_Id: 19177633021485056
+    m_Key: 'SelectModeTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19181873710292992
+    m_Key: 'BackTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19184408475000832
+    m_Key: LearnTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19184465832108032
+    m_Key: ListenTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19185812757340160
+    m_Key: TestTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19188651357429760
+    m_Key: ImageTxt
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: NumRepS01Q5
   m_EditorClassIdentifier: Assembly-CSharp::Question
   isAutomated: 1
-  questionLang: 0
-  questionDifficulty: 0
-  questionType: 0
   questionCategory:
     tableName: Numerals0_10
     columnName: Category
@@ -23,9 +20,9 @@ MonoBehaviour:
     value: Numerals
     whereColumn: ID
     whereValue: 
-  questionDescription: 
-  isQuestionTextOnly: 0
-  questionText: Question 5
+  questionLang: 1
+  questionDifficulty: 0
+  questionType: 0
   questionReference:
     tableName: Numerals0_10
     columnName: NomSing
@@ -33,16 +30,6 @@ MonoBehaviour:
     value: penki
     whereColumn: ID
     whereValue: 
-  imagesCount: 1
-  questionImage: {fileID: 0}
-  questionImageFile: []
-  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
-  isAnswerTextOnly: 0
-  answerVariantsText:
-  - Answer 1
-  - Answer 2
-  - Answer 3
-  - Answer 4
   answerReferences:
   - tableName: Numerals0_10
     columnName: RU
@@ -69,7 +56,20 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   answerSecondWord: []
-  answerImageReferences: []
   soundReferences: []
+  questionImageFile: []
+  imagesCount: 1
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   correctAnswerNumber: 2
   rewardAmount: 1
+  questionDescription: 
+  isQuestionTextOnly: 0
+  questionText: Question 5
+  questionImage: {fileID: 0}
+  isAnswerTextOnly: 0
+  answerVariantsText:
+  - Answer 1
+  - Answer 2
+  - Answer 3
+  - Answer 4
+  answerImageReferences: []

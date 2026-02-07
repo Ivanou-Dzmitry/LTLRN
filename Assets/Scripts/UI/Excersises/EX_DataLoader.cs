@@ -250,14 +250,6 @@ public class ExDataLoader : MonoBehaviour
         }
 
         sectionPanel.currentSection = section;
-
-        /*        int result = dbUtils.GetSectionResult(section.name);
-                string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
-                string resultText = $"{result} {fromTxt} {questionsCount}";
-                sectionPanel.sectionResultText.text = resultText;*/
-
-        // Implement bundle loading logic here
-        //Debug.Log("Loading bundled sections...");
     }
 
 

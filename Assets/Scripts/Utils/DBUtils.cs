@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class DBUtils : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class DBUtils : MonoBehaviour
     private bool isDataInitialized = false;
     private const string dbDataName = "keliasdata.db"; 
 
-    private const int DB_VERSION = 1; // Increment this when you update the database
+    private const int DB_VERSION = 2; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES
@@ -65,7 +66,10 @@ public class DBUtils : MonoBehaviour
     private enum WordColumn
     {
         NomSing,
-        NomPlur
+        NomPlur,
+        LearnData,
+        RU,
+        EN
     }
 
     public struct QuestionParams
@@ -1222,6 +1226,33 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    public string GetLearnData(DatabaseReference dbRef, string text)
+    {
+        var qp = GetQuestionParams(dbRef);
+
+        string tableName = qp.Value.TableName;
+        string columnName = qp.Value.ColumnName;                  
+
+        string result = GetValueWhere(tableName, columnName, WordColumn.LearnData.ToString(), text);
+
+        Debug.Log($"GetLearnData: table={tableName}, column={columnName}, text={text}, res = {result}");
+
+        return result;
+    }
+
+    public string GetTranslate(DatabaseReference dbRef, string text)
+    {
+        var qp = GetQuestionParams(dbRef);
+
+        string tableName = qp.Value.TableName;
+        string columnName = qp.Value.ColumnName;
+       
+        string result = GetValueWhere(tableName, columnName, WordColumn.LearnData.ToString(), text);
+
+        Debug.Log($"GetLearnData: table={tableName}, column={columnName}, text={text}, res = {result}");
+
+        return result;
+    }
 
     private class RowPair
     {

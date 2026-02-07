@@ -27,7 +27,7 @@ MonoBehaviour:
     tableName: Colors01
     columnName: RU
     recordID: 1
-    value: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439"
+    value: "\u043A\u0440\u0430\u0441\u043D\u044B\u0439"
     whereColumn: ID
     whereValue: 
   answerReferences: []
