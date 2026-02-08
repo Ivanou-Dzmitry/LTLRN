@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FruitLrn01
   m_EditorClassIdentifier: Assembly-CSharp::Section
   isBundle: 0
-  sectionType: 0
+  sectionType: 6
   sectionLanguage: 2
   difficultyType: 1
   sectionNumber: 1
@@ -48,14 +48,14 @@ MonoBehaviour:
     whereValue: 
   bundleSections: []
   questions:
-  - {fileID: 11400000, guid: 0edf4e1751f003a43b75b46a5e5d9fb9, type: 2}
-  - {fileID: 11400000, guid: 5b1515b30550a1d498e742cad391a512, type: 2}
-  - {fileID: 11400000, guid: d52a1fcc8b702e342a0ad6a56311083c, type: 2}
-  - {fileID: 11400000, guid: bc6d8a95f0d5f8e4cb22b9291e31d924, type: 2}
-  - {fileID: 11400000, guid: 48859f234a25dec4aabb10aefcd0eb7e, type: 2}
-  - {fileID: 11400000, guid: ef1b0374afbe34b468792dfd32ec1eec, type: 2}
-  - {fileID: 11400000, guid: fc7023da0493be149a91029a71131b04, type: 2}
-  - {fileID: 11400000, guid: c27b54ff9076ec546a20f0ee078290ac, type: 2}
-  - {fileID: 11400000, guid: 7f4eb4c13289a6543ac03e130ae7a073, type: 2}
-  - {fileID: 11400000, guid: 2b051b9e91faf4c408185081af5cf047, type: 2}
-  - {fileID: 11400000, guid: 5ba459829bdbc4543ae0d708544634ce, type: 2}
+  - {fileID: 11400000, guid: 05190f4e559b1664e8230fd941a5ccf9, type: 2}
+  - {fileID: 11400000, guid: 99167e5d531eb9c4daa41e0bfb10eb43, type: 2}
+  - {fileID: 11400000, guid: 430a0c35cac73e849988e28ad237e934, type: 2}
+  - {fileID: 11400000, guid: 57e675c1b3340b546844309000cdf01e, type: 2}
+  - {fileID: 11400000, guid: e7627a05142f5ca4ca7bee701eff548b, type: 2}
+  - {fileID: 11400000, guid: c258e773a65658240b97ddde2105eff5, type: 2}
+  - {fileID: 11400000, guid: d1fa9baffcbbd084bb2b721963bc1612, type: 2}
+  - {fileID: 11400000, guid: aca311b6ff7acc14d893b677bd76942c, type: 2}
+  - {fileID: 11400000, guid: 84cb2b2e362b1d647a9586aa2cb96790, type: 2}
+  - {fileID: 11400000, guid: e24d2e8b44d5fd74d80b87fc35b4f0dd, type: 2}
+  - {fileID: 11400000, guid: fb254d6fbf62c5c40994387bf44771e3, type: 2}

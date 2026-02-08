@@ -51,9 +51,6 @@ public class EX_ThemeBtn : MonoBehaviour
         topPnlImg = topPanel.GetComponent<Image>();   
         Image botPnlImg = bottomPanel.GetComponent<Image>();
 
-        //default colors
-        //topPnlImg.color = palette.PrimaryLight;
-        //botPnlImg.color = palette.Gray6Ligth;
     }
 
     public void UpdateUI()

@@ -40,5 +40,7 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   bundleSections:
+  - {fileID: 11400000, guid: 8667ec202c3262b489f4a15533da6f08, type: 2}
   - {fileID: 11400000, guid: 2940ad86368dd9a4ab16f1af8d6696e7, type: 2}
+  - {fileID: 11400000, guid: 6223f927acbc80247bcdb6c9df6ee15a, type: 2}
   questions: []

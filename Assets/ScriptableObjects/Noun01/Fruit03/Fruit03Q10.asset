@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
-  m_Name: Fruit01Q1
+  m_Name: Fruit03Q10
   m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
   isAutomated: 1
   questionCategory:
@@ -22,12 +22,12 @@ MonoBehaviour:
     whereValue: 
   questionLang: 1
   questionDifficulty: 0
-  questionType: 0
+  questionType: 3
   questionReference:
     tableName: Fruit01
     columnName: NomSing
-    recordID: 11
-    value: obuolys
+    recordID: 20
+    value: avokadas
     whereColumn: ID
     whereValue: 
   answerReferences: []
