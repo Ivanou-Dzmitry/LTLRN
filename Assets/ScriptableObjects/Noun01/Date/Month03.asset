@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
+  m_Name: Month03
+  m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 0
+  sectionType: 2
+  sectionLanguage: 2
+  difficultyType: 1
+  sectionNumber: 1
+  sectionIcon: {fileID: 21300000, guid: 19217339cefcb2743a7692305895b5a5, type: 3}
+  sectionHeaderColor: {r: 0.098039225, g: 0.5411765, b: 0.9803922, a: 1}
+  isLiked: 0
+  sectionTitle:
+    ru: "\u041C\u0435\u0441\u044F\u0446\u044B"
+    en: Months
+  sectionDescription:
+    ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+      \u043C\u0435\u0441\u044F\u0446\u0435\u0432. \u0422\u0435\u043A\u0441\u0442
+      \u0438 \u0437\u0432\u0443\u043A."
+    en: Repeat the names of the months. Text and sound.
+  sectionInfo:
+    tableName: Rules01
+    columnName: RU
+    recordID: 1
+    value: " \u0423\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
+      \u0432\u043C\u0435\u0441\u0442\u0435 \u0441\u043E \u0441\u043B\u043E\u0432\u0430\u043C\u0438
+      \u0432 \u0436\u0435\u043D\u0441\u043A\u043E\u043C \u0438 \u043C\u0443\u0436\u0441\u043A\u043E\u043C
+      \u0440\u043E\u0434\u0435: \u043A\u0430\u043A \u0438 \u0432 \u0440\u0443\u0441\u0441\u043A\u043E\u043C
+      \u044F\u0437\u044B\u043A\u0435, \u0432 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u043C
+      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u0443\u044E\u0442\u0441\u044F
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438
+      \u0432 \u0440\u043E\u0434\u0435, \u0447\u0438\u0441\u043B\u0435, \u043F\u0430\u0434\u0435\u0436\u0435
+      = \u0438\u0437\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u0432\u043C\u0435\u0441\u0442\u0435
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438."
+    whereColumn: ID
+    whereValue: 
+  bundleSections: []
+  questions:
+  - {fileID: 11400000, guid: 5ee369091095b44499dd77b04b409f7b, type: 2}
+  - {fileID: 11400000, guid: 036c9c3b85c5c9b45a7f2fd198d15c3d, type: 2}
+  - {fileID: 11400000, guid: b56051e0bda3ea64fa695cc962961ead, type: 2}
+  - {fileID: 11400000, guid: 3f0063b2e0c3c084c88126fb44f0b1cd, type: 2}
+  - {fileID: 11400000, guid: e70684517415e63409b20c0f03389822, type: 2}
+  - {fileID: 11400000, guid: 4833b903461dab441be79aebac1be39e, type: 2}
+  - {fileID: 11400000, guid: f538c251b19ec1c4fa47ca7432b9bf99, type: 2}
+  - {fileID: 11400000, guid: 73f3499b324c39441822c2c640d8c8e0, type: 2}
+  - {fileID: 11400000, guid: 7e05ef906b5cef8498b02331c5dbd3bc, type: 2}
+  - {fileID: 11400000, guid: 9c578508c9fd31b499bdfc92f55a55c3, type: 2}
+  - {fileID: 11400000, guid: 873e32f2bccfdf447b876d4fab5147f7, type: 2}
+  - {fileID: 11400000, guid: 0d03ba8b0dfe21e408365f1334d46293, type: 2}

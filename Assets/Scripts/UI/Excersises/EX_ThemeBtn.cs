@@ -12,6 +12,7 @@ public class EX_ThemeBtn : MonoBehaviour
     [Header("UI")]
     public Button button;
     public TMP_Text themeName;
+    public TMP_Text themeNameLocal;
     public TMP_Text themeDescription;
     public Image themeIcon;
     public Image topPnlImg;
@@ -24,12 +25,13 @@ public class EX_ThemeBtn : MonoBehaviour
     public TMP_Text questionsCount;
 
     [Header("Sliders")]
-    public Slider themeDifSlider;
+    //public Slider themeDifSlider;
     public Slider themeProgressSlider;
 
     [Header("Panels")]
     public GameObject topPanel;
     public GameObject bottomPanel;
+    [SerializeField] private GameObject infoPanel;
 
     [Header("Palette")]
     [SerializeField] private UIColorPalette palette;
@@ -50,8 +52,16 @@ public class EX_ThemeBtn : MonoBehaviour
         Image botPnlImg = bottomPanel.GetComponent<Image>();
 
         //default colors
-        topPnlImg.color = palette.PrimaryLight;
-        botPnlImg.color = palette.Gray6Ligth;
+        //topPnlImg.color = palette.PrimaryLight;
+        //botPnlImg.color = palette.Gray6Ligth;
+    }
+
+    public void UpdateUI()
+    {
+        if(sectionsCount.text == "0")
+        {
+            infoPanel.gameObject.SetActive(false);
+        }            
     }
 
     private void OnClicked()

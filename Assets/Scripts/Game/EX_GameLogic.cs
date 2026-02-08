@@ -113,6 +113,7 @@ public class ExGameLogic : MonoBehaviour
     private ExQManager01 qData;
 
     private bool isLearnSection = false;
+    private Languages currentLang;
 
     private void Awake()
     {
@@ -269,10 +270,8 @@ public class ExGameLogic : MonoBehaviour
         Ex_GamePanel gamePanel= panelUI.gameObject.GetComponent<Ex_GamePanel>();
 
         //get current language
-        Languages currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
-
-        //Debug.Log(currentLang.ToString());
-
+        currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
+       
         //set UI lang
         gamePanel.SetUIData(currentLang.ToString());
     }
@@ -756,7 +755,14 @@ public class ExGameLogic : MonoBehaviour
                     soundButton.SetDisabled(false);
                     soundButton.RefreshState();
 
-                    qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);                    
+                    //avoid empty image reference error
+                    try
+                    {
+                        qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);
+                    }catch(Exception e)
+                    {
+                        Debug.LogWarning("Error loading image or Emtpy Image: " + e.Message);
+                    }
 
                     //set question text
                     try
@@ -768,8 +774,9 @@ public class ExGameLogic : MonoBehaviour
                         Debug.LogError("Error setting question text: " + e.Message);
                     }
 
-                    qData.learnData01.text = dbUtils.GetLearnData(currentQuestion.questionReference, learnData.questionText);
-                    qData.learnData02.text = dbUtils.GetTranslate(currentQuestion.questionReference, learnData.questionText);
+                    //get learn data and translate
+                    qData.learnData01.text = dbUtils.GetLearnData(currentQuestion.questionReference);
+                    qData.learnData02.text = dbUtils.GetTranslate(currentQuestion.questionReference, currentLang.ToString());
 
                     //load sound. Avoid load name - but clip is not ready. In db just name.
                     qData.qAudioClip = LoadAudioAndSetButton(learnData.questionCategory, learnData.qSoundClipName, qData.soundBtn);

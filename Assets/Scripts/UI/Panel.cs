@@ -31,7 +31,7 @@ namespace LTLRN.UI
 
         [Header("Style")]
         [SerializeField] private Image panelImage;
-        [SerializeField] private UIColorPalette palette;
+        public UIColorPalette palette;
         [SerializeField] private PanelColor panelColor = PanelColor.Panel01;
 
         public virtual void Awake()

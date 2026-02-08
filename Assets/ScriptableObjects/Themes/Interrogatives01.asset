@@ -15,6 +15,7 @@ MonoBehaviour:
   themeDifficulty: 0
   themeIcon: {fileID: 21300000, guid: fc923f780cc57424d8f86f5577f0269e, type: 3}
   themeHeaderColor: {r: 0.72955966, g: 0.09406267, b: 0.3406734, a: 1}
+  themeNameTargetLang: "Klausiamieji \u017Eod\u017Eiai"
   themeName:
     ru: "\u0412\u043E\u043F\u0440\u043E\u0441\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
       \u0441\u043B\u043E\u0432\u0430"

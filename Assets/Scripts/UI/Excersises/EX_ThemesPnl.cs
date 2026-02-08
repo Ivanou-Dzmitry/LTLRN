@@ -99,24 +99,24 @@ public class EX_ThemesPanel : Panel
             SectionManager currentTheme = dataLoader.themes.theme[i];
 
             //load data into button component
+            //name sys
             themeBtnComponent.themeName.text = currentTheme.GetThemeName(currentTheme, locale);
+            //name target
+            themeBtnComponent.themeNameLocal.text = currentTheme.themeNameTargetLang;
 
-            themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
             themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
             
             //set theme button icon
             themeBtnComponent.themeIcon.sprite = dataLoader.themes.theme[i].themeIcon;
             themeBtnComponent.themeIndex = i;
 
-            //set color
-            themeBtnComponent.topPnlImg.color = dataLoader.themes.theme[i].themeHeaderColor;
-
             //dificulty
-            themeBtnComponent.themeDifSlider.value = currentTheme.GetThemeDifValue(currentTheme.themeDifficulty);
+            //themeBtnComponent.themeDifSlider.value = currentTheme.GetThemeDifValue(currentTheme.themeDifficulty);
             //themeBtnComponent.themeDifficulty.text = dataLoader.themes.theme[i].themeDifficulty.ToString(); ;
 
             //load info
             int sectionsCount = currentTheme.sections.Length;
+
             themeBtnComponent.sectionsCount.text = sectionsCount.ToString();
             themeBtnComponent.questionsCount.text = currentTheme.GetTotalQuestionCount().ToString();
 
@@ -124,6 +124,26 @@ public class EX_ThemesPanel : Panel
             int completeCount = dbUtils.GetCompleteSectionsCount();
             themeBtnComponent.themeProgressSlider.maxValue = sectionsCount;
             themeBtnComponent.themeProgressSlider.value = completeCount;
+
+            //get local description
+            string wipTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TopicWIPTxt");
+
+            //set color Gray if no sections, set button interactable
+            if (sectionsCount == 0)
+            {
+                themeBtnComponent.topPnlImg.color = palette.Panel02;
+                themeBtnComponent.button.interactable = false;
+                themeBtnComponent.themeDescription.text = wipTxt;
+            }
+            else
+            {
+                themeBtnComponent.topPnlImg.color = dataLoader.themes.theme[i].themeHeaderColor;
+                themeBtnComponent.button.interactable = true;
+                //description
+                themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
+            }
+
+            themeBtnComponent.UpdateUI();
         }
     }
 

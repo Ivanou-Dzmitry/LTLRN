@@ -132,18 +132,20 @@ public class EX_BundleMenu : Panel
 
         string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
 
+        //final text on button
         if (sec.sectionLanguage == Section.SectionLanguage.TARGET)
         {            
-            button.sectionText.text = $"{test}.\n{btnText02}{ARROW_RIGHT}{btnText01}";
+            button.sectionText.text = $"{test}\n{btnText02}{ARROW_RIGHT}{btnText01}";
         }
         else if(sec.sectionLanguage == Section.SectionLanguage.SYS)
         {         
-            button.sectionText.text = $"{test}.\n{btnText01}{ARROW_RIGHT}{btnText02}";
+            button.sectionText.text = $"{test}\n{btnText01}{ARROW_RIGHT}{btnText02}";
         }
 
         button.sectionIcon.sprite = sectionTypeIcons[4];
         //button.sectionIcon.gameObject.SetActive(false);
 
+        //set difficulty text
         button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
@@ -156,8 +158,10 @@ public class EX_BundleMenu : Panel
         string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ImageTxt");
         string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
 
-        button.sectionText.text = $"{test}. {text}";
+        //set button text
+        button.sectionText.text = $"{test}\n{text}";
 
+        //set difficulty text
         button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
@@ -167,12 +171,14 @@ public class EX_BundleMenu : Panel
         button.sectionIcon.gameObject.SetActive(true); //show icon
         button.sectionIcon.sprite = sectionTypeIcons[0]; //hear icon
 
+        //set difficulty text
         button.sectionDifficulty.text = sec.difficultyType.ToString();
 
         string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
         string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ListenTxt");
 
-        button.sectionText.text = $"{test}. {text}";
+        //set button text
+        button.sectionText.text = $"{LangList.LT.ToString()}\n{text}";
     }
 
     private void SetupInputSection(Section sec, SectionButton button)

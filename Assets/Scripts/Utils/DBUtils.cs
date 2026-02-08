@@ -2,6 +2,7 @@ using SQLite;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -1226,32 +1227,64 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    public string GetLearnData(DatabaseReference dbRef, string text)
-    {
-        var qp = GetQuestionParams(dbRef);
-
-        string tableName = qp.Value.TableName;
-        string columnName = qp.Value.ColumnName;                  
-
-        string result = GetValueWhere(tableName, columnName, WordColumn.LearnData.ToString(), text);
-
-        Debug.Log($"GetLearnData: table={tableName}, column={columnName}, text={text}, res = {result}");
-
-        return result;
-    }
-
-    public string GetTranslate(DatabaseReference dbRef, string text)
+    //get learn data for learn type
+    public string GetLearnData(DatabaseReference dbRef)
     {
         var qp = GetQuestionParams(dbRef);
 
         string tableName = qp.Value.TableName;
         string columnName = qp.Value.ColumnName;
-       
-        string result = GetValueWhere(tableName, columnName, WordColumn.LearnData.ToString(), text);
+        int qID = qp.Value.RecordID;
 
-        Debug.Log($"GetLearnData: table={tableName}, column={columnName}, text={text}, res = {result}");
+        string result = GetValueFrom(tableName, columnName, qID, WordColumn.LearnData.ToString());
 
         return result;
+    }
+
+    //get translate for learn type
+    public string GetTranslate(DatabaseReference dbRef, string language)
+    {
+        var qp = GetQuestionParams(dbRef);
+
+        string tableName = qp.Value.TableName;
+        string columnName = qp.Value.ColumnName;
+        int qID = qp.Value.RecordID;
+
+        // Parse string to enum, then convert back to string
+        if (System.Enum.TryParse<WordColumn>(language, true, out WordColumn column))
+        {
+            string result = GetValueFrom(tableName, columnName, qID, column.ToString());
+            return result;
+        }
+        else
+        {
+            Debug.LogError($"Invalid language/column: {language}");
+            return null;
+        }
+    }
+
+    public string GetValueFrom(string tableName, string sourceColumnName, int recordID, string targetColumnName)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return null;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string query = $"SELECT {targetColumnName} FROM [{tableName}] WHERE ID = ?";
+                var result = connection.ExecuteScalar<string>(query, recordID);
+                return result;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting value from table '{tableName}', column '{targetColumnName}', ID {recordID}: {ex.Message}");
+            return null;
+        }
     }
 
     private class RowPair

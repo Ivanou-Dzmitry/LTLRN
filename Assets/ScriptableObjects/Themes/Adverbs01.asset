@@ -15,6 +15,7 @@ MonoBehaviour:
   themeDifficulty: 0
   themeIcon: {fileID: 21300000, guid: 6b57f1ca382a15744b25d56a49f03ad8, type: 3}
   themeHeaderColor: {r: 0.2707368, g: 0.735849, b: 0.52334064, a: 1}
+  themeNameTargetLang: Prieveiksmiai
   themeName:
     ru: "\u041D\u0430\u0440\u0435\u0447\u0438\u044F"
     en: Adverbs

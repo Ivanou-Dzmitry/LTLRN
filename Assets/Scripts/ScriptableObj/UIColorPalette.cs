@@ -24,6 +24,7 @@ public class UIColorPalette : ScriptableObject
     public Color TextSecondary;
     public Color Gray6Ligth;
     public Color Gray6Dark;
+    public Color Gray4Dark;
 
     [Header("Info colors")]
     public Color Success;

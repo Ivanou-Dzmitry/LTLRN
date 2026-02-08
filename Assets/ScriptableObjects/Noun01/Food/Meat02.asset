@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
+  m_Name: Meat02
+  m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 0
+  sectionType: 0
+  sectionLanguage: 1
+  difficultyType: 1
+  sectionNumber: 1
+  sectionIcon: {fileID: 21300000, guid: 8da3772c1b8ecb64884367d31952e817, type: 3}
+  sectionHeaderColor: {r: 0.735849, g: 0.21982905, b: 0.24364544, a: 1}
+  isLiked: 0
+  sectionTitle:
+    ru: "\u041C\u044F\u0441\u043E"
+    en: Meat
+  sectionDescription:
+    ru: "\u0420\u0430\u0441\u0448\u0438\u0440\u044F\u0435\u043C \u0441\u043B\u043E\u0432\u0430\u0440\u043D\u044B\u0439
+      \u0437\u0430\u043F\u0430\u0441: \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
+      \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u043C\u044F\u0441\u0430 \u0438
+      \u043F\u043E\u043F\u0443\u043B\u044F\u0440\u043D\u044B\u0445 \u043C\u044F\u0441\u043D\u044B\u0445
+      \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u043E\u0432."
+    en: 'Expanding your vocabulary: repeats names of meat and popular meat products.'
+  sectionInfo:
+    tableName: Rules01
+    columnName: RU
+    recordID: 1
+    value: " \u0423\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
+      \u0432\u043C\u0435\u0441\u0442\u0435 \u0441\u043E \u0441\u043B\u043E\u0432\u0430\u043C\u0438
+      \u0432 \u0436\u0435\u043D\u0441\u043A\u043E\u043C \u0438 \u043C\u0443\u0436\u0441\u043A\u043E\u043C
+      \u0440\u043E\u0434\u0435: \u043A\u0430\u043A \u0438 \u0432 \u0440\u0443\u0441\u0441\u043A\u043E\u043C
+      \u044F\u0437\u044B\u043A\u0435, \u0432 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u043C
+      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u0443\u044E\u0442\u0441\u044F
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438
+      \u0432 \u0440\u043E\u0434\u0435, \u0447\u0438\u0441\u043B\u0435, \u043F\u0430\u0434\u0435\u0436\u0435
+      = \u0438\u0437\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u0432\u043C\u0435\u0441\u0442\u0435
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438."
+    whereColumn: ID
+    whereValue: 
+  bundleSections: []
+  questions:
+  - {fileID: 11400000, guid: 7e3c6dd518aec414c90df4969a460b57, type: 2}
+  - {fileID: 11400000, guid: cd3364a18d6b6f349b6430e099fbd6ca, type: 2}
+  - {fileID: 11400000, guid: 89c49f990f751e34cac147b6e61ecec9, type: 2}
+  - {fileID: 11400000, guid: eebca4090641ab44f8293bd898ca1c28, type: 2}
+  - {fileID: 11400000, guid: 3aad876611b5f14419b2da70c9179824, type: 2}
+  - {fileID: 11400000, guid: ff1269839a7527d439b3977575da0787, type: 2}
+  - {fileID: 11400000, guid: 24b418e2620fcb6439fe508ac7c61b32, type: 2}
+  - {fileID: 11400000, guid: 0a61d9f640278634885af23987b225af, type: 2}
+  - {fileID: 11400000, guid: 0f595d1eb0eb9e443b31c737f54a480a, type: 2}
+  - {fileID: 11400000, guid: bed202fdd87a06c4bac1a654509038b7, type: 2}
+  - {fileID: 11400000, guid: ea09a5e6a411c6f40a8fa84e5dd721f4, type: 2}
+  - {fileID: 11400000, guid: 68bccf51ec155714bbaf9724139961f6, type: 2}
+  - {fileID: 11400000, guid: a3ab23bca719f1c40bd6f4bf2c43d4d7, type: 2}
+  - {fileID: 11400000, guid: 55854348243ffca448043448e1ea8b74, type: 2}
+  - {fileID: 11400000, guid: bb9ba7a366633fb44a8c3dfa62b5f2eb, type: 2}
+  - {fileID: 11400000, guid: 5dfe88dc37872984b8a95161a212c47a, type: 2}
+  - {fileID: 11400000, guid: 97bb321f2255c224fa6843ee50e1e348, type: 2}

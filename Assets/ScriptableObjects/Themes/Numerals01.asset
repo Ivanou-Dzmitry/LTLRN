@@ -20,9 +20,8 @@ MonoBehaviour:
     ru: "\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435"
     en: Numerals
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
-      \u0441 0"
-    en: We study numerals starting with 0
+    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435."
+    en: Study numerals.
   sections:
   - {fileID: 11400000, guid: eed356a3ff30ab64ba6f91f54bbcc973, type: 2}
   - {fileID: 11400000, guid: d166b5729a918ca4da42bc1786382e10, type: 2}

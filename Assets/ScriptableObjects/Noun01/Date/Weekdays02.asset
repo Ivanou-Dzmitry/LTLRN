@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
+  m_Name: Weekdays02
+  m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 0
+  sectionType: 0
+  sectionLanguage: 1
+  difficultyType: 1
+  sectionNumber: 1
+  sectionIcon: {fileID: 21300000, guid: e48223f53dbc22d4db9d0937d4e28e4a, type: 3}
+  sectionHeaderColor: {r: 0.050274875, g: 0.29380625, b: 0.38993704, a: 1}
+  isLiked: 0
+  sectionTitle:
+    ru: "\u0414\u043D\u0438 \u043D\u0435\u0434\u0435\u043B\u0438"
+    en: Days of the week
+  sectionDescription:
+    ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
+      \u0434\u043D\u0435\u0439 \u043D\u0435\u0434\u0435\u043B\u0438. \u0422\u0435\u043A\u0441\u0442
+      \u0438 \u0437\u0432\u0443\u043A."
+    en: Let's review the names of the days of the week. Text and sound.
+  sectionInfo:
+    tableName: Rules01
+    columnName: RU
+    recordID: 1
+    value: " \u0423\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
+      \u0432\u043C\u0435\u0441\u0442\u0435 \u0441\u043E \u0441\u043B\u043E\u0432\u0430\u043C\u0438
+      \u0432 \u0436\u0435\u043D\u0441\u043A\u043E\u043C \u0438 \u043C\u0443\u0436\u0441\u043A\u043E\u043C
+      \u0440\u043E\u0434\u0435: \u043A\u0430\u043A \u0438 \u0432 \u0440\u0443\u0441\u0441\u043A\u043E\u043C
+      \u044F\u0437\u044B\u043A\u0435, \u0432 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u043C
+      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u0443\u044E\u0442\u0441\u044F
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438
+      \u0432 \u0440\u043E\u0434\u0435, \u0447\u0438\u0441\u043B\u0435, \u043F\u0430\u0434\u0435\u0436\u0435
+      = \u0438\u0437\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u0432\u043C\u0435\u0441\u0442\u0435
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438."
+    whereColumn: ID
+    whereValue: 
+  bundleSections: []
+  questions:
+  - {fileID: 11400000, guid: 7f420b1b469232547874eb3b7f09a1ec, type: 2}
+  - {fileID: 11400000, guid: f4a4da41b9b9ca74190ab1ba6ccba443, type: 2}
+  - {fileID: 11400000, guid: c6ddfcca162d3b34c9689cb2383e90bf, type: 2}
+  - {fileID: 11400000, guid: dacc53c437f6e044fa28cecb098261ce, type: 2}
+  - {fileID: 11400000, guid: 0c968dd55115e9d47b59063f2fe7fc9b, type: 2}
+  - {fileID: 11400000, guid: 2565eb8259b71614f870d3f17b3cadb9, type: 2}
+  - {fileID: 11400000, guid: 928070475ac53c844ac0d7ff967ea7b2, type: 2}

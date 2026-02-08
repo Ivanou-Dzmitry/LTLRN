@@ -15,6 +15,7 @@ MonoBehaviour:
   themeDifficulty: 0
   themeIcon: {fileID: 21300000, guid: 6b57f1ca382a15744b25d56a49f03ad8, type: 3}
   themeHeaderColor: {r: 0.5803922, g: 0.23470902, b: 0, a: 1}
+  themeNameTargetLang: Pusdalyviai
   themeName:
     ru: "\u041F\u043E\u043B\u0443\u043F\u0440\u0438\u0447\u0430\u0441\u0442\u0438\u044F "
     en: Half-Participles
