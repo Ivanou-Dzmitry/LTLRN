@@ -1342,15 +1342,13 @@ public class ExGameLogic : MonoBehaviour
     {
         //disable check button for question and enable for learn
         if (nextButton != null & isLearnSection == false)
-        {
-            Debug.Log("HERE1");
+        {            
             nextButton.interactable = false;
             nextBtn.PlayAnimation(false, animationName);
             nextBtn.RefreshState();
         }
         else if (nextButton != null & isLearnSection == true)
-        {            
-            Debug.Log("HERE2");
+        {                        
             nextButton.interactable = true;
             nextBtn.PlayAnimation(true, animationName);
             nextBtn.RefreshState();

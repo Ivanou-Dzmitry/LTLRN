@@ -38,7 +38,7 @@ public class DBUtils : MonoBehaviour
     private bool isDataInitialized = false;
     private const string dbDataName = "keliasdata.db"; 
 
-    private const int DB_VERSION = 3; // Increment this when you update the database
+    private const int DB_VERSION = 4; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES
@@ -283,7 +283,7 @@ public class DBUtils : MonoBehaviour
     }
 
     //section DATA table
-    public void EnsureSectionExists(string sectionName)
+    public void EnsureSectionExists(string sectionName, bool isBundle = false)
     {
         if (!isDataInitialized)
         {
@@ -300,7 +300,7 @@ public class DBUtils : MonoBehaviour
                     .Where(s => s.Name == sectionName)
                     .FirstOrDefault();
 
-                // If not exists, create it
+                // If section not exists, create it
                 if (existing == null)
                 {
                     var newSection = new SectionDB
@@ -308,7 +308,9 @@ public class DBUtils : MonoBehaviour
                         Name = sectionName,
                         QDone = 0,
                         Liked = "false",
-                        Time = 0
+                        Time = 0,
+                        Complete = "false",
+                        Bundle = isBundle.ToString().ToLower() // "true" or "false"
                     };
 
                     int rowsAffected = connection.Insert(newSection);

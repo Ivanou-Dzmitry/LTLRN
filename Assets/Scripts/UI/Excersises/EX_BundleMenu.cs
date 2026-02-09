@@ -3,6 +3,7 @@ using NUnit.Framework.Internal;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ using UnityEngine.UI;
 public class EX_BundleMenu : Panel
 {
     private GameData gameData;
+    private ExDataLoader dataLoader;
+    private DBUtils dbUtils;
 
     [Header("Buttons")]
     public Button exitButton;
@@ -57,6 +60,11 @@ public class EX_BundleMenu : Panel
         //run animation
         ButtonImage exitBtn = exitButton.GetComponent<ButtonImage>();
         exitBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
+
+        if (dataLoader == null)
+            dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
+
+        dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
     }   
 
     private void OnExitClick()
@@ -86,8 +94,8 @@ public class EX_BundleMenu : Panel
             sectionButton.sectionName = sec;
 
             //set colors
-            Image backColor = sectionBtnObj.GetComponent<Image>();
-            backColor.color = sec.sectionHeaderColor;
+            //Image backColor = sectionBtnObj.GetComponent<Image>();
+            //backColor.color = sec.sectionHeaderColor;
 
             ApplySectionType(sec, sectionButton);
         }        
@@ -147,6 +155,8 @@ public class EX_BundleMenu : Panel
 
         //set difficulty text
         button.sectionDifficulty.text = sec.difficultyType.ToString();
+
+        SetProgressSlider(sec, button);
     }
 
     private void SetupImageSection(Section sec, SectionButton button)
@@ -163,6 +173,8 @@ public class EX_BundleMenu : Panel
 
         //set difficulty text
         button.sectionDifficulty.text = sec.difficultyType.ToString();
+
+        SetProgressSlider(sec, button);
     }
 
     private void SetupSoundSection(Section sec, SectionButton button)
@@ -179,6 +191,8 @@ public class EX_BundleMenu : Panel
 
         //set button text
         button.sectionText.text = $"{LangList.LT.ToString()}\n{text}";
+
+        SetProgressSlider(sec, button);
     }
 
     private void SetupInputSection(Section sec, SectionButton button)
@@ -199,6 +213,12 @@ public class EX_BundleMenu : Panel
         button.sectionText.text = text;
 
         button.sectionDifficulty.text = sec.difficultyType.ToString();
+
+        bool complete = dbUtils.GetSectionComplete(sec.name);
+        if (complete)
+        {
+            SetProgressSlider(sec, button, true);
+        }
     }
 
     private void SetupExamSection(Section sec, SectionButton button)
@@ -221,6 +241,25 @@ public class EX_BundleMenu : Panel
             LocalizationSettings.SelectedLocale = locale;
 
         return locale;
+    }
+
+    private void SetProgressSlider(Section sec, SectionButton button, bool complete=false)
+    {
+        int questionsCount = dataLoader.GetQuestionCount(sec);
+
+        button.progressSlider.maxValue = questionsCount;
+
+        int result = dbUtils.GetSectionResult(sec.name);
+
+        //set slider value based on result or complete status
+        if (complete)
+            button.progressSlider.value = questionsCount;
+        else
+            button.progressSlider.value = result;
+
+        //fil eith theme color
+        Image fillImage = button.progressSlider.fillRect.GetComponent<Image>();
+        fillImage.color = sec.sectionHeaderColor;
     }
 
 

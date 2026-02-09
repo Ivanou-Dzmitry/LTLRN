@@ -76,8 +76,6 @@ public class ExDataLoader : MonoBehaviour
             yield return null;
         }
 
-        //Debug.Log("Database is ready! Loading data...");
-
         // Now load your data IMPORTANT
         LoadData();
     }
@@ -137,7 +135,7 @@ public class ExDataLoader : MonoBehaviour
             // OPTIONAL: initialize panel data
             Section section = sectionManager.sections[i];
 
-            if (section.questions.Length > 0 && section.questions != null)
+            if (!section.isBundle && section.questions.Length > 0 && section.questions != null)
             {
                 LoadSections(section, i); //section type1
             }
@@ -159,28 +157,35 @@ public class ExDataLoader : MonoBehaviour
 
     private void LoadSections(Section section, int i)
     {
+        if (sectionPanelPrefab == null)
+            return;
+
+        //prefab instance
         GameObject panel = Instantiate(sectionPanelPrefab, sectionsRectTransform);
         RectTransform rt = panel.GetComponent<RectTransform>();
         rt.localScale = Vector3.one;
         rt.localPosition = Vector3.zero;
 
+        //naming
         string sectionName = section.name;
         panel.name = sectionName;
-
-        //Debug.Log("Loading section: " + panel.name);
-
+       
         //upd section data in db
         dbUtils.EnsureSectionExists(panel.name);
 
+        //get controller
         SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
         sectionPanel.Initialize(section);
 
+        //set icon
         if (section.sectionIcon != null)
             sectionPanel.sectionImage.sprite = section.sectionIcon;
 
+        //set header and description
         sectionPanel.sectionHeaderText.text = sectionPanel.GetTitle(section);
         sectionPanel.sectionDescriptionText.text = sectionPanel.GetDescription(section);
 
+        //set liked state
         bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
         sectionPanel.SetLikedState(isLiked);
 
@@ -193,33 +198,42 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.progressSlider.maxValue = questionsCount;
         }
 
+        //get progress
         int progress = dbUtils.GetSectionProgress(section.name);
         sectionPanel.progressSlider.value = progress;
 
+        //get time
         float time = dbUtils.GetSectionTime(section.name);
         sectionPanel.sectionTimeText.text = FormatTime(time);
 
+        //get result
         int result = dbUtils.GetSectionResult(section.name);
         string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
         string resultText = $"{result} {fromTxt} {questionsCount}";
         sectionPanel.sectionResultText.text = resultText;
 
+        //set data
         sectionPanel.currentSection = section;
-        sectionPanel.sectionIndex = i;
-
-        //sectionPanel.PlayButtonToggle(questionsCount);
+        sectionPanel.sectionIndex = i;        
     }
 
     private void LoadBundle(Section section, int i)
     {
+        if (bundlePanelPrefab == null)
+            return;
+
+        //instance object
         GameObject panel = Instantiate(bundlePanelPrefab, sectionsRectTransform);
         RectTransform rt = panel.GetComponent<RectTransform>();
         rt.localScale = Vector3.one;
         rt.localPosition = Vector3.zero;
 
-        //setname
+        //set name
         string sectionName = section.name;
         panel.name = sectionName;
+
+        //upd section data in db. Set bundle state to true
+        dbUtils.EnsureSectionExists(panel.name, true);
 
         //get controller
         SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
@@ -234,27 +248,69 @@ public class ExDataLoader : MonoBehaviour
 
         int bundleLenght = section.bundleSections.Length;
 
+        //set slider max value to bundle length
+        sectionPanel.progressSlider.maxValue = bundleLenght;
+
+        //set liked state
+        bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
+        sectionPanel.SetLikedState(isLiked);
+
+        int bundleProgress = 0;
+        float bundleTime = 0;
+        int bundleResult = 0;
+        int bundleQuestionCount = 0;
+
         //BACKLOGIC: get total questions in bundle
         for (int j = 0; j < bundleLenght; j++)
         {
+            //upd section data in db. Set bundle state to true
+            dbUtils.EnsureSectionExists(section.bundleSections[j].name);
+
+            bool complete = dbUtils.GetSectionComplete(section.bundleSections[j].name);
+            if(complete)
+                bundleProgress++;
+
             //get/set progress
-            int progress = dbUtils.GetSectionProgress(section.bundleSections[j].name);
-            sectionPanel.progressSlider.value = progress;
+            //int progress = dbUtils.GetSectionProgress(section.bundleSections[j].name);
+            //sectionPanel.progressSlider.value = progress;
+
+            //get result
+            int result = dbUtils.GetSectionResult(section.bundleSections[j].name);
+            bundleResult = bundleResult + result;
+
+            // Get question count regardless of type
+            int questionsCount = 0;
+            if (section.bundleSections[j].sectionType != Section.SectionType.LearnType01)
+                questionsCount = GetQuestionCount(section.bundleSections[j]);
+            
+            bundleQuestionCount = bundleQuestionCount + questionsCount;
 
             //get-set time
             float time = dbUtils.GetSectionTime(section.bundleSections[j].name);
-            sectionPanel.sectionTimeText.text = FormatTime(time);
+            //sectionPanel.sectionTimeText.text = FormatTime(time);
+            bundleTime = bundleTime + time;
 
             //transfer bundle sections
             sectionPanel.bundleSections = section.bundleSections;
         }
+
+        //set slider
+        sectionPanel.progressSlider.value = bundleProgress;
+        
+        //set time
+        sectionPanel.sectionTimeText.text = FormatTime(bundleTime);
+
+        //set result
+        //string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
+        string resultText = $"{bundleResult}/{bundleQuestionCount}";
+        sectionPanel.sectionResultText.text = resultText;
 
         sectionPanel.currentSection = section;
     }
 
 
     // Helper method to get question count
-    private int GetQuestionCount(Section section)
+    public int GetQuestionCount(Section section)
     {
         if (section.questions != null && section.questions.Length > 0)
             return section.questions.Length;

@@ -40,6 +40,9 @@ public class EX_MainPanel : Panel
     public RectTransform panel_02;
     public RectTransform panel_03;
 
+    public TMP_Text textPrefab;
+    private TMP_Text infoText;
+
     public RectTransform scrollPanel;
 
     // for ui layout
@@ -85,21 +88,6 @@ public class EX_MainPanel : Panel
             UpdateButton(lifeBtnImage, gameData.saveData.life);
             UpdateButton(crystalsBtnImage, gameData.saveData.crystals);
         }
-
-/*
-        //upb theme button text       
-        if (exDataLoader != null)
-        {
-            SectionManager currentTheme = exDataLoader.sectionManager;
-            Locale locale = GetLocale();
-
-            //update theme button text
-            if (currentTheme != null)
-            {
-                themeButtonData.buttonTextStr = currentTheme.GetThemeName(currentTheme, locale);
-                themeButtonData.RefreshState();
-            }            
-        }*/
     }
 
     //game resources buttons update
@@ -154,10 +142,8 @@ public class EX_MainPanel : Panel
 
         // Toggle filter state
         filterLikedOnly = !filterLikedOnly;
-        //Debug.Log("Like filter toggled. Now: " + (filterLikedOnly ? "ON" : "OFF"));
 
-        // Update button visual state
-        //likeFBtn.SetSelected(filterLikedOnly);
+        int likedCount = 0;
 
         // Update visibility of section panels
         foreach (Transform child in contentPanel)
@@ -166,14 +152,41 @@ public class EX_MainPanel : Panel
                 continue;
 
             SectionPanel sectionPanel = child.GetComponent<SectionPanel>();
+            
             if (sectionPanel == null)
                 continue;
 
+            if (sectionPanel.isLiked)
+                likedCount++;
+
             bool shouldBeVisible = !filterLikedOnly || sectionPanel.isLiked;
+            
             child.gameObject.SetActive(shouldBeVisible);
         }
 
+        //show text if no likes
+        ShowInfoText(likedCount, filterLikedOnly);
+
         isProcessing = false;
+    }
+
+    private void ShowInfoText(int likesCount, bool visible)
+    {
+        if (infoText != null)
+        {
+            Destroy(infoText.gameObject);
+            infoText = null;
+        }
+
+        if (likesCount == 0)
+        {
+            infoText = Instantiate(textPrefab, contentPanel);
+            infoText.name = "NoLikedContentText";
+            infoText.gameObject.SetActive(visible);
+            
+            string info = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "NoLikesTxt");
+            infoText.text = info;            
+        }
     }
 
     private void OnDestroy()
