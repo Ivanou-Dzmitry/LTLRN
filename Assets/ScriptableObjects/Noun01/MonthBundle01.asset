@@ -18,7 +18,7 @@ MonoBehaviour:
   difficultyType: 7
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: 19217339cefcb2743a7692305895b5a5, type: 3}
-  sectionHeaderColor: {r: 0.098039225, g: 0.5411765, b: 0.9803922, a: 1}
+  sectionHeaderColor: {r: 0.25490198, g: 0.82745105, b: 0.9843138, a: 1}
   isLiked: 0
   sectionTitle:
     ru: "\u041C\u0435\u0441\u044F\u0446\u044B"

@@ -18,15 +18,15 @@ MonoBehaviour:
   difficultyType: 7
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: e4ecfce803fb1854ea9b8eae6da5be92, type: 3}
-  sectionHeaderColor: {r: 0.8616352, g: 0.37916866, b: 0, a: 1}
+  sectionHeaderColor: {r: 0.9960785, g: 0.5686275, b: 0.25882354, a: 1}
   isLiked: 0
   sectionTitle:
     ru: "\u0422\u0435\u043C\u0430 \"\u0415\u0434\u0430\": \u0444\u0440\u0443\u043A\u0442\u044B"
     en: 'Theme "Food": fruits'
   sectionDescription:
     ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
-      \u0444\u0440\u0443\u043A\u0442\u043E\u0432"
-    en: Repeats names of fruits
+      \u0444\u0440\u0443\u043A\u0442\u043E\u0432."
+    en: Repeats names of fruits.
   sectionInfo:
     tableName: Rules01
     columnName: RU

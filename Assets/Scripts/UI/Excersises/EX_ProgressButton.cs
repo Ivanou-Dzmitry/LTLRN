@@ -21,13 +21,6 @@ public class EX_ProgressButton : MonoBehaviour
         button.onClick.AddListener(OnClicked);
     }
 
-    void Start()
-    {              
-        //set color
-        progressBar.color = palette.SuccessLight;
-        background.color = palette.Primary;
-    }
-
     public void StartProgress(float growthTime)
     {
         RectTransform rt = progressBar.rectTransform;

@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.78616345, g: 0.78616345, b: 0.78616345, a: 1}
+  m_Color: {r: 0.85, g: 0.85, b: 0.85, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1992,7 +1992,7 @@ PrefabInstance:
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+      objectReference: {fileID: -2275659944949192723, guid: c98f4408767c2fb4d8fcc30cf0b65435, type: 2}
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -2250,7 +2250,7 @@ PrefabInstance:
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+      objectReference: {fileID: -2275659944949192723, guid: c98f4408767c2fb4d8fcc30cf0b65435, type: 2}
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
@@ -2380,7 +2380,7 @@ PrefabInstance:
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+      objectReference: {fileID: -2275659944949192723, guid: c98f4408767c2fb4d8fcc30cf0b65435, type: 2}
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
@@ -2498,7 +2498,7 @@ PrefabInstance:
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+      objectReference: {fileID: -2275659944949192723, guid: c98f4408767c2fb4d8fcc30cf0b65435, type: 2}
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
@@ -2764,7 +2764,7 @@ PrefabInstance:
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+      objectReference: {fileID: -2275659944949192723, guid: c98f4408767c2fb4d8fcc30cf0b65435, type: 2}
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
@@ -2907,7 +2907,7 @@ PrefabInstance:
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+      objectReference: {fileID: -2275659944949192723, guid: c98f4408767c2fb4d8fcc30cf0b65435, type: 2}
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
@@ -3211,7 +3211,7 @@ PrefabInstance:
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1682879605890211294, guid: 76f434b841fd2a9418e5e169893dcd9d, type: 2}
+      objectReference: {fileID: -2275659944949192723, guid: c98f4408767c2fb4d8fcc30cf0b65435, type: 2}
     - target: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
