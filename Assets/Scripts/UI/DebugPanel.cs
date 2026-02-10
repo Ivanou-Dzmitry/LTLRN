@@ -1,18 +1,21 @@
 using LTLRN.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 using UnityEngine.UI;
 
 //debug panel
 
 public class DebugPanel : Panel
 {
-    //private DBUtils dbUtils;
+    private DBUtils dbUtils;
     private GameData gameData;
 
     [Header("Buttons")]
     [SerializeField] private Button resetSectionBtn;
     [SerializeField] private Button resetGameBtn;
+
+    [Header("UI")]
     [SerializeField] private TMP_Dropdown debugDrop;
     [SerializeField] private TMP_Text debugText;
 
@@ -24,6 +27,7 @@ public class DebugPanel : Panel
         }
         
         resetGameBtn.onClick.AddListener(OnResetClicked);
+        resetSectionBtn.onClick.AddListener(OnResetSectionClick);
 
         base.Initialize();
     }
@@ -31,6 +35,7 @@ public class DebugPanel : Panel
     public override void Open()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
 
         debugDrop.value = gameData.saveData.debugMode ? 1 : 0;
 
@@ -38,16 +43,26 @@ public class DebugPanel : Panel
     }
 
     private void OnResetClicked()
-    {       
-        if (gameData != null )
-            gameData.AddDefaultData();
+    {
+        bool result = false;
 
-        debugText.text = "Game Data Reset to Default Values.";
+        if (gameData != null )
+            result = gameData.AddDefaultData();
+
+        debugText.text = $"Game Data Reset to Default Values = {result}";
+    }
+
+    private void OnResetSectionClick()
+    {
+        bool result = dbUtils.DropSection();
+
+        debugText.text = $"Sections Reset to Default Values = {result}";
     }
 
     private void OnDestroy()
     {
-        resetGameBtn.onClick.RemoveListener(OnResetClicked);       
+        resetGameBtn.onClick.RemoveListener(OnResetClicked);
+        resetSectionBtn.onClick.RemoveListener(OnResetSectionClick);
     }
 
 
@@ -62,9 +77,7 @@ public class DebugPanel : Panel
             gameData.SaveToFile();
 
             debugText.text = "Debug: " + debugDrop.value;
-        }
-
-        
+        }        
     }
 
 }

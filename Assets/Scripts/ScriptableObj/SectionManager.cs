@@ -41,6 +41,26 @@ public class SectionManager : ScriptableObject
         return totalQuestions;
     }
 
+    public int GetBundleTotalQuestionCount()
+    {
+        int totalQuestions = 0;
+
+        foreach (var section in sections)
+        {
+            if (section != null)
+            {
+                //inside bundle sections
+                foreach (var bSection in section.bundleSections)
+                {
+                    if (bSection != null && bSection.questions != null && bSection.sectionType != SectionType.LearnType01) //skip learn sections
+                        totalQuestions += bSection.questions.Length;                    
+                }            
+            }
+        }
+
+        return totalQuestions;
+    }
+
     public float GetThemeDifValue(ThemeDifficulty difficulty)
     {
         switch (difficulty)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SectionManager
   themeDifficulty: 0
   themeIcon: {fileID: 21300000, guid: 27597e199bd7e094fb017edb84b9386b, type: 3}
-  themeHeaderColor: {r: 0.04705883, g: 0.854902, b: 0.76470596, a: 1}
+  themeHeaderColor: {r: 0.42745098, g: 0.85490197, b: 0.8071769, a: 1}
   themeNameTargetLang: "Daiktavard\u017Eiai"
   themeName:
     ru: "\u0421\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 "

@@ -829,7 +829,7 @@ public class ExGameLogic : MonoBehaviour
         //get question
         QuestionBase question = currentQuestion;
 
-        Debug.Log(currentSection.sectionType.ToString());
+        //Debug.Log(currentSection.sectionType.ToString());
 
         //check selected Text, Sound IMPORTANT
         if (currentSection.sectionType == Section.SectionType.Text || currentSection.sectionType == Section.SectionType.Sound || currentSection.sectionType == Section.SectionType.Image)

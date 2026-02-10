@@ -90,14 +90,16 @@ public class EX_BundleMenu : Panel
             GameObject sectionBtnObj = Instantiate(sectionButonPrefab, sectionsRectTransform);
             sectionBtnObj.name = sec.name;
 
+            //get section button component
             SectionButton sectionButton = sectionBtnObj.GetComponent<SectionButton>();
             sectionButton.sectionName = sec;
 
-            //set colors
-            //Image backColor = sectionBtnObj.GetComponent<Image>();
-            //backColor.color = sec.sectionHeaderColor;
-
+            //apply section type setup
             ApplySectionType(sec, sectionButton);
+
+            //fill eith theme color
+            Image fillImage = sectionButton.progressSlider.fillRect.GetComponent<Image>();
+            fillImage.color = sec.sectionHeaderColor;
         }        
     }
 
@@ -256,10 +258,6 @@ public class EX_BundleMenu : Panel
             button.progressSlider.value = questionsCount;
         else
             button.progressSlider.value = result;
-
-        //fil eith theme color
-        Image fillImage = button.progressSlider.fillRect.GetComponent<Image>();
-        fillImage.color = sec.sectionHeaderColor;
     }
 
 

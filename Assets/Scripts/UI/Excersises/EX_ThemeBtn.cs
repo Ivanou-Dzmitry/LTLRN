@@ -22,6 +22,7 @@ public class EX_ThemeBtn : MonoBehaviour
 
     [Header("Info")]
     public TMP_Text sectionsCount;
+    public TMP_Text tasksCount;
     public TMP_Text questionsCount;
 
     [Header("Sliders")]

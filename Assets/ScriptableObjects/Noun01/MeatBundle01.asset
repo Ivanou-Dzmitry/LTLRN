@@ -26,7 +26,7 @@ MonoBehaviour:
   sectionDescription:
     ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
       \u043C\u044F\u0441\u0430 \u0438 \u043C\u044F\u0441\u043D\u044B\u0445 \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u043E\u0432."
-    en: Repeats names of meat, and meat products.
+    en: Learn, and repeat the names of meat, and meat products.
   sectionInfo:
     tableName: Rules01
     columnName: RU

@@ -1326,7 +1326,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44661466966396951, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: selectedTextColor
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44661466966396951, guid: 384b72e585b56d64389b89913b571684, type: 3}
+      propertyPath: selectedButtonColor
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 699847442577452107, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_IsActive
@@ -1813,6 +1817,7 @@ MonoBehaviour:
   resetSectionBtn: {fileID: 3221437270405293191}
   resetGameBtn: {fileID: 5803849843016563941}
   debugDrop: {fileID: 804413922117281769}
+  debugText: {fileID: 0}
 --- !u!1001 &6704900372076396997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1827,7 +1832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44661466966396951, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: selectedTextColor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 699847442577452107, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_IsActive

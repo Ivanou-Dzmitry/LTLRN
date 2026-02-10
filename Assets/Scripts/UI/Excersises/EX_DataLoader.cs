@@ -233,7 +233,7 @@ public class ExDataLoader : MonoBehaviour
         panel.name = sectionName;
 
         //upd section data in db. Set bundle state to true
-        dbUtils.EnsureSectionExists(panel.name, true);
+        dbUtils.EnsureSectionExists(sectionName, true);
 
         //get controller
         SectionPanel sectionPanel = panel.GetComponent<SectionPanel>();
@@ -247,6 +247,7 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.sectionImage.sprite = section.sectionIcon;
 
         int bundleLenght = section.bundleSections.Length;
+        //Debug.Log($"Bundle '{section.name}' has {bundleLenght} sections.");
 
         //set slider max value to bundle length
         sectionPanel.progressSlider.maxValue = bundleLenght;
@@ -267,12 +268,9 @@ public class ExDataLoader : MonoBehaviour
             dbUtils.EnsureSectionExists(section.bundleSections[j].name);
 
             bool complete = dbUtils.GetSectionComplete(section.bundleSections[j].name);
+            
             if(complete)
                 bundleProgress++;
-
-            //get/set progress
-            //int progress = dbUtils.GetSectionProgress(section.bundleSections[j].name);
-            //sectionPanel.progressSlider.value = progress;
 
             //get result
             int result = dbUtils.GetSectionResult(section.bundleSections[j].name);
@@ -286,13 +284,18 @@ public class ExDataLoader : MonoBehaviour
             bundleQuestionCount = bundleQuestionCount + questionsCount;
 
             //get-set time
-            float time = dbUtils.GetSectionTime(section.bundleSections[j].name);
-            //sectionPanel.sectionTimeText.text = FormatTime(time);
+            float time = dbUtils.GetSectionTime(section.bundleSections[j].name);           
             bundleTime = bundleTime + time;
 
             //transfer bundle sections
             sectionPanel.bundleSections = section.bundleSections;
         }
+
+        //set topic count
+        float percentTopic = (float)bundleProgress / bundleLenght * 100f;
+        sectionPanel.topicsCount.text = $"{percentTopic:0}%";
+
+        //sectionPanel.topicsCount.text = $"{bundleProgress}/{bundleLenght}"; ;
 
         //set slider
         sectionPanel.progressSlider.value = bundleProgress;
@@ -301,9 +304,10 @@ public class ExDataLoader : MonoBehaviour
         sectionPanel.sectionTimeText.text = FormatTime(bundleTime);
 
         //set result
-        //string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
-        string resultText = $"{bundleResult}/{bundleQuestionCount}";
-        sectionPanel.sectionResultText.text = resultText;
+        float percentQ = (float)bundleResult / bundleQuestionCount * 100f;
+        
+        //string resultText = $"{bundleResult}/{bundleQuestionCount}";
+        sectionPanel.sectionResultText.text = $"{percentQ:0}%";
 
         sectionPanel.currentSection = section;
     }

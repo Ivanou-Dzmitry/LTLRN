@@ -177,7 +177,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4041682511257600
-    m_Localized: 'Select a topic to study or review
+    m_Localized: 'Select a topic to study, or review
 
 '
     m_Metadata:
@@ -322,7 +322,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 19188651357429760
-    m_Localized: Iamge
+    m_Localized: Image
     m_Metadata:
       m_Items: []
   - m_Id: 19528512962719744

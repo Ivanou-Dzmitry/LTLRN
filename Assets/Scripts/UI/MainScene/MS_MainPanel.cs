@@ -31,7 +31,7 @@ public class MainPanel : Panel
 
     private void OpenAdventureMenu()
     {
-        PanelManager.OpenScene("AdventureMenu");
+        PanelManager.OpenScene("GameBoard");
     }
 
     private void OpenExercisesMenu()

@@ -108,40 +108,52 @@ public class GameData : MonoBehaviour
         else
         {
             //default values
-            AddDefaultData();
+            bool result = AddDefaultData();
+            Debug.Log("No save file found. Created new save data with default values. Result: " + result);
         }
     }
 
-    public void AddDefaultData()
+    public bool AddDefaultData()
     {
-        saveData = new SaveData();
+        try
+        {
+            saveData = new SaveData();
 
-        gameData.saveData.selectedThemeIndex = 0;
-        gameData.saveData.selectedSectionIndex = 0;
+            gameData.saveData.selectedThemeIndex = 0;
+            gameData.saveData.selectedSectionIndex = 0;
 
-        //score
-        gameData.saveData.totalScore = 0;
+            //score
+            gameData.saveData.totalScore = 0;
 
-        gameData.saveData.playerName = "Player";
-        gameData.saveData.playerPass = "";
-        gameData.saveData.playerIconIndex = 0;
+            gameData.saveData.playerName = "Player";
+            gameData.saveData.playerPass = "";
+            gameData.saveData.playerIconIndex = 0;
 
-        //language
-        saveData.lang = "en";
+            //language
+            saveData.lang = "en";
 
-        //bonus stuff
-        gameData.saveData.stars = 0;
-        gameData.saveData.life = 5;
-        gameData.saveData.crystals = 0;
+            //bonus stuff
+            gameData.saveData.stars = 0;
+            gameData.saveData.life = 5;
+            gameData.saveData.crystals = 0;
 
-        //sound and music settings
-        saveData.soundToggle = false;
-        saveData.musicToggle = true;
-        saveData.soundVolume = 0.5f;
-        saveData.musicVolume = 0.1f;
-        saveData.soundSpeed = 1.0f;
+            //sound and music settings
+            saveData.soundToggle = true;
+            saveData.musicToggle = false;
+            saveData.soundVolume = 0.5f;
+            saveData.musicVolume = 0.1f;
+            saveData.soundSpeed = 1.0f;
 
-        saveData.debugMode = false;
+            saveData.debugMode = false;
+
+            return false;
+        }
+        catch
+        (Exception ex)
+        {
+            Debug.LogError("Error while adding default data: " + ex.Message);
+            return false;
+        }
     }
 
     private void PatchSavedData()

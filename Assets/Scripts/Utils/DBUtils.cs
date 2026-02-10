@@ -317,7 +317,7 @@ public class DBUtils : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log($"Section already exists: {sectionName} (ID: {existing.ID})");
+                    Debug.Log($"Section already exists: {sectionName} (ID: {existing.ID})");
                 }
             }
         }
@@ -1289,12 +1289,36 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    public bool DropSection()
+    {
+        if (!isDataInitialized)
+        {
+            Debug.LogError("Database not initialized! Wait for initialization to complete.");
+            return false;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbDataPath))
+            {
+                // Delete all records from the Sections table
+                int deletedRows = connection.DeleteAll<SectionDB>();
+                Debug.Log($"Cleared {deletedRows} records from Sections table");
+                return true;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error clearing Sections table: {ex.Message}");
+            return false;
+        }
+    }
+
     private class RowPair
     {
         public string FirstValue { get; set; }
         public string SecondValue { get; set; }
     }
-
 
 
     public bool IsReady => isInitialized && isDataInitialized;

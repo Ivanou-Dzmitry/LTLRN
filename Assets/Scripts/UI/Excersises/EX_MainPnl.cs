@@ -63,6 +63,8 @@ public class EX_MainPanel : Panel
 
         likeFilterButton.onClick.AddListener(ToggleLikeFilter);
         likeFBtn = likeFilterButton.GetComponent<ButtonImage>();
+
+        likeFBtn.buttonIcon.color = palette.DisabledButton;
     }
 
     private void Start()
@@ -142,6 +144,11 @@ public class EX_MainPanel : Panel
 
         // Toggle filter state
         filterLikedOnly = !filterLikedOnly;
+
+        if(filterLikedOnly)
+            likeFBtn.buttonIcon.color = palette.Secondary;
+        else
+            likeFBtn.buttonIcon.color = palette.DisabledButton;
 
         int likedCount = 0;
 

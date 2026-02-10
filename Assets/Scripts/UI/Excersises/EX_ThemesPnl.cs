@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 //panel with theme choosed
 
@@ -78,9 +79,11 @@ public class EX_ThemesPanel : Panel
 
         for (int i = 0; i < dataLoader.themes.theme.Length; i++)
         {
+            //prefab instance
             string themeName = dataLoader.themes.theme[i].name;
             GameObject themeButton = Instantiate(themeButtonPrefab, themesContainer.transform);
-                     
+            
+            //set name
             themeButton.name = themeName;
 
             // Ensure theme exists in DB
@@ -88,7 +91,6 @@ public class EX_ThemesPanel : Panel
 
             // Ensure correct UI transform values
             RectTransform rt = themeButton.GetComponent<RectTransform>();
-
             rt.localScale = Vector3.one;
             rt.localPosition = Vector3.zero;
             
@@ -101,9 +103,11 @@ public class EX_ThemesPanel : Panel
             //load data into button component
             //name sys
             themeBtnComponent.themeName.text = currentTheme.GetThemeName(currentTheme, locale);
-            //name target
+            
+            //name target (lern lang)
             themeBtnComponent.themeNameLocal.text = currentTheme.themeNameTargetLang;
 
+            //set theme
             themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
             
             //set theme button icon
@@ -117,20 +121,64 @@ public class EX_ThemesPanel : Panel
             //load info
             int sectionsCount = currentTheme.sections.Length;
 
+            //set sections count and questions count
             themeBtnComponent.sectionsCount.text = sectionsCount.ToString();
-            themeBtnComponent.questionsCount.text = currentTheme.GetTotalQuestionCount().ToString();
 
-            //Complete slider
-            int completeCount = dbUtils.GetCompleteSectionsCount();
+            int qCount = 0;
+            int completeCount = 0;
+
+            //try basic
+            qCount = currentTheme.GetTotalQuestionCount();
+
+            //try bundle
+            if(qCount == 0)
+                qCount = currentTheme.GetBundleTotalQuestionCount();
+
+            //set questions count
+            themeBtnComponent.questionsCount.text = qCount.ToString(); // bundle
+
             themeBtnComponent.themeProgressSlider.maxValue = sectionsCount;
             themeBtnComponent.themeProgressSlider.value = completeCount;
 
-            //get local description
-            string wipTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TopicWIPTxt");
+            //Debug.Log(dataLoader.themes.theme.Length);
+            //Debug.Log(currentTheme.sections.Length);
+
+            int comp = 0;
+            int totalSections = 0;
+
+            foreach (var section in currentTheme.sections)
+            {
+                if (!section.isBundle) continue;
+
+                foreach (var bundleSection in section.bundleSections)
+                {
+                    totalSections++;
+
+                    bool isComplete = dbUtils.GetSectionComplete(bundleSection.name);
+                    if (isComplete)
+                    {
+                        comp++;
+                    }
+                }
+            }
+
+            //tasks cont
+            themeBtnComponent.tasksCount.text = totalSections.ToString();
+
+            //set slider
+            themeBtnComponent.themeProgressSlider.maxValue = totalSections;
+            themeBtnComponent.themeProgressSlider.value = comp;
+
+            //fill slider with theme color
+            Image fillImage = themeBtnComponent.themeProgressSlider.fillRect.GetComponent<Image>();
+            fillImage.color = dataLoader.themes.theme[i].themeHeaderColor;
 
             //set color Gray if no sections, set button interactable
             if (sectionsCount == 0)
             {
+                //get local description
+                string wipTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TopicWIPTxt");
+
                 themeBtnComponent.topPnlImg.color = palette.Panel02;
                 themeBtnComponent.button.interactable = false;
                 themeBtnComponent.themeDescription.text = wipTxt;
@@ -140,7 +188,7 @@ public class EX_ThemesPanel : Panel
                 themeBtnComponent.topPnlImg.color = dataLoader.themes.theme[i].themeHeaderColor;
                 themeBtnComponent.button.interactable = true;
                 //description
-                themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
+                //themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
             }
 
             themeBtnComponent.UpdateUI();

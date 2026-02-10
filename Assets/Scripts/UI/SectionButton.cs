@@ -41,7 +41,7 @@ public class SectionButton : MonoBehaviour
             if(sectionName.sectionType == Section.SectionType.LearnType01)
                 dbUtils.SetSectionComplete(sectionName.name, true);
 
-            Debug.Log("Section set to: " + sectionName.ToString());
+            //Debug.Log("Section set to: " + sectionName.ToString());
         }
 
         //get game data

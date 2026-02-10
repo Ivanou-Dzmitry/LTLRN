@@ -24,6 +24,7 @@ public class SectionPanel : MonoBehaviour
     public TMP_Text sectionTimeText;
     public TMP_Text sectionResultText;
     public TMP_Text diffText;
+    public TMP_Text topicsCount;
 
     [Header("Sliders")]
     public Slider progressSlider;

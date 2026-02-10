@@ -24,9 +24,9 @@ MonoBehaviour:
     ru: "\u0422\u0435\u043C\u0430 \"\u0415\u0434\u0430\": \u0444\u0440\u0443\u043A\u0442\u044B"
     en: 'Theme "Food": fruits'
   sectionDescription:
-    ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
-      \u0444\u0440\u0443\u043A\u0442\u043E\u0432."
-    en: Repeats names of fruits.
+    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
+      \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0444\u0440\u0443\u043A\u0442\u043E\u0432."
+    en: Learn, and repeat the names of fruits.
   sectionInfo:
     tableName: Rules01
     columnName: RU
