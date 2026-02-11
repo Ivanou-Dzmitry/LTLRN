@@ -1,0 +1,1040 @@
+fileFormatVersion: 2
+guid: 1868e38dc3d68834391ed6b9e83297d7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 267279597765115534
+    second: kelias_tiles_01_0
+  - first:
+      213: -5574197111610782116
+    second: kelias_tiles_01_1
+  - first:
+      213: -8422902589958399011
+    second: kelias_tiles_01_2
+  - first:
+      213: -1553910338940788765
+    second: kelias_tiles_01_3
+  - first:
+      213: 4503697010785414526
+    second: kelias_tiles_01_4
+  - first:
+      213: 9169210711107434955
+    second: kelias_tiles_01_5
+  - first:
+      213: -4984948076245574672
+    second: kelias_tiles_01_6
+  - first:
+      213: -7581270709084126503
+    second: kelias_tiles_01_7
+  - first:
+      213: -8991260048812349189
+    second: kelias_tiles_01_8
+  - first:
+      213: 4607484441347817396
+    second: kelias_tiles_01_9
+  - first:
+      213: 1285772509910295953
+    second: kelias_tiles_01_10
+  - first:
+      213: -1245388228389959352
+    second: kelias_tiles_01_11
+  - first:
+      213: 778989948345005666
+    second: kelias_tiles_01_12
+  - first:
+      213: -7265994328068323484
+    second: kelias_tiles_01_13
+  - first:
+      213: 6355183370863581923
+    second: kelias_tiles_01_14
+  - first:
+      213: -7868177771999558966
+    second: kelias_tiles_01_15
+  - first:
+      213: 6224623565164244371
+    second: kelias_tiles_01_16
+  - first:
+      213: 9184437780888478520
+    second: kelias_tiles_01_17
+  - first:
+      213: -4183886703146620374
+    second: kelias_tiles_01_18
+  - first:
+      213: 5306490764987953193
+    second: kelias_tiles_01_19
+  - first:
+      213: -2919176280396758696
+    second: kelias_tiles_01_20
+  - first:
+      213: 6866876053497083036
+    second: kelias_tiles_01_21
+  - first:
+      213: 1712822202735076498
+    second: kelias_tiles_01_22
+  - first:
+      213: -8198649798853479402
+    second: kelias_tiles_01_23
+  - first:
+      213: -3235537045154863229
+    second: kelias_tiles_01_24
+  - first:
+      213: -2392940280992633241
+    second: kelias_tiles_01_25
+  - first:
+      213: -6104484707714243493
+    second: kelias_tiles_01_26
+  - first:
+      213: 1943389377688345978
+    second: kelias_tiles_01_27
+  - first:
+      213: 9155775797719299414
+    second: kelias_tiles_01_28
+  - first:
+      213: 1362781196849972869
+    second: kelias_tiles_01_29
+  - first:
+      213: -7662583766988632875
+    second: kelias_tiles_01_30
+  - first:
+      213: 4405144014782265232
+    second: kelias_tiles_01_31
+  - first:
+      213: 1900927074897769125
+    second: kelias_tiles_01_32
+  - first:
+      213: -9014230433626075938
+    second: kelias_tiles_01_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kelias_tiles_01_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 470
+        width: 433
+        height: 554
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8ebf78c06195b300800000000000000
+      internalID: 267279597765115534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_1
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 929
+        width: 97
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5e4e66a24974a2b0800000000000000
+      internalID: -5574197111610782116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_2
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 995
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddbdfcb88b6db1b80800000000000000
+      internalID: -8422902589958399011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_3
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 975
+        width: 50
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ef90aa97c66f6ae0800000000000000
+      internalID: -1553910338940788765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_4
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 1009
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7d6ad7d198508e30800000000000000
+      internalID: 4503697010785414526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_5
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 1007
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc9f34aaf849f3f70800000000000000
+      internalID: 9169210711107434955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_6
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 977
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fb9d93d228e1dab0800000000000000
+      internalID: -4984948076245574672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_7
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 991
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d287f6157ae9c690800000000000000
+      internalID: -7581270709084126503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_8
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 901
+        width: 17
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf8e0639f90a83380800000000000000
+      internalID: -8991260048812349189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_9
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 911
+        width: 33
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bffcaa10b211ff30800000000000000
+      internalID: 4607484441347817396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_10
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 911
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1956a23194bf7d110800000000000000
+      internalID: 1285772509910295953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_11
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 944
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8490d5f210e77bee0800000000000000
+      internalID: -1245388228389959352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_12
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 944
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26634b21b378fca00800000000000000
+      internalID: 778989948345005666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_13
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 943
+        width: 34
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4670c7fc7a00a2b90800000000000000
+      internalID: -7265994328068323484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_14
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 897
+        width: 46
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ea1bc6ca95223850800000000000000
+      internalID: 6355183370863581923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_15
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 916
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac28756f00e9ec290800000000000000
+      internalID: -7868177771999558966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_16
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 917
+        width: 21
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39de32e272e426650800000000000000
+      internalID: 6224623565164244371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_17
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 916
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 833e88f108da57f70800000000000000
+      internalID: 9184437780888478520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_18
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 832
+        width: 146
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a277ee539dfe5c0800000000000000
+      internalID: -4183886703146620374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_19
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 880
+        width: 49
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9207ffa5c3174a940800000000000000
+      internalID: 5306490764987953193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_20
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 863
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8518432b3a00d77d0800000000000000
+      internalID: -2919176280396758696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_21
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 895
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c94745d636b0c4f50800000000000000
+      internalID: 6866876053497083036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_22
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 867
+        width: 50
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2942d6de7ba25c710800000000000000
+      internalID: 1712822202735076498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_23
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 755
+        width: 108
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 614b28d327b883e80800000000000000
+      internalID: -8198649798853479402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_24
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 783
+        width: 18
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3876de533301913d0800000000000000
+      internalID: -3235537045154863229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_25
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 783
+        width: 50
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76ee5b62e719aced0800000000000000
+      internalID: -2392940280992633241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_26
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 783
+        width: 37
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5463e35083884ba0800000000000000
+      internalID: -6104484707714243493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_27
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 680
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7d916da75e48fa10800000000000000
+      internalID: 1943389377688345978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_28
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 704
+        width: 28
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6557d222499df0f70800000000000000
+      internalID: 9155775797719299414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_29
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 680
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58603d8374299e210800000000000000
+      internalID: 1362781196849972869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_30
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 680
+        width: 178
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dcc7fa79a809a590800000000000000
+      internalID: -7662583766988632875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 447
+        width: 59
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 097f8895427322d30800000000000000
+      internalID: 4405144014782265232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_32
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 568
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a234336a13716a10800000000000000
+      internalID: 1900927074897769125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_tiles_01_33
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 479
+        width: 50
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edcc3381e2507e280800000000000000
+      internalID: -9014230433626075938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      kelias_tiles_01_0: 267279597765115534
+      kelias_tiles_01_1: -5574197111610782116
+      kelias_tiles_01_10: 1285772509910295953
+      kelias_tiles_01_11: -1245388228389959352
+      kelias_tiles_01_12: 778989948345005666
+      kelias_tiles_01_13: -7265994328068323484
+      kelias_tiles_01_14: 6355183370863581923
+      kelias_tiles_01_15: -7868177771999558966
+      kelias_tiles_01_16: 6224623565164244371
+      kelias_tiles_01_17: 9184437780888478520
+      kelias_tiles_01_18: -4183886703146620374
+      kelias_tiles_01_19: 5306490764987953193
+      kelias_tiles_01_2: -8422902589958399011
+      kelias_tiles_01_20: -2919176280396758696
+      kelias_tiles_01_21: 6866876053497083036
+      kelias_tiles_01_22: 1712822202735076498
+      kelias_tiles_01_23: -8198649798853479402
+      kelias_tiles_01_24: -3235537045154863229
+      kelias_tiles_01_25: -2392940280992633241
+      kelias_tiles_01_26: -6104484707714243493
+      kelias_tiles_01_27: 1943389377688345978
+      kelias_tiles_01_28: 9155775797719299414
+      kelias_tiles_01_29: 1362781196849972869
+      kelias_tiles_01_3: -1553910338940788765
+      kelias_tiles_01_30: -7662583766988632875
+      kelias_tiles_01_31: 4405144014782265232
+      kelias_tiles_01_32: 1900927074897769125
+      kelias_tiles_01_33: -9014230433626075938
+      kelias_tiles_01_4: 4503697010785414526
+      kelias_tiles_01_5: 9169210711107434955
+      kelias_tiles_01_6: -4984948076245574672
+      kelias_tiles_01_7: -7581270709084126503
+      kelias_tiles_01_8: -8991260048812349189
+      kelias_tiles_01_9: 4607484441347817396
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

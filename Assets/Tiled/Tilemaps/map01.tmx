@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="24" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="1">
+ <editorsettings>
+  <chunksize width="32" height="32"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../Tilesets/kelias.tsx"/>
+ <layer id="5" name="ground" width="24" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAMw6DOv+kLOSSsmqqq+uIBEw4DAQ==
+  </data>
+ </layer>
+ <layer id="6" name="roads" width="24" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzLENACAMA0F3mRtYHDYIoqC6l9xZl/SNSubZqovzQ3w+n8/n8/l8Pv+PvwH1ezNh
+  </data>
+ </layer>
+ <layer id="7" name="decor" width="24" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzKERADAIADGWK5u1c4NBV+GSu7cfAcA4XS7+b/cW/wDwU5+OAZc=
+  </data>
+ </layer>
+</map>
