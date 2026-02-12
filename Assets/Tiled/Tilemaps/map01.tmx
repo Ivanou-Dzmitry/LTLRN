@@ -15,8 +15,11 @@
   </data>
  </layer>
  <layer id="7" name="decor" width="24" height="32">
+  <properties>
+   <property name="Type" value="decor"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJztzKERADAIADGWK5u1c4NBV+GSu7cfAcA4XS7+b/cW/wDwU5+OAZc=
+   eJxjYBgFo2AUjIJRAAOuQOxGQ/NbgbiNhuaPglEwVIALIzC/AbEb40C7ZBSMgpEHAHtoAmk=
   </data>
  </layer>
 </map>

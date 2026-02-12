@@ -263,7 +263,7 @@ public class DBUtils : MonoBehaviour
 
         //check size
         FileInfo fileInfo = new FileInfo(path);
-        Debug.Log($"Database file size: {fileInfo.Length} bytes");
+        //Debug.Log($"Database file size: {fileInfo.Length} bytes");
 
         try
         {

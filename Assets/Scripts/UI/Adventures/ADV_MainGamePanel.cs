@@ -1,21 +1,59 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class ADV_MainGamePanel : MonoBehaviour
 {
+    private GameData gameData;
+
     [Header("UI")]
     public Canvas canvasRoot;
     public RectTransform panel01;
     public RectTransform panel02;
     public RectTransform panel03;
 
-    private const float PANEL01_HEIGHT = 200f;
+    public float fadeDuration = 2f;
+
+    [Header("Game data")]
+    public Button lifeBtn;
+    public Button crystalsBtn;
+    public Button starsBtn;
+    
+    private ButtonImage starsBtnImage;
+    private ButtonImage lifeBtnImage;
+    private ButtonImage crystalsBtnImage;
+
+    private Image panelImage;
+
+    private const float PANEL01_HEIGHT = 0f;
     private const float PANEL03_HEIGHT = 450f;
+
     private void Start()
     {
         SetPanelHeight();
+
+        LoadData();
+
+        panelImage = panel02.GetComponent<Image>();
+        StartCoroutine(FadeOut());
     }
 
-    void SetPanelHeight()
+    private void LoadData()
+    {
+        //get gamedata
+        if (gameData == null)
+            gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        //update buttons
+        if (gameData != null)
+        {
+            UpdateButton(starsBtn, gameData.saveData.stars);
+            UpdateButton(lifeBtn, gameData.saveData.life);
+            UpdateButton(crystalsBtn, gameData.saveData.crystals);
+        }
+    }
+
+    private void SetPanelHeight()
     {
         Rect safeArea = Screen.safeArea;
 
@@ -35,5 +73,45 @@ public class ADV_MainGamePanel : MonoBehaviour
         panel01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL01_HEIGHT);
         panel02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
         panel03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL03_HEIGHT);
+    }
+
+    //game resources buttons update
+    private void UpdateButton(Button button, int value)
+    {
+        if(button == null)
+            return;
+
+        ButtonImage btn = button.GetComponent<ButtonImage>();
+
+        //update button text
+        string str = value.ToString();
+        btn.buttonTextStr = str;
+        btn.SetText(str);
+        btn.RefreshState();
+    }
+
+    private IEnumerator FadeOut()
+    {
+        float time = 0f;
+        Color color = panelImage.color;
+
+        color.a = 1f;
+        panelImage.color = color;
+
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+
+            float t = time / fadeDuration;
+            t = t * t; // ease-in
+
+            color.a = 1f - t;
+            panelImage.color = color;
+
+            yield return null;
+        }
+
+        color.a = 0f;
+        panelImage.color = color;
     }
 }

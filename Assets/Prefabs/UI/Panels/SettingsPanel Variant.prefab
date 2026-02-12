@@ -2238,6 +2238,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4560857321245587293, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560857321245587293, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560857321245587293, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645654784262621396, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6237729991487557621, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6918176931490351773, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2261,6 +2281,18 @@ PrefabInstance:
     - target: {fileID: 8453238218624206470, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
       propertyPath: m_Name
       value: UserImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992079008750299409, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992079008750299409, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992079008750299409, guid: 4fb24cbbbe04b9545851cdd9aec65549, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

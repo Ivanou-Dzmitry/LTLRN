@@ -19,6 +19,7 @@ public class SaveData
     public string playerName;
     public string playerPass;
     public int playerIconIndex;
+    public Vector3 playerPosition;
 
     public string lang = "en";
 
@@ -121,6 +122,9 @@ public class GameData : MonoBehaviour
 
             gameData.saveData.selectedThemeIndex = 0;
             gameData.saveData.selectedSectionIndex = 0;
+
+            //player position
+            gameData.saveData.playerPosition = Vector3.zero;
 
             //score
             gameData.saveData.totalScore = 0;

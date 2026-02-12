@@ -3,28 +3,92 @@
  <grid orientation="orthogonal" width="32" height="32"/>
  <image source="../../Art/kelias_tiles_01.png" width="1024" height="1024"/>
  <tile id="68">
+  <properties>
+   <property name="Name" value="stump"/>
+   <property name="Type" value="inanimate"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="7" y="10" width="9" height="6"/>
   </objectgroup>
  </tile>
  <tile id="69">
+  <properties>
+   <property name="Name" value="stump"/>
+   <property name="Type" value="inanimate"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="10" width="7" height="6"/>
   </objectgroup>
  </tile>
  <tile id="132">
+  <properties>
+   <property name="Name" value="stump"/>
+   <property name="Type" value="inanimate"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="5" y="0" width="11" height="15"/>
   </objectgroup>
  </tile>
  <tile id="133">
+  <properties>
+   <property name="Name" value="stump"/>
+   <property name="Type" value="inanimate"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="14" height="15"/>
   </objectgroup>
  </tile>
+ <tile id="323">
+  <properties>
+   <property name="Name" value="log"/>
+   <property name="Type" value="inanimate"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="0" width="14" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="324">
+  <properties>
+   <property name="Name" value="log"/>
+   <property name="Type" value="inanimate"/>
+  </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
  <tile id="325">
+  <properties>
+   <property name="Name" value="log"/>
+   <property name="Type" value="inanimate"/>
+  </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="-2.54545" y="0" width="18.5455" height="16"/>
+   <object id="2" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="326">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="4" y="5" width="11" height="9"/>
+  </objectgroup>
+ </tile>
+ <tile id="327">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="1" width="16" height="14"/>
+  </objectgroup>
+ </tile>
+ <tile id="328">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="3" width="15" height="13"/>
+  </objectgroup>
+ </tile>
+ <tile id="329">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="3" width="15" height="12"/>
+  </objectgroup>
+ </tile>
+ <tile id="330">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="2" y="6" width="13" height="8"/>
   </objectgroup>
  </tile>
  <wangsets>

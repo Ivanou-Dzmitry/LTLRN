@@ -15,6 +15,7 @@ TagManager:
   - ScoreManager
   - LangSwitcher
   - BundlePanel
+  - ADVGameLogic
   layers:
   - Default
   - TransparentFX

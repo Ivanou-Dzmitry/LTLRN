@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
@@ -17,6 +17,17 @@ public class GameLogic : MonoBehaviour
     private SoundManager soundManager;
     private ScoreManager scoreManager;
     private LanguageSwitcher locManager;
+
+    [Header("Camera")]
+    public Camera mainCamera;
+
+    [Header("Player")]
+    public GameObject player;
+    public bool isInteraction = false;
+
+    [Header("Diallog")]
+    public GameObject dialogPanelTop;
+    public GameObject dialogPanelBottom;
 
     [Header("App State")]
     public GameState gameState;
@@ -67,7 +78,9 @@ public class GameLogic : MonoBehaviour
         //load theme
         if (gameData != null)
         {
-            Debug.Log("Load data!");
+            player.transform.position = gameData.saveData.playerPosition;
+
+            //Debug.Log("Load data!");
         }
         else
         {
@@ -94,6 +107,21 @@ public class GameLogic : MonoBehaviour
 
         //get current language
         currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
+    }
+
+
+    public void StartInteraction(string param01, string param02)
+    {
+        isInteraction = true;
+        dialogPanelTop.gameObject.SetActive(true);
+        Debug.Log($"Start interaction with {param01}, {param02}");
+    }
+
+
+    private void OnApplicationQuit()
+    {
+        gameData.saveData.playerPosition = player.transform.position;
+        gameData.SaveToFile();
     }
 
 }
