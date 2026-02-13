@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="24" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="24" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="3">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -11,7 +11,12 @@
  </layer>
  <layer id="6" name="roads" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJztzLENACAMA0F3mRtYHDYIoqC6l9xZl/SNSubZqovzQ3w+n8/n8/l8Pv+PvwH1ezNh
+   eJztzMEJACAQA8H8rm61Mr3GTAeK4kd2Ib8w0roSUvVabJwPwsfHx8fHx8fHx//J73aHl4/8myYNvzKG
+  </data>
+ </layer>
+ <layer id="8" name="fence" width="24" height="32">
+  <data encoding="base64" compression="zlib">
+   eJw7ysLAcIwARgaE1CLjI0DcgaafmqB91PxR80fNHzV/1PxR80fNHzV/1PxR84eZ+axA3EYjzALEAJT6PS8=
   </data>
  </layer>
  <layer id="7" name="decor" width="24" height="32">
@@ -19,7 +24,26 @@
    <property name="Type" value="decor"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRAAOuQOxGQ/NbgbiNhuaPglEwVIALIzC/AbEb40C7ZBSMgpEHAHtoAmk=
+   eJxjYBgFo2AU4AIujAwMrkDsxjjQLhkF9AKuQOxGQ/NbgbiNhuaPglEwlIEHEWWtNxnlsTuJejyHaJk/GNxNTvwQC4hJH6OAOAAACK8Ebw==
+  </data>
+ </layer>
+ <objectgroup id="10" name="objlayer01">
+  <object id="1" x="144.053" y="0.0719697" width="48.1515" height="16.0303">
+   <properties>
+    <property name="Name" value="topexit"/>
+    <property name="Type" value="entrance"/>
+   </properties>
+  </object>
+  <object id="2" x="80.9565" y="255.957" width="14" height="6.06454">
+   <properties>
+    <property name="Name" value="hut"/>
+    <property name="Type" value="entrance"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer id="9" name="buildings" width="24" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0MkNgDAQBEH7ZWwHxhUYYALjSooOYiR4TEv1nZU2BOec+76EDhkFVbzfY8CICbN4f8GKDQ27eP/AiQs3HvF+ivwfGQU1ig8455z7TS8jNAhn
   </data>
  </layer>
 </map>

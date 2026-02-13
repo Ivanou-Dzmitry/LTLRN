@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameLogic : MonoBehaviour
 {
     public enum GameState
     {
-        Play,
+        Play,        
         Finish,
         Pause
+    }
+
+    public enum InterractState
+    {
+        Start,
+        End        
     }
 
     private GameData gameData;
@@ -17,20 +24,26 @@ public class GameLogic : MonoBehaviour
     private SoundManager soundManager;
     private ScoreManager scoreManager;
     private LanguageSwitcher locManager;
-
+    
     [Header("Camera")]
     public Camera mainCamera;
 
     [Header("Player")]
     public GameObject player;
+    private Player playerClass;
     public bool isInteraction = false;
 
     [Header("Diallog")]
     public GameObject dialogPanelTop;
+    public TMP_Text dialogPanelText;
+
     public GameObject dialogPanelBottom;
 
     [Header("App State")]
     public GameState gameState;
+
+    [Header("Interract State")]
+    public InterractState interractState;
 
     [Header("Score")]
     public int tempScore = 0;
@@ -75,6 +88,8 @@ public class GameLogic : MonoBehaviour
         //scoreManager = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
         locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();
 
+        playerClass = player.GetComponent<Player>();
+
         //load theme
         if (gameData != null)
         {
@@ -107,14 +122,31 @@ public class GameLogic : MonoBehaviour
 
         //get current language
         currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
+
+        interractState = InterractState.End;
+
+
     }
 
 
-    public void StartInteraction(string param01, string param02)
+    public void StartInteraction(string[] tileParam)
     {
         isInteraction = true;
         dialogPanelTop.gameObject.SetActive(true);
-        Debug.Log($"Start interaction with {param01}, {param02}");
+        dialogPanelText.text = $"You interract with {tileParam[0]}, its {tileParam[1]}";
+
+        interractState = InterractState.Start;
+    }
+
+    public void EndInteraction()
+    {
+        isInteraction = false;
+        dialogPanelTop.gameObject.SetActive(false);
+        dialogPanelText.text = "";
+
+        interractState = InterractState.End;
+
+        playerClass.InteractIconRoutine(false);
     }
 
 
