@@ -11,12 +11,12 @@
  </layer>
  <layer id="6" name="roads" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJztzMEJACAQA8H8rm61Mr3GTAeK4kd2Ib8w0roSUvVabJwPwsfHx8fHx8fHx//J73aHl4/8myYNvzKG
+   eJxjYCAONLIzMDQBcTM7kRpIBEPZfEegmU4ctDMf5nZam88I9MNhGpo/FON21PxR80fNHzV/1PxR80fNHzWfHHAQaO4hdtq0rSgFALj4M2I=
   </data>
  </layer>
  <layer id="8" name="fence" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJw7ysLAcIwARgaE1CLjI0DcgaafmqB91PxR80fNHzV/1PxR80fNHzV/1PxR84eZ+axA3EYjzALEAJT6PS8=
+   eJw7ysLAcIwAdgdidOBGhL4jQNyBRS+1QPuo+aPmj5o/av6o+aPmj5o/av6o+aPmDzPzWYG4jUaYBYgBiB87Zg==
   </data>
  </layer>
  <layer id="7" name="decor" width="24" height="32">
@@ -28,7 +28,7 @@
   </data>
  </layer>
  <objectgroup id="10" name="objlayer01">
-  <object id="1" x="144.053" y="0.0719697" width="48.1515" height="16.0303">
+  <object id="1" x="160.235" y="0.0719697" width="63.7879" height="16.0303">
    <properties>
     <property name="Name" value="topexit"/>
     <property name="Type" value="entrance"/>

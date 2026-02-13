@@ -318,6 +318,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ADV_CameraMove
   target: {fileID: 1538462470}
   moveSmooth: 0.1
+  maxPosition: {x: 9.5, y: -5}
+  minPosition: {x: 2.5, y: -13}
 --- !u!224 &75940353 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4096145154094965966, guid: 384b72e585b56d64389b89913b571684, type: 3}
@@ -3069,7 +3071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1593912702
 Transform:
   m_ObjectHideFlags: 0
@@ -3719,6 +3721,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ADV_MapManager
   map:
   - {fileID: 8201949818147450626, guid: 439a806f89bc2bf4ba418d6482aa6623, type: 3}
+  - {fileID: -7779549013044185237, guid: 53f20eb7d3634e7418afeadeb69ed840, type: 3}
+  player: {fileID: 1538462468}
 --- !u!1 &1862857899
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,9 @@ public class SaveData
     public int playerIconIndex;
     public Vector3 playerPosition;
 
+    [Header("Map")]
+    public int currentMapIndex;
+
     public string lang = "en";
 
     //bonus stuff
@@ -126,6 +129,9 @@ public class GameData : MonoBehaviour
             //player position
             gameData.saveData.playerPosition = Vector3.zero;
 
+            //map
+            gameData.saveData.currentMapIndex = 0;
+
             //score
             gameData.saveData.totalScore = 0;
 
@@ -165,8 +171,7 @@ public class GameData : MonoBehaviour
         // Ensure life is at least 1
         if (gameData.saveData.life == 0)
             gameData.saveData.life = 5;
-
-
+               
         if (saveData.lang == string.Empty)
         {
             saveData.lang = "en";
