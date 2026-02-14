@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
@@ -25,6 +24,10 @@ public class Player : MonoBehaviour
     private Collision2D currentCollision;
     [SerializeField] private GameObject interractIcon;
     private Vector3Int currentTilePosition;
+
+    [Header("Utils")]
+    public TilesUtils tilesUtilsClass;
+    public ADV_MapManager mapManagerClass;
 
     //for icaon fade
     private Coroutine fadeRoutine;
@@ -68,7 +71,12 @@ public class Player : MonoBehaviour
     {
         //move only if not interacting
         if (gameLogic.interractState == GameLogic.InterractState.Start)
+        {
+            currentDirection = MoveDirection.None;
+            PlayerAnimation(currentDirection);
             return;
+        }
+            
 
         moveInputPlayer = context.ReadValue<Vector2>();
 
@@ -140,11 +148,10 @@ public class Player : MonoBehaviour
 
         currentCollision = collision;
 
+        mapManagerClass.ExitCheck(collision);
+
         //get tilemap from collision
         currentTilemap = collision.collider.GetComponentInParent<Tilemap>();
-
-/*        //try read custom properties from collider
-        ReadCustomPropertiesFromObject(collision);*/
 
         //only if tilemap found
         if (currentTilemap == null)
@@ -160,7 +167,6 @@ public class Player : MonoBehaviour
     {
         InteractIconRoutine(false);
     }
-
 
     public bool InteractIconRoutine(bool value)
     {
@@ -179,42 +185,6 @@ public class Player : MonoBehaviour
         fadeRoutine = StartCoroutine(FadeSprite(interractIcon, mode, ICON_FADE_TIME));
 
         return true;
-    }
-
-    public string[] GetCustomTileProperties(Vector3Int tilePos)
-    {
-        if (currentTilemap == null)
-            return null;
-
-        //get current tile
-        TileBase tile = currentTilemap.GetTile(tilePos);
-
-        if (tile == null)
-            return null;
-
-        //get custom properties from tile
-        SuperTile superTile = tile as SuperTile;
-        
-        if (superTile == null || superTile.m_CustomProperties == null)
-            return null;
-
-        //for custom params
-        string[] customData = new string[2];        
-
-        foreach (var prop in superTile.m_CustomProperties)
-        {
-            //get name
-            if (prop.m_Name == "Name")
-                customData[0] = prop.GetValueAsString();
-            //gett type
-            if (prop.m_Name == "Type")
-                customData[1] = prop.GetValueAsString();
-        }
-
-        if (customData[0] == null || customData[1] == null)
-            return null;
-
-        return customData;
     }
 
 
@@ -255,7 +225,7 @@ public class Player : MonoBehaviour
         Vector3Int targetCell = playerCell + offset;
 
         //try to get custom properties from target cell
-        string[] customProperty = GetCustomTileProperties(targetCell);
+        string[] customProperty = tilesUtilsClass.GetCustomTileProperties(currentTilemap, targetCell);
 
         if (customProperty != null)
         {
@@ -272,7 +242,7 @@ public class Player : MonoBehaviour
 
     public bool TryToInteractWithObject(Collision2D collision)
     {
-        string[] customProperty = ReadCustomPropertiesFromObject(collision);
+        string[] customProperty = tilesUtilsClass.GetCustomPropertiesFromObject(collision);
 
         //Debug.Log($"Trying to interact with object...{customProperty[0]}, {customProperty[1]}");
 
@@ -283,6 +253,7 @@ public class Player : MonoBehaviour
 
             fadeRoutine = StartCoroutine(FadeSprite(interractIcon, "in", ICON_FADE_TIME));
 
+            //send data to game logic
             gameLogic.StartInteraction(customProperty);
 
             return true;
@@ -291,42 +262,6 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    private string[] ReadCustomPropertiesFromObject(Collision2D collision)
-    {
-        try
-        {
-            SuperCustomProperties customProperties = collision.collider.GetComponentInParent<SuperCustomProperties>();
-            if (customProperties != null && customProperties.m_Properties != null)
-            {
-                // Get specific properties by name
-                string nameValue = null;
-                string typeValue = null;
-
-                foreach (var prop in customProperties.m_Properties)
-                {
-                    if (prop.m_Name == "Name")
-                    {
-                        nameValue = prop.GetValueAsString();
-                    }
-                    else if (prop.m_Name == "Type")
-                    {
-                        typeValue = prop.GetValueAsString();
-                    }
-                }
-
-                if (nameValue == null || typeValue == null)
-                    return null;
-
-                return new string[] { nameValue, typeValue };
-            }
-            return null;
-        }
-        catch
-        {
-            Debug.LogWarning("No SuperCustomProperties found on the collided tilemap.");
-            return null;
-        }
-    }
 
     private IEnumerator FadeSprite(GameObject obj, string direction, float duration)
     {
@@ -367,8 +302,6 @@ public class Player : MonoBehaviour
         if (direction == "out")
             obj.gameObject.SetActive(false);
     }
-
-
 
 }
 

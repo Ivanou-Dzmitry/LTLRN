@@ -21,8 +21,9 @@ public class SaveData
     public int playerIconIndex;
     public Vector3 playerPosition;
 
-    [Header("Map")]
-    public int currentMapIndex;
+    [Header("Map")]    
+    public int currentMapManagerIndex = 0;
+    public int currentMapIndex = 0;
 
     public string lang = "en";
 
@@ -129,7 +130,8 @@ public class GameData : MonoBehaviour
             //player position
             gameData.saveData.playerPosition = Vector3.zero;
 
-            //map
+            //map            
+            gameData.saveData.currentMapManagerIndex = 0;
             gameData.saveData.currentMapIndex = 0;
 
             //score

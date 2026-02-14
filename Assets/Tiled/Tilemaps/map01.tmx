@@ -3,6 +3,10 @@
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
+ <properties>
+  <property name="Name" value="map01"/>
+  <property name="Type" value="t"/>
+ </properties>
  <tileset firstgid="1" source="../Tilesets/kelias.tsx"/>
  <layer id="5" name="ground" width="24" height="32">
   <data encoding="base64" compression="zlib">
@@ -20,17 +24,19 @@
   </data>
  </layer>
  <layer id="7" name="decor" width="24" height="32">
-  <properties>
-   <property name="Type" value="decor"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AU4AIujAwMrkDsxjjQLhkF9AKuQOxGQ/NbgbiNhuaPglEwlIEHEWWtNxnlsTuJejyHaJk/GNxNTvwQC4hJH6OAOAAACK8Ebw==
   </data>
  </layer>
- <objectgroup id="10" name="objlayer01">
+ <layer id="9" name="buildings" width="24" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0MkNgDAQBEH7ZWwHxhUYYALjSooOYiR4TEv1nZU2BOec+76EDhkFVbzfY8CICbN4f8GKDQ27eP/AiQs3HvF+ivwfGQU1ig8455z7TS8jNAhn
+  </data>
+ </layer>
+ <objectgroup id="10" name="obects">
   <object id="1" x="160.235" y="0.0719697" width="63.7879" height="16.0303">
    <properties>
-    <property name="Name" value="topexit"/>
+    <property name="Name" value="top"/>
     <property name="Type" value="entrance"/>
    </properties>
   </object>
@@ -41,9 +47,4 @@
    </properties>
   </object>
  </objectgroup>
- <layer id="9" name="buildings" width="24" height="32">
-  <data encoding="base64" compression="zlib">
-   eJzt0MkNgDAQBEH7ZWwHxhUYYALjSooOYiR4TEv1nZU2BOec+76EDhkFVbzfY8CICbN4f8GKDQ27eP/AiQs3HvF+ivwfGQU1ig8455z7TS8jNAhn
-  </data>
- </layer>
 </map>

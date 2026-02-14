@@ -35,8 +35,8 @@ public class GameLogic : MonoBehaviour
 
     [Header("Diallog")]
     public GameObject dialogPanelTop;
-    public TMP_Text dialogPanelText;
-
+    private ADV_DialogPanel dialogPanelClass;
+    
     public GameObject dialogPanelBottom;
 
     [Header("App State")]
@@ -125,27 +125,27 @@ public class GameLogic : MonoBehaviour
 
         interractState = InterractState.End;
 
-
+        //get dialog panel class
+        dialogPanelClass = dialogPanelTop.GetComponent<ADV_DialogPanel>();
     }
 
 
     public void StartInteraction(string[] tileParam)
     {
         isInteraction = true;
-        dialogPanelTop.gameObject.SetActive(true);
-        dialogPanelText.text = $"You interract with {tileParam[0]}, its {tileParam[1]}";
-
+        
         interractState = InterractState.Start;
+        
+        string text = $"You interract with {tileParam[0]}, its {tileParam[1]}";
+        
+        //open panel with diallog
+        dialogPanelClass.OpenPanel(text);               
     }
 
     public void EndInteraction()
     {
-        isInteraction = false;
-        dialogPanelTop.gameObject.SetActive(false);
-        dialogPanelText.text = "";
-
+        isInteraction = false;               
         interractState = InterractState.End;
-
         playerClass.InteractIconRoutine(false);
     }
 

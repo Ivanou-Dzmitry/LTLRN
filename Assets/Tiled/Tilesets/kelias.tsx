@@ -187,9 +187,30 @@
    <object id="2" x="0" y="0" width="16" height="16"/>
   </objectgroup>
  </tile>
+ <tile id="1029">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="-0.125" y="15.9375">
+    <polygon points="0,0 16.0625,0.0625 16.1875,-16"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="1030">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0.125" y="0.125">
+    <polygon points="0,0 -0.125,15.75 15.8125,15.75"/>
+   </object>
+  </objectgroup>
+ </tile>
  <tile id="1031">
   <objectgroup draworder="index" id="2">
    <object id="2" x="0" y="0" width="16" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="1093">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0.0625" y="0.125">
+    <polygon points="0,0 15.875,0 15.9375,15.9375"/>
+   </object>
   </objectgroup>
  </tile>
  <tile id="1094">
