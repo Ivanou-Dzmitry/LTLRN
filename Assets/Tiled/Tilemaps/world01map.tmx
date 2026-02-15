@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="5" height="4" tilewidth="96" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="5" height="4" tilewidth="96" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="1">
+ <editorsettings>
+  <chunksize width="32" height="32"/>
+ </editorsettings>
  <tileset firstgid="1" source="../Tilesets/world01map.tsx"/>
  <layer id="1" name="maps" width="5" height="4">
   <data encoding="csv">
-0,0,0,0,0,
-0,0,18,0,0,
-0,0,17,0,0,
-0,0,16,0,0
+4,4,4,4,4,
+4,4,3,4,4,
+4,4,2,4,4,
+4,4,1,4,4
 </data>
  </layer>
  <objectgroup id="2" name="objects"/>

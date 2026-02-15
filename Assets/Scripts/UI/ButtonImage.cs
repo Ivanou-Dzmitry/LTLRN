@@ -108,7 +108,7 @@ public class ButtonImage : MonoBehaviour
         }
         else if(currentState == ButtonState.Selected)
         {
-            buttonImage.color = GetButtonColor(ButtonColor.PrimaryLight);
+            buttonImage.color = GetButtonColor(ButtonColor.SuccessLight);
         }
             
     }

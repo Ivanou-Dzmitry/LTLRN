@@ -333,6 +333,10 @@ MonoBehaviour:
     m_Localized: No likes on this topic.
     m_Metadata:
       m_Items: []
+  - m_Id: 22038470673358848
+    m_Localized: Map
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

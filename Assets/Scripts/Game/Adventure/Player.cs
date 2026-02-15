@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         //move only if not interacting
-        if (gameLogic.interractState == GameLogic.InterractState.End)        
+        if (gameLogic.interractState == GameLogic.InterractState.End || gameLogic.gameState == GameLogic.GameState.Play)        
             rigidbodyPlayer.linearVelocity = moveInputPlayer.normalized * _speed;
     }
 
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         //move only if not interacting
-        if (gameLogic.interractState == GameLogic.InterractState.Start)
+        if (gameLogic.interractState == GameLogic.InterractState.Start || gameLogic.gameState == GameLogic.GameState.Pause)
         {
             currentDirection = MoveDirection.None;
             PlayerAnimation(currentDirection);

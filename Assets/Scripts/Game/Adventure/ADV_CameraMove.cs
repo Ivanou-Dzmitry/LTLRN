@@ -3,6 +3,7 @@ using UnityEngine;
 public class ADV_CameraMove : MonoBehaviour
 {
     private GameData gameData;
+    private GameLogic gameLogic;
 
     public Transform target;
     public float moveSmooth;
@@ -15,14 +16,19 @@ public class ADV_CameraMove : MonoBehaviour
     {
         //get classes
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-        
-        if(gameData!=null)
+        gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
+
+        if (gameData!=null)
             transform.position = new Vector3(gameData.saveData.playerPosition.x, gameData.saveData.playerPosition.y, transform.position.z);
     }
 
     // Update is called once per frame
     void LateUpdate()
-    {        
+    {
+        //move cam only in play mode
+        if (gameLogic.gameState == GameLogic.GameState.Pause)
+            return;
+
         if (transform.position != target.position)
         {
             Vector3 targetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
