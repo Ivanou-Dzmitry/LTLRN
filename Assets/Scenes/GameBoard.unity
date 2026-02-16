@@ -341,7 +341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &89687050
 SpriteRenderer:
   serializedVersion: 2
@@ -4380,8 +4380,9 @@ MonoBehaviour:
   worlds: {fileID: 11400000, guid: 63265f109bf295946a939e50d453ab7e, type: 2}
   mapPanel: {fileID: 89687049}
   mapButton: {fileID: 113302266}
-  player: {fileID: 1538462468}
   tilesUtilsClass: {fileID: 2045288895}
+  player: {fileID: 1538462468}
+  mainPanel: {fileID: 1014867732}
 --- !u!1 &1862857899
 GameObject:
   m_ObjectHideFlags: 0

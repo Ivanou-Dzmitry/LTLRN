@@ -63,13 +63,13 @@
  </tile>
  <tile id="10">
   <properties>
-   <property name="Name" value="map0"/>
+   <property name="Name" value="map11"/>
    <property name="Type" value="map"/>
   </properties>
  </tile>
  <tile id="11">
   <properties>
-   <property name="Name" value="map0"/>
+   <property name="Name" value="map12"/>
    <property name="Type" value="map"/>
   </properties>
  </tile>
@@ -120,13 +120,13 @@
  </tile>
  <tile id="18">
   <properties>
-   <property name="Name" value="map0"/>
+   <property name="Name" value="map19"/>
    <property name="Type" value="map"/>
   </properties>
  </tile>
  <tile id="19">
   <properties>
-   <property name="Name" value="map0"/>
+   <property name="Name" value="map20"/>
    <property name="Type" value="map"/>
   </properties>
  </tile>

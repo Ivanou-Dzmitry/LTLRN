@@ -153,13 +153,13 @@
 </data>
  </layer>
  <objectgroup id="4" name="objects">
-  <object id="1" x="160.094" y="0.0507413" width="63.8985" height="15.8985">
+  <object id="1" x="160.094" y="0.0507413" width="63.8985" height="6.8985">
    <properties>
     <property name="Name" value="top"/>
     <property name="Type" value="entrance"/>
    </properties>
   </object>
-  <object id="2" x="159.955" y="496.212" width="64" height="15.6667">
+  <object id="2" x="159.955" y="509.951" width="64" height="2">
    <properties>
     <property name="Name" value="bottom"/>
     <property name="Type" value="entrance"/>

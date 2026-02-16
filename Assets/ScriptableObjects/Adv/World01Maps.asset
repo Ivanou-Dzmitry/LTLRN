@@ -21,4 +21,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72ba89438072af440b49240f49b52bda, type: 2}
   - {fileID: 11400000, guid: c228030807f1ba9478a5ed6d54679da4, type: 2}
   - {fileID: 11400000, guid: 3e0236835feb21746b52c32b81c9771a, type: 2}
+  - {fileID: 11400000, guid: 4311dd68b26f174419af95e782eb3590, type: 2}
+  - {fileID: 11400000, guid: b1589ed6299cccc4abd5236df8e166a2, type: 2}
+  - {fileID: 11400000, guid: 575f04caf23747e48af189b4d71b9aab, type: 2}
+  - {fileID: 11400000, guid: 9403741fc101e954b946cb13e8f55d04, type: 2}
   worldMap: {fileID: -831229621140371656, guid: 42b61591ce2ccf94a86f7d50391e76a4, type: 3}

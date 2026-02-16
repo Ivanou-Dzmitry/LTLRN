@@ -23,7 +23,7 @@ public class SaveData
 
     [Header("Map")]    
     public int currentMapManagerIndex = 0;
-    public int currentMapIndex = 0;
+    public int currentMapIndex;
 
     public string lang = "en";
 

@@ -6,10 +6,10 @@
  <tileset firstgid="1" source="../Tilesets/world01map.tsx"/>
  <layer id="1" name="maps" width="5" height="4">
   <data encoding="csv">
-4,4,4,4,4,
-4,4,3,4,4,
-4,4,2,4,4,
-4,4,1,4,4
+20,20,19,20,20,
+4,11,3,12,5,
+20,20,2,20,20,
+20,20,1,20,20
 </data>
  </layer>
  <objectgroup id="2" name="objects"/>

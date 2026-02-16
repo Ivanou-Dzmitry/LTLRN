@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 public class ADV_MapManager : MonoBehaviour
 {
     private GameData gameData;
     private GameLogic gameLogic;
+    private ADV_CameraMove cameraMoveClass;
 
     public Worlds worlds; 
     private MapsManager mapsManager;
@@ -16,10 +16,13 @@ public class ADV_MapManager : MonoBehaviour
 
     [Header("Map")]
     public GameObject mapPanel;
+    
     public Button mapButton;
     private ButtonImage mapBtn;
+
     private bool mapOpened = false;
-    GameObject miniMap = null;
+    private GameObject miniMap = null;
+    private GameObject currentMapInstance = null;
 
     private string[,] mapValues;
 
@@ -29,16 +32,32 @@ public class ADV_MapManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject player;
     private Player playerClass;
+    private Vector2 playerPositionOnMap = Vector2.zero;
+
+    //public Vector2 cameraChange;
+    private Vector3 playerPositionShift;
+
+    private Vector3 PLAYER_TOP = new Vector3 (0,-15f,0);
+    private Vector3 PLAYER_BOTTOM = new Vector3(0, 15f, 0);
+    private Vector3 PLAYER_RIGHT = new Vector3(-11, 0, 0);
+    private Vector3 PLAYER_LEFT = new Vector3(11, 0f, 0);
+
+    public GameObject mainPanel;
+    ADV_MainGamePanel mainPanelUI;
 
     //indexes for save
     private int currentMapIndex;
     private int currentMapManagerIndex;    
+
+    private bool exitTrigger = false;
     
 
     private void Awake()
     {
         mapButton.onClick.AddListener(OnMapOpen);
-        mapBtn = mapButton.GetComponent<ButtonImage>();    
+        mapBtn = mapButton.GetComponent<ButtonImage>();
+
+        mainPanelUI =  mainPanel.GetComponent<ADV_MainGamePanel>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,6 +71,7 @@ public class ADV_MapManager : MonoBehaviour
 
         //get logic
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
+        cameraMoveClass = Camera.main.GetComponent<ADV_CameraMove>();
     }
 
     private void LoadMap()
@@ -76,8 +96,16 @@ public class ADV_MapManager : MonoBehaviour
         //get map index
         currentMapIndex = gameData.saveData.currentMapIndex;
 
-        //get map
-        currentMap = mapsManager.maps[currentMapIndex];
+        //try load map
+        try
+        {
+            currentMap = mapsManager.maps[currentMapIndex];
+        }
+        catch
+        {
+        currentMap = mapsManager.maps[0];
+        }
+            
 
         if (currentMap == null)
             return;
@@ -89,8 +117,8 @@ public class ADV_MapManager : MonoBehaviour
             BuidWorld(miniMap);
 
         string mapName = currentMap.mapPrefab.name;
-        Vector2 myPosition = FindMapPosition(mapValues, mapName);
-        Debug.Log($">>> My position at '{mapName}' is at Row {myPosition.x}, Column {myPosition.y}");
+               
+        playerPositionOnMap = FindMapPosition(mapValues, mapName);
     }
 
     private bool MiniMapCreate()
@@ -116,11 +144,18 @@ public class ADV_MapManager : MonoBehaviour
 
     private bool InstanceMapPrefab(Map map)
     {
+/*        // Clear old
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }*/
+
         if (map != null)
         {
-            GameObject currentMapInstance = Instantiate(map.mapPrefab, Vector3.zero, Quaternion.identity);
+            currentMapInstance = Instantiate(map.mapPrefab, Vector3.zero, Quaternion.identity);
             currentMapInstance.transform.parent = transform;
             currentMapInstance.name = map.mapPrefab.name;
+
             return true;
         }
         else
@@ -130,21 +165,92 @@ public class ADV_MapManager : MonoBehaviour
         }
     }
 
+    private void MapTransfer(Vector2 position, string direction)
+    {
+        Debug.Log($">>> My position is at Row {playerPositionOnMap.x}, Column {playerPositionOnMap.y} Direction: {direction}");
+        int rows = mapValues.GetLength(0);
+        int columns = mapValues.GetLength(1);
+
+        int newRow = (int)playerPositionOnMap.x;
+        int newCol = (int)playerPositionOnMap.y;
+
+        switch (direction.ToLower())
+        {
+            case "top":
+                newRow = Mathf.Min(newRow + 1, rows - 1);    // prevent going past last row
+                playerPositionShift = PLAYER_TOP;
+                break;
+            case "bottom":
+                newRow = Mathf.Max(newRow - 1, 0);           // prevent going below first row
+                playerPositionShift = PLAYER_BOTTOM;
+                break;
+            case "left":
+                newCol = Mathf.Max(newCol - 1, 0);           // prevent going before first column
+                playerPositionShift = PLAYER_LEFT;
+                break;
+            case "right":
+                newCol = Mathf.Min(newCol + 1, columns - 1); // prevent going past last column
+                playerPositionShift = PLAYER_RIGHT;
+                break;
+            default:
+                Debug.LogWarning("Invalid direction: " + direction);
+                break;
+        }
+
+        Vector2 newPlayerPosition = new Vector2(newRow, newCol);
+
+        string mapName = mapValues[newRow, newCol];
+
+        Debug.Log($">>> Next position is at Row {newRow}, Column {newCol} Map: {mapName}");
+
+        //Debug.Log($"{mapName}");
+
+        for (int i = 0; i< mapsManager.maps.Length; i++)
+        {
+            if (mapsManager.maps[i].mapPrefab.name == mapName)
+            {
+                Destroy(currentMapInstance);
+
+                Debug.Log($"{i}");
+                InstanceMapPrefab(mapsManager.maps[i]);
+                
+                player.transform.position += playerPositionShift;
+
+                currentMapIndex = i;
+                gameData.saveData.currentMapIndex = currentMapIndex;
+                gameData.SaveToFile();
+                /*                cameraMoveClass.minPosition += cameraChange;
+                                cameraMoveClass.maxPosition += cameraChange;*/
+
+                playerPositionOnMap = FindMapPosition(mapValues, mapName);
+
+                mainPanelUI.PanelFadeOut();                
+                break;
+            }
+                
+        }
+
+
+        //Debug.Log($">>> New position: Row {newRow}, Column {newCol} | Value: {mapValues[newRow, newCol]}");
+
+    }
+
 
     public bool ExitCheck(Collision2D collision)
     {
+        //get exit direction
         string[] customProperty = tilesUtilsClass.GetCustomPropertiesFromObject(collision);
 
         if (customProperty!=null)
         {
             if(customProperty[1] == "entrance")
             {
-                Debug.Log($"Entrance {customProperty[0]} detected!");
+                MapTransfer(playerPositionOnMap, customProperty[0]);
 
                 return true;
             }
         }
-
+                
         return false;
     }
 
@@ -190,6 +296,7 @@ public class ADV_MapManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        //save data
         gameData.saveData.currentMapManagerIndex = currentMapManagerIndex;
         gameData.saveData.currentMapIndex = currentMapIndex;
         gameData.SaveToFile();

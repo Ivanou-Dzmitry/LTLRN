@@ -34,7 +34,7 @@
   </data>
  </layer>
  <objectgroup id="10" name="obects">
-  <object id="1" x="160.235" y="0.0719697" width="63.7879" height="16.0303">
+  <object id="1" x="160.235" y="0.0719697" width="63.7879" height="9.12121">
    <properties>
     <property name="Name" value="top"/>
     <property name="Type" value="entrance"/>

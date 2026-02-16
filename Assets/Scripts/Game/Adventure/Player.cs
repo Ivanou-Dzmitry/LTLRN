@@ -148,6 +148,7 @@ public class Player : MonoBehaviour
 
         currentCollision = collision;
 
+        //check collision with exit
         mapManagerClass.ExitCheck(collision);
 
         //get tilemap from collision

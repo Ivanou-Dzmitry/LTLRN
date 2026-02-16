@@ -35,7 +35,8 @@ public class ADV_MainGamePanel : MonoBehaviour
         LoadData();
 
         panelImage = panel02.GetComponent<Image>();
-        StartCoroutine(FadeOut());
+
+        PanelFadeOut();
     }
 
     private void LoadData()
@@ -88,6 +89,11 @@ public class ADV_MainGamePanel : MonoBehaviour
         btn.buttonTextStr = str;
         btn.SetText(str);
         btn.RefreshState();
+    }
+
+    public void PanelFadeOut()
+    {
+        StartCoroutine(FadeOut());
     }
 
     private IEnumerator FadeOut()
