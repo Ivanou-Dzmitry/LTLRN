@@ -142,7 +142,7 @@ public class GameLogic : MonoBehaviour
 
     public void StartInteraction(string[] tileParam)
     {
-        isInteraction = true;
+        //isInteraction = true;
         
         interractState = InterractState.Start;
         
@@ -156,7 +156,11 @@ public class GameLogic : MonoBehaviour
 
     public void EndInteraction()
     {
-        isInteraction = false;               
+        if(isInteraction)
+            isInteraction = false;               
+
+        dialogPanelClass.OnDiallogClose();
+
         interractState = InterractState.End;
         interactBtn.SetSelected(false);
 
@@ -166,7 +170,13 @@ public class GameLogic : MonoBehaviour
 
     private void OnInteract()
     {
-        playerClass.Interact();        
+        //toggle
+        isInteraction = !isInteraction;
+
+        if (isInteraction)
+            playerClass.Interact();
+        else
+            EndInteraction();
     }
 
     private void OnApplicationQuit()

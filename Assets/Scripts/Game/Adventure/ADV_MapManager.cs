@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class ADV_MapManager : MonoBehaviour
@@ -34,7 +35,7 @@ public class ADV_MapManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private GameObject player;
-    private Player playerClass;
+    //private Player playerClass;
     private Vector2 playerPositionOnMap = Vector2.zero;
     public GameObject playerMarkerOnMap;
 
@@ -67,8 +68,8 @@ public class ADV_MapManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (player != null)
-            playerClass = player.GetComponent<Player>();
+/*        if (player != null)
+            playerClass = player.GetComponent<Player>();*/
 
         if(worlds != null)
             LoadMap();
@@ -161,6 +162,7 @@ public class ADV_MapManager : MonoBehaviour
             currentMapInstance.transform.parent = transform;
             currentMapInstance.name = map.mapPrefab.name;
 
+            //set current map
             currentMap = map;
 
             return true;
@@ -314,8 +316,10 @@ public class ADV_MapManager : MonoBehaviour
         if (gameLogic.interractState == GameLogic.InterractState.Start)
             return;
 
+        //toggle
         mapOpened = !mapOpened;
 
+        //set panel active
         mapPanel.SetActive(mapOpened);
 
         if (mapOpened)
@@ -326,15 +330,14 @@ public class ADV_MapManager : MonoBehaviour
             miniMap.SetActive(true);
             miniMap.transform.localPosition = new Vector3(-0.4f, 0.25f, -0.1f);
 
+            //get current map
             Transform marker = miniMap.GetComponentsInChildren<Transform>(true)
               .FirstOrDefault(t => t.name == currentMap.mapPrefab.name);
-
-            Debug.Log(currentMap.mapPrefab.name);
-
+            
+            // get map on minimap and set position on minimap
             if (marker != null)
             {
-                //GameObject markerObj = marker.gameObject;
-                playerMarkerOnMap.transform.position = marker.transform.position;
+                UpdateMiniMapMarkerPosition(marker);
             }
 
             gameLogic.gameState = GameLogic.GameState.Pause;
@@ -347,7 +350,6 @@ public class ADV_MapManager : MonoBehaviour
             mapBtn.SetSelected(false);
         }
     }
-
 
 
     private void OnDestroy()
@@ -374,6 +376,45 @@ public class ADV_MapManager : MonoBehaviour
 
         // If not found, return -1,-1
         return new Vector2(-1, -1);
+    }
+
+    void UpdateMiniMapMarkerPosition(Transform marker)
+    {
+        if (marker == null) return;
+
+        Vector3 basePos = marker.transform.position;
+        Vector3 playerPos = player.transform.position;
+
+        float offsetValuePos = 0.2f;
+        float offsetValueNeg = -0.2f;
+
+        float offsetX = 0f;
+        float offsetY = 0f;
+
+        // ----- Y logic -----
+        if (playerPos.y >= -15f && playerPos.y <= -10f)
+        {
+            offsetY = offsetValueNeg;
+        }
+        else if (playerPos.y >= -6f && playerPos.y <= -0.8f)
+        {
+            offsetY = offsetValuePos;
+        }
+
+        // ----- X logic -----
+        if (playerPos.x >= 0.6f && playerPos.x <= 3f)
+        {
+            offsetX = offsetValueNeg;
+        }
+        else if (playerPos.x >= 7.5f && playerPos.x <= 11f)
+        {
+            offsetX = offsetValuePos;
+        }
+
+        playerMarkerOnMap.transform.position =
+            new Vector3(basePos.x + offsetX,
+                        basePos.y + offsetY,
+                        basePos.z);
     }
 
 }

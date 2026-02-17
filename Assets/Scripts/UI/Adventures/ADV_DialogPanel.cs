@@ -31,10 +31,8 @@ public class ADV_DialogPanel : MonoBehaviour
         dialogText.text = text;
     }
 
-    private void OnDiallogClose()
-    {
-        gameLogic.EndInteraction();
-       
+    public void OnDiallogClose()
+    {               
         if (animator != null)
         {
             animator.SetBool("closePanel", true);
