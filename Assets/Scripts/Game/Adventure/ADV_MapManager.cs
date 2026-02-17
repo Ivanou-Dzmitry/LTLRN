@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -16,7 +17,9 @@ public class ADV_MapManager : MonoBehaviour
 
     [Header("Map")]
     public GameObject mapPanel;
-    
+    private const int MAP_SORTING_ORDER = 13;
+
+    [Header("Map Button")]
     public Button mapButton;
     private ButtonImage mapBtn;
 
@@ -33,6 +36,7 @@ public class ADV_MapManager : MonoBehaviour
     [SerializeField] private GameObject player;
     private Player playerClass;
     private Vector2 playerPositionOnMap = Vector2.zero;
+    public GameObject playerMarkerOnMap;
 
     //public Vector2 cameraChange;
     private Vector3 playerPositionShift;
@@ -131,8 +135,9 @@ public class ADV_MapManager : MonoBehaviour
             miniMap.name = "miniMap_" + mapsManager.worldMap.name;
             miniMap.gameObject.SetActive(false);
 
+            //set sort here
             TilemapRenderer tr = miniMap.GetComponentInChildren<TilemapRenderer>();
-            tr.sortingOrder = 13;
+            tr.sortingOrder = MAP_SORTING_ORDER;
 
             return true;
         }
@@ -155,6 +160,8 @@ public class ADV_MapManager : MonoBehaviour
             currentMapInstance = Instantiate(map.mapPrefab, Vector3.zero, Quaternion.identity);
             currentMapInstance.transform.parent = transform;
             currentMapInstance.name = map.mapPrefab.name;
+
+            currentMap = map;
 
             return true;
         }
@@ -304,6 +311,9 @@ public class ADV_MapManager : MonoBehaviour
 
     private void OnMapOpen()
     {
+        if (gameLogic.interractState == GameLogic.InterractState.Start)
+            return;
+
         mapOpened = !mapOpened;
 
         mapPanel.SetActive(mapOpened);
@@ -315,6 +325,17 @@ public class ADV_MapManager : MonoBehaviour
 
             miniMap.SetActive(true);
             miniMap.transform.localPosition = new Vector3(-0.4f, 0.25f, -0.1f);
+
+            Transform marker = miniMap.GetComponentsInChildren<Transform>(true)
+              .FirstOrDefault(t => t.name == currentMap.mapPrefab.name);
+
+            Debug.Log(currentMap.mapPrefab.name);
+
+            if (marker != null)
+            {
+                //GameObject markerObj = marker.gameObject;
+                playerMarkerOnMap.transform.position = marker.transform.position;
+            }
 
             gameLogic.gameState = GameLogic.GameState.Pause;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class GameLogic : MonoBehaviour
 {
@@ -44,6 +45,8 @@ public class GameLogic : MonoBehaviour
 
     [Header("Interract State")]
     public InterractState interractState;
+    public Button interactButton;
+    private ButtonImage interactBtn;
 
     [Header("Score")]
     public int tempScore = 0;
@@ -53,6 +56,13 @@ public class GameLogic : MonoBehaviour
     public float sessionDuration;
 
     private Languages currentLang;
+
+
+    private void Awake()
+    {
+        interactButton.onClick.AddListener(OnInteract);
+        interactBtn = interactButton.GetComponent<ButtonImage>();
+    }
 
     private void Start()
     {
@@ -139,21 +149,36 @@ public class GameLogic : MonoBehaviour
         string text = $"You interract with {tileParam[0]}, its {tileParam[1]}";
         
         //open panel with diallog
-        dialogPanelClass.OpenPanel(text);               
+        dialogPanelClass.OpenPanel(text);
+
+        interactBtn.SetSelected(true);
     }
 
     public void EndInteraction()
     {
         isInteraction = false;               
         interractState = InterractState.End;
-        playerClass.InteractIconRoutine(false);
+        interactBtn.SetSelected(false);
+
+        playerClass.InteractIconRoutine(false);     
     }
 
+
+    private void OnInteract()
+    {
+        playerClass.Interact();        
+    }
 
     private void OnApplicationQuit()
     {
         gameData.saveData.playerPosition = player.transform.position;
         gameData.SaveToFile();
+    }
+
+    private void OnDestroy()
+    {
+        //remove listeners
+        interactButton.onClick.RemoveListener(OnInteract);
     }
 
 }

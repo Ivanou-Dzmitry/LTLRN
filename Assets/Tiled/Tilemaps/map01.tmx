@@ -43,7 +43,7 @@
   <object id="2" x="80.9565" y="255.957" width="14" height="6.06454">
    <properties>
     <property name="Name" value="hut"/>
-    <property name="Type" value="entrance"/>
+    <property name="Type" value="interior"/>
    </properties>
   </object>
  </objectgroup>

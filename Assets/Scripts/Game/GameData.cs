@@ -128,7 +128,7 @@ public class GameData : MonoBehaviour
             gameData.saveData.selectedSectionIndex = 0;
 
             //player position
-            gameData.saveData.playerPosition = Vector3.zero;
+            gameData.saveData.playerPosition = new Vector3 (5, -14, 0);
 
             //map            
             gameData.saveData.currentMapManagerIndex = 0;

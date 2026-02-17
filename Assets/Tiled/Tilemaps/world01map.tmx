@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="5" height="4" tilewidth="96" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="5" height="4" tilewidth="96" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="8">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -12,5 +12,27 @@
 20,20,1,20,20
 </data>
  </layer>
- <objectgroup id="2" name="objects"/>
+ <objectgroup id="2" name="objects">
+  <object id="1" name="map03" x="238.333" y="192.167">
+   <point/>
+  </object>
+  <object id="2" name="map01" x="239.667" y="457.333">
+   <point/>
+  </object>
+  <object id="3" name="map02" x="239.333" y="320.333">
+   <point/>
+  </object>
+  <object id="4" name="map11" x="143.667" y="191.333">
+   <point/>
+  </object>
+  <object id="5" name="map04" x="50" y="192">
+   <point/>
+  </object>
+  <object id="6" name="map05" x="429.667" y="189.667">
+   <point/>
+  </object>
+  <object id="7" name="map12" x="339" y="191.333">
+   <point/>
+  </object>
+ </objectgroup>
 </map>
