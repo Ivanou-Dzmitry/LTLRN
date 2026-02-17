@@ -35,8 +35,8 @@
  </tile>
  <tile id="68">
   <properties>
-   <property name="Name" value="stump"/>
-   <property name="Type" value="inanimate"/>
+   <property name="Name" value=""/>
+   <property name="Type" value=""/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="7" y="10" width="9" height="6"/>
@@ -44,8 +44,8 @@
  </tile>
  <tile id="69">
   <properties>
-   <property name="Name" value="stump"/>
-   <property name="Type" value="inanimate"/>
+   <property name="Name" value=""/>
+   <property name="Type" value=""/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="10" width="7" height="6"/>
@@ -63,8 +63,8 @@
  </tile>
  <tile id="132">
   <properties>
-   <property name="Name" value="stump"/>
-   <property name="Type" value="inanimate"/>
+   <property name="Name" value=""/>
+   <property name="Type" value=""/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="5" y="0" width="11" height="15"/>
@@ -72,8 +72,8 @@
  </tile>
  <tile id="133">
   <properties>
-   <property name="Name" value="stump"/>
-   <property name="Type" value="inanimate"/>
+   <property name="Name" value=""/>
+   <property name="Type" value=""/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="14" height="15"/>
@@ -149,8 +149,8 @@
  </tile>
  <tile id="323">
   <properties>
-   <property name="Name" value="log"/>
-   <property name="Type" value="inanimate"/>
+   <property name="Name" value=""/>
+   <property name="Type" value=""/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="2" y="0" width="14" height="16"/>
@@ -158,8 +158,8 @@
  </tile>
  <tile id="324">
   <properties>
-   <property name="Name" value="log"/>
-   <property name="Type" value="inanimate"/>
+   <property name="Name" value=""/>
+   <property name="Type" value=""/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="16" height="16"/>
@@ -167,8 +167,8 @@
  </tile>
  <tile id="325">
   <properties>
-   <property name="Name" value="log"/>
-   <property name="Type" value="inanimate"/>
+   <property name="Name" value=""/>
+   <property name="Type" value=""/>
   </properties>
   <objectgroup draworder="index" id="2">
    <object id="1" x="-2.54545" y="0" width="18.5455" height="16"/>

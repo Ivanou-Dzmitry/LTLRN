@@ -220,7 +220,7 @@ public class ADV_MapManager : MonoBehaviour
             {
                 Destroy(currentMapInstance);
 
-                Debug.Log($"{i}");
+                //Debug.Log($"{i}");
                 InstanceMapPrefab(mapsManager.maps[i]);
                 
                 player.transform.position += playerPositionShift;

@@ -9,6 +9,9 @@ public class TilesUtils : MonoBehaviour
         try
         {
             SuperCustomProperties customProperties = collision.collider.GetComponentInParent<SuperCustomProperties>();
+
+            Debug.Log(collision.collider.name);
+
             if (customProperties != null && customProperties.m_Properties != null)
             {
                 // Get specific properties by name
@@ -26,6 +29,8 @@ public class TilesUtils : MonoBehaviour
                         typeValue = prop.GetValueAsString();
                     }
                 }
+
+                //Debug.Log($"{nameValue}/ {typeValue}");
 
                 if (nameValue == null || typeValue == null)
                     return null;
@@ -75,5 +80,23 @@ public class TilesUtils : MonoBehaviour
             return null;
 
         return customData;
+    }
+
+
+    public TextAsset GetDialogue(Collider2D collider)
+    {
+        //Debug.Log(collider.gameObject.name);
+
+        ADV_DialogueTrigger trigger = collider.GetComponentInParent<ADV_DialogueTrigger>();
+
+        if (trigger != null)
+        {            
+            Debug.Log(trigger.inkJSON.text);
+
+            return trigger.inkJSON;
+        }
+            
+
+        return null;
     }
 }

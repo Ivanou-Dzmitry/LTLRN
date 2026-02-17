@@ -32,13 +32,16 @@ public class ADV_DialogPanel : MonoBehaviour
     }
 
     public void OnDiallogClose()
-    {               
+    {
+        dialogText.text = "";
+
         if (animator != null)
         {
             animator.SetBool("closePanel", true);
         }
 
-        StartCoroutine(DisableAfterDelay(ANIMATION_DURATION));
+        if(gameObject.activeSelf) 
+            StartCoroutine(DisableAfterDelay(ANIMATION_DURATION));
     }
 
     private IEnumerator DisableAfterDelay(float delay)

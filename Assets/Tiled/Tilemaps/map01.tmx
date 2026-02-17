@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="24" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="3">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="24" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="5">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -34,16 +34,28 @@
   </data>
  </layer>
  <objectgroup id="10" name="obects">
-  <object id="1" x="160.235" y="0.0719697" width="63.7879" height="9.12121">
+  <object id="1" name="entrance" x="160" y="0" width="63.7879" height="9.12121">
    <properties>
     <property name="Name" value="top"/>
     <property name="Type" value="entrance"/>
    </properties>
   </object>
-  <object id="2" x="80.9565" y="255.957" width="14" height="6.06454">
+  <object id="2" name="interior" x="80.9565" y="255.957" width="14" height="6.06454">
    <properties>
     <property name="Name" value="hut"/>
     <property name="Type" value="interior"/>
+   </properties>
+  </object>
+  <object id="3" name="log" x="122" y="120" width="62" height="32">
+   <properties>
+    <property name="Name" value="log"/>
+    <property name="Type" value="decor"/>
+   </properties>
+  </object>
+  <object id="4" name="stump" x="208" y="213" width="35" height="32">
+   <properties>
+    <property name="Name" value="stump"/>
+    <property name="Type" value="decor"/>
    </properties>
   </object>
  </objectgroup>

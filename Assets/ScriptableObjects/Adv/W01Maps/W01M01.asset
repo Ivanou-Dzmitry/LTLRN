@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60212e10ff4d71447b8c952abba1a6c5, type: 3}
   m_Name: W01M01
   m_EditorClassIdentifier: Assembly-CSharp::Map
-  mapPrefab: {fileID: 8201949818147450626, guid: 439a806f89bc2bf4ba418d6482aa6623, type: 3}
+  mapPrefab: {fileID: 4430078392526201593, guid: 1c46e718f512b2046a25047f5a2542db, type: 3}

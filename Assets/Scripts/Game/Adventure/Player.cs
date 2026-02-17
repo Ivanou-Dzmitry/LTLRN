@@ -1,6 +1,7 @@
 using SuperTiled2Unity;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -22,8 +23,10 @@ public class Player : MonoBehaviour
     [Header("Interaction")]
     private Tilemap currentTilemap;
     private Collision2D currentCollision;
+    private Collider2D currentCollider;
     [SerializeField] private GameObject interractIcon;
     private Vector3Int currentTilePosition;
+    private TextAsset inkText;
 
     [Header("Utils")]
     public TilesUtils tilesUtilsClass;
@@ -77,7 +80,6 @@ public class Player : MonoBehaviour
             return;
         }
             
-
         moveInputPlayer = context.ReadValue<Vector2>();
 
         //get direction from input
@@ -103,9 +105,13 @@ public class Player : MonoBehaviour
         //only interact if ready. Collision with collider
         if (!readyForInteract)
             return;
-       
-        if(!TryToInteractWithTile())
+
+        if (!TryToInteractWithTile())
+        {
             TryToInteractWithObject(currentCollision);
+            TryToInk();
+        }
+            
     }
 
     private void ResolveDirection(Vector2 input)
@@ -142,6 +148,36 @@ public class Player : MonoBehaviour
         animator.SetBool("moving", direction != MoveDirection.None);
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {        
+        currentCollider = collider;
+
+        inkText = tilesUtilsClass.GetDialogue(collider);
+
+        if(inkText != null)
+        {
+            readyForInteract = true;
+        }
+                    
+    }
+
+    private bool TryToInk()
+    {
+        if (fadeRoutine != null)
+            StopCoroutine(fadeRoutine);
+
+        fadeRoutine = StartCoroutine(FadeSprite(interractIcon, "in", ICON_FADE_TIME));
+
+        gameLogic.StartInteraction(inkText.text);
+
+        return true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        readyForInteract = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         readyForInteract = true;
@@ -149,7 +185,7 @@ public class Player : MonoBehaviour
         currentCollision = collision;
 
         //check collision with exit
-        mapManagerClass.ExitCheck(collision);
+        bool isExit = mapManagerClass.ExitCheck(collision);
 
         //get tilemap from collision
         currentTilemap = collision.collider.GetComponentInParent<Tilemap>();
@@ -166,12 +202,13 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        InteractIconRoutine(false);
+        //InteractIconRoutine(false);
+        currentCollision = null;
     }
 
     public bool InteractIconRoutine(bool value)
     {
-        readyForInteract = value;
+        //readyForInteract = value;
 
         if (fadeRoutine != null)
             StopCoroutine(fadeRoutine);
@@ -226,13 +263,13 @@ public class Player : MonoBehaviour
         Vector3Int targetCell = playerCell + offset;
 
         //try to get custom properties from target cell
-        string[] customProperty = tilesUtilsClass.GetCustomTileProperties(currentTilemap, targetCell);
+        string[] customProperty = tilesUtilsClass.GetCustomTileProperties(currentTilemap, targetCell);        
 
-        if (customProperty != null)
+        if (customProperty != null && customProperty[0] != "")
         {
             InteractIconRoutine(true);
 
-            gameLogic.StartInteraction(customProperty);
+            gameLogic.StartInteraction(customProperty[0]);
 
             return true;
         }
@@ -245,8 +282,6 @@ public class Player : MonoBehaviour
     {
         string[] customProperty = tilesUtilsClass.GetCustomPropertiesFromObject(collision);
 
-        //Debug.Log($"Trying to interact with object...{customProperty[0]}, {customProperty[1]}");
-
         if (customProperty != null )
         {
             if (fadeRoutine != null)
@@ -255,7 +290,7 @@ public class Player : MonoBehaviour
             fadeRoutine = StartCoroutine(FadeSprite(interractIcon, "in", ICON_FADE_TIME));
 
             //send data to game logic
-            gameLogic.StartInteraction(customProperty);
+            gameLogic.StartInteraction(customProperty[0]);
 
             return true;
         }

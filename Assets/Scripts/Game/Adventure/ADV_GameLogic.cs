@@ -140,13 +140,13 @@ public class GameLogic : MonoBehaviour
     }
 
 
-    public void StartInteraction(string[] tileParam)
+    public void StartInteraction(string tileParam)
     {
         //isInteraction = true;
         
         interractState = InterractState.Start;
         
-        string text = $"You interract with {tileParam[0]}, its {tileParam[1]}";
+        string text = $"You interract with {tileParam}";
         
         //open panel with diallog
         dialogPanelClass.OpenPanel(text);
@@ -172,6 +172,8 @@ public class GameLogic : MonoBehaviour
     {
         //toggle
         isInteraction = !isInteraction;
+
+        Debug.Log($"isInteraction={isInteraction}");
 
         if (isInteraction)
             playerClass.Interact();
