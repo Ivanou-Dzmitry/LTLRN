@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ADV_DialogPanel : MonoBehaviour
 {    
@@ -11,30 +12,24 @@ public class ADV_DialogPanel : MonoBehaviour
 
     [SerializeField] private Button closeDiallogButton;
     [SerializeField] private TMP_Text dialogText;
+    [SerializeField] private Button submitButton;
 
     private void Awake()
     {
         closeDiallogButton.onClick.AddListener(OnDiallogClose);
         animator = GetComponent<Animator>();
+
+        submitButton.onClick.AddListener(HandleSubmit);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //get logic
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
     }
 
-    public void OpenPanel(string text)
-    {
-        gameObject.SetActive(true);
-        dialogText.text = text;
-    }
-
     public void OnDiallogClose()
-    {
-        dialogText.text = "";
-
+    {       
         if (animator != null)
         {
             animator.SetBool("closePanel", true);
@@ -44,9 +39,18 @@ public class ADV_DialogPanel : MonoBehaviour
             StartCoroutine(DisableAfterDelay(ANIMATION_DURATION));
     }
 
+    private void HandleSubmit()
+    {
+        if (!ADV_DialogueManager.Instance.dialogueIsPalying)
+            return;
+
+        ADV_DialogueManager.Instance.ContinueStory();
+    }
+
     private IEnumerator DisableAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);        
+        yield return new WaitForSeconds(delay);
+        dialogText.text = "";
         gameObject.SetActive(false);
     }
 
@@ -54,6 +58,7 @@ public class ADV_DialogPanel : MonoBehaviour
     {
         //remove listeners
         closeDiallogButton.onClick.RemoveListener(OnDiallogClose);
+        submitButton.onClick.RemoveListener(HandleSubmit);
     }
 
 }

@@ -31,22 +31,13 @@ public class GameLogic : MonoBehaviour
 
     [Header("Player")]
     public GameObject player;
-    private Player playerClass;
-    public bool isInteraction = false;
-
-    [Header("Diallog")]
-    public GameObject dialogPanelTop;
-    private ADV_DialogPanel dialogPanelClass;
-    
-    public GameObject dialogPanelBottom;
+    private Player playerClass;    
 
     [Header("App State")]
     public GameState gameState;
 
-    [Header("Interract State")]
-    public InterractState interractState;
-    public Button interactButton;
-    private ButtonImage interactBtn;
+    [Header("Interract")]
+    public InterractState interractState;    
 
     [Header("Score")]
     public int tempScore = 0;
@@ -60,8 +51,7 @@ public class GameLogic : MonoBehaviour
 
     private void Awake()
     {
-        interactButton.onClick.AddListener(OnInteract);
-        interactBtn = interactButton.GetComponent<ButtonImage>();
+
     }
 
     private void Start()
@@ -104,8 +94,6 @@ public class GameLogic : MonoBehaviour
         if (gameData != null)
         {
             player.transform.position = gameData.saveData.playerPosition;
-
-            //Debug.Log("Load data!");
         }
         else
         {
@@ -133,53 +121,22 @@ public class GameLogic : MonoBehaviour
         //get current language
         currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
 
-        interractState = InterractState.End;
-
-        //get dialog panel class
-        dialogPanelClass = dialogPanelTop.GetComponent<ADV_DialogPanel>();
+        //dialog and interaction
+        interractState = InterractState.End;        
     }
 
-
-    public void StartInteraction(string tileParam)
+    //dialogue system
+/*    public void DialogueRoutine(TextAsset inkJSON)
     {
-        //isInteraction = true;
-        
-        interractState = InterractState.Start;
-        
-        string text = $"You interract with {tileParam}";
-        
         //open panel with diallog
-        dialogPanelClass.OpenPanel(text);
+        ADV_DialogueManager.Instance.EnterDialogueMode(inkJSON);
+    }*/
 
-        interactBtn.SetSelected(true);
-    }
-
-    public void EndInteraction()
+    public void StartInteraction(string[] interactParams)
     {
-        if(isInteraction)
-            isInteraction = false;               
-
-        dialogPanelClass.OnDiallogClose();
-
-        interractState = InterractState.End;
-        interactBtn.SetSelected(false);
-
-        playerClass.InteractIconRoutine(false);     
+        Debug.Log($"{interactParams}");
     }
 
-
-    private void OnInteract()
-    {
-        //toggle
-        isInteraction = !isInteraction;
-
-        Debug.Log($"isInteraction={isInteraction}");
-
-        if (isInteraction)
-            playerClass.Interact();
-        else
-            EndInteraction();
-    }
 
     private void OnApplicationQuit()
     {
@@ -190,7 +147,7 @@ public class GameLogic : MonoBehaviour
     private void OnDestroy()
     {
         //remove listeners
-        interactButton.onClick.RemoveListener(OnInteract);
+
     }
 
 }

@@ -6,32 +6,32 @@
  <tileset firstgid="1" source="../Tilesets/world01map.tsx"/>
  <layer id="1" name="maps" width="5" height="4">
   <data encoding="csv">
-20,20,19,20,20,
+20,20,20,20,20,
 4,11,3,12,5,
 20,20,2,20,20,
 20,20,1,20,20
 </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="1" name="map03" x="238.333" y="192.167">
+  <object id="1" name="map03" x="239" y="193">
    <point/>
   </object>
-  <object id="2" name="map01" x="239.667" y="457.333">
+  <object id="2" name="map01" x="240" y="457">
    <point/>
   </object>
-  <object id="3" name="map02" x="239.333" y="320.333">
+  <object id="3" name="map02" x="240" y="321">
    <point/>
   </object>
-  <object id="4" name="map11" x="143.667" y="191.333">
+  <object id="4" name="map11" x="144" y="195">
    <point/>
   </object>
-  <object id="5" name="map04" x="50" y="192">
+  <object id="5" name="map04" x="48" y="195">
    <point/>
   </object>
-  <object id="6" name="map05" x="429.667" y="189.667">
+  <object id="6" name="map05" x="430" y="191">
    <point/>
   </object>
-  <object id="7" name="map12" x="339" y="191.333">
+  <object id="7" name="map12" x="339" y="192">
    <point/>
   </object>
  </objectgroup>

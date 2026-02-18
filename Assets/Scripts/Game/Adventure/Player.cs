@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
@@ -13,26 +14,36 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float _speed = 5f;
 
+    //player staff
     private Rigidbody2D rigidbodyPlayer;
     private BoxCollider2D colliderPlayer;
     private Vector2 moveInputPlayer;
     private Animator animator;
 
-    private bool readyForInteract = false;
+    public bool readyForInteract = false;
+    public bool readyForDialogue = false;
+
+    //important objects
+    private Collision2D currentCollision; //for interract
+    private Collider2D currentCollider; //for dialog
 
     [Header("Interaction")]
     private Tilemap currentTilemap;
-    private Collision2D currentCollision;
-    private Collider2D currentCollider;
     [SerializeField] private GameObject interractIcon;
     private Vector3Int currentTilePosition;
+
+    [Header("Dialog")]
     private TextAsset inkText;
+
+    [Header("Joystick")]
+    [SerializeField] private GameObject joystick;
+    private OnScreenStick stickControler;
 
     [Header("Utils")]
     public TilesUtils tilesUtilsClass;
     public ADV_MapManager mapManagerClass;
 
-    //for icaon fade
+    //for icon fade
     private Coroutine fadeRoutine;
     private const float ICON_FADE_TIME = .3f;
 
@@ -45,15 +56,18 @@ public class Player : MonoBehaviour
         Down
     }
 
+    //for direction
     private MoveDirection currentDirection;
     private MoveDirection currentDirectionLast;
 
     private void Awake()
     {
-        //get components
+        //get Player components
         animator = GetComponent<Animator>();
         rigidbodyPlayer = GetComponent<Rigidbody2D>();
         colliderPlayer = GetComponent<BoxCollider2D>();
+
+        stickControler = joystick.GetComponent<OnScreenStick>();
     }
 
     private void Start()
@@ -64,22 +78,33 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //move only if not interacting
-        if (gameLogic.interractState == GameLogic.InterractState.End || gameLogic.gameState == GameLogic.GameState.Play)        
+        //move only if not dialgue
+        if (ADV_DialogueManager.Instance.dialogueState == ADV_DialogueManager.DialogueState.End || gameLogic.gameState == GameLogic.GameState.Play)
+        {
             rigidbodyPlayer.linearVelocity = moveInputPlayer.normalized * _speed;
+            stickControler.enabled = true;
+        }
+
+        if (ADV_DialogueManager.Instance.dialogueState == ADV_DialogueManager.DialogueState.Start || gameLogic.gameState == GameLogic.GameState.Pause)
+        {
+            rigidbodyPlayer.linearVelocity = Vector3.zero;
+            stickControler.enabled = false;
+        }
+            
     }
 
     // Called automatically by PlayerInput
     public void OnMove(InputAction.CallbackContext context)
     {
-        //move only if not interacting
-        if (gameLogic.interractState == GameLogic.InterractState.Start || gameLogic.gameState == GameLogic.GameState.Pause)
+        //move only if not diallog
+        if (ADV_DialogueManager.Instance.dialogueState == ADV_DialogueManager.DialogueState.Start || gameLogic.gameState == GameLogic.GameState.Pause)
         {
             currentDirection = MoveDirection.None;
             PlayerAnimation(currentDirection);
             return;
         }
-            
+
+        //get movement            
         moveInputPlayer = context.ReadValue<Vector2>();
 
         //get direction from input
@@ -92,15 +117,36 @@ public class Player : MonoBehaviour
             animator.SetBool("moving", false);
     }
 
+    //for interraction with dialogue
     public void OnInterract(InputAction.CallbackContext context)
-    {
+    {        
         if (!context.performed)
             return;
 
-        Interact();
+        //for dialogues system
+        ADV_DialogueManager.Instance.OnCommunicate();
     }
 
-    public void Interact()
+
+    public void TryToDialogue()
+    {
+        if (!readyForDialogue)
+            return;
+
+        if (inkText != null)
+            ADV_DialogueManager.Instance.EnterDialogueMode(inkText);
+    }
+
+/*    private bool DialogueStart()
+    {
+        if (inkText != null)
+            gameLogic.DialogueRoutine(inkText.text);
+
+        return true;
+    }*/
+
+    //for collision effects and etc
+    public void StartInteract()
     {
         //only interact if ready. Collision with collider
         if (!readyForInteract)
@@ -109,9 +155,7 @@ public class Player : MonoBehaviour
         if (!TryToInteractWithTile())
         {
             TryToInteractWithObject(currentCollision);
-            TryToInk();
-        }
-            
+        }            
     }
 
     private void ResolveDirection(Vector2 input)
@@ -140,6 +184,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //run player annimation
     private void PlayerAnimation(MoveDirection direction)
     {
         animator.SetFloat("moveX", moveInputPlayer.x);
@@ -148,43 +193,46 @@ public class Player : MonoBehaviour
         animator.SetBool("moving", direction != MoveDirection.None);
     }
 
+    //for diallog - ENTER
     private void OnTriggerEnter2D(Collider2D collider)
     {        
+        //set current collider to use
         currentCollider = collider;
 
-        inkText = tilesUtilsClass.GetDialogue(collider);
+        //try to get dialogue from object
+        inkText = tilesUtilsClass.GetDialogueFromCollider(collider);
 
         if(inkText != null)
         {
-            readyForInteract = true;
-        }
-                    
+            readyForDialogue = true;
+
+            InteractIconRoutine(true);
+        }                    
     }
 
-    private bool TryToInk()
-    {
-        if (fadeRoutine != null)
-            StopCoroutine(fadeRoutine);
-
-        fadeRoutine = StartCoroutine(FadeSprite(interractIcon, "in", ICON_FADE_TIME));
-
-        gameLogic.StartInteraction(inkText.text);
-
-        return true;
-    }
-
+    //for diallog - EXIT
     private void OnTriggerExit2D(Collider2D collider)
     {
-        readyForInteract = false;
+        currentCollider = null;
+
+        readyForDialogue = false;
+        
+        inkText = null;
+
+        InteractIconRoutine(false);
     }
 
+    //collision for vfx, collision etc
     private void OnCollisionEnter2D(Collision2D collision)
     {
         readyForInteract = true;
 
+        Debug.Log($"IN: {collision.collider.name}");
+
+        //set current collision for use
         currentCollision = collision;
 
-        //check collision with exit
+        //check collision with exit IMPORTNAT
         bool isExit = mapManagerClass.ExitCheck(collision);
 
         //get tilemap from collision
@@ -202,14 +250,12 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //InteractIconRoutine(false);
         currentCollision = null;
+        Debug.Log($"OUT: {collision.collider.name}");
     }
 
-    public bool InteractIconRoutine(bool value)
+    private bool InteractIconRoutine(bool value)
     {
-        //readyForInteract = value;
-
         if (fadeRoutine != null)
             StopCoroutine(fadeRoutine);
 
@@ -228,21 +274,21 @@ public class Player : MonoBehaviour
 
     public bool TryToInteractWithTile()
     {
-        Vector3Int playerCell;
+        Vector3Int playerCell = Vector3Int.zero;
 
         try
         {
             //get player cell position
             playerCell = currentTilemap.WorldToCell(transform.position);
         }catch
-        {
-            Debug.LogWarning("Player cell is not on a tilemap cell.");
+        {            
             return false;
         }
 
         //set initial offset to zero
         Vector3Int offset = Vector3Int.zero;
 
+        //directions
         switch (currentDirectionLast)
         {
             case MoveDirection.Up:
@@ -267,9 +313,7 @@ public class Player : MonoBehaviour
 
         if (customProperty != null && customProperty[0] != "")
         {
-            InteractIconRoutine(true);
-
-            gameLogic.StartInteraction(customProperty[0]);
+            gameLogic.StartInteraction(customProperty);
 
             return true;
         }
@@ -284,13 +328,8 @@ public class Player : MonoBehaviour
 
         if (customProperty != null )
         {
-            if (fadeRoutine != null)
-                StopCoroutine(fadeRoutine);
-
-            fadeRoutine = StartCoroutine(FadeSprite(interractIcon, "in", ICON_FADE_TIME));
-
             //send data to game logic
-            gameLogic.StartInteraction(customProperty[0]);
+            gameLogic.StartInteraction(customProperty);
 
             return true;
         }

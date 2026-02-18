@@ -4,13 +4,12 @@ using UnityEngine.Tilemaps;
 
 public class TilesUtils : MonoBehaviour
 {
-     public string[] GetCustomPropertiesFromObject(Collision2D collision)
+    //for interation
+    public string[] GetCustomPropertiesFromObject(Collision2D collision)
     {
         try
         {
             SuperCustomProperties customProperties = collision.collider.GetComponentInParent<SuperCustomProperties>();
-
-            Debug.Log(collision.collider.name);
 
             if (customProperties != null && customProperties.m_Properties != null)
             {
@@ -30,8 +29,6 @@ public class TilesUtils : MonoBehaviour
                     }
                 }
 
-                //Debug.Log($"{nameValue}/ {typeValue}");
-
                 if (nameValue == null || typeValue == null)
                     return null;
 
@@ -46,6 +43,7 @@ public class TilesUtils : MonoBehaviour
         }
     }
 
+    //for interation
     public string[] GetCustomTileProperties(Tilemap currentTilemap, Vector3Int tilePos)
     {
         if (currentTilemap == null)
@@ -83,20 +81,16 @@ public class TilesUtils : MonoBehaviour
     }
 
 
-    public TextAsset GetDialogue(Collider2D collider)
-    {
-        //Debug.Log(collider.gameObject.name);
-
+    //for dialog system
+    public TextAsset GetDialogueFromCollider(Collider2D collider)
+    {        
         ADV_DialogueTrigger trigger = collider.GetComponentInParent<ADV_DialogueTrigger>();
 
         if (trigger != null)
-        {            
-            Debug.Log(trigger.inkJSON.text);
-
+        {                        
             return trigger.inkJSON;
         }
             
-
         return null;
     }
 }
