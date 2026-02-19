@@ -37,9 +37,10 @@ public class ADV_DialogueManager : MonoBehaviour
     private ButtonImage communicateBtn;
 
     public Button closePanelButton;
+    public Button nextStoryButton;
 
-    private Story currentStory;
-    public bool dialogueIsPalying;
+    private Story currentStory = null;
+    public bool dialogueIsPalying { get; private set; }
 
     //private static ADV_DialogueManager instance;
 
@@ -57,10 +58,12 @@ public class ADV_DialogueManager : MonoBehaviour
 
         playerInput = player.GetComponent<PlayerInput>();
 
+        //set buttons
         communicateButton.onClick.AddListener(OnCommunicate);
         communicateBtn = communicateButton.GetComponent<ButtonImage>();
 
         closePanelButton.onClick.AddListener(OnClosePanel);
+        nextStoryButton.onClick.AddListener(NextStory);
     }
 
     private void Start()
@@ -79,9 +82,7 @@ public class ADV_DialogueManager : MonoBehaviour
     }
 
     public void OnSubmit(InputAction.CallbackContext context)
-    {
-        Debug.Log($"{context.performed}/ {dialogueIsPalying}");
-
+    {        
         if (!context.performed)
             return;
 
@@ -99,7 +100,14 @@ public class ADV_DialogueManager : MonoBehaviour
         //toggle
         dialogueIsPalying = !dialogueIsPalying;
 
-        if (dialogueIsPalying)
+        //try read story
+        if (currentStory != null && currentStory.canContinue)
+        {
+            ContinueStory();
+            return;
+        }        
+
+        if (dialogueIsPalying && currentStory == null)
             playerClass.TryToDialogue();
         else
             ExitDialogueMode();
@@ -108,6 +116,10 @@ public class ADV_DialogueManager : MonoBehaviour
     public void EnterDialogueMode(TextAsset inkJSON)
     {        
         currentStory = new Story(inkJSON.text);
+
+        //buttons
+        nextStoryButton.gameObject.SetActive(true);
+        closePanelButton.gameObject.SetActive(false);
 
         //set state
         dialogueState = DialogueState.Start;
@@ -125,6 +137,7 @@ public class ADV_DialogueManager : MonoBehaviour
     private void ExitDialogueMode()
     {
         dialogueIsPalying = false;
+        currentStory = null;
         dialogPanelClass.OnDiallogClose();
         playerInput.defaultActionMap = "Player";
 
@@ -140,11 +153,24 @@ public class ADV_DialogueManager : MonoBehaviour
         if (currentStory.canContinue)
         {
             dialogueText.text = currentStory.Continue();
+            
+            //show butttons
+            if (!currentStory.canContinue)
+            {
+                nextStoryButton.gameObject.SetActive(false);
+                closePanelButton.gameObject.SetActive(true);
+            }                
         }
         else
-        {
+        {            
             ExitDialogueMode();
         }
+    }
+
+    private void NextStory()
+    {
+        if (currentStory.canContinue)
+            ContinueStory();
     }
 
     private void OnClosePanel()

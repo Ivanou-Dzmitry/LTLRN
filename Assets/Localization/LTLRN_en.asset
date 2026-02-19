@@ -337,6 +337,10 @@ MonoBehaviour:
     m_Localized: Map
     m_Metadata:
       m_Items: []
+  - m_Id: 23604010219003904
+    m_Localized: Mode
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
