@@ -1,151 +1,79 @@
-using System;
-using System.Threading.Tasks;
-using TMPro;
-using Unity.Services.Leaderboards;  
 using UnityEngine;
-using UnityEngine.UI;
-
+using GooglePlayGames;
 
 public class LeaderboardManager : MonoBehaviour
-{    
-    private GameData gameData;
+{
+    public static LeaderboardManager Instance { get; private set; }
 
-    [SerializeField] private int playersPerPage = 5; 
-    [SerializeField] private LeaderboardPlayerItem playerItemPrefab = null; 
-    [SerializeField] private RectTransform playersContainer = null; 
-    [SerializeField] public TextMeshProUGUI pageText = null; 
-    [SerializeField] private Button nextButton = null; 
-    [SerializeField] private Button prevButton = null; 
+    [Header("Leaderboard ID from Google Play Console")]
+    public string leaderboardID = "";
+    private const long minScore = 1;
 
-    private int currentPage = 1;
-    private int totalPages = 0;
-
-    public bool isInitialized = false;
-
-    // Replace with your actual leaderboard ID
-    private const string leaderboardId = "LTLRN";
-
-    public void InitializeBoard()
-    {        
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-
-        ClearPlayersList();
-
-        nextButton.onClick.AddListener(NextPage);
-        prevButton.onClick.AddListener(PrevPage);
-    }
-
-    public async Task AddScoreLeaderboard(int score)
+    private void Awake()
     {
-        try
+        if (Instance == null)
         {
-            var playerEntry = await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardId: leaderboardId, score);            
-            await LoadPlayers(currentPage); // await the async method properly
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        catch (Exception exception)
+        else
         {
-            Debug.LogError(exception.Message);
+            Destroy(gameObject);
         }
     }
 
-    public async Task LoadPlayers(int page)
+    public void ReportScore(long score)
     {
-        if (!isInitialized)
+        if (score < 0)
         {
-            Debug.LogWarning("Services not initialized yet!");
+            Debug.LogError("Score cannot be negative.");
             return;
         }
 
-        try
+        if (string.IsNullOrEmpty(leaderboardID))
         {
-            nextButton.interactable = false;
-            prevButton.interactable = false;
+            Debug.LogError("Leaderboard ID is not set.");
+            return;
+        }
 
-            GetScoresOptions options = new GetScoresOptions
+        if (score < minScore)
+        {
+            Debug.LogWarning($"Score {score} is less than the minimum score of {minScore}. Not reporting.");
+            return;
+        }
+
+        if (GPGSManager.Instance.IsAuthenticated())
+        {
+            PlayGamesPlatform.Instance.ReportScore(score, leaderboardID, (bool success) =>
             {
-                Offset = (page - 1) * playersPerPage,
-                Limit = playersPerPage
-            };
-
-            var score = await LeaderboardsService.Instance.GetScoresAsync(leaderboardId, options);            
-
-            ClearPlayersList();
-
-            //add players to the list
-            for (int i = 0; i < score.Results.Count; i++)
-            {
-                LeaderboardPlayerItem playerItem = Instantiate(playerItemPrefab, playersContainer);
-               
-                playerItem.Inialize(score.Results[i]);
-
-                //get score
-                int currentScore = (int)score.Results[i].Score;
-
-                //get name
-                string curentName = playerItem.nameText.text;
-
-                //select player name
-                if (curentName == gameData.saveData.playerName)
+                if (success)
                 {
-                    playerItem.nameText.fontStyle = FontStyles.Bold;
-                    playerItem.nameText.color = new Color32(144, 238, 144, 255);
-
-                    //fix score
-                    if(gameData.saveData.totalScore != currentScore)
-                        gameData.saveData.totalScore = currentScore;
+                    Debug.Log("Score reported successfully.");
                 }
-            }
-
-            totalPages = Mathf.CeilToInt((float)score.Total / (float)score.Limit);
-            currentPage = page;
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError(ex.Message);
-        }
-
-        pageText.text = $"{currentPage}/{totalPages}";
-        nextButton.interactable = currentPage < totalPages && totalPages > 1;
-        prevButton.interactable = currentPage > 1 && totalPages > 1;
-    }
-
-    private async void NextPage()
-    {
-        // Go forward unless we're already on the last page
-        if (currentPage < totalPages)
-        {
-            await LoadPlayers(currentPage + 1);
+                else
+                {
+                    Debug.LogError("Failed to report score.");
+                }
+            });
         }
         else
         {
-            Debug.Log("Already on the last page.");
+            Debug.LogWarning("User is not authenticated. Cannot report score.");
         }
     }
 
-    private async void PrevPage()
+    public void ShowLeaderboardUI()
     {
-        // Go back unless we're already on the first page
-        if (currentPage > 1)
+        if (GPGSManager.Instance.IsAuthenticated())
         {
-            await LoadPlayers(currentPage - 1);
+            PlayGamesPlatform.Instance.ShowLeaderboardUI(leaderboardID);
         }
         else
         {
-            Debug.Log("Already on the first page.");
-        }
-    }
-
-    public void ClearPlayersList()
-    {
-        LeaderboardPlayerItem[] playersItems = playersContainer.GetComponentsInChildren<LeaderboardPlayerItem>();
-
-        if (playersItems != null && playersItems.Length > 0)
-        {
-            foreach (LeaderboardPlayerItem item in playersItems)
-            {
-                Destroy(item.gameObject);
-            }
+            Debug.LogWarning("User is not authenticated. Cannot show leaderboard UI.");
         }
 
+        // Unlock the achievement for showing the leaderboard
+        //AchievementManager.Instance.UnlockOrIncrement("leaderboard_bee");
     }
 }

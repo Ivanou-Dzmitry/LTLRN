@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
     
     private static MenuManager singleton = null;
 
-    public LeaderboardManager leaderboardManager;
+    //public LeaderboardManager leaderboardManager;
 
     private string pendingUsername;
 
@@ -58,21 +58,6 @@ public class MenuManager : MonoBehaviour
             singleton = null;
         }
     }
-
-/*    private void Awake()
-    {
-        //Application.runInBackground = true;
-
-        //StartClientService();
-
-
-        //Initialize PlayGamesPlatform
-
-        //PlayGamesPlatform.Activate();
-
-        //LoginGooglePlayGames();
-
-    }*/
 
     private void Awake()
     {
@@ -110,13 +95,11 @@ public class MenuManager : MonoBehaviour
                 SaveNamePass(playerName, "000000");
 
                 PlayGamesPlatform.Instance.RequestServerSideAccess(true, code =>
-                {
-                    //Debug.Log("Authorization code: " + code);
+                {                    
                     m_GooglePlayGamesToken = code;
 
                     PanelManager.CloseAll();
-                    PanelManager.Open("main");
-                    // This token serves as an example to be used for SignInWithGooglePlayGames
+                    PanelManager.Open("main");                  
                 });
             }
             else
@@ -315,7 +298,7 @@ public class MenuManager : MonoBehaviour
             }
 
             // Initialize LeaderboardManager
-            if (leaderboardManager != null)
+/*            if (leaderboardManager != null)
             {
                 leaderboardManager.isInitialized = true;
                 leaderboardManager.InitializeBoard();
@@ -323,7 +306,7 @@ public class MenuManager : MonoBehaviour
             else
             {
                 Debug.LogWarning("LeaderboardManager reference is missing in MenuManager.");
-            }                
+            }  */              
             
         }
         catch (Exception exception)
@@ -337,65 +320,55 @@ public class MenuManager : MonoBehaviour
 
     public async void SignInAnonymouslyAsync()
     {
-        //PanelManager.Open("loading");
-
         try
         {
-            // Initialize Unity Services if not already
-            if (UnityServices.State != ServicesInitializationState.Initialized)
+            // FIRST: Initialize services through the persistent manager
+            bool initialized = await GameServiceManager.Instance.InitializeServicesAsync();
+
+            if (!initialized)
             {
-                var options = new InitializationOptions();
-                options.SetProfile("default_profile");
-                await UnityServices.InitializeAsync();
+                Debug.LogWarning("Services initialized but user not signed in yet. Proceeding to sign in...");
             }
 
+            // SECOND: Sign in
+            bool signedIn = await GameServiceManager.Instance.SignInAnonymouslyAsync();
 
-            // Force sign out first to ensure a new anonymous session
-            if (AuthenticationService.Instance.IsSignedIn)
+            if (!signedIn)
             {
-                AuthenticationService.Instance.SignOut();
+                Debug.LogError("MM: Sign in failed");
+                return;
             }
 
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            Debug.Log("MM: Sign in successful");
 
-            // Check and set default PlayerName if empty
-            string timestamp = DateTime.Now.ToString("HHmmss");
-            string playerName = "Guest" + timestamp;
-
-            await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
-
-            //save
-            if (AuthenticationService.Instance.SessionTokenExists)
+            // THIRD: Set GameData reference in the manager
+            gameData = GameObject.FindWithTag("GameData")?.GetComponent<GameData>();
+            if (gameData != null)
             {
-                gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-
-                string name = string.Empty;
-                string pass = string.Empty;
-
-                if (gameData != null)
-                {
-                    gameData.LoadFromFile();
-
-                    name = gameData.saveData.playerName;
-                    pass = gameData.saveData.playerPass;
-                }
-
-                SaveNamePass(playerName, "");
+                GameServiceManager.Instance.gameData = gameData;
             }
-             
 
+/*            // FOURTH: Initialize LeaderboardManager
             if (leaderboardManager != null)
+            {
+                leaderboardManager.isInitialized = true;
+                leaderboardManager.InitializeBoard();
                 await leaderboardManager.LoadPlayers(1);
+                Debug.Log("MM: Leaderboard initialized and loaded");
+            }
+            else
+            {
+                Debug.LogWarning("LeaderboardManager reference is missing in MenuManager.");
+            }*/
 
-            // Open login panel **after username is set**
+            // FIFTH: Open login panel
             PanelManager.CloseAll();
             var panel = PanelManager.GetSingleton("login") as SignOutMenu;
             if (panel != null)
             {
                 panel.Open();
-                panel.UpdatePlayerNameUI(playerName);
+                panel.UpdatePlayerNameUI(GameServiceManager.Instance.GetPlayerName());
             }
-
         }
         catch (AuthenticationException exception)
         {
@@ -407,7 +380,6 @@ public class MenuManager : MonoBehaviour
         {
             Debug.LogException(exception);
             string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error03");
-            //retry
             string btnText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "RetryTxt01");
             ShowError(ErrorMenu.Action.SignIn, errText + exception, btnText);
         }
@@ -429,8 +401,8 @@ public class MenuManager : MonoBehaviour
             //save
             SaveNamePass(username, password);
 
-            if (leaderboardManager != null)
-                await leaderboardManager.LoadPlayers(1);
+/*            if (leaderboardManager != null)
+                await leaderboardManager.LoadPlayers(1);*/
         }
         catch (AuthenticationException exception)
         {
@@ -463,8 +435,8 @@ public class MenuManager : MonoBehaviour
             //save
             SaveNamePass(username, password);
 
-            if (leaderboardManager != null)
-                await leaderboardManager.LoadPlayers(1);
+/*            if (leaderboardManager != null)
+                await leaderboardManager.LoadPlayers(1);*/
         }
         catch (AuthenticationException exception)
         {

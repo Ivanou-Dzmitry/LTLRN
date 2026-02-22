@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -10,6 +11,11 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using static QuestionBase;
+
+#if UNITY_ANDROID
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+#endif
 
 
 public enum GameState
@@ -45,7 +51,7 @@ public class ExGameLogic : MonoBehaviour
     private SoundManager soundManager;
     private ScoreManager scoreManager;
     private LanguageSwitcher locManager;
-
+    
     [Header("App State")]
     public GameState gameState;
 
@@ -276,7 +282,6 @@ public class ExGameLogic : MonoBehaviour
         gamePanel.SetUIData(currentLang.ToString());
     }
 
-
     void ShuffleQuestions(List<QuestionBase> list)
     {
         //Debug.Log("Shuffling questions..." + list.Count);
@@ -333,7 +338,7 @@ public class ExGameLogic : MonoBehaviour
             data.questionText = DBUtils.Instance.ResolveLangReference(question.questionReference, sysLang); ;
 
         //table name for automation
-        string tableName = string.Empty;
+        string tableName;
         string columnName = string.Empty;
         int qID = -1;
 
@@ -345,7 +350,8 @@ public class ExGameLogic : MonoBehaviour
         qID = qp.Value.RecordID;
 
         //get answer word count
-        int wordCount = 0;
+        int wordCount;
+
         wordCount = question.GetAnswerColumns().Length;
         string[] answerColumns = question.GetAnswerColumns();
 
@@ -518,9 +524,9 @@ public class ExGameLogic : MonoBehaviour
                 {
                     data.questionImageFile = new[] { DBUtils.Instance.ResolveReference(question.questionImageFile[0]) };                    
                 }
-                catch (Exception ex)
+                catch 
                 {
-                    //Debug.LogException(ex);
+                    //Debug.LogException(ex);(Exception ex)
                     data.questionImageFile = Array.Empty<string>();   // Length = 0
                 }                
             }
@@ -668,7 +674,7 @@ public class ExGameLogic : MonoBehaviour
                     }
 
                     //load sound. Avoid load name - but clip is not ready. In db just name.                    
-                    qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
+                    //qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
                 }
 
                 //set answers
@@ -826,9 +832,6 @@ public class ExGameLogic : MonoBehaviour
         if( correctIndex < 0 )
             correctIndex = DBUtils.Instance.GetCorrectIndex();
 
-        //get question
-        QuestionBase question = currentQuestion;
-
         //Debug.Log(currentSection.sectionType.ToString());
 
         //check selected Text, Sound IMPORTANT
@@ -838,7 +841,7 @@ public class ExGameLogic : MonoBehaviour
             if (selectedIndex == correctIndex)
             {
                 qData.CheckAnswer(selectedIndex, correctIndex);
-                tempScore = tempScore + currentQuestion.rewardAmount;
+                tempScore += currentQuestion.rewardAmount;
             }
             else
             {
@@ -896,16 +899,13 @@ public class ExGameLogic : MonoBehaviour
 
         //Debug.Log(correctAnswerText);
 
-        //get question
-        QuestionBase question = currentQuestion;
-
         //check selected Type Input
         if (currentSection.sectionType == Section.SectionType.Input)
         {
             if (input == correctAnswerText)
             {
                 // Add score, show success animation, etc.
-                tempScore = tempScore + currentQuestion.rewardAmount;
+                tempScore += currentQuestion.rewardAmount;
 
                 qData.CheckInputAnswer(input, correctAnswerText, true);
             }
@@ -1113,16 +1113,18 @@ public class ExGameLogic : MonoBehaviour
         PanelManager.OpenScene("ExMenu");
     }
 
-    public void ExitGame()
+    public bool ExitGame()
     {
         //save progress and time
         SaveGameProgress();
-        SaveResult();
+        bool saveOp = SaveResult();
         SaveTime();
 
         PanelManager.CloseAll();
 
         PanelManager.OpenScene("ExMenu");                
+
+        return true;
     }
 
     public void InterruptedExit()
@@ -1151,7 +1153,7 @@ public class ExGameLogic : MonoBehaviour
             dbUtils.SetSectionProgress(currentSection.name, currentProgress);
     }
 
-    private void SaveResult()
+    private bool SaveResult()
     {
         //saved result
         int savedResult = dbUtils.GetSectionResult(currentSection.name);
@@ -1161,8 +1163,24 @@ public class ExGameLogic : MonoBehaviour
         {
             dbUtils.SetSectionResult(currentSection.name, tempScore);
             scoreManager.SaveCrystals(tempScore);
-        }
             
+            LeaderboardManager.Instance.ReportScore(tempScore);
+
+            //old leaderboard
+            /*          
+                        bool addScore = false;
+
+              if (leaderboardManager != null)
+                            addScore = await leaderboardManager.AddScoreLeaderboard(tempScore);
+
+                        Social.ReportScore(tempScore, "CgkIvt3JrOAZEAIQAg", success =>
+                        {
+                            if (success)
+                                Debug.Log("Score submitted");
+                        });*/
+
+        }
+
         //questions done
         int done = dbUtils.GetSectionProgress(currentSection.name);
 
@@ -1176,6 +1194,8 @@ public class ExGameLogic : MonoBehaviour
         }            
         else
             dbUtils.SetSectionComplete(currentSection.name, false);
+
+        return true;
     }
 
     private void SaveTime()
@@ -1241,6 +1261,8 @@ public class ExGameLogic : MonoBehaviour
 
         if (!hasNext)
             return;
+
+
         
         currentSection = sectionManager.sections[nextIndex];
         
@@ -1249,6 +1271,7 @@ public class ExGameLogic : MonoBehaviour
         
         //save data
         gameData.SaveToFile();
+        
         //load next section
         PanelManager.CloseAll();
         PanelManager.OpenScene("ExGame");
@@ -1262,7 +1285,7 @@ public class ExGameLogic : MonoBehaviour
         int nextIndex = curentBundleIndex + 1;
 
         if (!hasNext)
-            return;
+            return;        
 
         Section[] bundleSections = gameData.saveData.bundleSections;
 

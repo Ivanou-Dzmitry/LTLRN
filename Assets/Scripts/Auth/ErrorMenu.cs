@@ -44,12 +44,10 @@ public class ErrorMenu : Panel
     
     public void Open(Action action, string error, string button)
     {
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-        gameData.LoadFromFile();
-
         Open();
 
         this.action = action;
+
         if (string.IsNullOrEmpty(error) == false)
         {
             errorText.text = error;

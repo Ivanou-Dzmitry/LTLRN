@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class ExDataLoader : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class ExDataLoader : MonoBehaviour
     private GameData gameData;
     private DBUtils dbUtils;
     private LanguageSwitcher locManager;
+
+    //public LeaderboardManager leaderboardManager;
 
     public Themes themes;
 
@@ -81,7 +84,7 @@ public class ExDataLoader : MonoBehaviour
     }
 
     //IMPORTANT
-    public void LoadData()
+    public bool LoadData()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();
@@ -118,7 +121,11 @@ public class ExDataLoader : MonoBehaviour
             //themeBtn.buttonIcon.sprite = sectionManager.themeIcon;
 
             CreateSectionPanels();
-        }        
+
+            return true;
+        }
+
+        return false;
     }
 
     //IMPORTANT
@@ -274,18 +281,18 @@ public class ExDataLoader : MonoBehaviour
 
             //get result
             int result = dbUtils.GetSectionResult(section.bundleSections[j].name);
-            bundleResult = bundleResult + result;
+            bundleResult += result;
 
             // Get question count regardless of type
             int questionsCount = 0;
             if (section.bundleSections[j].sectionType != Section.SectionType.LearnType01)
                 questionsCount = GetQuestionCount(section.bundleSections[j]);
             
-            bundleQuestionCount = bundleQuestionCount + questionsCount;
+            bundleQuestionCount += questionsCount;
 
             //get-set time
             float time = dbUtils.GetSectionTime(section.bundleSections[j].name);           
-            bundleTime = bundleTime + time;
+            bundleTime += time;
 
             //transfer bundle sections
             sectionPanel.bundleSections = section.bundleSections;

@@ -137,13 +137,13 @@ public class DBUtils : MonoBehaviour
             (path) => dbDataPath = path);
 
         // Check connections
-        Debug.Log("Final Main Database Path: " + dbPath);
+        //Debug.Log("Final Main Database Path: " + dbPath);
         isInitialized = CheckConnection(dbPath);
-        Debug.Log("DB1 Connection Result: " + isInitialized);
+        //Debug.Log("DB1 Connection Result: " + isInitialized);
 
-        Debug.Log("Final Data Database Path: " + dbDataPath);
+        //Debug.Log("Final Data Database Path: " + dbDataPath);
         isDataInitialized = CheckConnection(dbDataPath);
-        Debug.Log("DB2 Connection Result: " + isDataInitialized);
+        //Debug.Log("DB2 Connection Result: " + isDataInitialized);
 
         // Create tables
         bool res = CreateGameDataTables();
@@ -180,7 +180,7 @@ public class DBUtils : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{databaseName} is up to date (version {savedVersion})");
+            //Debug.Log($"{databaseName} is up to date (version {savedVersion})");
             yield return null;
         }
     }
@@ -316,7 +316,8 @@ public class DBUtils : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"Section already exists: {sectionName} (ID: {existing.ID})");
+                    //show info
+                    //Debug.Log($"Section already exists: {sectionName} (ID: {existing.ID})");
                 }
             }
         }

@@ -1,10 +1,14 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class ScoreManager : MonoBehaviour
 {
     private ExGameLogic exGameLogic;
     private GameData gameData;
+    private LeaderboardManager leaderboardManager;
     [SerializeField] public int tmpScore = 0;
+    public bool newRecord = false;
+    public int matchScore;
 
 
     public void SaveCrystals(int score)

@@ -2,26 +2,66 @@ using UnityEngine;
 
 public class GameBootstrap : MonoBehaviour
 {
-    public GameObject soundManagerPrefab;
-    public GameObject gameDataPrefab;
-    public GameObject logPrefab;
+    [SerializeField] private GameObject soundManagerPrefab;
+    [SerializeField] private GameObject gameDataPrefab;
+    [SerializeField] private GameObject logPrefab;
 
     private void Awake()
     {
-        if (SoundManager.soundManager == null)
+        InitializeSoundManager();
+        InitializeGameData();
+        InitializeLogManager();
+    }
+
+    private void InitializeSoundManager()
+    {
+        if (SoundManager.soundManager != null)
+            return;
+
+        if (soundManagerPrefab == null)
         {
-            Instantiate(soundManagerPrefab);
+            Debug.LogError("SoundManager prefab not assigned.");
+            return;
         }
 
-        if (GameData.gameData == null)
+        Instantiate(soundManagerPrefab);
+    }
+
+    private void InitializeGameData()
+    {
+        if (GameData.gameData != null)
+            return;
+
+        if (gameDataPrefab == null)
         {
-            Instantiate(gameDataPrefab);
-            GameData.gameData.LoadFromFile();
+            Debug.LogError("GameData prefab not assigned.");
+            return;
         }
 
-        if (LogManager.log == null)
+        var instance = Instantiate(gameDataPrefab);
+
+        var data = instance.GetComponent<GameData>();
+        if (data != null)
         {
-            Instantiate(logPrefab);
+            data.LoadFromFile();
         }
+        else
+        {
+            Debug.LogError("GameData component missing on prefab.");
+        }
+    }
+
+    private void InitializeLogManager()
+    {
+        if (LogManager.log != null)
+            return;
+
+        if (logPrefab == null)
+        {
+            Debug.LogError("LogManager prefab not assigned.");
+            return;
+        }
+
+        Instantiate(logPrefab);
     }
 }

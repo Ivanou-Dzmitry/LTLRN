@@ -53,8 +53,6 @@ public class ADV_MapManager : MonoBehaviour
     //indexes for save
     private int currentMapIndex;
     private int currentMapManagerIndex;    
-
-    private bool exitTrigger = false;
     
 
     private void Awake()

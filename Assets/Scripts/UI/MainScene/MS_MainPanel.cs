@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class MainPanel : Panel
 {
-    public Button mode1Button;
-    public Button mode2Button;
+    [SerializeField] private Button mode1Button;
+    [SerializeField] private Button mode2Button;
 
     [Header("UI")]
-    public Canvas canvasRoot;
-    public RectTransform panel_01;
-    public RectTransform panel_02;
-    public RectTransform panel_03;
+    [SerializeField] private Canvas canvasRoot;
+    [SerializeField] private RectTransform panel_01;
+    [SerializeField] private RectTransform panel_02;
+    [SerializeField] private RectTransform panel_03;
 
     private float panel01Height = 128f;
     private float panel03Height = 192f;
@@ -23,20 +23,22 @@ public class MainPanel : Panel
         if (IsInitialized)
             return;
 
-        mode1Button.onClick.AddListener(OpenAdventureMenu);
-        mode2Button.onClick.AddListener(OpenExercisesMenu);
+        mode1Button.onClick.AddListener(AdventureMode);
+        mode2Button.onClick.AddListener(ExercisesMode);
 
         base.Initialize();
     }
 
-    private void OpenAdventureMenu()
+    private void AdventureMode()
     {
         PanelManager.OpenScene("GameBoard");
+        PanelManager.Open("waiting");
     }
 
-    private void OpenExercisesMenu()
+    private void ExercisesMode()
     {
         PanelManager.OpenScene("ExMenu");
+        PanelManager.Open("waiting");
     }
 
     private void Start()
