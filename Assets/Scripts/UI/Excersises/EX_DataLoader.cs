@@ -20,8 +20,6 @@ public class ExDataLoader : MonoBehaviour
     private DBUtils dbUtils;
     private LanguageSwitcher locManager;
 
-    //public LeaderboardManager leaderboardManager;
-
     public Themes themes;
 
     public Button themeButton;
@@ -80,11 +78,11 @@ public class ExDataLoader : MonoBehaviour
         }
 
         // Now load your data IMPORTANT
-        LoadData();
+        LoadExerciseData();
     }
 
     //IMPORTANT
-    public bool LoadData()
+    public bool LoadExerciseData()
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();
@@ -116,9 +114,6 @@ public class ExDataLoader : MonoBehaviour
 
             //set name on target lang
             themeNameTargetLangTxt.text = sectionManager.themeNameTargetLang;
-
-            //Open theme button menu icon
-            //themeBtn.buttonIcon.sprite = sectionManager.themeIcon;
 
             CreateSectionPanels();
 
@@ -254,11 +249,10 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.sectionImage.sprite = section.sectionIcon;
 
         int bundleLenght = section.bundleSections.Length;
-        //Debug.Log($"Bundle '{section.name}' has {bundleLenght} sections.");
 
         //set slider max value to bundle length
         sectionPanel.progressSlider.maxValue = bundleLenght;
-
+        
         //set liked state
         bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);
         sectionPanel.SetLikedState(isLiked);
@@ -302,18 +296,18 @@ public class ExDataLoader : MonoBehaviour
         float percentTopic = (float)bundleProgress / bundleLenght * 100f;
         sectionPanel.topicsCount.text = $"{percentTopic:0}%";
 
-        //sectionPanel.topicsCount.text = $"{bundleProgress}/{bundleLenght}"; ;
-
         //set slider
-        sectionPanel.progressSlider.value = bundleProgress;
-        
+        //sectionPanel.progressSlider.value = bundleProgress;
+
+        sectionPanel.progressSlider.GetComponent<EX_SliderAnimator>()
+              .AnimateTo(bundleProgress, 0.5f);
+
         //set time
         sectionPanel.sectionTimeText.text = FormatTime(bundleTime);
 
         //set result
         float percentQ = (float)bundleResult / bundleQuestionCount * 100f;
-        
-        //string resultText = $"{bundleResult}/{bundleQuestionCount}";
+
         sectionPanel.sectionResultText.text = $"{percentQ:0}%";
 
         sectionPanel.currentSection = section;

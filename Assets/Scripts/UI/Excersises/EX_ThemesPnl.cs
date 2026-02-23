@@ -138,8 +138,8 @@ public class EX_ThemesPanel : Panel
             themeBtnComponent.questionsCount.text = qCount.ToString(); // bundle
 
             themeBtnComponent.themeProgressSlider.maxValue = sectionsCount;
-            themeBtnComponent.themeProgressSlider.value = completeCount;
-
+            themeBtnComponent.themeProgressSlider.value = 0;
+            
             //Debug.Log(dataLoader.themes.theme.Length);
             //Debug.Log(currentTheme.sections.Length);
 
@@ -167,7 +167,9 @@ public class EX_ThemesPanel : Panel
 
             //set slider
             themeBtnComponent.themeProgressSlider.maxValue = totalSections;
-            themeBtnComponent.themeProgressSlider.value = comp;
+            //themeBtnComponent.themeProgressSlider.value = comp;
+
+            themeBtnComponent.themeProgressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(comp, 0.5f);
 
             //fill slider with theme color
             Image fillImage = themeBtnComponent.themeProgressSlider.fillRect.GetComponent<Image>();

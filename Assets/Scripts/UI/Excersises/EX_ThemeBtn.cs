@@ -81,7 +81,7 @@ public class EX_ThemeBtn : MonoBehaviour
         PanelManager.CloseAll();
         PanelManager.Open("exmain");
 
-        dataLoader.LoadData();
+        dataLoader.LoadExerciseData();
     }
 
     private void OnDestroy()
