@@ -22,4 +22,5 @@ MonoBehaviour:
   themeDescription:
     ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F "
     en: We study pronouns.
-  sections: []
+  sections:
+  - {fileID: 11400000, guid: 65c92a42e633699478c06f7b84e810d5, type: 2}

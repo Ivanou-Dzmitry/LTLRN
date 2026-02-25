@@ -255,9 +255,19 @@ public class EX_BundleMenu : Panel
 
         //set slider value based on result or complete status
         if (complete)
-            button.progressSlider.value = questionsCount;
+        {
+            //button.progressSlider.value = questionsCount;
+            button.progressSlider.GetComponent<EX_SliderAnimator>()
+  .AnimateTo(questionsCount, 0.5f);
+        }
+            
         else
-            button.progressSlider.value = result;
+        {
+            //button.progressSlider.value = result;
+            button.progressSlider.GetComponent<EX_SliderAnimator>()
+              .AnimateTo(result, 0.5f);
+        }    
+            
     }
 
 

@@ -292,21 +292,26 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.bundleSections = section.bundleSections;
         }
 
-        //set topic count
+        //set ready topic count
         float percentTopic = (float)bundleProgress / bundleLenght * 100f;
         sectionPanel.topicsCount.text = $"{percentTopic:0}%";
 
         //set slider
         //sectionPanel.progressSlider.value = bundleProgress;
-
         sectionPanel.progressSlider.GetComponent<EX_SliderAnimator>()
               .AnimateTo(bundleProgress, 0.5f);
 
         //set time
         sectionPanel.sectionTimeText.text = FormatTime(bundleTime);
 
-        //set result
-        float percentQ = (float)bundleResult / bundleQuestionCount * 100f;
+        //ready questions count
+        float percentQ = 0f;
+        
+        //avoid divide by 0
+        if (bundleQuestionCount > 0)
+        {
+            percentQ = (float)bundleResult / bundleQuestionCount * 100f;
+        }
 
         sectionPanel.sectionResultText.text = $"{percentQ:0}%";
 
