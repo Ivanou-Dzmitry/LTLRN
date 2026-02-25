@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
+  m_Name: Fruit01Q4
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
+  isAutomated: 1
+  questionCategory:
+    tableName: Fruit01
+    columnName: Category
+    recordID: 11
+    value: Fruits
+    whereColumn: ID
+    whereValue: 
+  questionLang: 1
+  questionDifficulty: 0
+  questionType: 0
+  questionReference:
+    tableName: Fruit01
+    columnName: NomSing
+    recordID: 14
+    value: "vynuog\u0117s"
+    whereColumn: ID
+    whereValue: 
+  answerReferences: []
+  answerSecondWord: []
+  soundReferences: []
+  questionImageFile: []
+  imagesCount: -1
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
+  correctAnswerNumber: -1
+  rewardAmount: 1
+  answerColumn: []
+  questionDescription: 

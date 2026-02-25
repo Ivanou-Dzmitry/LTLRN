@@ -37,7 +37,7 @@ public class DBUtils : MonoBehaviour
     private bool isDataInitialized = false;
     private const string dbDataName = "keliasdata.db"; 
 
-    private const int DB_VERSION = 4; // Increment this when you update the database
+    private const int DB_VERSION = 1; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES
@@ -147,7 +147,9 @@ public class DBUtils : MonoBehaviour
 
         // Create tables
         bool res = CreateGameDataTables();
-        Debug.Log("DB2 create tables: " + res);
+        
+        if (!res)
+            Debug.Log("DB2 create tables: " + res);
     }
 
 

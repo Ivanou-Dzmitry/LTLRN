@@ -17,6 +17,11 @@ public class ExWinPnl : Panel
     public Button nextButton;
     public ButtonImage nextBtn;
 
+    [Header("Slider")]
+    public Slider resultSlider;
+    [SerializeField] private TMP_Text resultSliderText;
+
+
     [Header("Result")]
     [SerializeField] private TMP_Text score;
     [SerializeField] private TMP_Text time;
@@ -56,6 +61,17 @@ public class ExWinPnl : Panel
         int qCount = exGameLogic.currentSection.questions.Length;
 
         string scoreText = $"{scoreValue} {fromTxt} {qCount}";
+
+        //set slider max based on questions
+        resultSlider.maxValue = qCount;        
+
+        //text
+        float percentTopic = 0;
+        percentTopic = (float)scoreValue / qCount * 100f;
+        //set text with %
+        resultSliderText.text = $"{percentTopic:0}%";
+
+        resultSlider.GetComponent<EX_SliderAnimator>().AnimateTo(scoreValue, 0.5f);
 
         if (exGameLogic != null)
         {

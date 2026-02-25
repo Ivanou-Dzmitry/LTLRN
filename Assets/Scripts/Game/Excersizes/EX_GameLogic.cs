@@ -365,7 +365,7 @@ public class ExGameLogic : MonoBehaviour
         if (answerColumns.Length > 1)
             secondColumnName = answerColumns[1];
 
-        Debug.Log($"FC: {firstColumnName}, SC: {secondColumnName}, Count: {wordCount}, Lang: {sysLang}, Qlang:{questionLang}");
+        //Debug.Log($"FC: {firstColumnName}, SC: {secondColumnName}, Count: {wordCount}, Lang: {sysLang}, Qlang:{questionLang}");
 
         /*  FIRST START */
 
