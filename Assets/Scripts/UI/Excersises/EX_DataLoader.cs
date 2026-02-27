@@ -322,10 +322,18 @@ public class ExDataLoader : MonoBehaviour
     // Helper method to get question count
     public int GetQuestionCount(Section section)
     {
-        if (section.questions != null && section.questions.Length > 0)
-            return section.questions.Length;
+        if(section.questions == null || section.questions.Length <= 0)
+            return 0;
 
-        return 0;
+        //if contain bundle - bundle always 0
+        if (section.isContainBundleQuestion)
+        {
+            return section.questions[0].questionReferences.Length;
+        }
+        else
+        {
+            return section.questions.Length;
+        }        
     }
 
 }

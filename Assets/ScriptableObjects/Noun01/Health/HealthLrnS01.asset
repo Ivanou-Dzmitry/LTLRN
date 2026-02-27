@@ -40,8 +40,6 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   bundleSections: []
+  isContainBundleQuestion: 1
   questions:
   - {fileID: 11400000, guid: 82299993794c44f4ba781a24fa81381d, type: 2}
-  - {fileID: 11400000, guid: 08e93923f8c73654f9a570de1d2ae4c5, type: 2}
-  - {fileID: 11400000, guid: edf993e62ddda1e46887dd6271289b00, type: 2}
-  - {fileID: 11400000, guid: 4ded4cffa8d91fe45b8b9f08f2876e60, type: 2}

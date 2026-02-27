@@ -57,8 +57,9 @@ public class ExWinPnl : Panel
         //get question count
         int scoreValue = exGameLogic.tempScore;
         string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
-        int qCount = exGameLogic.currentSection.questions.Length;
+        int qCount = exGameLogic.questionsCount;
 
+        //based on qustion count
         string scoreText = $"{scoreValue} {fromTxt} {qCount}";
 
         //set slider max based on questions

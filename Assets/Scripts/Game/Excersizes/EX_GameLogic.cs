@@ -11,6 +11,8 @@ using UnityEngine.Localization.Settings;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using static QuestionBase;
+using System.Linq;
+
 
 #if UNITY_ANDROID
 using GooglePlayGames;
@@ -59,7 +61,7 @@ public class ExGameLogic : MonoBehaviour
     public Slider progressBar;
     public TMP_Text progressText;
     public TMP_Text skillLevelText; //Language proficiency level, or test difficulty level
-    private int questionsCount = 0;
+    public int questionsCount = 0;
     private Coroutine progressRoutine;
 
     [Header("Data")]
@@ -80,7 +82,7 @@ public class ExGameLogic : MonoBehaviour
     private GameObject questionInstance;
 
     [Header("Question Stuff")]
-    public RectTransform questionArea;
+    public RectTransform questionArea; //area for questions, container
     public GameObject[] questionPrefabs;
 
     [Header("Buttons")]
@@ -183,27 +185,46 @@ public class ExGameLogic : MonoBehaviour
             sectionManager = themes.theme[gameData.saveData.selectedThemeIndex];
 
             //load selected section
-            if (sectionManager != null)
+            if (sectionManager != null && sectionManager.sections != null && sectionManager.sections.Length > 0)
             {
+                int index = gameData.saveData.selectedSectionIndex;
+
+                Section tempSection = null;
+                Section tempBundleSection = null;
+
+                // Validate index. try load from save, id fail load 0
                 try
                 {
-                    //temporary section
-                    Section tempSection = null;
+                    //if (index >= 0 && index < sectionManager.sections.Length)
+                    tempSection = sectionManager.sections[index];
+                }
+                catch (Exception e)                
+                {
+                    Debug.LogWarning($"Load 0 section. {e}");
+                    tempSection = sectionManager.sections[0];
+                }            
 
-                    //set temp from selected index
-                    tempSection = sectionManager.sections[gameData.saveData.selectedSectionIndex];
-
-                    //avoid bundle
-                    if(tempSection.isBundle)
-                        tempSection = gameData.saveData.sectionToLoad;
-
+                // Avoid empty bundle
+                if (tempSection.isBundle)
+                {
+                    //try load from save, id fail load 0
+                    try
+                    {
+                        tempBundleSection = gameData.saveData.sectionToLoad;
+                        currentSection = tempBundleSection;
+                    }
+                    catch(Exception e)
+                    {
+                        Debug.LogWarning($"Load 0 bundle. {e}");
+                        tempBundleSection = tempSection.bundleSections[0];
+                        currentSection = tempBundleSection;
+                    }            
+                }
+                else
+                {
                     currentSection = tempSection;
                 }
-                catch
-                {
-                    Debug.LogError("Selected section index is out of range. Resetting to first section.");
-                    currentSection = gameData.saveData.sectionToLoad;
-                }
+
             }
 
             //get section type: question or learn
@@ -213,16 +234,14 @@ public class ExGameLogic : MonoBehaviour
             // Create runtime copy of questions
             if (currentSection.questions.Length > 0)
             {
-
                 //experimental
                 tempQuestions = qGen.QuestionGenerator(currentSection.questions[0]);
-                Debug.Log(tempQuestions);
+                //Debug.Log(tempQuestions);
 
                 //round 2
                 if(tempQuestions == null)
                     tempQuestions = new List<QuestionBase>(currentSection.questions);
-            }                       
-                
+            }                                       
             else
                 tempQuestions = new List<QuestionBase>(gameData.saveData.sectionToLoad.questions);            
 
@@ -230,9 +249,9 @@ public class ExGameLogic : MonoBehaviour
             if(!isLearnSection)
                 ShuffleQuestions(tempQuestions);
 
-            //load first
-            if (tempQuestions != null && tempQuestions.Count > 0)
-                currentQuestion = tempQuestions[0];       
+        //load first
+        if (tempQuestions != null && tempQuestions.Count > 0)
+            currentQuestion = tempQuestions[0];       
         }
         else
         {
@@ -258,7 +277,7 @@ public class ExGameLogic : MonoBehaviour
             QuestionDataLoadUI(currentQuestion);
 
         //get questions count
-        questionsCount = currentSection.questions.Length;
+        questionsCount = tempQuestions.Count;
 
         //set progress bar
         progressBar.maxValue = questionsCount;
@@ -284,6 +303,7 @@ public class ExGameLogic : MonoBehaviour
         PanelManager.CloseAll();
         PanelManager.Open("exgamemain");
 
+        //load game panel
         Ex_GamePanel gamePanel= panelUI.gameObject.GetComponent<Ex_GamePanel>();
 
         //get current language
@@ -859,8 +879,8 @@ public class ExGameLogic : MonoBehaviour
                 qData.CheckAnswer(selectedIndex, correctIndex);
             }
 
-            //next question or finish
-            if (qCounter < currentSection.questions.Length - 1)
+            //next question or finish - currentSection.questions.Length
+            if (qCounter < tempQuestions.Count - 1)
             {
                 nextButton.interactable = true;
                 nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
@@ -876,8 +896,8 @@ public class ExGameLogic : MonoBehaviour
         {
             Debug.Log("Checking LearnType01 or Exam question...");
 
-            //next question or finish
-            if (qCounter < currentSection.questions.Length - 1)
+            //next question or finish - currentSection.questions.Length
+            if (qCounter < tempQuestions.Count - 1)
             {
                 nextButton.interactable = true;
                 nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
@@ -1001,15 +1021,15 @@ public class ExGameLogic : MonoBehaviour
 
         //Debug.Log($"qCounter = {qCounter}");
 
-        //load next question
-        if (qCounter < currentSection.questions.Length && qCounter < tempQuestions.Count)
+        //load next question - > qCounter < currentSection.questions.Length
+        if (qCounter < tempQuestions.Count)
         {
             //set progress
             int targetValue = qCounter + 1;
             AnimateProgress(progressBar.value, targetValue, 1f);
 
             //set text
-            progressText.text = $"{qCounter}/{currentSection.questions.Length}";
+            progressText.text = $"{qCounter}/{tempQuestions.Count}";
 
             //get question
             currentQuestion = tempQuestions[qCounter];
@@ -1425,7 +1445,8 @@ public class ExGameLogic : MonoBehaviour
             scRect.vertical = true;
 
             //set height of question container based on questions count
-            float height = currentSection.questions.Length * learnPanelHeight;
+            float height = tempQuestions.Count * learnPanelHeight;
+
             questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);
 
             skillLevelText.text = textForLearn;

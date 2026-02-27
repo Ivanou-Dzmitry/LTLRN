@@ -1,4 +1,5 @@
 using LTLRN.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,12 +8,15 @@ public class MainPanel : Panel
 {
     [SerializeField] private Button mode1Button;
     [SerializeField] private Button mode2Button;
+    [SerializeField] private Button openLBoardBtn;
 
     [Header("UI")]
     [SerializeField] private Canvas canvasRoot;
     [SerializeField] private RectTransform panel_01;
     [SerializeField] private RectTransform panel_02;
     [SerializeField] private RectTransform panel_03;
+
+    [SerializeField] private TMP_Text errorTextAsset;
 
     private float panel01Height = 128f;
     private float panel03Height = 192f;
@@ -25,6 +29,8 @@ public class MainPanel : Panel
 
         mode1Button.onClick.AddListener(AdventureMode);
         mode2Button.onClick.AddListener(ExercisesMode);
+
+        openLBoardBtn.onClick.AddListener(OpenLeaderboard);
 
         base.Initialize();
     }
@@ -67,5 +73,16 @@ public class MainPanel : Panel
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel01Height);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
         panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel03Height);
+    }
+
+    private void OnDestroy()
+    {
+        //remove listeners
+        openLBoardBtn.onClick.RemoveListener(OpenLeaderboard);
+    }
+
+    private void OpenLeaderboard()
+    {
+        LeaderboardManager.Instance.ShowLeaderboardUI(errorTextAsset);
     }
 }

@@ -16,7 +16,8 @@ public class DatabaseReferenceDrawer : PropertyDrawer
     private static bool isLoaded = false;
 
     private const float LINE_HEIGHT = 18f;
-    private const float SPACING = 2f;
+    private const float SPACING = 4f;
+    private const int FIELDS_COUNT = 4;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
@@ -151,7 +152,8 @@ public class DatabaseReferenceDrawer : PropertyDrawer
                     yPos += LINE_HEIGHT + SPACING;
                 }
 
-                // OR separator
+                //COMENTED
+/*                // OR separator
                 EditorGUI.LabelField(new Rect(position.x, yPos, position.width, LINE_HEIGHT), "--- OR use WHERE clause ---");
                 yPos += LINE_HEIGHT + SPACING;
 
@@ -171,7 +173,7 @@ public class DatabaseReferenceDrawer : PropertyDrawer
                 yPos += LINE_HEIGHT + SPACING;
 
                 // Where Value (text field)
-                EditorGUI.PropertyField(new Rect(position.x, yPos, position.width, LINE_HEIGHT), whereValue);
+                EditorGUI.PropertyField(new Rect(position.x, yPos, position.width, LINE_HEIGHT), whereValue);*/
             }
             else
             {
@@ -190,7 +192,7 @@ public class DatabaseReferenceDrawer : PropertyDrawer
         if (!property.isExpanded)
             return LINE_HEIGHT;
 
-        return (LINE_HEIGHT + SPACING) * 8 + LINE_HEIGHT; // 8 fields + foldout
+        return (LINE_HEIGHT + SPACING) * FIELDS_COUNT + LINE_HEIGHT; // fields + foldout
     }
 
     private static string GetCacheKey(string tableName, string columnName)

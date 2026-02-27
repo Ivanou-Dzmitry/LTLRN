@@ -19,6 +19,7 @@ public class EX_MainPanel : Panel
     public Button lifeBtn;
     public Button crystalsBtn;
     public Button starsBtn;
+    public Button openLBoardBtn;
 
     [Header("Theme")]
     //public Button themeButton; //run theme selector
@@ -27,8 +28,10 @@ public class EX_MainPanel : Panel
     [Header("Like filter")]
     [SerializeField] private Button likeFilterButton;
     private ButtonImage likeFBtn;
+
     private bool isProcessing = false;
     private bool filterLikedOnly = false;
+    
     [SerializeField] private Transform contentPanel;
 
     [Header("Run random")]
@@ -42,6 +45,8 @@ public class EX_MainPanel : Panel
 
     public TMP_Text textPrefab;
     private TMP_Text infoText;
+
+    [SerializeField] private TMP_Text errorTextAsset;
 
     public RectTransform scrollPanel;
 
@@ -63,6 +68,8 @@ public class EX_MainPanel : Panel
 
         likeFilterButton.onClick.AddListener(ToggleLikeFilter);
         likeFBtn = likeFilterButton.GetComponent<ButtonImage>();
+
+        openLBoardBtn.onClick.AddListener(OpenLeaderboard);
 
         likeFBtn.buttonIcon.color = palette.DisabledButton;
     }
@@ -196,10 +203,17 @@ public class EX_MainPanel : Panel
         }
     }
 
+    private void OpenLeaderboard()
+    {
+        LeaderboardManager.Instance.ShowLeaderboardUI(errorTextAsset);
+    }
+
     private void OnDestroy()
     {
         //remove listeners
         likeFilterButton.onClick.RemoveListener(ToggleLikeFilter);
+
+        openLBoardBtn.onClick.RemoveListener(OpenLeaderboard);
     }
 
 }

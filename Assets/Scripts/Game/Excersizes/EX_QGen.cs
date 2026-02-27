@@ -3,12 +3,9 @@ using UnityEngine;
 
 public class EX_QGen : MonoBehaviour
 {
-    private QuestionBase currentQuestion;
-
-
     public List<QuestionBase> QuestionGenerator(QuestionBase question)
     {
-        Debug.Log(question.name);
+        Debug.Log($"Input data from: {question.name}");
 
         if (!question.isQuestionBundle)
             return null;
@@ -22,6 +19,8 @@ public class EX_QGen : MonoBehaviour
 
             // Create a clone
             QuestionBase tempQ = Instantiate(question);
+
+            tempQ.name = question.name + '_' + i;
 
             tempQ.isQuestionBundle = false;
             tempQ.questionReference = dbRef;

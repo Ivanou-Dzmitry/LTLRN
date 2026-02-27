@@ -46,12 +46,6 @@ MonoBehaviour:
     whereColumn: ID
     whereValue: 
   bundleSections: []
+  isContainBundleQuestion: 1
   questions:
-  - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}
-  - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}
-  - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}
-  - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}
-  - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}
-  - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}
-  - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}
   - {fileID: 11400000, guid: 05d29a9e925658547a1323aa0d83ff27, type: 2}

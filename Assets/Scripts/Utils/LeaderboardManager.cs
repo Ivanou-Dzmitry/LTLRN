@@ -8,9 +8,7 @@ public class LeaderboardManager : MonoBehaviour
 
     [Header("Leaderboard ID from Google Play Console")]
     public string leaderboardID = "";
-    private const long minScore = 1;
-
-    [SerializeField] private TMP_Text errorText;
+    private const long minScore = 1;    
 
     private void Awake()
     {
@@ -65,7 +63,7 @@ public class LeaderboardManager : MonoBehaviour
         }
     }
 
-    public void ShowLeaderboardUI()
+    public void ShowLeaderboardUI(TMP_Text errorText)
     {
         if (GPGSManager.Instance.IsAuthenticated())
         {

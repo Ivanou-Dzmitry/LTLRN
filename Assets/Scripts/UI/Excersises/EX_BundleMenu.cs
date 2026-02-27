@@ -58,8 +58,8 @@ public class EX_BundleMenu : Panel
             gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
         //run animation
-        ButtonImage exitBtn = exitButton.GetComponent<ButtonImage>();
-        exitBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
+/*        ButtonImage exitBtn = exitButton.GetComponent<ButtonImage>();
+        exitBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());*/
 
         if (dataLoader == null)
             dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
@@ -247,25 +247,25 @@ public class EX_BundleMenu : Panel
 
     private void SetProgressSlider(Section sec, SectionButton button, bool complete=false)
     {
-        int questionsCount = dataLoader.GetQuestionCount(sec);
+        int questionsCount = dataLoader.GetQuestionCount(sec);        
 
         button.progressSlider.maxValue = questionsCount;
 
         int result = dbUtils.GetSectionResult(sec.name);
 
+        Debug.Log($"questionsCount = {questionsCount}/ {result}");
+
         //set slider value based on result or complete status
         if (complete)
         {
             //button.progressSlider.value = questionsCount;
-            button.progressSlider.GetComponent<EX_SliderAnimator>()
-  .AnimateTo(questionsCount, 0.5f);
+            button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(questionsCount, 0.5f);
         }
             
         else
         {
             //button.progressSlider.value = result;
-            button.progressSlider.GetComponent<EX_SliderAnimator>()
-              .AnimateTo(result, 0.5f);
+            button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(result, 0.5f);
         }    
             
     }

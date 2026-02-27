@@ -77,9 +77,9 @@ public class Section : ScriptableObject
     [Header("Info text")]
     public DatabaseReference sectionInfo;
 
-
-
     public Section[] bundleSections;
+
+    public bool isContainBundleQuestion;
 
     [Header("Type01 and Type02")]
     public QuestionBase[] questions;
