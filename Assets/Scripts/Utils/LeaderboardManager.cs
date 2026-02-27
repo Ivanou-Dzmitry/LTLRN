@@ -1,5 +1,6 @@
-using UnityEngine;
 using GooglePlayGames;
+using TMPro;
+using UnityEngine;
 
 public class LeaderboardManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class LeaderboardManager : MonoBehaviour
     [Header("Leaderboard ID from Google Play Console")]
     public string leaderboardID = "";
     private const long minScore = 1;
+
+    [SerializeField] private TMP_Text errorText;
 
     private void Awake()
     {
@@ -70,7 +73,10 @@ public class LeaderboardManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("User is not authenticated. Cannot show leaderboard UI.");
+            string errorTxt = "User is not authenticated. Cannot show leaderboard UI.";
+            PanelManager.Open("error");
+            PanelManager.ShowText(errorText, errorTxt);
+            Debug.LogWarning(errorTxt);
         }
 
         // Unlock the achievement for showing the leaderboard

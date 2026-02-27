@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 //win panel Excersises
 

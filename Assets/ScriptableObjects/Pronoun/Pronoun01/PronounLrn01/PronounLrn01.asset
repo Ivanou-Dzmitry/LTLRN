@@ -23,11 +23,61 @@ MonoBehaviour:
   questionLang: 1
   questionDifficulty: 0
   questionType: 4
+  isQuestionBundle: 1
   questionReference:
     tableName: Pronoun01
     columnName: NomSing
+    recordID: 4
+    value: Ji
+    whereColumn: ID
+    whereValue: 
+  questionReferences:
+  - tableName: Pronoun01
+    columnName: NomSing
     recordID: 1
     value: "A\u0161"
+    whereColumn: ID
+    whereValue: 
+  - tableName: Pronoun01
+    columnName: NomSing
+    recordID: 2
+    value: Tu
+    whereColumn: ID
+    whereValue: 
+  - tableName: Pronoun01
+    columnName: NomSing
+    recordID: 3
+    value: Jis
+    whereColumn: ID
+    whereValue: 
+  - tableName: Pronoun01
+    columnName: NomSing
+    recordID: 4
+    value: Ji
+    whereColumn: ID
+    whereValue: 
+  - tableName: Pronoun01
+    columnName: NomPlur
+    recordID: 5
+    value: Mes
+    whereColumn: ID
+    whereValue: 
+  - tableName: Pronoun01
+    columnName: NomPlur
+    recordID: 6
+    value: "J\u016Bs"
+    whereColumn: ID
+    whereValue: 
+  - tableName: Pronoun01
+    columnName: NomPlur
+    recordID: 7
+    value: Jie
+    whereColumn: ID
+    whereValue: 
+  - tableName: Pronoun01
+    columnName: NomPlur
+    recordID: 8
+    value: Jos
     whereColumn: ID
     whereValue: 
   answerReferences: []

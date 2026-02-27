@@ -69,6 +69,9 @@ public class ExGameLogic : MonoBehaviour
     private Section nextSection;
     public QuestionBase currentQuestion;
 
+    [Header("GEN")]
+    [SerializeField] private EX_QGen qGen;
+
     //shuffle questions
     private List<QuestionBase> tempQuestions;
 
@@ -125,7 +128,7 @@ public class ExGameLogic : MonoBehaviour
     {
         PanelManager.Open("waiting");
 
-        //buttons
+        //buttons activation
         nextButton.gameObject.SetActive(true);
         finishButton.gameObject.SetActive(false);
         takeTestButton.gameObject.SetActive(false);
@@ -207,13 +210,21 @@ public class ExGameLogic : MonoBehaviour
             if (currentSection.sectionType == Section.SectionType.LearnType01)
                 isLearnSection = true;
 
-            //Debug.Log($"{currentSection.name}");
-
             // Create runtime copy of questions
-            if (currentSection.questions.Length > 0)                       
-                tempQuestions = new List<QuestionBase>(currentSection.questions);
+            if (currentSection.questions.Length > 0)
+            {
+
+                //experimental
+                tempQuestions = qGen.QuestionGenerator(currentSection.questions[0]);
+                Debug.Log(tempQuestions);
+
+                //round 2
+                if(tempQuestions == null)
+                    tempQuestions = new List<QuestionBase>(currentSection.questions);
+            }                       
+                
             else
-                tempQuestions = new List<QuestionBase>(gameData.saveData.sectionToLoad.questions);
+                tempQuestions = new List<QuestionBase>(gameData.saveData.sectionToLoad.questions);            
 
             //shuffle if not learn section
             if(!isLearnSection)

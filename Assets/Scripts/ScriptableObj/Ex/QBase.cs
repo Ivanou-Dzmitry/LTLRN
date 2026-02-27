@@ -72,8 +72,13 @@ public abstract class QuestionBase : ScriptableObject
     [Tooltip("Type1 - question is text, Type2 - question is image, Type3 - with input field.")]
     public QuestionType questionType = QuestionType.Text;
 
+    public bool isQuestionBundle = false;
+
     [Header("Question")]
     public DatabaseReference questionReference;
+
+    [Header("Questions")]
+    public DatabaseReference[] questionReferences;
 
     [Header("Answers")]
     public DatabaseReference[] answerReferences;

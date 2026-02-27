@@ -1,6 +1,7 @@
 
 using LTLRN.UI;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -118,5 +119,10 @@ public class PanelManager : MonoBehaviour
     public static void OpenScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public static void ShowText(TMP_Text asset, string textToShow)
+    {
+        asset.text = textToShow;
     }
 }
