@@ -51,9 +51,9 @@ MonoBehaviour:
     whereColumn: 
     whereValue: 
   - tableName: Health01
-    columnName: NomPlur
+    columnName: NomSing
     recordID: 4
-    value: antibiotikai
+    value: antibiotikas
     whereColumn: 
     whereValue: 
   - tableName: Health01

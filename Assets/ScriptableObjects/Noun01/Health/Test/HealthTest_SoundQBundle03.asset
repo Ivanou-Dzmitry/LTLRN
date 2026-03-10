@@ -39,9 +39,21 @@ MonoBehaviour:
     whereColumn: 
     whereValue: 
   - tableName: Health01
+    columnName: NomPlur
+    recordID: 2
+    value: "la\u0161ai"
+    whereColumn: 
+    whereValue: 
+  - tableName: Health01
     columnName: NomSing
     recordID: 3
     value: "tablet\u0117"
+    whereColumn: 
+    whereValue: 
+  - tableName: Health01
+    columnName: NomSing
+    recordID: 4
+    value: antibiotikas
     whereColumn: 
     whereValue: 
   - tableName: Health01
@@ -120,24 +132,6 @@ MonoBehaviour:
     columnName: NomSing
     recordID: 17
     value: "ligonin\u0117"
-    whereColumn: 
-    whereValue: 
-  - tableName: Health01
-    columnName: NomPlur
-    recordID: 2
-    value: "la\u0161ai"
-    whereColumn: 
-    whereValue: 
-  - tableName: Health01
-    columnName: NomPlur
-    recordID: 5
-    value: vaistai
-    whereColumn: 
-    whereValue: 
-  - tableName: Health01
-    columnName: NomPlur
-    recordID: 4
-    value: antibiotikai
     whereColumn: 
     whereValue: 
   answerReferences: []

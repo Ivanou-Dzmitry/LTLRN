@@ -253,7 +253,7 @@ public class EX_BundleMenu : Panel
 
         int result = dbUtils.GetSectionResult(sec.name);
 
-        Debug.Log($"questionsCount = {questionsCount}/ {result}");
+        //Debug.Log($"questionsCount = {questionsCount}/ {result}");
 
         //set slider value based on result or complete status
         if (complete)

@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
+  m_Name: MonthTestQBundle01
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
+  isAutomated: 1
+  questionCategory:
+    tableName: Month
+    columnName: Category
+    recordID: 1
+    value: Date
+    whereColumn: ID
+    whereValue: 
+  questionLang: 1
+  questionDifficulty: 0
+  questionType: 0
+  isQuestionBundle: 1
+  questionReference:
+    tableName: Month
+    columnName: NomSing
+    recordID: 1
+    value: sausis
+    whereColumn: ID
+    whereValue: 
+  questionReferences:
+  - tableName: Month
+    columnName: NomSing
+    recordID: 1
+    value: sausis
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 2
+    value: vasaris
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 3
+    value: kovas
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 4
+    value: balandis
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 5
+    value: "gegu\u017E\u0117"
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 6
+    value: "bir\u017Eelis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 7
+    value: liepa
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 8
+    value: "rugpj\u016Btis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 9
+    value: "rugs\u0117jis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 10
+    value: spalis
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 11
+    value: lapkritis
+    whereColumn: 
+    whereValue: 
+  - tableName: Month
+    columnName: NomSing
+    recordID: 12
+    value: gruodis
+    whereColumn: 
+    whereValue: 
+  answerReferences: []
+  answerSecondWord: []
+  soundReferences: []
+  questionImageFile: []
+  imagesCount: 1
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
+  correctAnswerNumber: -1
+  rewardAmount: 1
+  answerColumn:
+  - recordID: 1
+    tableName: Month
+    columnName: NomSing
+  questionDescription: 
