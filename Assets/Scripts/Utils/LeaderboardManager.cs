@@ -43,6 +43,7 @@ public class LeaderboardManager : MonoBehaviour
             return;
         }
 
+#if UNITY_ANDROID || UNITY_STANDALONE_WIN
         if (GPGSManager.Instance.IsAuthenticated())
         {
             PlayGamesPlatform.Instance.ReportScore(score, leaderboardID, (bool success) =>
@@ -61,10 +62,14 @@ public class LeaderboardManager : MonoBehaviour
         {
             Debug.LogWarning("User is not authenticated. Cannot report score.");
         }
+#else
+    Debug.Log("GPGS not supported on this platform. Score not reported.");
+#endif
     }
 
     public void ShowLeaderboardUI(TMP_Text errorText)
     {
+#if UNITY_ANDROID || UNITY_STANDALONE_WIN
         if (GPGSManager.Instance.IsAuthenticated())
         {
             PlayGamesPlatform.Instance.ShowLeaderboardUI(leaderboardID);
@@ -76,8 +81,11 @@ public class LeaderboardManager : MonoBehaviour
             PanelManager.ShowText(errorText, errorTxt);
             Debug.LogWarning(errorTxt);
         }
-
-        // Unlock the achievement for showing the leaderboard
-        //AchievementManager.Instance.UnlockOrIncrement("leaderboard_bee");
+#else
+    string errorTxt = "Leaderboard is not supported on this platform.";
+    PanelManager.Open("error");
+    PanelManager.ShowText(errorText, errorTxt);
+    Debug.Log(errorTxt);
+#endif
     }
 }
