@@ -266,8 +266,7 @@ public class EX_BundleMenu : Panel
         {
             //button.progressSlider.value = result;
             button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(result, 0.5f);
-        }    
-            
+        }                
     }
 
 

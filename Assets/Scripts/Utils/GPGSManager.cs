@@ -23,8 +23,13 @@ public class GPGSManager : MonoBehaviour
 
     private void InitializeGPGS()
     {
-        PlayGamesPlatform.DebugLogEnabled = true;        
+#if UNITY_ANDROID || UNITY_STANDALONE_WIN
+        PlayGamesPlatform.DebugLogEnabled = true;
+        PlayGamesPlatform.Activate();
         PlayGamesPlatform.Instance.Authenticate(OnSignInResult);
+#else
+    Debug.Log("Skipping GPGS init: unsupported platform");
+#endif
     }
 
     private void OnSignInResult(SignInStatus status)
