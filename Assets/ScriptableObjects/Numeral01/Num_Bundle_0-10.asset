@@ -21,9 +21,8 @@ MonoBehaviour:
   sectionHeaderColor: {r: 0.65882355, g: 0.67058825, b: 0.9843137, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435:
-      0-10"
-    en: 'Numerals: 0-10'
+    ru: 0-10
+    en: 0-10
   sectionDescription:
     ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C  \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
       \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043E\u0442
