@@ -173,7 +173,11 @@ public class EX_ThemesPanel : Panel
 
             //fill slider with theme color
             Image fillImage = themeBtnComponent.themeProgressSlider.fillRect.GetComponent<Image>();
-            fillImage.color = dataLoader.themes.theme[i].themeHeaderColor;
+
+            Color color = dataLoader.themes.theme[i].themeHeaderColor;
+            color.a = 0.5f; // 50% opacity
+
+            fillImage.color = color;
 
             //set color Gray if no sections, set button interactable
             if (sectionsCount == 0)

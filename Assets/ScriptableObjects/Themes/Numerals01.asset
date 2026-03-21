@@ -24,4 +24,6 @@ MonoBehaviour:
     en: Study numerals.
   sections:
   - {fileID: 11400000, guid: eed356a3ff30ab64ba6f91f54bbcc973, type: 2}
-  - {fileID: 11400000, guid: d166b5729a918ca4da42bc1786382e10, type: 2}
+  - {fileID: 11400000, guid: 943f4eff7a5edfd4e9b8057f79c76483, type: 2}
+  - {fileID: 11400000, guid: cfe5762ebc9806246b413e4d002f83ee, type: 2}
+  - {fileID: 11400000, guid: 2d339f4d49df803479c2de2f50bbb19d, type: 2}

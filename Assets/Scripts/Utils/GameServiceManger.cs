@@ -94,10 +94,14 @@ public class GameServiceManager : MonoBehaviour
 
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-            // Set default PlayerName
-            string timestamp = System.DateTime.Now.ToString("HHmmss");
-            string desiredName = "Guest" + timestamp;
-            await AuthenticationService.Instance.UpdatePlayerNameAsync(desiredName);
+            //avid error auth
+            if (string.IsNullOrEmpty(AuthenticationService.Instance.PlayerName))
+            {
+                // Set default PlayerName
+                string timestamp = System.DateTime.Now.ToString("HHmmss");
+                string desiredName = "Guest" + timestamp;
+                await AuthenticationService.Instance.UpdatePlayerNameAsync(desiredName);
+            }
 
             // Unity adds a discriminator (#3004), so we need to strip it
             string fullName = AuthenticationService.Instance.PlayerName;

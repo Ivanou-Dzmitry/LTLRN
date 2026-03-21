@@ -19,6 +19,14 @@ public class QuestionT02Editor : Editor
             );
             field?.SetValue(null, false);
 
+            //columns drawer for answer column
+            var drawerC = typeof(DatabaseColumnReferenceDrawer);
+            var fieldC = drawerC.GetField(
+                "isLoaded",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static
+            );
+            fieldC?.SetValue(null, false);
+
             Debug.Log("Database info will reload on next draw (T02)");
         }
     }

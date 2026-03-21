@@ -77,6 +77,7 @@ public abstract class QuestionBase : ScriptableObject
     [Header("Question")]
     public DatabaseReference questionReference;
 
+    //main
     [Header("Questions")]
     public DatabaseReference[] questionReferences;
 

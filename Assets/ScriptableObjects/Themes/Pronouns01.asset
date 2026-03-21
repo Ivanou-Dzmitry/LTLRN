@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pronouns01
   m_EditorClassIdentifier: Assembly-CSharp::SectionManager
   themeDifficulty: 0
-  themeIcon: {fileID: 21300000, guid: 1c0ca8bfcf695d8469be4fda656f6e52, type: 3}
+  themeIcon: {fileID: 21300000, guid: 645b925d2262ede41915053aeea661fc, type: 3}
   themeHeaderColor: {r: 0.9176471, g: 0.5568628, b: 0.9843138, a: 1}
   themeNameTargetLang: "\u012Evard\u017Eiai"
   themeName:
