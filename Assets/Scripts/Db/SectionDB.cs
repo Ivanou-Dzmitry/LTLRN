@@ -12,5 +12,6 @@ public class SectionDB
     public string Liked { get; set; }  // "true" or "false" as text    
     public float Time { get; set; }
     public string Complete { get; set; }  // "true" or "false" as text    
-    public string Bundle { get; set; }  // "true" or "false" as text    
+    public string Bundle { get; set; }  // "true" or "false" as text        
+    public string SelectedLevels { get; set; }  // A0, A1, A2, B1, B2, C1, C2 as comma-separated values    
 }

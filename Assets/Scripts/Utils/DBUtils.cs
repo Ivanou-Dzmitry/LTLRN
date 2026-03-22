@@ -744,6 +744,76 @@ public class DBUtils : MonoBehaviour
         }
     }
 
+    public string GetSectionLevels(string sectionName)
+    {
+        if (!isDataInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return "A0";
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbDataPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    return section.SelectedLevels;
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                    return "A0";
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting section levels: {ex.Message}");
+            return "A0";
+        }
+    }
+
+
+    public void SetSectionLevels(string sectionName, string selectedLevels)
+    {
+        if (!isDataInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return;
+        }
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbDataPath))
+            {
+                var section = connection.Table<SectionDB>()
+                    .Where(s => s.Name == sectionName)
+                    .FirstOrDefault();
+
+                if (section != null)
+                {
+                    section.SelectedLevels = selectedLevels;
+                    connection.Update(section);
+                }
+                else
+                {
+                    Debug.LogWarning($"Section not found: {sectionName}");
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error updating section selection: {ex.Message}");
+        }
+    }
+
+
+
     // Generic method to get value from any table
     public string GetValue(string tableName, string columnName, int recordID)
     {

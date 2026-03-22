@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 //language switcher for multiple dropdowns
 
@@ -17,103 +18,83 @@ public enum Languages
 
 public class LanguageSwitcher : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown languageDropdown;
-    [SerializeField] private TMP_Dropdown langDropdownSet;
-
-    private TMP_Dropdown[] dropdowns;
+    [SerializeField] private Button[] langButtons;
     private GameData gameData;
-    private bool isChanging = false;
-
-    private void Awake()
-    {
-        // Create array of non-null dropdowns only
-        dropdowns = new[] { languageDropdown, langDropdownSet }.Where(d => d != null).ToArray();
-    }
 
     private void Start()
     {
-        if (dropdowns.Length > 0)
-        {
-            StartCoroutine(InitializeLanguageDropdown());
-        }
+        StartCoroutine(InitializeLanguageButtons());
     }
 
-    private IEnumerator InitializeLanguageDropdown()
+    private IEnumerator InitializeLanguageButtons()
     {
-        //Debug.Log("Initializing Language Dropdown...");
-
         yield return LocalizationSettings.InitializationOperation;
 
-        // Create options list once
-        var options = LocalizationSettings.AvailableLocales.Locales
-            .Select(locale => new TMP_Dropdown.OptionData(locale.Identifier.Code.ToUpper()))
-            .ToList();
-
-        // Apply options to all dropdowns
-        foreach (var dropdown in dropdowns)
-        {
-            dropdown.ClearOptions();
-            dropdown.AddOptions(options);
-        }
-
-        // Cache GameData
         gameData = GameObject.FindWithTag("GameData")?.GetComponent<GameData>();
 
-        // Load saved language
-        if (gameData != null && !string.IsNullOrEmpty(gameData.saveData.lang))
-        {
-            var savedLocale = LocalizationSettings.AvailableLocales.Locales
-                .FirstOrDefault(l => l.Identifier.Code == gameData.saveData.lang);
+        // Load saved language or fallback
+        string savedLang = gameData?.saveData.lang;
 
-            if (savedLocale != null)
-            {
-                LocalizationSettings.SelectedLocale = savedLocale;
-            }
+        if (!string.IsNullOrEmpty(savedLang))
+        {
+            SetLanguage(savedLang.ToUpper());
+        }
+        else
+        {
+            SetLanguage("EN"); // default
         }
 
-        // Set current language index
-        int currentIndex = LocalizationSettings.AvailableLocales.Locales
-            .IndexOf(LocalizationSettings.SelectedLocale);
-
-        // Apply to all dropdowns and add listeners
-        foreach (var dropdown in dropdowns)
+        // Hook buttons
+        foreach (var btn in langButtons)
         {
-            dropdown.SetValueWithoutNotify(currentIndex);
-            dropdown.onValueChanged.AddListener(OnLanguageChanged);
+            var btnImage = btn.GetComponent<ButtonImage>();
+            string langCode = btnImage.buttonTextStr.ToUpper();
+
+            btn.onClick.AddListener(() => OnLanguageButtonClicked(langCode));
         }
+
+        UpdateButtonsUI();
     }
 
-    private void OnLanguageChanged(int index)
+    private void OnLanguageButtonClicked(string langCode)
     {
-        if (isChanging) return;
+        SetLanguage(langCode);
+        UpdateButtonsUI();
+    }
 
-        isChanging = true;
+    private void SetLanguage(string langCode)
+    {
+        var locale = LocalizationSettings.AvailableLocales.Locales
+            .FirstOrDefault(l => l.Identifier.Code.ToUpper() == langCode);
 
-        var selectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
-        LocalizationSettings.SelectedLocale = selectedLocale;
+        if (locale == null)
+        {
+            Debug.LogWarning($"Locale not found: {langCode}");
+            return;
+        }
 
-        // Save language
+        LocalizationSettings.SelectedLocale = locale;
+
+        // Save
         if (gameData != null)
         {
-            gameData.saveData.lang = selectedLocale.Identifier.Code;
+            gameData.saveData.lang = locale.Identifier.Code;
             gameData.SaveToFile();
         }
-
-        // Sync all other dropdowns
-        foreach (var dropdown in dropdowns)
-        {
-            dropdown.SetValueWithoutNotify(index);
-        }
-
-        isChanging = false;
     }
 
-    private void OnDestroy()
+    private void UpdateButtonsUI()
     {
-        // Clean up listeners
-        foreach (var dropdown in dropdowns)
+        string currentLang = LocalizationSettings.SelectedLocale.Identifier.Code.ToUpper();
+
+        foreach (var btn in langButtons)
         {
-            dropdown.onValueChanged.RemoveListener(OnLanguageChanged);
+            var btnImage = btn.GetComponent<ButtonImage>();
+            string btnLang = btnImage.buttonTextStr.ToUpper();
+
+            bool isSelected = btnLang == currentLang;
+
+            btnImage.SetSelected(isSelected);
         }
     }
 

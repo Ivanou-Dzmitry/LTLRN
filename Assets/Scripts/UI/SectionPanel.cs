@@ -71,12 +71,18 @@ public class SectionPanel : MonoBehaviour
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
     }
 
+    private void Start()
+    {
+        //get db utils        
+        dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
+    }
+
     private void OnClicked()
     {
         //for bundle sections, open bundle menu and load sections into it, otherwise load game directly with selected section
         if (isBundleSection)
-        {
-            LoadBundle();
+        {            
+            LoadBundle(currentSection.name);
         }
         else
         {
@@ -86,9 +92,6 @@ public class SectionPanel : MonoBehaviour
 
     private void OnLike()
     {
-        //get db utils
-        dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
-
         //toggle like state
         isLiked = !isLiked;
 
@@ -210,7 +213,7 @@ public class SectionPanel : MonoBehaviour
         return locale;
     }
 
-    private void LoadBundle()
+    private void LoadBundle(string bundleSectionName)
     {
         //Debug.Log("Loading bundle section: ");
         PanelManager.Open("bundlemenu");
@@ -221,7 +224,8 @@ public class SectionPanel : MonoBehaviour
         //load sections into bundle panel
         if (bundlePanel != null)
         {
-            bundlePanel.SectionLoader(bundleSections, sectionHeaderText.text);
+            //load sections into bundle panel
+            bundlePanel.SectionLoader(bundleSections, sectionHeaderText.text, bundleSectionName);
 
             //save bundles
             if (gameData != null)

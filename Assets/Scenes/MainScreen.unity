@@ -980,17 +980,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 40665461334079144, guid: defa4b5822cfc734bae974e6af44b90e, type: 3}
   m_PrefabInstance: {fileID: 382586513}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &444583209 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7784560281924400174, guid: 689093d32c115b540803e1995f892595, type: 3}
-  m_PrefabInstance: {fileID: 2025777123833320436}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_Dropdown
 --- !u!1 &475223272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,6 +3065,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 40665461334079144, guid: defa4b5822cfc734bae974e6af44b90e, type: 3}
   m_PrefabInstance: {fileID: 597971207}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1245576554 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8269932923233667479, guid: 689093d32c115b540803e1995f892595, type: 3}
+  m_PrefabInstance: {fileID: 2025777123833320436}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &1266612861 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1193665322704138182, guid: e4d7d6ad2b98f1f49a2223f02d160d4e, type: 3}
@@ -3912,17 +3912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &1887873827 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5418955324538352732, guid: d17ecf6d624144c4b870d04c9253e55b, type: 3}
-  m_PrefabInstance: {fileID: 3976606274220685077}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_Dropdown
 --- !u!1 &1898281107
 GameObject:
   m_ObjectHideFlags: 0
@@ -3970,6 +3959,17 @@ MonoBehaviour:
   soundManagerPrefab: {fileID: 6673029259881224829, guid: 0e282a90e68a571429f80334ad401a9a, type: 3}
   gameDataPrefab: {fileID: 6153394010585547894, guid: 9f1028a6b31f4704ca55c98bb328540a, type: 3}
   logPrefab: {fileID: 4775174157173856373, guid: bb9c1d25106c13b4682e2fca23ec70a7, type: 3}
+--- !u!114 &1915118957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5048130105732457301, guid: 689093d32c115b540803e1995f892595, type: 3}
+  m_PrefabInstance: {fileID: 2025777123833320436}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1949965958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4223,8 +4223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247bb0e4a5607647ac37b953c609842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LanguageSwitcher
-  languageDropdown: {fileID: 1887873827}
-  langDropdownSet: {fileID: 444583209}
+  langButtons:
+  - {fileID: 1245576554}
+  - {fileID: 1915118957}
 --- !u!1001 &1460029445604847651
 PrefabInstance:
   m_ObjectHideFlags: 0

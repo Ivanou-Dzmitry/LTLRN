@@ -630,6 +630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DiffText
       objectReference: {fileID: 0}
+    - target: {fileID: 2128513864167417080, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4789130257236730002, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

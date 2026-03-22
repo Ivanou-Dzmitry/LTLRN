@@ -341,6 +341,10 @@ MonoBehaviour:
     m_Localized: Mode
     m_Metadata:
       m_Items: []
+  - m_Id: 34411889452703744
+    m_Localized: Select your training level
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

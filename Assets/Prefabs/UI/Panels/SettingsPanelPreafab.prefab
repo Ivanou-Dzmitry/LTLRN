@@ -83,6 +83,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 593213885821171016}
     m_Modifications:
+    - target: {fileID: 696535526519239123, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 696535526519239123, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 696535526519239123, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 696535526519239123, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1976799710303941672, guid: edfa813f29b6da041991880006b210b0, type: 3}
       propertyPath: m_Name
       value: LangPanel
@@ -116,6 +132,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4289723889363042630, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4422724939230714641, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4422724939230714641, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4422724939230714641, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4422724939230714641, guid: edfa813f29b6da041991880006b210b0, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -199,9 +231,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5489094016435909694, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489094016435909694, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489094016435909694, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489094016435909694, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7695642080286598948, guid: edfa813f29b6da041991880006b210b0, type: 3}
       propertyPath: m_Options.m_Options.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711956555645820668, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711956555645820668, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711956555645820668, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711956555645820668, guid: edfa813f29b6da041991880006b210b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -857,7 +921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6409384696753180353, guid: defa4b5822cfc734bae974e6af44b90e, type: 3}
       propertyPath: m_Name
-      value: SettingsPanel Variant
+      value: SettingsPanelPreafab
       objectReference: {fileID: 0}
     - target: {fileID: 6409384696753180353, guid: defa4b5822cfc734bae974e6af44b90e, type: 3}
       propertyPath: m_IsActive

@@ -1,5 +1,6 @@
 using LTLRN.UI;
 using NUnit.Framework.Internal;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.Diagnostics;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using static Section;
 
 public class EX_BundleMenu : Panel
 {
@@ -28,6 +30,12 @@ public class EX_BundleMenu : Panel
 
     private const string ARROW_RIGHT = "\u2192";
 
+    [Header("Levels")]
+    [SerializeField] private Button[] levelButtons;
+    private HashSet<string> selectedLevels = new HashSet<string>();
+    private HashSet<string> availableLevels;
+    private string bundleSectionName;
+
     private enum LangList
     {
         LT,
@@ -45,6 +53,17 @@ public class EX_BundleMenu : Panel
         //buttons
         if(exitButton != null)
             exitButton.onClick.AddListener(OnExitClick);
+
+        //add listeners for level buttons
+        foreach (var btn in levelButtons)
+        {
+            ButtonImage btnImage = btn.GetComponent<ButtonImage>();
+
+            btn.onClick.AddListener(() =>
+            {
+                ToggleLevel(btnImage);
+            });
+        }
 
         base.Initialize();
     }
@@ -73,7 +92,8 @@ public class EX_BundleMenu : Panel
         PanelManager.Open("exmain");
     }
 
-    public void SectionLoader(Section[] section, string bundleName)
+
+    public void SectionLoader(Section[] section, string bundleName, string bndlSecName)
     {
         // Clear old panels (important when reloading)
         foreach (Transform child in sectionsRectTransform)
@@ -81,12 +101,36 @@ public class EX_BundleMenu : Panel
             Destroy(child.gameObject);
         }
 
+        //set current section - root
+        bundleSectionName = bndlSecName;
         bundleSections = section;
         headerText.text = bundleName;
+
+        //get levels from db
+        string selLevels = dbUtils.GetSectionLevels(bndlSecName);
+
+        // Normalize levels string
+        string normValueSelLevels = NormalizeLevels(selLevels);
+
+        UpdateAvailableLevels();
+
+        //set values of selected levels based on db value
+        ApplyLevelsFromDB(normValueSelLevels);
+
+        ValidateSelectedLevels();
+
+        //set selected levels of difficulty buttons
+        UpdateLevelButtonsUI();
 
         //button instances
         foreach (Section sec in bundleSections)
         {
+            string difficulty = sec.difficultyType.ToString();
+
+            // skip if not selected
+            if (!selectedLevels.Contains(difficulty))
+                continue;
+
             GameObject sectionBtnObj = Instantiate(sectionButonPrefab, sectionsRectTransform);
             sectionBtnObj.name = sec.name;
 
@@ -217,6 +261,7 @@ public class EX_BundleMenu : Panel
         button.sectionDifficulty.text = sec.difficultyType.ToString();
 
         bool complete = dbUtils.GetSectionComplete(sec.name);
+
         if (complete)
         {
             SetProgressSlider(sec, button, true);
@@ -269,6 +314,109 @@ public class EX_BundleMenu : Panel
         }                
     }
 
+    private void ToggleLevel(ButtonImage btn)
+    {
+        string level = btn.buttonTextStr;
+
+        if (selectedLevels.Contains(level))
+        {
+            // Prevent removing last selected item
+            if (selectedLevels.Count == 1)
+            {
+                Debug.Log("At least one level must remain selected.");
+                return;
+            }
+
+            selectedLevels.Remove(level);
+            btn.SetSelected(false);
+        }
+        else
+        {
+            selectedLevels.Add(level);
+            btn.SetSelected(true);
+        }
+
+        //set to db selected levels for current bundle section
+        dbUtils.SetSectionLevels(bundleSectionName, string.Join(",", selectedLevels));
+
+        //reload
+        SectionLoader(bundleSections, headerText.text, bundleSectionName);
+    }
+
+    private string NormalizeLevels(string levels)
+    {
+        if (string.IsNullOrWhiteSpace(levels))
+            return "A0";
+
+        var split = levels.Split(',');
+
+        // remove empty / duplicates
+        var cleaned = new HashSet<string>(
+            split.Where(l => !string.IsNullOrWhiteSpace(l))
+        );
+
+        if (cleaned.Count == 0)
+            return "A0";
+
+        return string.Join(",", cleaned);
+    }
+
+    private void ApplyLevelsFromDB(string levels)
+    {
+        selectedLevels.Clear();
+
+        var split = levels.Split(',');
+
+        foreach (var lvl in split)
+        {
+            var clean = lvl.Trim();
+            if (!string.IsNullOrEmpty(clean))
+                selectedLevels.Add(clean);
+        }
+    }
+
+    private void UpdateLevelButtonsUI()
+    {
+        foreach (var btn in levelButtons)
+        {
+            var btnImage = btn.GetComponent<ButtonImage>();
+            string level = btnImage.buttonTextStr;
+
+            bool isAvailable = availableLevels.Contains(level);
+            bool isSelected = selectedLevels.Contains(level);
+
+            // 1. Disable if not available
+            btnImage.SetDisabled(!isAvailable);
+
+            // 2. Apply selection ONLY if available
+            btnImage.SetSelected(isAvailable && isSelected);
+        }
+    }
+
+    private void UpdateAvailableLevels()
+    {
+        availableLevels = new HashSet<string>();
+
+        foreach (var sec in bundleSections)
+        {
+            if (sec.difficultyType == DifficultyType.Bundle)
+                continue;
+
+            availableLevels.Add(sec.difficultyType.ToString());
+        }
+    }
+
+    private void ValidateSelectedLevels()
+    {
+        selectedLevels.RemoveWhere(level => !availableLevels.Contains(level));
+
+        // enforce at least one
+        if (selectedLevels.Count == 0 && availableLevels.Count > 0)
+        {
+            string fallback = availableLevels.First();
+            selectedLevels.Add(fallback);
+        }
+    }
 
     private void OnDestroy()
     {

@@ -1301,17 +1301,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8876172837794605285, guid: 3f43aed4c94fae645992bf3436149e17, type: 3}
   m_PrefabInstance: {fileID: 1847937402}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &918506864 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7784560281924400174, guid: 689093d32c115b540803e1995f892595, type: 3}
-  m_PrefabInstance: {fileID: 1394529860}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_Dropdown
 --- !u!1 &1014867732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,6 +1427,17 @@ MonoBehaviour:
   lifeBtn: {fileID: 1513142717}
   crystalsBtn: {fileID: 465849711}
   starsBtn: {fileID: 1380241971}
+--- !u!114 &1194569080 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8269932923233667479, guid: 689093d32c115b540803e1995f892595, type: 3}
+  m_PrefabInstance: {fileID: 1394529860}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1238827577
 GameObject:
   m_ObjectHideFlags: 0
@@ -4525,6 +4525,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
+--- !u!114 &1647134140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5048130105732457301, guid: 689093d32c115b540803e1995f892595, type: 3}
+  m_PrefabInstance: {fileID: 1394529860}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1 &1649880191
 GameObject:
   m_ObjectHideFlags: 0
@@ -6805,8 +6816,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247bb0e4a5607647ac37b953c609842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LanguageSwitcher
-  languageDropdown: {fileID: 918506864}
-  langDropdownSet: {fileID: 0}
+  langButtons:
+  - {fileID: 1194569080}
+  - {fileID: 1647134140}
 --- !u!1 &2111274110
 GameObject:
   m_ObjectHideFlags: 0
