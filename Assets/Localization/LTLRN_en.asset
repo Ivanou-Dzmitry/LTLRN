@@ -345,6 +345,14 @@ MonoBehaviour:
     m_Localized: Select your training level
     m_Metadata:
       m_Items: []
+  - m_Id: 35198986790952960
+    m_Localized: Education
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35206594344050688
+    m_Localized: Exam
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

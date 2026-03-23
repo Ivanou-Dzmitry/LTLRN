@@ -124,6 +124,8 @@ public class ExGameLogic : MonoBehaviour
     private ExQManager01 qData;
 
     private bool isLearnSection = false;
+    private bool isExamSection = false;
+
     private Languages currentLang;
 
     private void Awake()
@@ -200,7 +202,7 @@ public class ExGameLogic : MonoBehaviour
                 }
                 catch (Exception e)                
                 {
-                    Debug.LogWarning($"Load 0 section. {e}");
+                    Debug.LogWarning($"Load 0 section. {e} Maybe section is bundle.");
                     tempSection = sectionManager.sections[0];
                 }            
 
@@ -227,17 +229,26 @@ public class ExGameLogic : MonoBehaviour
 
             }
 
-            //get section type: question or learn
+            //Important - set type of section - learn or exam
+
+            //get section type: learn
             if (currentSection.sectionType == Section.SectionType.LearnType01)
                 isLearnSection = true;
+
+            //get section type: exam
+            if (currentSection.sectionType == Section.SectionType.Exam)
+                isExamSection = true;
+
+            //disable buttons for exam section
+            if (isExamSection)
+                nextButton.gameObject.SetActive(false);
 
             // Create runtime copy of questions
             if (currentSection.questions.Length > 0)
             {
-                //experimental
+                //question generator
                 tempQuestions = qGen.QuestionGenerator(currentSection.questions[0]);
-                //Debug.Log(tempQuestions);
-
+  
                 //round 2
                 if(tempQuestions == null)
                     tempQuestions = new List<QuestionBase>(currentSection.questions);
@@ -249,14 +260,14 @@ public class ExGameLogic : MonoBehaviour
             if(!isLearnSection)
                 ShuffleQuestions(tempQuestions);
 
-        //load first
-        if (tempQuestions != null && tempQuestions.Count > 0)
-            currentQuestion = tempQuestions[0];       
-        }
-        else
-        {
-            Debug.LogError("GameData not found in scene!");            
-        }
+            //load first question
+            if (tempQuestions != null && tempQuestions.Count > 0)
+                currentQuestion = tempQuestions[0];       
+            }
+            else
+            {
+                Debug.LogError("GameData not found in scene!");            
+            }
 
         //load sound
         if(soundManager != null)
@@ -283,7 +294,7 @@ public class ExGameLogic : MonoBehaviour
         progressBar.maxValue = questionsCount;
         progressBar.value = 1;
 
-        //set text
+        //set text questions count
         progressText.text = $"0/{questionsCount}";
 
         //Debug.Log($"Section type: {currentSection.sectionType}, isLearnSection: {isLearnSection}");
@@ -771,8 +782,8 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-        // Learn type 01
-        if (question.questionType == QuestionType.Learn)
+            // Learn type 01
+            if (question.questionType == QuestionType.Learn)
         {
             for(int i = 0; i < tempQuestions.Count; i++)
             {
@@ -866,21 +877,37 @@ public class ExGameLogic : MonoBehaviour
         //Debug.Log(currentSection.sectionType.ToString());
 
         //check selected Text, Sound IMPORTANT
-        if (currentSection.sectionType == Section.SectionType.Text || currentSection.sectionType == Section.SectionType.Sound || currentSection.sectionType == Section.SectionType.Image)
+        if (currentSection.sectionType == Section.SectionType.Text || currentSection.sectionType == Section.SectionType.Sound ||
+            currentSection.sectionType == Section.SectionType.Image || currentSection.sectionType == Section.SectionType.Exam)
         {
-            //compare indexes
-            if (selectedIndex == correctIndex)
-            {
-                qData.CheckAnswer(selectedIndex, correctIndex);
-                tempScore += currentQuestion.rewardAmount;
-            }
-            else
-            {
-                qData.CheckAnswer(selectedIndex, correctIndex);
-            }
+            TestRoutine(selectedIndex, correctIndex);
+        }
+        else if (currentSection.sectionType == Section.SectionType.LearnType01)
+        {
+            LearnRoutine();
+        }
+    }
 
-            //next question or finish - currentSection.questions.Length
-            if (qCounter < tempQuestions.Count - 1)
+    private void TestRoutine(int selectedIndex, int correctIndex)
+    {
+        //compare indexes
+        if (selectedIndex == correctIndex)
+        {
+            qData.CheckAnswer(selectedIndex, correctIndex);
+            
+            //increase temp score
+            tempScore += currentQuestion.rewardAmount;
+        }
+        else
+        {
+            qData.CheckAnswer(selectedIndex, correctIndex);
+        }
+
+        //next question or finish - currentSection.questions.Length
+        if (qCounter < tempQuestions.Count - 1)
+        {
+            //exam section - if not exam - show next button, if exam - no next button, only result in the end
+            if (!isExamSection)
             {
                 nextButton.interactable = true;
                 nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
@@ -888,26 +915,37 @@ public class ExGameLogic : MonoBehaviour
             }
             else
             {
-                gameState = GameState.Finish;
-                resultRoutine = StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
+                nextBtnClicked(); //auto next question for exam section 
             }
         }
-        else if (currentSection.sectionType == Section.SectionType.LearnType01 || currentSection.sectionType == Section.SectionType.Exam)
+        else
         {
-            Debug.Log("Checking LearnType01 or Exam question...");
-
-            //next question or finish - currentSection.questions.Length
-            if (qCounter < tempQuestions.Count - 1)
-            {
-                nextButton.interactable = true;
-                nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
-                nextBtn.RefreshState();
-            }
-            else
+            if (!isExamSection)
             {
                 gameState = GameState.Finish;
                 resultRoutine = StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
             }
+            else
+            {
+                ResultProcessing();
+            }
+                
+        }
+    }
+
+    private void LearnRoutine()
+    {
+        //next question or finish - currentSection.questions.Length
+        if (qCounter < tempQuestions.Count - 1)
+        {
+            nextButton.interactable = true;
+            nextBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
+            nextBtn.RefreshState();
+        }
+        else
+        {
+            gameState = GameState.Finish;
+            resultRoutine = StartCoroutine(ResultProcessingDelayed(CHECK_DELAY)); // wait 1.5 seconds
         }
     }
 
@@ -962,9 +1000,6 @@ public class ExGameLogic : MonoBehaviour
     //wait
     private IEnumerator ResultProcessingDelayed(float delay)
     {
-        //open wait panel
-        //yield return new WaitForSeconds(delay/2);
-
         //PanelManager.Open("waiting");
         nextButton.gameObject.SetActive(false);
 
@@ -981,6 +1016,7 @@ public class ExGameLogic : MonoBehaviour
         progressText.text = $"{questionsCount}/{questionsCount}";
 
         yield return new WaitForSeconds(delay);
+        
         ResultProcessing();
     }
 
@@ -1286,15 +1322,15 @@ public class ExGameLogic : MonoBehaviour
 
     public void NextSection()
     {
+        //get next section
         bool hasNext = GetNextSection();
 
         int nextIndex = gameData.saveData.selectedSectionIndex + 1;
 
         if (!hasNext)
             return;
-
-
         
+        //set current section
         currentSection = sectionManager.sections[nextIndex];
         
         //set selected section index
@@ -1434,6 +1470,7 @@ public class ExGameLogic : MonoBehaviour
             NextButtonRoutine(ButtonImage.ButtonAnimation.Idle.ToString()); //question
             scRect.vertical = false;
 
+            //set text
             skillLevelText.text = textForTest;
         }
         else
@@ -1449,9 +1486,10 @@ public class ExGameLogic : MonoBehaviour
 
             questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);
 
+            //set text
             skillLevelText.text = textForLearn;
 
-            //show button
+            //show button TakeTest
             takeTestButton.gameObject.SetActive(true);
         }
     }
@@ -1459,6 +1497,7 @@ public class ExGameLogic : MonoBehaviour
 
     private void OnTakeTest()
     {
+        //get sections in bundle
         Section[] bundleSections = gameData.saveData.bundleSections;
 
         if (bundleSections == null)
@@ -1474,6 +1513,7 @@ public class ExGameLogic : MonoBehaviour
         }
 
         PanelManager.CloseAll();
+        
         //load game
         PanelManager.OpenScene("ExGame");
     }

@@ -42,7 +42,6 @@ public class EX_BundleMenu : Panel
         EN,
         RU
     }
-
     public override void Initialize()
     {
         if (IsInitialized)
@@ -200,7 +199,7 @@ public class EX_BundleMenu : Panel
         //button.sectionIcon.gameObject.SetActive(false);
 
         //set difficulty text
-        button.sectionDifficulty.text = sec.difficultyType.ToString();
+        //button.sectionDifficulty.text = sec.difficultyType.ToString();
 
         SetProgressSlider(sec, button);
     }
@@ -218,7 +217,7 @@ public class EX_BundleMenu : Panel
         button.sectionText.text = $"{test}\n{text}";
 
         //set difficulty text
-        button.sectionDifficulty.text = sec.difficultyType.ToString();
+        //button.sectionDifficulty.text = sec.difficultyType.ToString();
 
         SetProgressSlider(sec, button);
     }
@@ -230,7 +229,7 @@ public class EX_BundleMenu : Panel
         button.sectionIcon.sprite = sectionTypeIcons[0]; //hear icon
 
         //set difficulty text
-        button.sectionDifficulty.text = sec.difficultyType.ToString();
+        //button.sectionDifficulty.text = sec.difficultyType.ToString();
 
         string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
         string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ListenTxt");
@@ -258,7 +257,7 @@ public class EX_BundleMenu : Panel
 
         button.sectionText.text = text;
 
-        button.sectionDifficulty.text = sec.difficultyType.ToString();
+        //button.sectionDifficulty.text = sec.difficultyType.ToString();
 
         bool complete = dbUtils.GetSectionComplete(sec.name);
 
@@ -270,11 +269,15 @@ public class EX_BundleMenu : Panel
 
     private void SetupExamSection(Section sec, SectionButton button)
     {
-        button.sectionText.gameObject.SetActive(false);
+        button.sectionText.gameObject.SetActive(true);
         button.sectionIcon.gameObject.SetActive(true);
         button.sectionIcon.sprite = sectionTypeIcons[2]; //exam icon
 
-        button.sectionDifficulty.text = sec.difficultyType.ToString();
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ExamTxt");
+
+        button.sectionText.text = $"{text} {sec.difficultyType.ToString()}";
+
+        //button.sectionDifficulty.text = sec.difficultyType.ToString();
     }
 
     private Locale GetLocale()
