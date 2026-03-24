@@ -77,6 +77,9 @@ public class ExDataLoader : MonoBehaviour
             yield return null;
         }
 
+        //run waiting panel
+        PanelManager.Open("waiting");
+
         // Now load your data IMPORTANT
         LoadExerciseData();
     }
@@ -115,7 +118,7 @@ public class ExDataLoader : MonoBehaviour
             //set name on target lang
             themeNameTargetLangTxt.text = sectionManager.themeNameTargetLang;
 
-            CreateSectionPanels();
+            CreateSectionPanels();            
 
             return true;
         }
@@ -148,6 +151,9 @@ public class ExDataLoader : MonoBehaviour
                 LoadBundle(section, i);
             }
         }
+
+        //close waiting panel
+        PanelManager.Close("waiting");
     }
 
     public string FormatTime(float seconds)

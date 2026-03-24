@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
-  m_Name: MonthTest_Target01
+  m_Name: Month_Lrn_01
   m_EditorClassIdentifier: Assembly-CSharp::Section
   isBundle: 0
-  sectionType: 0
-  sectionLanguage: 1
-  difficultyType: 1
+  sectionType: 6
+  sectionLanguage: 2
+  difficultyType: 0
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: 19217339cefcb2743a7692305895b5a5, type: 3}
   sectionHeaderColor: {r: 0.25490198, g: 0.827451, b: 0.9843137, a: 1}
@@ -25,8 +25,9 @@ MonoBehaviour:
     en: Months
   sectionDescription:
     ru: "\u041F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
-      \u043C\u0435\u0441\u044F\u0446\u0435\u0432. \u0422\u0435\u043A\u0441\u0442."
-    en: Repeat the names of the months. Text.
+      \u043C\u0435\u0441\u044F\u0446\u0435\u0432. \u0422\u0435\u043A\u0441\u0442
+      \u0438 \u0437\u0432\u0443\u043A."
+    en: Repeat the names of the months. Text and sound.
   sectionInfo:
     tableName: Rules01
     columnName: RU
@@ -46,4 +47,4 @@ MonoBehaviour:
   bundleSections: []
   isContainBundleQuestion: 1
   questions:
-  - {fileID: 11400000, guid: 529a423d18e705b4d92904ec3f52e2ff, type: 2}
+  - {fileID: 11400000, guid: 2cba4e99350f99648a0a406aea1a42e6, type: 2}

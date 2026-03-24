@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
-  m_Name: MonthLrnQBundle01
+  m_Name: MonthTest_QB_Sys_01
   m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
   isAutomated: 1
   questionCategory:
@@ -20,88 +20,88 @@ MonoBehaviour:
     value: Date
     whereColumn: ID
     whereValue: 
-  questionLang: 1
+  questionLang: 0
   questionDifficulty: 0
-  questionType: 4
+  questionType: 0
   isQuestionBundle: 1
   questionReference:
     tableName: Month
-    columnName: NomSing
-    recordID: 12
-    value: gruodis
+    columnName: RU
+    recordID: 1
+    value: "\u044F\u043D\u0432\u0430\u0440\u044C"
     whereColumn: ID
     whereValue: 
   questionReferences:
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 1
-    value: sausis
+    value: "\u044F\u043D\u0432\u0430\u0440\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 2
-    value: vasaris
+    value: "\u0444\u0435\u0432\u0440\u0430\u043B\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 3
-    value: kovas
+    value: "\u043C\u0430\u0440\u0442"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 4
-    value: balandis
+    value: "\u0430\u043F\u0440\u0435\u043B\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 5
-    value: "gegu\u017E\u0117"
+    value: "\u043C\u0430\u0439"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 6
-    value: "bir\u017Eelis"
+    value: "\u0438\u044E\u043D\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 7
-    value: liepa
+    value: "\u0438\u044E\u043B\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 8
-    value: "rugpj\u016Btis"
+    value: "\u0430\u0432\u0433\u0443\u0441\u0442"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 9
-    value: "rugs\u0117jis"
+    value: "\u0441\u0435\u043D\u0442\u044F\u0431\u0440\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 10
-    value: spalis
+    value: "\u043E\u043A\u0442\u044F\u0431\u0440\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 11
-    value: lapkritis
+    value: "\u043D\u043E\u044F\u0431\u0440\u044C"
     whereColumn: 
     whereValue: 
   - tableName: Month
-    columnName: NomSing
+    columnName: RU
     recordID: 12
-    value: gruodis
+    value: "\u0434\u0435\u043A\u0430\u0431\u0440\u044C"
     whereColumn: 
     whereValue: 
   answerReferences: []

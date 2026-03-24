@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
-  m_Name: MonthTest_System01
+  m_Name: MonthTest_Tst_01
   m_EditorClassIdentifier: Assembly-CSharp::Section
   isBundle: 0
-  sectionType: 0
+  sectionType: 4
   sectionLanguage: 2
   difficultyType: 1
   sectionNumber: 1
@@ -47,4 +47,4 @@ MonoBehaviour:
   bundleSections: []
   isContainBundleQuestion: 1
   questions:
-  - {fileID: 11400000, guid: e86338708a6819047acef44f5aef7f63, type: 2}
+  - {fileID: 11400000, guid: ab88f3c7a59553b43acaf03288d4abe4, type: 2}

@@ -1165,18 +1165,25 @@ public class ExGameLogic : MonoBehaviour
 
     public void InterruptGame()
     {
-        PanelManager.CloseAll();
+        //if use get some score - ask, else just exit
+        if (tempScore > 0)
+        {
+            SaveResult();
+            PanelManager.CloseAll();
 
-        //run panel with choise
-        PanelManager.Open("exit");        
+            //run panel with choise
+            PanelManager.Open("exit");
+        }
+        else
+        {
+            InerruptLearn();
+        }
+
     }
 
     private void InerruptLearn()
     {
-        PanelManager.CloseAll();
-
-        PanelManager.CloseAll();
-
+        //PanelManager.CloseAll();      
         PanelManager.OpenScene("ExMenu");
     }
 
@@ -1232,20 +1239,6 @@ public class ExGameLogic : MonoBehaviour
             scoreManager.SaveCrystals(tempScore);
             
             LeaderboardManager.Instance.ReportScore(tempScore);
-
-            //old leaderboard
-            /*          
-                        bool addScore = false;
-
-              if (leaderboardManager != null)
-                            addScore = await leaderboardManager.AddScoreLeaderboard(tempScore);
-
-                        Social.ReportScore(tempScore, "CgkIvt3JrOAZEAIQAg", success =>
-                        {
-                            if (success)
-                                Debug.Log("Score submitted");
-                        });*/
-
         }
 
         //questions done
@@ -1340,7 +1333,7 @@ public class ExGameLogic : MonoBehaviour
         gameData.SaveToFile();
         
         //load next section
-        PanelManager.CloseAll();
+        PanelManager.CloseAll();        
         PanelManager.OpenScene("ExGame");
     }
 

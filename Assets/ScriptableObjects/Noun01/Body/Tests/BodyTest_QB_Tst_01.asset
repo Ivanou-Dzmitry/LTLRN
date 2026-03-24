@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
-  m_Name: MonthTestQBundle01
+  m_Name: BodyTest_QB_Tst_01
   m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
   isAutomated: 1
   questionCategory:
-    tableName: Month
+    tableName: Body01
     columnName: Category
     recordID: 1
-    value: Date
+    value: Body
     whereColumn: ID
     whereValue: 
   questionLang: 1
@@ -25,95 +25,116 @@ MonoBehaviour:
   questionType: 0
   isQuestionBundle: 1
   questionReference:
-    tableName: Month
+    tableName: Body01
     columnName: NomSing
     recordID: 1
-    value: sausis
+    value: "k\u016Bnas"
     whereColumn: ID
     whereValue: 
   questionReferences:
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 1
-    value: sausis
+    value: "k\u016Bnas"
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 2
-    value: vasaris
+    value: galva
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 3
-    value: kovas
+    value: veidas
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 4
-    value: balandis
+    value: akis
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 5
-    value: "gegu\u017E\u0117"
+    value: nosis
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 6
-    value: "bir\u017Eelis"
+    value: ausis
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 7
-    value: liepa
+    value: dantis
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 8
-    value: "rugpj\u016Btis"
+    value: "gerkl\u0117"
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 9
-    value: "rugs\u0117jis"
+    value: ranka
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 10
-    value: spalis
+    value: "pir\u0161tas"
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 11
-    value: lapkritis
+    value: koja
     whereColumn: 
     whereValue: 
-  - tableName: Month
+  - tableName: Body01
     columnName: NomSing
     recordID: 12
-    value: gruodis
+    value: skrandis
+    whereColumn: 
+    whereValue: 
+  - tableName: Body01
+    columnName: NomSing
+    recordID: 13
+    value: pilvas
+    whereColumn: 
+    whereValue: 
+  - tableName: Body01
+    columnName: NomSing
+    recordID: 14
+    value: nugara
+    whereColumn: 
+    whereValue: 
+  - tableName: Body01
+    columnName: NomSing
+    recordID: 15
+    value: "\u0161irdis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Body01
+    columnName: NomSing
+    recordID: 16
+    value: kraujas
     whereColumn: 
     whereValue: 
   answerReferences: []
   answerSecondWord: []
   soundReferences: []
   questionImageFile: []
-  imagesCount: 1
+  imagesCount: -1
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   correctAnswerNumber: -1
   rewardAmount: 1
-  answerColumn:
-  - recordID: 1
-    tableName: Month
-    columnName: NomSing
+  answerColumn: []
   questionDescription: 

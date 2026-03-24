@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
-  m_Name: BodyBundle01
+  m_Name: BodyTest_Tst_01
   m_EditorClassIdentifier: Assembly-CSharp::Section
-  isBundle: 1
-  sectionType: 5
-  sectionLanguage: 3
-  difficultyType: 7
+  isBundle: 0
+  sectionType: 4
+  sectionLanguage: 2
+  difficultyType: 1
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: e0c5ffc63a8e57e43925700c53580a84, type: 3}
   sectionHeaderColor: {r: 0.9685534, g: 0.6974802, b: 0.88707435, a: 1}
@@ -25,7 +25,7 @@ MonoBehaviour:
     en: Body
   sectionDescription:
     ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F
-      \u0447\u0430\u0441\u0442\u0435\u0439 \u0442\u0435\u043B\u0430."
+      \u0447\u0430\u0441\u0442\u0435 \u0442\u0435\u043B\u0430."
     en: Learn the names of body parts.
   sectionInfo:
     tableName: Rules01
@@ -39,10 +39,7 @@ MonoBehaviour:
       \u0438\u0437 \u0441\u043F\u0438\u0441\u043A\u0430."
     whereColumn: ID
     whereValue: 
-  bundleSections:
-  - {fileID: 11400000, guid: f334fecf45e64984daecdacfff741b68, type: 2}
-  - {fileID: 11400000, guid: 7bcfa98681715a144a19c1a30baf7a7c, type: 2}
-  - {fileID: 11400000, guid: 68522ff6c93c86c438870d3ca12e22af, type: 2}
-  - {fileID: 11400000, guid: fd1dc6b521e37cd4d98c13bf59375268, type: 2}
-  isContainBundleQuestion: 0
-  questions: []
+  bundleSections: []
+  isContainBundleQuestion: 1
+  questions:
+  - {fileID: 11400000, guid: 37e26bd19cf7e234b9ab7cab483e0df4, type: 2}
