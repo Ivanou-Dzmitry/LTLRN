@@ -22,7 +22,7 @@ MonoBehaviour:
     whereValue: 
   questionLang: 1
   questionDifficulty: 0
-  questionType: 4
+  questionType: 3
   isQuestionBundle: 1
   questionReference:
     tableName: Weekdays

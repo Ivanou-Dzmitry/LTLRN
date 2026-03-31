@@ -20,9 +20,9 @@ MonoBehaviour:
     value: Date
     whereColumn: ID
     whereValue: 
-  questionLang: 1
+  questionLang: 0
   questionDifficulty: 0
-  questionType: 4
+  questionType: 0
   isQuestionBundle: 1
   questionReference:
     tableName: Weekdays
@@ -33,45 +33,45 @@ MonoBehaviour:
     whereValue: 
   questionReferences:
   - tableName: Weekdays
-    columnName: NomSing
+    columnName: RU
     recordID: 1
-    value: pirmadienis
+    value: "\u043F\u043E\u043D\u0435\u0434\u0435\u043B\u044C\u043D\u0438\u043A"
     whereColumn: 
     whereValue: 
   - tableName: Weekdays
-    columnName: NomSing
+    columnName: RU
     recordID: 2
-    value: antradienis
+    value: "\u0432\u0442\u043E\u0440\u043D\u0438\u043A"
     whereColumn: 
     whereValue: 
   - tableName: Weekdays
-    columnName: NomSing
+    columnName: RU
     recordID: 3
-    value: "tre\u010Diadienis"
+    value: "\u0441\u0440\u0435\u0434\u0430"
     whereColumn: 
     whereValue: 
   - tableName: Weekdays
-    columnName: NomSing
+    columnName: RU
     recordID: 4
-    value: ketvirtadienis
+    value: "\u0447\u0435\u0442\u0432\u0435\u0440\u0433"
     whereColumn: 
     whereValue: 
   - tableName: Weekdays
-    columnName: NomSing
+    columnName: RU
     recordID: 5
-    value: penktadienis
+    value: "\u043F\u044F\u0442\u043D\u0438\u0446\u0430"
     whereColumn: 
     whereValue: 
   - tableName: Weekdays
-    columnName: NomSing
+    columnName: RU
     recordID: 6
-    value: "\u0161e\u0161tadienis"
+    value: "\u0441\u0443\u0431\u0431\u043E\u0442\u0430"
     whereColumn: 
     whereValue: 
   - tableName: Weekdays
-    columnName: NomSing
+    columnName: RU
     recordID: 7
-    value: sekmadienis
+    value: "\u0432\u043E\u0441\u043A\u0440\u0435\u0441\u0435\u043D\u044C\u0435"
     whereColumn: 
     whereValue: 
   answerReferences: []
@@ -82,5 +82,8 @@ MonoBehaviour:
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   correctAnswerNumber: -1
   rewardAmount: 1
-  answerColumn: []
+  answerColumn:
+  - recordID: 0
+    tableName: Weekdays
+    columnName: NomSing
   questionDescription: 
