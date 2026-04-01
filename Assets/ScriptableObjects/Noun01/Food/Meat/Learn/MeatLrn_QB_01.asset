@@ -23,12 +23,116 @@ MonoBehaviour:
   questionLang: 1
   questionDifficulty: 0
   questionType: 4
+  isQuestionBundle: 1
   questionReference:
     tableName: Meat01
     columnName: NomSing
     recordID: 1
     value: kiauliena
     whereColumn: ID
+    whereValue: 
+  questionReferences:
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 1
+    value: kiauliena
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 2
+    value: jautiena
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 3
+    value: "vi\u0161tiena"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 4
+    value: "\u0117riena"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 5
+    value: "ver\u0161iena"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 6
+    value: kumpis
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 7
+    value: "\u0161onin\u0117"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 8
+    value: "de\u0161ra"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 9
+    value: "de\u0161rel\u0117"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 11
+    value: "far\u0161as"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 12
+    value: "kepen\u0117l\u0117s"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 14
+    value: "\u0161onkauliai"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 15
+    value: kalakutiena
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 16
+    value: "triu\u0161iena"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 17
+    value: "pa\u0161tetas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 18
+    value: antiena
+    whereColumn: 
+    whereValue: 
+  - tableName: Meat01
+    columnName: NomSing
+    recordID: 19
+    value: "la\u0161iniai"
+    whereColumn: 
     whereValue: 
   answerReferences: []
   answerSecondWord: []
