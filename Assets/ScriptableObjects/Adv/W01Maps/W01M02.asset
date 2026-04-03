@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: W01M02
   m_EditorClassIdentifier: Assembly-CSharp::Map
   mapPrefab: {fileID: -7779549013044185237, guid: 53f20eb7d3634e7418afeadeb69ed840, type: 3}
+  showMapInfo: 1
+  mapInfo: You enter map 2

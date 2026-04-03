@@ -6,5 +6,7 @@ public class MapsManager : ScriptableObject
 {
     [Header("World Maps")]
     public Map[] maps;
+
+    [Header("Map")]
     public GameObject worldMap;
 }

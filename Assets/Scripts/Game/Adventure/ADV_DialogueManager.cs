@@ -146,6 +146,8 @@ public class ADV_DialogueManager : MonoBehaviour
 
         //set state
         dialogueState = DialogueState.End;
+
+        playerClass.currentPlayerState = Player.PlayerState.Idle;
     }
 
     public void ContinueStory()

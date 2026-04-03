@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     [Header("Utils")]
     public TilesUtils tilesUtilsClass;
     public ADV_MapManager mapManagerClass;
+    public ADV_InteractionManager interactionManagerClass;
 
     //for icon fade
     private Coroutine fadeRoutine;
@@ -56,9 +57,20 @@ public class Player : MonoBehaviour
         Down
     }
 
+    public enum PlayerState
+    {
+        Idle,
+        Walk,
+        Attack,
+        Interract,
+        Talk
+    }
+
     //for direction
     private MoveDirection currentDirection;
     private MoveDirection currentDirectionLast;
+
+    public PlayerState currentPlayerState;
 
     private void Awake()
     {
@@ -100,7 +112,7 @@ public class Player : MonoBehaviour
         if (ADV_DialogueManager.Instance.dialogueState == ADV_DialogueManager.DialogueState.Start || gameLogic.gameState == GameLogic.GameState.Pause)
         {
             currentDirection = MoveDirection.None;
-            PlayerAnimation(currentDirection);
+            PlayerAnimation(currentDirection);            
             return;
         }
 
@@ -112,16 +124,23 @@ public class Player : MonoBehaviour
 
         //animate player only if moving
         if (currentDirection != MoveDirection.None)
+        {
             PlayerAnimation(currentDirection);
+            currentPlayerState = PlayerState.Walk;
+        }
         else
+        {
             animator.SetBool("moving", false);
+            currentPlayerState = PlayerState.Idle;
+        }
+            
     }
 
     //for interraction with dialogue
     public void OnInterract(InputAction.CallbackContext context)
     {        
         if (!context.performed)
-            return;
+            return;        
 
         //for dialogues system
         ADV_DialogueManager.Instance.OnCommunicate();
@@ -134,7 +153,11 @@ public class Player : MonoBehaviour
             return;
 
         if (inkText != null)
+        {
             ADV_DialogueManager.Instance.EnterDialogueMode(inkText);
+            currentPlayerState = PlayerState.Talk;
+        }
+            
     }
 
 /*    private bool DialogueStart()
@@ -195,24 +218,33 @@ public class Player : MonoBehaviour
 
     //for diallog - ENTER
     private void OnTriggerEnter2D(Collider2D collider)
-    {        
+    {
+        Debug.Log($"IN Trigger: {collider.name}");
+
         //set current collider to use
         currentCollider = collider;
 
         //try to get dialogue from object
         inkText = tilesUtilsClass.GetDialogueFromCollider(collider);
 
-        if(inkText != null)
+        //run diallogue if found
+        if (inkText != null)
         {
             readyForDialogue = true;
 
             InteractIconRoutine(true);
-        }                    
+        }
+        
+        string interactionType = interactionManagerClass.GetInteraction(collider);
+
+        Debug.Log($"interactionType: {interactionType}");
     }
 
     //for diallog - EXIT
     private void OnTriggerExit2D(Collider2D collider)
     {
+        Debug.Log($"OUT Trigger: {collider.name}");
+
         currentCollider = null;
 
         readyForDialogue = false;
@@ -227,7 +259,7 @@ public class Player : MonoBehaviour
     {
         readyForInteract = true;
 
-        Debug.Log($"IN: {collision.collider.name}");
+        Debug.Log($"IN Collision: {collision.collider.name}");
 
         //set current collision for use
         currentCollision = collision;
@@ -251,7 +283,7 @@ public class Player : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         currentCollision = null;
-        Debug.Log($"OUT: {collision.collider.name}");
+        Debug.Log($"OUT Collision: {collision.collider.name}");
     }
 
     private bool InteractIconRoutine(bool value)

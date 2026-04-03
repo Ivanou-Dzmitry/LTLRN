@@ -48,12 +48,6 @@ public class GameLogic : MonoBehaviour
 
     private Languages currentLang;
 
-
-    private void Awake()
-    {
-
-    }
-
     private void Start()
     {
         StartCoroutine(WaitAndLoadData());
@@ -136,7 +130,6 @@ public class GameLogic : MonoBehaviour
     {
         Debug.Log($"{interactParams}");
     }
-
 
     private void OnApplicationQuit()
     {

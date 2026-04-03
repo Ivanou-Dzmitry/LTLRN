@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 
 public class ADV_MapManager : MonoBehaviour
 {
@@ -33,6 +35,9 @@ public class ADV_MapManager : MonoBehaviour
     [Header("Utils")]
     public TilesUtils tilesUtilsClass;
 
+    [Header("InfoPanel")]
+    [SerializeField] private GameObject infoPanel;
+
     [Header("Player")]
     [SerializeField] private GameObject player;
     //private Player playerClass;
@@ -54,7 +59,6 @@ public class ADV_MapManager : MonoBehaviour
     private int currentMapIndex;
     private int currentMapManagerIndex;    
     
-
     private void Awake()
     {
         mapButton.onClick.AddListener(OnMapOpen);
@@ -148,11 +152,13 @@ public class ADV_MapManager : MonoBehaviour
 
     private bool InstanceMapPrefab(Map map)
     {
-/*        // Clear old
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }*/
+        /*        // Clear old
+                foreach (Transform child in transform)
+                {
+                    Destroy(child.gameObject);
+                }*/
+        if(infoPanel.activeSelf)
+            infoPanel.SetActive(false);
 
         if (map != null)
         {
@@ -163,6 +169,14 @@ public class ADV_MapManager : MonoBehaviour
             //set current map
             currentMap = map;
 
+            //show panel with map info if needed
+            if (map.showMapInfo)
+            {
+                infoPanel.SetActive(true);
+                ADV_InfoPanel iPanel = infoPanel.GetComponent<ADV_InfoPanel>();
+                iPanel.ShowInfo(map.mapInfo);
+            }
+                
             return true;
         }
         else
@@ -414,5 +428,7 @@ public class ADV_MapManager : MonoBehaviour
                         basePos.y + offsetY,
                         basePos.z);
     }
+
+
 
 }
