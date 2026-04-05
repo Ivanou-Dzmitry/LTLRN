@@ -16,6 +16,8 @@ TagManager:
   - LangSwitcher
   - BundlePanel
   - ADVGameLogic
+  - ADV_Collectible
+  - ADV_Destructible
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,3576 @@
+fileFormatVersion: 2
+guid: e1f5b1f901035794c8d122e14424a9e6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -835208463330735227
+    second: kelias_objects_01_0
+  - first:
+      213: 7079265451709762387
+    second: kelias_objects_01_1
+  - first:
+      213: -5263870728796588368
+    second: kelias_objects_01_2
+  - first:
+      213: -2616995823257078174
+    second: kelias_objects_01_3
+  - first:
+      213: -6584014199842906715
+    second: kelias_objects_01_4
+  - first:
+      213: -1824597105752910937
+    second: kelias_objects_01_5
+  - first:
+      213: -8635041717909048169
+    second: kelias_objects_01_6
+  - first:
+      213: 1715742003657819904
+    second: kelias_objects_01_7
+  - first:
+      213: 5259562765375490278
+    second: kelias_objects_01_8
+  - first:
+      213: 4363340915834566535
+    second: kelias_objects_01_9
+  - first:
+      213: 3947030481314827953
+    second: kelias_objects_01_10
+  - first:
+      213: 1473131697367903090
+    second: kelias_objects_01_11
+  - first:
+      213: 1056096597015413048
+    second: kelias_objects_01_12
+  - first:
+      213: 7808243507285350053
+    second: kelias_objects_01_13
+  - first:
+      213: 1767422543063475860
+    second: kelias_objects_01_14
+  - first:
+      213: 1027290895281382558
+    second: kelias_objects_01_15
+  - first:
+      213: 7738969810810928214
+    second: kelias_objects_01_16
+  - first:
+      213: -8492612312820095905
+    second: kelias_objects_01_17
+  - first:
+      213: 4944445175603474920
+    second: kelias_objects_01_18
+  - first:
+      213: -2871579797412325275
+    second: kelias_objects_01_19
+  - first:
+      213: 7224980886120087777
+    second: kelias_objects_01_20
+  - first:
+      213: -8315495405580165651
+    second: kelias_objects_01_21
+  - first:
+      213: -3353781918304857689
+    second: kelias_objects_01_22
+  - first:
+      213: -7253562615238292570
+    second: kelias_objects_01_23
+  - first:
+      213: -5014401071052816426
+    second: kelias_objects_01_24
+  - first:
+      213: -1987748828117758883
+    second: kelias_objects_01_25
+  - first:
+      213: 6402410794369046610
+    second: kelias_objects_01_26
+  - first:
+      213: -5315451161940502156
+    second: kelias_objects_01_27
+  - first:
+      213: 8362664709828592513
+    second: kelias_objects_01_28
+  - first:
+      213: -4694253206234516373
+    second: kelias_objects_01_29
+  - first:
+      213: -3211469991471480347
+    second: kelias_objects_01_30
+  - first:
+      213: 1233093960543307704
+    second: kelias_objects_01_31
+  - first:
+      213: 8430590170471249341
+    second: kelias_objects_01_32
+  - first:
+      213: 9060846195183014871
+    second: kelias_objects_01_33
+  - first:
+      213: 4713332553686111233
+    second: kelias_objects_01_34
+  - first:
+      213: 3784709727858172431
+    second: kelias_objects_01_35
+  - first:
+      213: -7932807790807247357
+    second: kelias_objects_01_36
+  - first:
+      213: -709013322698873064
+    second: kelias_objects_01_37
+  - first:
+      213: -1270768847981433636
+    second: kelias_objects_01_38
+  - first:
+      213: -5679669509804006769
+    second: kelias_objects_01_39
+  - first:
+      213: -2067035748496353349
+    second: kelias_objects_01_40
+  - first:
+      213: 7852255869126992950
+    second: kelias_objects_01_41
+  - first:
+      213: -2304066911382044339
+    second: kelias_objects_01_42
+  - first:
+      213: 8299476650751001028
+    second: kelias_objects_01_43
+  - first:
+      213: 8562733999646750463
+    second: kelias_objects_01_44
+  - first:
+      213: 5239829220807214407
+    second: kelias_objects_01_45
+  - first:
+      213: 941332998394589496
+    second: kelias_objects_01_46
+  - first:
+      213: -2395464091619926523
+    second: kelias_objects_01_47
+  - first:
+      213: 8508621091068062921
+    second: kelias_objects_01_48
+  - first:
+      213: 2202223560470387646
+    second: kelias_objects_01_49
+  - first:
+      213: -2932114136272834052
+    second: kelias_objects_01_50
+  - first:
+      213: 7014366088857420854
+    second: kelias_objects_01_51
+  - first:
+      213: -4149679666724738274
+    second: kelias_objects_01_52
+  - first:
+      213: -4784196394732533712
+    second: kelias_objects_01_53
+  - first:
+      213: 5649766211313493364
+    second: kelias_objects_01_54
+  - first:
+      213: -4643066681270408220
+    second: kelias_objects_01_55
+  - first:
+      213: -1231134802269030824
+    second: kelias_objects_01_56
+  - first:
+      213: 2887626919916481951
+    second: kelias_objects_01_57
+  - first:
+      213: 1263215231599452412
+    second: kelias_objects_01_58
+  - first:
+      213: -1871966691368546205
+    second: kelias_objects_01_59
+  - first:
+      213: -8947958253062088397
+    second: kelias_objects_01_60
+  - first:
+      213: -2481321139011161707
+    second: kelias_objects_01_61
+  - first:
+      213: 7583530205839246318
+    second: kelias_objects_01_62
+  - first:
+      213: 4432622620875036863
+    second: kelias_objects_01_63
+  - first:
+      213: 6220233984824433125
+    second: kelias_objects_01_64
+  - first:
+      213: -4253268971065193100
+    second: kelias_objects_01_65
+  - first:
+      213: -7454990230990792259
+    second: kelias_objects_01_66
+  - first:
+      213: -6206203651980915789
+    second: kelias_objects_01_67
+  - first:
+      213: -2964875606926763671
+    second: kelias_objects_01_68
+  - first:
+      213: -6197201314762189953
+    second: kelias_objects_01_69
+  - first:
+      213: 3259836906370265572
+    second: kelias_objects_01_70
+  - first:
+      213: 2297420622550822351
+    second: kelias_objects_01_71
+  - first:
+      213: 2676834782536396267
+    second: kelias_objects_01_72
+  - first:
+      213: 3405111084987391249
+    second: kelias_objects_01_73
+  - first:
+      213: -2739173403460873656
+    second: kelias_objects_01_74
+  - first:
+      213: 6406640296680130494
+    second: kelias_objects_01_75
+  - first:
+      213: 7508789506871922062
+    second: kelias_objects_01_76
+  - first:
+      213: 566568519553007119
+    second: kelias_objects_01_77
+  - first:
+      213: 7256414384797363740
+    second: kelias_objects_01_78
+  - first:
+      213: 2620151579259961668
+    second: kelias_objects_01_79
+  - first:
+      213: 7406956525763473259
+    second: kelias_objects_01_80
+  - first:
+      213: -2928187223987348978
+    second: kelias_objects_01_81
+  - first:
+      213: 1481953241507817643
+    second: kelias_objects_01_82
+  - first:
+      213: 4864822049840610953
+    second: kelias_objects_01_83
+  - first:
+      213: 8175557352130934807
+    second: kelias_objects_01_84
+  - first:
+      213: -2773963020293028625
+    second: kelias_objects_01_85
+  - first:
+      213: -221991979471721641
+    second: kelias_objects_01_86
+  - first:
+      213: -3999911590213863214
+    second: kelias_objects_01_87
+  - first:
+      213: -3640136328875433106
+    second: kelias_objects_01_88
+  - first:
+      213: 1809899628256709684
+    second: kelias_objects_01_89
+  - first:
+      213: -8657635967640848661
+    second: kelias_objects_01_90
+  - first:
+      213: 7637983672665916238
+    second: kelias_objects_01_91
+  - first:
+      213: -4822297489441149155
+    second: kelias_objects_01_92
+  - first:
+      213: 8128557482246941696
+    second: kelias_objects_01_93
+  - first:
+      213: 7826863591959090601
+    second: kelias_objects_01_94
+  - first:
+      213: 4028340426231593179
+    second: kelias_objects_01_95
+  - first:
+      213: -6102365258501320309
+    second: kelias_objects_01_96
+  - first:
+      213: -9048166006158096081
+    second: kelias_objects_01_97
+  - first:
+      213: 405217142106826002
+    second: kelias_objects_01_98
+  - first:
+      213: -9131960671370281552
+    second: kelias_objects_01_99
+  - first:
+      213: 7852394769327597317
+    second: kelias_objects_01_100
+  - first:
+      213: -6464672071526694442
+    second: kelias_objects_01_101
+  - first:
+      213: -3241849696734633096
+    second: kelias_objects_01_102
+  - first:
+      213: 4590709391965276038
+    second: kelias_objects_01_103
+  - first:
+      213: -8942727800394892465
+    second: kelias_objects_01_104
+  - first:
+      213: 5300977741638148436
+    second: kelias_objects_01_105
+  - first:
+      213: -3905176669549864162
+    second: kelias_objects_01_106
+  - first:
+      213: 473382289305558936
+    second: kelias_objects_01_107
+  - first:
+      213: -5271115730411179433
+    second: kelias_objects_01_108
+  - first:
+      213: -951515231273121731
+    second: kelias_objects_01_109
+  - first:
+      213: -7196282173570605706
+    second: kelias_objects_01_110
+  - first:
+      213: -3660662195002505181
+    second: kelias_objects_01_111
+  - first:
+      213: 2491303529047809044
+    second: kelias_objects_01_112
+  - first:
+      213: 8636073179648960245
+    second: kelias_objects_01_113
+  - first:
+      213: -4640630325745586777
+    second: kelias_objects_01_114
+  - first:
+      213: -5445214188559024687
+    second: kelias_objects_01_115
+  - first:
+      213: 3778201355220269681
+    second: kelias_objects_01_116
+  - first:
+      213: 3940585048822002902
+    second: kelias_objects_01_117
+  - first:
+      213: 2063179321476947866
+    second: kelias_objects_01_118
+  - first:
+      213: -343353978071425796
+    second: kelias_objects_01_119
+  - first:
+      213: -5454139122515697824
+    second: kelias_objects_01_120
+  - first:
+      213: 1746501340753919002
+    second: kelias_objects_01_121
+  - first:
+      213: 4772986617791415807
+    second: kelias_objects_01_122
+  - first:
+      213: 6054011085213217855
+    second: kelias_objects_01_123
+  - first:
+      213: 7834602837406389362
+    second: kelias_objects_01_124
+  - first:
+      213: -583666240914509299
+    second: kelias_objects_01_125
+  - first:
+      213: -7917518547654621423
+    second: kelias_objects_01_126
+  - first:
+      213: 286258196577917461
+    second: kelias_objects_01_127
+  - first:
+      213: -7136722140332916629
+    second: kelias_objects_01_128
+  - first:
+      213: 2200045277008177723
+    second: kelias_objects_01_129
+  - first:
+      213: -2899121411389271477
+    second: kelias_objects_01_130
+  - first:
+      213: 6971768457277483187
+    second: kelias_objects_01_131
+  - first:
+      213: 6954620689025378749
+    second: kelias_objects_01_132
+  - first:
+      213: -4575042077191887197
+    second: kelias_objects_01_133
+  - first:
+      213: 1919149347369412773
+    second: kelias_objects_01_134
+  - first:
+      213: -3162932186003481211
+    second: kelias_objects_01_135
+  - first:
+      213: 8776261717068408523
+    second: kelias_objects_01_136
+  - first:
+      213: 2171784195093545469
+    second: kelias_objects_01_137
+  - first:
+      213: 1610677933063620474
+    second: kelias_objects_01_138
+  - first:
+      213: -9217796615874128538
+    second: kelias_objects_01_139
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kelias_objects_01_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 303
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58b85c5e35eb864f0800000000000000
+      internalID: -835208463330735227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 303
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35b0bd7bb6a9e3260800000000000000
+      internalID: 7079265451709762387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_2
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 304
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b6b08a1679f2f6b0800000000000000
+      internalID: -5263870728796588368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 304
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 266b4180a209eabd0800000000000000
+      internalID: -2616995823257078174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_4
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 304
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ad5c3608f1e0a4a0800000000000000
+      internalID: -6584014199842906715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_5
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 304
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a35465799abda6e0800000000000000
+      internalID: -1824597105752910937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_6
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 304
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7943a57de4b2a2880800000000000000
+      internalID: -8635041717909048169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_7
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 304
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 007cd3e034a8fc710800000000000000
+      internalID: 1715742003657819904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_8
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 303
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e8c3100878bdf840800000000000000
+      internalID: 5259562765375490278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_9
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 303
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7873f3ae173bd8c30800000000000000
+      internalID: 4363340915834566535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_10
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 303
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bec86c7f4ba6c630800000000000000
+      internalID: 3947030481314827953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_11
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 304
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27b6bf8497d917410800000000000000
+      internalID: 1473131697367903090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_12
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 305
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8314a91724208ae00800000000000000
+      internalID: 1056096597015413048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_13
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 305
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a65e7b99147c5c60800000000000000
+      internalID: 7808243507285350053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_14
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 305
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 496e05f4075278810800000000000000
+      internalID: 1767422543063475860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_15
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 305
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e946d3e50aba14e00800000000000000
+      internalID: 1027290895281382558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_16
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 305
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65c7bd44a08566b60800000000000000
+      internalID: 7738969810810928214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_17
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 287
+        width: 98
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54ef37e81e242a80800000000000000
+      internalID: -8492612312820095905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_18
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 291
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e13d3fb0b23e9440800000000000000
+      internalID: 4944445175603474920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_19
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 278
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568dc0773691628d0800000000000000
+      internalID: -2871579797412325275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_20
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 278
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e0cc2a16d9444460800000000000000
+      internalID: 7224980886120087777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_21
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 283
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ded500b6cfc699c80800000000000000
+      internalID: -8315495405580165651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_22
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 278
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a19f494d19f471d0800000000000000
+      internalID: -3353781918304857689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_23
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 278
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ab0ba28b3b265b90800000000000000
+      internalID: -7253562615238292570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_24
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 291
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dffe861bc4496ab0800000000000000
+      internalID: -5014401071052816426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_25
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 292
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5c875de8f81a64e0800000000000000
+      internalID: -1987748828117758883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_26
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 293
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2585e7032bee9d850800000000000000
+      internalID: 6402410794369046610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_27
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 293
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4795997a459bb36b0800000000000000
+      internalID: -5315451161940502156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_28
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 280
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 183470d0f372e0470800000000000000
+      internalID: 8362664709828592513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_29
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 279
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6437a48499aadeb0800000000000000
+      internalID: -4694253206234516373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_30
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 286
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e1048fce019e63d0800000000000000
+      internalID: -3211469991471480347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_31
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 283
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b70dd48c64dc1110800000000000000
+      internalID: 1233093960543307704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_32
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 281
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db5b6d5c7197ff470800000000000000
+      internalID: 8430590170471249341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_33
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 276
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d3555cab979ebd70800000000000000
+      internalID: 9060846195183014871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_34
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 278
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 104deba3cfe196140800000000000000
+      internalID: 4713332553686111233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_35
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 273
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f02a3faf17df58430800000000000000
+      internalID: 3784709727858172431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_36
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 272
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3069b75185109e190800000000000000
+      internalID: -7932807790807247357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_37
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 261
+        width: 10
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 817a387b3241926f0800000000000000
+      internalID: -709013322698873064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_38
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 261
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdc2f6037725d5ee0800000000000000
+      internalID: -1270768847981433636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_39
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 261
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f82e38a4ca2cd21b0800000000000000
+      internalID: -5679669509804006769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_40
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 261
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb757d830f96053e0800000000000000
+      internalID: -2067035748496353349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_41
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 261
+        width: 52
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6346ac42c11d8fc60800000000000000
+      internalID: 7852255869126992950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_42
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 257
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4187500a5f4600e0800000000000000
+      internalID: -2304066911382044339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_43
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 257
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c189a59a0aad2370800000000000000
+      internalID: 8299476650751001028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_44
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 242
+        width: 11
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff6ba139431f4d670800000000000000
+      internalID: 8562733999646750463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_45
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 257
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7450ded1aec97b840800000000000000
+      internalID: 5239829220807214407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_46
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 255
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831b9a8ef59401d00800000000000000
+      internalID: 941332998394589496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_47
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 255
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e5ac2b91a91ced0800000000000000
+      internalID: -2395464091619926523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_48
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 255
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cc228d3dc1b41670800000000000000
+      internalID: 8508621091068062921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_49
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 255
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebb55dd09aedf8e10800000000000000
+      internalID: 2202223560470387646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_50
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 255
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf17e826ab90f47d0800000000000000
+      internalID: -2932114136272834052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_51
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 255
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63484ea4bc8085160800000000000000
+      internalID: 7014366088857420854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_52
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 255
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1be53d34506966c0800000000000000
+      internalID: -4149679666724738274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_53
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 259
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 038434c0abe1b9db0800000000000000
+      internalID: -4784196394732533712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_54
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 259
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47568597f60086e40800000000000000
+      internalID: 5649766211313493364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_55
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 260
+        width: 22
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ebec621473809fb0800000000000000
+      internalID: -4643066681270408220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_56
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 234
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85632209b612aeee0800000000000000
+      internalID: -1231134802269030824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_57
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 261
+        width: 20
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9d2a756269e21820800000000000000
+      internalID: 2887626919916481951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_58
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 261
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf029527f87d78110800000000000000
+      internalID: 1263215231599452412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_59
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 242
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3605d9956307506e0800000000000000
+      internalID: -1871966691368546205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_60
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 242
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339953d806772d380800000000000000
+      internalID: -8947958253062088397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_61
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 242
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59172971293909dd0800000000000000
+      internalID: -2481321139011161707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_62
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 235
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee34e7efa8c1e3960800000000000000
+      internalID: 7583530205839246318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_63
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 235
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb81e94e9c6d38d30800000000000000
+      internalID: 4432622620875036863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_64
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 230
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e9d54d5ad5b25650800000000000000
+      internalID: 6220233984824433125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_65
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 228
+        width: 26
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47dc775d76a59f4c0800000000000000
+      internalID: -4253268971065193100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_66
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 231
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db959c512ed8a8890800000000000000
+      internalID: -7454990230990792259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_pot04
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bb02ff09a22fd9a0800000000000000
+      internalID: -6206203651980915789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_68
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 243
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 969d8e51855aad6d0800000000000000
+      internalID: -2964875606926763671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_69
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 244
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7314080d3e1ff9a0800000000000000
+      internalID: -6197201314762189953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_70
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 237
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e178ed15644d3d20800000000000000
+      internalID: 3259836906370265572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_71
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 243
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcd6cca42e312ef10800000000000000
+      internalID: 2297420622550822351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 225
+        width: 15
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beded7f5d07062520800000000000000
+      internalID: 2676834782536396267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_73
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 225
+        width: 33
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11d1b61ad72614f20800000000000000
+      internalID: 3405111084987391249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_74
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 232
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84254846d408cf9d0800000000000000
+      internalID: -2739173403460873656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_75
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 235
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb7825fe765f8e850800000000000000
+      internalID: 6406640296680130494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_76
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 225
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8d0842f544943860800000000000000
+      internalID: 7508789506871922062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_77
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 228
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0e30e4111bdcd700800000000000000
+      internalID: 566568519553007119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_78
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 193
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1ea1e4df66f3b460800000000000000
+      internalID: 7256414384797363740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_79
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 209
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 441087baaf5ac5420800000000000000
+      internalID: 2620151579259961668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_80
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 209
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6fa4e867bbcac660800000000000000
+      internalID: 7406956525763473259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_pot
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0a9566eb3dfc57d0800000000000000
+      internalID: -2928187223987348978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_pot01
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba8efc51f94f09410800000000000000
+      internalID: 1481953241507817643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_pot02
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98ebc3021e1538340800000000000000
+      internalID: 4864822049840610953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_pot03
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 718f896881a657170800000000000000
+      internalID: 8175557352130934807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_91
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 193
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e434c79bea19ff960800000000000000
+      internalID: 7637983672665916238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_92
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 193
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1f2a94abf1c31db0800000000000000
+      internalID: -4822297489441149155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_97
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 159
+        width: 15
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f298e26e4f47e6280800000000000000
+      internalID: -9048166006158096081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_98
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 159
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2152d2408de9f9500800000000000000
+      internalID: 405217142106826002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_99
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 177
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bdf2201722c44180800000000000000
+      internalID: -9131960671370281552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_100
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 159
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50728ed507f49fc60800000000000000
+      internalID: 7852394769327597317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_101
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 177
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d14343900fd846a0800000000000000
+      internalID: -6464672071526694442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_102
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 159
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 873acea70e2a203d0800000000000000
+      internalID: -3241849696734633096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_103
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 176
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 687c32f8ed975bf30800000000000000
+      internalID: 4590709391965276038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_104
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 176
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4bb376327c05e380800000000000000
+      internalID: -8942727800394892465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_105
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 176
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45128949b2bd09940800000000000000
+      internalID: 5300977741638148436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_106
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 176
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1b565272860ec9c0800000000000000
+      internalID: -3905176669549864162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_107
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89fd40d1faac19600800000000000000
+      internalID: 473382289305558936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_108
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7523ed6bb2c39d6b0800000000000000
+      internalID: -5271115730411179433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_109
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d38879140f98bc2f0800000000000000
+      internalID: -951515231273121731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_110
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 126
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67d19dc9d7ba12c90800000000000000
+      internalID: -7196282173570605706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_111
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3288c20f027b23dc0800000000000000
+      internalID: -3660662195002505181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_112
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41c52943c53e29220800000000000000
+      internalID: 2491303529047809044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_113
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 96
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f6214f0dce79d770800000000000000
+      internalID: 8636073179648960245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_114
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 128
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ad670c4e4b299fb0800000000000000
+      internalID: -4640630325745586777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_115
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ddb505ab86be64b0800000000000000
+      internalID: -5445214188559024687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_116
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17abdc36d1ede6430800000000000000
+      internalID: 3778201355220269681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_117
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 96
+        width: 66
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d4304a4935cfa630800000000000000
+      internalID: 3940585048822002902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_118
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 128
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f909469a2e1ac10800000000000000
+      internalID: 2063179321476947866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_119
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfcd5d840692c3bf0800000000000000
+      internalID: -343353978071425796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_120
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06f14e68d510f44b0800000000000000
+      internalID: -5454139122515697824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_121
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1c716f47b1dc3810800000000000000
+      internalID: 1746501340753919002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_122
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5862f5a0e0d3240800000000000000
+      internalID: 4772986617791415807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_123
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 71
+        width: 50
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f343968a10b240450800000000000000
+      internalID: 6054011085213217855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_124
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 79
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27410e765c91abc60800000000000000
+      internalID: 7834602837406389362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_125
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 81
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0237e275a666e7f0800000000000000
+      internalID: -583666240914509299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_126
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 81
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 117ca7864d25f1290800000000000000
+      internalID: -7917518547654621423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_127
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 81
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51a1219205ef8f300800000000000000
+      internalID: 286258196577917461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_128
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 81
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b608acc760545fc90800000000000000
+      internalID: -7136722140332916629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_129
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 51
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3a29d9e581288e10800000000000000
+      internalID: 2200045277008177723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_130
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 49
+        width: 46
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b42d961cf6044c7d0800000000000000
+      internalID: -2899121411389271477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_131
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 65
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b82c405972b0c060800000000000000
+      internalID: 6971768457277483187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_132
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 65
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db9a0f46ba6c38060800000000000000
+      internalID: 6954620689025378749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_133
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 65
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a6238c687f2280c0800000000000000
+      internalID: -4575042077191887197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_134
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 65
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a860e0d92032aa10800000000000000
+      internalID: 1919149347369412773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_135
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 41
+        width: 50
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58ddc9c4fe10b14d0800000000000000
+      internalID: -3162932186003481211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_136
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 49
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc6e8b5788b8bc970800000000000000
+      internalID: 8776261717068408523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_137
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 49
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df1cb55083ab32e10800000000000000
+      internalID: 2171784195093545469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_138
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 0
+        width: 98
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7741dfdb074a5610800000000000000
+      internalID: 1610677933063620474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kelias_objects_01_139
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 3
+        width: 122
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 665560bd0dec31080800000000000000
+      internalID: -9217796615874128538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a8f242c74fe9ffc48a40f1d914611dc3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      kelias_objects_01_0: -835208463330735227
+      kelias_objects_01_1: 7079265451709762387
+      kelias_objects_01_10: 3947030481314827953
+      kelias_objects_01_100: 7852394769327597317
+      kelias_objects_01_101: -6464672071526694442
+      kelias_objects_01_102: -3241849696734633096
+      kelias_objects_01_103: 4590709391965276038
+      kelias_objects_01_104: -8942727800394892465
+      kelias_objects_01_105: 5300977741638148436
+      kelias_objects_01_106: -3905176669549864162
+      kelias_objects_01_107: 473382289305558936
+      kelias_objects_01_108: -5271115730411179433
+      kelias_objects_01_109: -951515231273121731
+      kelias_objects_01_11: 1473131697367903090
+      kelias_objects_01_110: -7196282173570605706
+      kelias_objects_01_111: -3660662195002505181
+      kelias_objects_01_112: 2491303529047809044
+      kelias_objects_01_113: 8636073179648960245
+      kelias_objects_01_114: -4640630325745586777
+      kelias_objects_01_115: -5445214188559024687
+      kelias_objects_01_116: 3778201355220269681
+      kelias_objects_01_117: 3940585048822002902
+      kelias_objects_01_118: 2063179321476947866
+      kelias_objects_01_119: -343353978071425796
+      kelias_objects_01_12: 1056096597015413048
+      kelias_objects_01_120: -5454139122515697824
+      kelias_objects_01_121: 1746501340753919002
+      kelias_objects_01_122: 4772986617791415807
+      kelias_objects_01_123: 6054011085213217855
+      kelias_objects_01_124: 7834602837406389362
+      kelias_objects_01_125: -583666240914509299
+      kelias_objects_01_126: -7917518547654621423
+      kelias_objects_01_127: 286258196577917461
+      kelias_objects_01_128: -7136722140332916629
+      kelias_objects_01_129: 2200045277008177723
+      kelias_objects_01_13: 7808243507285350053
+      kelias_objects_01_130: -2899121411389271477
+      kelias_objects_01_131: 6971768457277483187
+      kelias_objects_01_132: 6954620689025378749
+      kelias_objects_01_133: -4575042077191887197
+      kelias_objects_01_134: 1919149347369412773
+      kelias_objects_01_135: -3162932186003481211
+      kelias_objects_01_136: 8776261717068408523
+      kelias_objects_01_137: 2171784195093545469
+      kelias_objects_01_138: 1610677933063620474
+      kelias_objects_01_139: -9217796615874128538
+      kelias_objects_01_14: 1767422543063475860
+      kelias_objects_01_15: 1027290895281382558
+      kelias_objects_01_16: 7738969810810928214
+      kelias_objects_01_17: -8492612312820095905
+      kelias_objects_01_18: 4944445175603474920
+      kelias_objects_01_19: -2871579797412325275
+      kelias_objects_01_2: -5263870728796588368
+      kelias_objects_01_20: 7224980886120087777
+      kelias_objects_01_21: -8315495405580165651
+      kelias_objects_01_22: -3353781918304857689
+      kelias_objects_01_23: -7253562615238292570
+      kelias_objects_01_24: -5014401071052816426
+      kelias_objects_01_25: -1987748828117758883
+      kelias_objects_01_26: 6402410794369046610
+      kelias_objects_01_27: -5315451161940502156
+      kelias_objects_01_28: 8362664709828592513
+      kelias_objects_01_29: -4694253206234516373
+      kelias_objects_01_3: -2616995823257078174
+      kelias_objects_01_30: -3211469991471480347
+      kelias_objects_01_31: 1233093960543307704
+      kelias_objects_01_32: 8430590170471249341
+      kelias_objects_01_33: 9060846195183014871
+      kelias_objects_01_34: 4713332553686111233
+      kelias_objects_01_35: 3784709727858172431
+      kelias_objects_01_36: -7932807790807247357
+      kelias_objects_01_37: -709013322698873064
+      kelias_objects_01_38: -1270768847981433636
+      kelias_objects_01_39: -5679669509804006769
+      kelias_objects_01_4: -6584014199842906715
+      kelias_objects_01_40: -2067035748496353349
+      kelias_objects_01_41: 7852255869126992950
+      kelias_objects_01_42: -2304066911382044339
+      kelias_objects_01_43: 8299476650751001028
+      kelias_objects_01_44: 8562733999646750463
+      kelias_objects_01_45: 5239829220807214407
+      kelias_objects_01_46: 941332998394589496
+      kelias_objects_01_47: -2395464091619926523
+      kelias_objects_01_48: 8508621091068062921
+      kelias_objects_01_49: 2202223560470387646
+      kelias_objects_01_5: -1824597105752910937
+      kelias_objects_01_50: -2932114136272834052
+      kelias_objects_01_51: 7014366088857420854
+      kelias_objects_01_52: -4149679666724738274
+      kelias_objects_01_53: -4784196394732533712
+      kelias_objects_01_54: 5649766211313493364
+      kelias_objects_01_55: -4643066681270408220
+      kelias_objects_01_56: -1231134802269030824
+      kelias_objects_01_57: 2887626919916481951
+      kelias_objects_01_58: 1263215231599452412
+      kelias_objects_01_59: -1871966691368546205
+      kelias_objects_01_6: -8635041717909048169
+      kelias_objects_01_60: -8947958253062088397
+      kelias_objects_01_61: -2481321139011161707
+      kelias_objects_01_62: 7583530205839246318
+      kelias_objects_01_63: 4432622620875036863
+      kelias_objects_01_64: 6220233984824433125
+      kelias_objects_01_65: -4253268971065193100
+      kelias_objects_01_66: -7454990230990792259
+      kelias_objects_01_68: -2964875606926763671
+      kelias_objects_01_69: -6197201314762189953
+      kelias_objects_01_7: 1715742003657819904
+      kelias_objects_01_70: 3259836906370265572
+      kelias_objects_01_71: 2297420622550822351
+      kelias_objects_01_72: 2676834782536396267
+      kelias_objects_01_73: 3405111084987391249
+      kelias_objects_01_74: -2739173403460873656
+      kelias_objects_01_75: 6406640296680130494
+      kelias_objects_01_76: 7508789506871922062
+      kelias_objects_01_77: 566568519553007119
+      kelias_objects_01_78: 7256414384797363740
+      kelias_objects_01_79: 2620151579259961668
+      kelias_objects_01_8: 5259562765375490278
+      kelias_objects_01_80: 7406956525763473259
+      kelias_objects_01_85: -2773963020293028625
+      kelias_objects_01_86: -221991979471721641
+      kelias_objects_01_87: -3999911590213863214
+      kelias_objects_01_88: -3640136328875433106
+      kelias_objects_01_89: 1809899628256709684
+      kelias_objects_01_9: 4363340915834566535
+      kelias_objects_01_90: -8657635967640848661
+      kelias_objects_01_91: 7637983672665916238
+      kelias_objects_01_92: -4822297489441149155
+      kelias_objects_01_93: 8128557482246941696
+      kelias_objects_01_94: 7826863591959090601
+      kelias_objects_01_95: 4028340426231593179
+      kelias_objects_01_96: -6102365258501320309
+      kelias_objects_01_97: -9048166006158096081
+      kelias_objects_01_98: 405217142106826002
+      kelias_objects_01_99: -9131960671370281552
+      kelias_objects_01_pot: -2928187223987348978
+      kelias_objects_01_pot01: 1481953241507817643
+      kelias_objects_01_pot02: 4864822049840610953
+      kelias_objects_01_pot03: 8175557352130934807
+      kelias_objects_01_pot04: -6206203651980915789
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

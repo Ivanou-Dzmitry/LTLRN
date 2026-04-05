@@ -32,11 +32,14 @@ public class ADV_InfoPanel : MonoBehaviour
     {
         // --- TYPEWRITER ---
         infoPanelText.text = text;
+        infoPanelText.ForceMeshUpdate();
         infoPanelText.maxVisibleCharacters = 0;
 
         float charDelay = 0.03f; // speed (lower = faster)
 
         int totalChars = infoPanelText.textInfo.characterCount;
+
+        Debug.Log($"Showing info panel with text: '{text}' ({totalChars} chars)");  
 
         for (int i = 0; i <= totalChars; i++)
         {

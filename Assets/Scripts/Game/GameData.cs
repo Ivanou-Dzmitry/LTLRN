@@ -1,6 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+
+[Serializable]
+public class InteractionStateData
+{
+    public string id;
+    public ADV_Interaction.ObjectState state;
+}
+
 
 [Serializable]
 public class SaveData
@@ -42,6 +51,9 @@ public class SaveData
 
     [Header("Debug")]
     public bool debugMode = false;
+
+    [Header("Objects States")]
+    public List<InteractionStateData> interactionStates = new List<InteractionStateData>();
 }
 
 public class GameData : MonoBehaviour
@@ -52,7 +64,6 @@ public class GameData : MonoBehaviour
     public SaveData saveData;
 
     const string SETTINGS_FILE_NAME = "ltlrn_settings.json";
-
 
     private void Awake()
     {
@@ -166,6 +177,46 @@ public class GameData : MonoBehaviour
             Debug.LogError("Error while adding default data: " + ex.Message);
             return false;
         }
+    }
+
+    //for save and load interaction
+    public void SetInteractionState(string id, ADV_Interaction.ObjectState state)
+    {
+        var existing = saveData.interactionStates.Find(x => x.id == id);
+
+        if (existing != null)
+        {
+            existing.state = state;
+        }
+        else
+        {
+            saveData.interactionStates.Add(new InteractionStateData
+            {
+                id = id,
+                state = state
+            });
+        }
+    }
+
+    //for save and load interaction
+    public ADV_Interaction.ObjectState GetInteractionState(string id)
+    {
+        var existing = saveData.interactionStates.Find(x => x.id == id);
+
+        if (existing != null)
+            return existing.state;
+
+        return ADV_Interaction.ObjectState.Normal;
+    }
+
+    public bool ResetInteractionStates()
+    {
+        saveData.interactionStates.Clear();
+        SaveToFile();
+
+        Debug.Log("All interaction states reset to default.");
+
+        return true;
     }
 
     private void PatchSavedData()

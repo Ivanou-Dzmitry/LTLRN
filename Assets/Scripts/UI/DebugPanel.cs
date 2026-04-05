@@ -14,6 +14,7 @@ public class DebugPanel : Panel
     [Header("Buttons")]
     [SerializeField] private Button resetSectionBtn;
     [SerializeField] private Button resetGameBtn;
+    [SerializeField] private Button resetStateBtn;
 
     [Header("UI")]
     [SerializeField] private TMP_Dropdown debugDrop;
@@ -28,6 +29,7 @@ public class DebugPanel : Panel
         
         resetGameBtn.onClick.AddListener(OnResetClicked);
         resetSectionBtn.onClick.AddListener(OnResetSectionClick);
+        resetStateBtn.onClick.AddListener(OnResetStateClick);
 
         base.Initialize();
     }
@@ -59,10 +61,18 @@ public class DebugPanel : Panel
         debugText.text = $"Sections Reset to Default Values = {result}";
     }
 
+    private void OnResetStateClick()
+    {
+        bool result = gameData.ResetInteractionStates();
+
+        debugText.text = $"Object states = {result}";
+    }
+
     private void OnDestroy()
     {
         resetGameBtn.onClick.RemoveListener(OnResetClicked);
         resetSectionBtn.onClick.RemoveListener(OnResetSectionClick);
+        resetStateBtn.onClick.RemoveListener(OnResetStateClick);
     }
 
 

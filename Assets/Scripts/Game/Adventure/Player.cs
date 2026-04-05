@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class Player : MonoBehaviour
 
     [Header("Dialog")]
     private TextAsset inkText;
+
+    [Header("Fight")]
+    public Button attackButton;
+    public PolygonCollider2D[] attackColliders;
 
     [Header("Joystick")]
     [SerializeField] private GameObject joystick;
@@ -136,6 +141,28 @@ public class Player : MonoBehaviour
             
     }
 
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            StartAttack();
+
+        if (context.canceled)
+            StopAttack();
+    }
+
+    public void StartAttack()
+    {        
+        animator.SetBool("attacking", true);
+        currentPlayerState = PlayerState.Attack;        
+    }
+
+    public void StopAttack()
+    {
+        currentPlayerState = PlayerState.Idle;
+        animator.SetBool("attacking", false);
+    }
+
+
     //for interraction with dialogue
     public void OnInterract(InputAction.CallbackContext context)
     {        
@@ -237,8 +264,21 @@ public class Player : MonoBehaviour
         
         string interactionType = interactionManagerClass.GetInteraction(collider);
 
-        Debug.Log($"interactionType: {interactionType}");
+        if (interactionType == "Collectible")
+            interactionManagerClass.RunInteraction(collider);
     }
+
+    //only if contact wit hitbox
+    public void HandleAttackHit(Collider2D collider)
+    {
+        string interactionType = interactionManagerClass.GetInteraction(collider);
+
+        if (collider != null && interactionType == "Destractible" && currentPlayerState == PlayerState.Attack)
+        {
+            interactionManagerClass.RunInteraction(collider);
+        }
+    }
+
 
     //for diallog - EXIT
     private void OnTriggerExit2D(Collider2D collider)
