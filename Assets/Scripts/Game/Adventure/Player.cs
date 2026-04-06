@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using static ADV_Interaction;
 
 public class Player : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     [Header("Fight")]
     public Button attackButton;
     public PolygonCollider2D[] attackColliders;
+    [SerializeField] private float kickForce = 5;
 
     [Header("Joystick")]
     [SerializeField] private GameObject joystick;
@@ -261,24 +263,49 @@ public class Player : MonoBehaviour
 
             InteractIconRoutine(true);
         }
-        
-        string interactionType = interactionManagerClass.GetInteraction(collider);
 
-        if (interactionType == "Collectible")
+        InteractionType interactionType = interactionManagerClass.GetInteraction(collider);
+
+        if (interactionType == InteractionType.Collectible)
             interactionManagerClass.RunInteraction(collider);
     }
 
     //only if contact wit hitbox
     public void HandleAttackHit(Collider2D collider)
     {
-        string interactionType = interactionManagerClass.GetInteraction(collider);
+        InteractionType interactionType = interactionManagerClass.GetInteraction(collider);
 
-        if (collider != null && interactionType == "Destractible" && currentPlayerState == PlayerState.Attack)
+        if (collider != null && currentPlayerState == PlayerState.Attack)
         {
-            interactionManagerClass.RunInteraction(collider);
+            if (collider.gameObject.CompareTag("Enemy"))
+                KnockBack(collider);
+
+            switch (interactionType)
+            {
+                case InteractionType.Destructible:
+                case InteractionType.Enemy:
+                    interactionManagerClass.RunInteraction(collider);
+                    break;
+            }
         }
     }
 
+    private void KnockBack(Collider2D collider)
+    {
+        Debug.Log("Hit Enemy!");
+
+        Rigidbody2D enemy = collider.GetComponentInChildren<Rigidbody2D>();
+
+        if (enemy != null)
+        {
+            enemy.bodyType = RigidbodyType2D.Dynamic;
+
+            Vector2 dir = (enemy.position - (Vector2)transform.position).normalized;
+
+            enemy.linearVelocity = Vector2.zero; // important
+            enemy.AddForce(dir * kickForce, ForceMode2D.Impulse);
+        }
+    }
 
     //for diallog - EXIT
     private void OnTriggerExit2D(Collider2D collider)

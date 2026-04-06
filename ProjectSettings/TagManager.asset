@@ -18,6 +18,7 @@ TagManager:
   - ADVGameLogic
   - ADV_Collectible
   - ADV_Destructible
+  - Enemy
   layers:
   - Default
   - TransparentFX

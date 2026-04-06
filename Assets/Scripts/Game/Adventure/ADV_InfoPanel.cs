@@ -11,6 +11,7 @@ public class ADV_InfoPanel : MonoBehaviour
     [SerializeField] private float hideDuration = 0.5f;
     [SerializeField] private Button closeInfoPanel;    
     private Coroutine infoRoutine;
+    private Animator _animator;
 
     private void Awake()
     {
@@ -71,6 +72,11 @@ public class ADV_InfoPanel : MonoBehaviour
         //restore color
         color.a = 1f;
         panelImage.color = color;
+
+        //run animation and disable
+        _animator = infoPanel.GetComponent<Animator>();
+        _animator.SetBool("closePanel", true);
+        yield return new WaitForSeconds(1f);
 
         infoPanel.SetActive(false);
     }

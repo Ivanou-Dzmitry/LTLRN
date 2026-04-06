@@ -15,7 +15,6 @@ public class ADV_InteractionManager : MonoBehaviour
         Instance = this;
     }
 
-
     public void SetState(string id, ObjectState state)
     {
         states[id] = state;
@@ -29,14 +28,14 @@ public class ADV_InteractionManager : MonoBehaviour
         return ObjectState.Normal;
     }
 
-    public string GetInteraction(Collider2D collider)
+    public InteractionType GetInteraction(Collider2D collider)
     {
         ADV_Interaction interaction = collider.GetComponent<ADV_Interaction>();
 
         if (interaction == null)
-            return "null";
+            return InteractionType.None;
 
-        return interaction.interactionType.ToString();
+        return interaction.interactionType;
     }
 
     public void RunInteraction(Collider2D collider)
@@ -50,9 +49,10 @@ public class ADV_InteractionManager : MonoBehaviour
             return;
 
         //destroy
-        if(interaction.interactionType == InteractionType.Destractible)
+        if(interaction.interactionType == InteractionType.Destructible || interaction.interactionType == InteractionType.Enemy)
         {
-            interaction.DestroyObject();
+            Debug.Log("Destructible interaction");
+            interaction.ReduceHealth(1);
         }
 
 
