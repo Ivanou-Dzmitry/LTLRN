@@ -45,17 +45,22 @@ public class ADV_InteractionManager : MonoBehaviour
 
         ADV_Interaction interaction = collider.GetComponent<ADV_Interaction>();
 
+        Debug.Log($"{interaction.interactionType}");
+
         if(interaction == null)
             return;
 
         //destroy
         if(interaction.interactionType == InteractionType.Destructible || interaction.interactionType == InteractionType.Enemy)
-        {
-            Debug.Log("Destructible interaction");
+        {            
             interaction.ReduceHealth(1);
         }
 
+        //kick
+        if (interaction.interactionType == InteractionType.Enemy)
+            Debug.Log(interaction.KnockBack(collider));
 
+        //collect
         if (interaction.interactionType == InteractionType.Collectible)
         {
             interaction.CollectObject();

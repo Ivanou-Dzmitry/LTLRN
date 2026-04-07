@@ -1,7 +1,4 @@
-using SuperTiled2Unity;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.OnScreen;
@@ -277,9 +274,6 @@ public class Player : MonoBehaviour
 
         if (collider != null && currentPlayerState == PlayerState.Attack)
         {
-            if (collider.gameObject.CompareTag("Enemy"))
-                KnockBack(collider);
-
             switch (interactionType)
             {
                 case InteractionType.Destructible:
@@ -290,27 +284,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void KnockBack(Collider2D collider)
-    {
-        Debug.Log("Hit Enemy!");
-
-        Rigidbody2D enemy = collider.GetComponentInChildren<Rigidbody2D>();
-
-        if (enemy != null)
-        {
-            enemy.bodyType = RigidbodyType2D.Dynamic;
-
-            Vector2 dir = (enemy.position - (Vector2)transform.position).normalized;
-
-            enemy.linearVelocity = Vector2.zero; // important
-            enemy.AddForce(dir * kickForce, ForceMode2D.Impulse);
-        }
-    }
-
     //for diallog - EXIT
     private void OnTriggerExit2D(Collider2D collider)
     {
-        Debug.Log($"OUT Trigger: {collider.name}");
+        //Debug.Log($"OUT Trigger: {collider.name}");
 
         currentCollider = null;
 
