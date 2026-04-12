@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8415944878908145933}
   - component: {fileID: 6447745971654124350}
-  - component: {fileID: 1557314250481226680}
+  - component: {fileID: 3473576424216312306}
   m_Layer: 0
   m_Name: Pot01
   m_TagString: ADV_Destructible
@@ -241,7 +241,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1557314250481226680
+--- !u!114 &3473576424216312306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,8 +250,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7217914928705745202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 355914841ae241d4a995a647385354d6, type: 3}
+  m_Script: {fileID: 11500000, guid: d4ea4576ac83df846bb952ddb1f9587a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ADV_Interaction
+  m_EditorClassIdentifier: Assembly-CSharp::ADV_Destructible
+  objectId: 
+  health: 1
+  objectParticles: []
   interactionType: 2
-  state: 0

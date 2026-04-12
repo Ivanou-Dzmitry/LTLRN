@@ -10,11 +10,13 @@ public class DebugPanel : Panel
 {
     private DBUtils dbUtils;
     private GameData gameData;
+    private GameObjectsState objState;
 
     [Header("Buttons")]
     [SerializeField] private Button resetSectionBtn;
     [SerializeField] private Button resetGameBtn;
     [SerializeField] private Button resetStateBtn;
+    [SerializeField] private Button resetInventoryBtn;
 
     [Header("UI")]
     [SerializeField] private TMP_Dropdown debugDrop;
@@ -30,6 +32,7 @@ public class DebugPanel : Panel
         resetGameBtn.onClick.AddListener(OnResetClicked);
         resetSectionBtn.onClick.AddListener(OnResetSectionClick);
         resetStateBtn.onClick.AddListener(OnResetStateClick);
+        resetInventoryBtn.onClick.AddListener(OnResetInventoryClick);
 
         base.Initialize();
     }
@@ -38,6 +41,7 @@ public class DebugPanel : Panel
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
         dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
+        objState = GameObject.FindWithTag("GameObjState").GetComponent<GameObjectsState>();
 
         debugDrop.value = gameData.saveData.debugMode ? 1 : 0;
 
@@ -63,9 +67,15 @@ public class DebugPanel : Panel
 
     private void OnResetStateClick()
     {
-        bool result = gameData.ResetInteractionStates();
+        bool result = objState.ResetInteractionStates();
 
         debugText.text = $"Object states = {result}";
+    }
+
+    private void OnResetInventoryClick()
+    {
+        bool result = objState.ResetInventory();
+        debugText.text = $"Inventory Reset to Default Values = {result}";
     }
 
     private void OnDestroy()

@@ -19,6 +19,8 @@ TagManager:
   - ADV_Collectible
   - ADV_Destructible
   - Enemy
+  - GameObjState
+  - MapManager
   layers:
   - Default
   - TransparentFX

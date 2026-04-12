@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: baseDamage
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3473576424216312306, guid: 682d31be27481394dbd4644bda6f4068, type: 3}
+      propertyPath: objectId
+      value: pot02
+      objectReference: {fileID: 0}
     - target: {fileID: 7217914928705745202, guid: 682d31be27481394dbd4644bda6f4068, type: 3}
       propertyPath: m_Name
       value: Pot03
@@ -306,6 +310,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeadPixel02
       objectReference: {fileID: 0}
+    - target: {fileID: 7029651473398157163, guid: e2e323ff147a36a4780dd9a89ca497c0, type: 3}
+      propertyPath: meta
+      value: B
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029651473398157163, guid: e2e323ff147a36a4780dd9a89ca497c0, type: 3}
+      propertyPath: itemId
+      value: dpixel02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029651473398157163, guid: e2e323ff147a36a4780dd9a89ca497c0, type: 3}
+      propertyPath: objectId
+      value: dpixel02
+      objectReference: {fileID: 0}
     - target: {fileID: 7463660061796139831, guid: e2e323ff147a36a4780dd9a89ca497c0, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -392,6 +408,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7707010854467385991, guid: b14e37676cafc0749aebf6e84f310a02, type: 3}
+      propertyPath: objectId
+      value: enemy04
+      objectReference: {fileID: 0}
     - target: {fileID: 8203068329913425222, guid: b14e37676cafc0749aebf6e84f310a02, type: 3}
       propertyPath: m_Name
       value: m2_enemy_01
@@ -425,6 +445,10 @@ PrefabInstance:
     - target: {fileID: 1557314250481226680, guid: 682d31be27481394dbd4644bda6f4068, type: 3}
       propertyPath: baseDamage
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3473576424216312306, guid: 682d31be27481394dbd4644bda6f4068, type: 3}
+      propertyPath: objectId
+      value: pot03
       objectReference: {fileID: 0}
     - target: {fileID: 7217914928705745202, guid: 682d31be27481394dbd4644bda6f4068, type: 3}
       propertyPath: m_Name

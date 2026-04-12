@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1751250687656887867}
   - component: {fileID: 2491264007645520638}
-  - component: {fileID: 1386023989814111998}
+  - component: {fileID: 7029651473398157163}
   m_Layer: 0
   m_Name: DeadPixel
   m_TagString: ADV_Collectible
@@ -80,7 +80,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1386023989814111998
+--- !u!114 &7029651473398157163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,9 +89,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2513514309843844047}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 355914841ae241d4a995a647385354d6, type: 3}
+  m_Script: {fileID: 11500000, guid: f7ec90bea8d62a140932c0a77a010a4e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ADV_Interaction
+  m_EditorClassIdentifier: Assembly-CSharp::ADV_Collectible
+  objectId: 
+  health: 1
+  objectParticles: []
   interactionType: 1
 --- !u!1 &7088800349740315100
 GameObject:

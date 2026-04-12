@@ -5,12 +5,14 @@ public class GameBootstrap : MonoBehaviour
     [SerializeField] private GameObject soundManagerPrefab;
     [SerializeField] private GameObject gameDataPrefab;
     [SerializeField] private GameObject logPrefab;
+    [SerializeField] private GameObject gameObjStatePrefab;
 
     private void Awake()
     {
         InitializeSoundManager();
         InitializeGameData();
         InitializeLogManager();
+        InitGameObjectState();
     }
 
     private void InitializeSoundManager()
@@ -48,6 +50,31 @@ public class GameBootstrap : MonoBehaviour
         else
         {
             Debug.LogError("GameData component missing on prefab.");
+        }
+    }
+
+    //state
+    private void InitGameObjectState()
+    {
+        if (GameObjectsState.objState != null)
+            return;
+
+        if (gameObjStatePrefab == null)
+        {
+            Debug.LogError("GameObjectsState prefab not assigned.");
+            return;
+        }
+
+        var instance = Instantiate(gameObjStatePrefab);
+
+        var state = instance.GetComponent<GameObjectsState>();
+        if (state != null)
+        {
+            state.LoadStateFromFile();
+        }
+        else
+        {
+            Debug.LogError("GameObjectsState component missing on prefab.");
         }
     }
 

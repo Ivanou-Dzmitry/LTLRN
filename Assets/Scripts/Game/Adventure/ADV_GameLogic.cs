@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Runtime.CompilerServices;
 
 public class GameLogic : MonoBehaviour
 {
@@ -37,7 +36,10 @@ public class GameLogic : MonoBehaviour
     public GameState gameState;
 
     [Header("Interract")]
-    public InterractState interractState;    
+    public InterractState interractState;
+
+    [Header("Inventory")]
+    public Button inventoryButton;
 
     [Header("Score")]
     public int tempScore = 0;
@@ -47,6 +49,11 @@ public class GameLogic : MonoBehaviour
     public float sessionDuration;
 
     private Languages currentLang;
+
+    private void Awake()
+    {
+        inventoryButton.onClick.AddListener(OpenInventoryPanel);
+    }
 
     private void Start()
     {
@@ -140,7 +147,14 @@ public class GameLogic : MonoBehaviour
     private void OnDestroy()
     {
         //remove listeners
+        inventoryButton.onClick.RemoveListener(OpenInventoryPanel);
 
+    }
+
+    public void OpenInventoryPanel()
+    {
+        PanelManager.Open("inventory");
+        gameState = GameState.Pause;
     }
 
 }

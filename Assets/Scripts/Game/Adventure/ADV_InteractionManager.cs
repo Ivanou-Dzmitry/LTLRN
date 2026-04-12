@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static ADV_Interaction;
+using static ADV_InteractionBase;
 
 public class ADV_InteractionManager : MonoBehaviour
 {
     public static ADV_InteractionManager Instance;
 
-
-    private Dictionary<string, ADV_Interaction.ObjectState> states
-    = new Dictionary<string, ADV_Interaction.ObjectState>();
+    private Dictionary<string, ADV_InteractionBase.ObjectState> states
+    = new Dictionary<string, ADV_InteractionBase.ObjectState>();
 
     private void Awake()
     {
@@ -30,7 +29,7 @@ public class ADV_InteractionManager : MonoBehaviour
 
     public InteractionType GetInteraction(Collider2D collider)
     {
-        ADV_Interaction interaction = collider.GetComponent<ADV_Interaction>();
+        ADV_InteractionBase interaction = collider.GetComponent<ADV_InteractionBase>();
 
         if (interaction == null)
             return InteractionType.None;
@@ -40,30 +39,20 @@ public class ADV_InteractionManager : MonoBehaviour
 
     public void RunInteraction(Collider2D collider)
     {
-        if(collider == null)
-            return;    
+        if (collider == null) return;
 
-        ADV_Interaction interaction = collider.GetComponent<ADV_Interaction>();
+        ADV_InteractionBase interaction = collider.GetComponent<ADV_InteractionBase>();
+        if (interaction == null) return;
 
-        Debug.Log($"{interaction.interactionType}");
+        // works for both ADV_Enemy and ADV_Destructible
+        interaction.ReduceHealth(1);
 
-        if(interaction == null)
-            return;
+        // enemy-specific
+        if (interaction is ADV_Enemy enemy)
+            enemy.KnockBack(collider);
 
-        //destroy
-        if(interaction.interactionType == InteractionType.Destructible || interaction.interactionType == InteractionType.Enemy)
-        {            
-            interaction.ReduceHealth(1);
-        }
-
-        //kick
-        if (interaction.interactionType == InteractionType.Enemy)
-            Debug.Log(interaction.KnockBack(collider));
-
-        //collect
-        if (interaction.interactionType == InteractionType.Collectible)
-        {
-            interaction.CollectObject();
-        }
+        // collectible-specific
+        if (interaction is ADV_Collectible collectible)
+            collectible.Collect();
     }
 }

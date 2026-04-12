@@ -9959,8 +9959,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7020265587339819157}
   - component: {fileID: 2895662935300148205}
-  - component: {fileID: 4226629957374418134}
   - component: {fileID: 3151839948374684386}
+  - component: {fileID: 7707010854467385991}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Enemy
@@ -10022,34 +10022,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &4226629957374418134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8203068329913425222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 355914841ae241d4a995a647385354d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ADV_Interaction
-  interactionType: 4
-  state: 0
-  objectId: 
-  health: 100
-  baseDamage: 10
-  moveSpeed: 0
-  basePosition: {fileID: 0}
-  target: {fileID: 0}
-  chaseRange: 5
-  attackRange: 1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  objectParticles:
-  - {fileID: 1312204841449706822}
-  - {fileID: 2954372184511023073}
 --- !u!50 &3151839948374684386
 Rigidbody2D:
   serializedVersion: 5
@@ -10077,3 +10049,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7707010854467385991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203068329913425222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3ef485d48fa9647abaa54266cce00a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ADV_Enemy
+  objectId: 
+  health: 2
+  objectParticles:
+  - {fileID: 1312204841449706822}
+  - {fileID: 2954372184511023073}
+  interactionType: 4
+  baseDamage: 1
+  moveSpeed: 1
+  chaseRange: 2
+  attackRange: 1
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128

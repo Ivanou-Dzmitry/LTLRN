@@ -4,14 +4,6 @@ using System.IO;
 using UnityEngine;
 
 [Serializable]
-public class InteractionStateData
-{
-    public string id;
-    public ADV_Interaction.ObjectState state;
-}
-
-
-[Serializable]
 public class SaveData
 {
     [Header("Game")]
@@ -51,9 +43,6 @@ public class SaveData
 
     [Header("Debug")]
     public bool debugMode = false;
-
-    [Header("Objects States")]
-    public List<InteractionStateData> interactionStates = new List<InteractionStateData>();    
 }
 
 public class GameData : MonoBehaviour
@@ -63,9 +52,7 @@ public class GameData : MonoBehaviour
     //public static SoundManager Instance;
     public SaveData saveData;
 
-    const string SETTINGS_FILE_NAME = "ltlrn_settings.json";
-
-    private Dictionary<string, ADV_Interaction.ObjectState> stateDict;
+    const string SETTINGS_FILE_NAME = "ltlrn_settings.json";    
 
     private void Awake()
     {
@@ -78,12 +65,6 @@ public class GameData : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        //empty
     }
 
     public void SaveToFile()
@@ -102,7 +83,7 @@ public class GameData : MonoBehaviour
             string filePath = Path.Combine(Application.persistentDataPath, SETTINGS_FILE_NAME);
 
             File.WriteAllText(filePath, savingData);
-            Debug.Log(filePath);
+            //Debug.Log(filePath);
         }
         catch (Exception ex)
         {
@@ -122,8 +103,6 @@ public class GameData : MonoBehaviour
 
             // Fix any size mismatch
             PatchSavedData();
-
-            BuildCache();
         }
         else
         {
@@ -183,47 +162,6 @@ public class GameData : MonoBehaviour
         }
     }
 
-    //for save and load interaction
-    public void SetInteractionState(string id, ADV_Interaction.ObjectState state)
-    {
-        stateDict[id] = state;
-
-        var existing = saveData.interactionStates.Find(x => x.id == id);
-
-        if (existing != null)
-            existing.state = state;
-        else
-            saveData.interactionStates.Add(new InteractionStateData { id = id, state = state });
-    }
-
-    //for save and load interaction
-    public ADV_Interaction.ObjectState GetInteractionState(string id)
-    {
-        if (stateDict.TryGetValue(id, out var state))
-            return state;
-
-        return ADV_Interaction.ObjectState.Normal;
-    }
-
-    public void BuildCache()
-    {
-        stateDict = new Dictionary<string, ADV_Interaction.ObjectState>();
-
-        foreach (var item in saveData.interactionStates)
-        {
-            stateDict[item.id] = item.state;
-        }
-    }
-
-    public bool ResetInteractionStates()
-    {
-        saveData.interactionStates.Clear();
-        SaveToFile();
-
-        Debug.Log("All interaction states reset to default.");
-
-        return true;
-    }
 
     private void PatchSavedData()
     {

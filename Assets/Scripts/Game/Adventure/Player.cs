@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
-using static ADV_Interaction;
+using static ADV_InteractionBase;
 
 public class Player : MonoBehaviour
 {

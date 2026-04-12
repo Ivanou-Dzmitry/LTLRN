@@ -21,6 +21,7 @@ public class ADV_MapManager : MonoBehaviour
     [Header("Map")]
     public GameObject mapPanel;
     private const int MAP_SORTING_ORDER = 13;
+    public string currentMapID;
 
     [Header("Map Button")]
     public Button mapButton;
@@ -168,6 +169,9 @@ public class ADV_MapManager : MonoBehaviour
 
             //set current map
             currentMap = map;
+
+            //set name
+            currentMapID = currentMap.mapID;
 
             //show panel with map info if needed
             if (map.showMapInfo)

@@ -4,6 +4,7 @@ using UnityEngine;
 public class Map : ScriptableObject
 {
     public GameObject mapPrefab;
+    public string mapID;
 
     [Header("Map Info")]
     public bool showMapInfo;
