@@ -3975,6 +3975,7 @@ MonoBehaviour:
   soundManagerPrefab: {fileID: 6673029259881224829, guid: 0e282a90e68a571429f80334ad401a9a, type: 3}
   gameDataPrefab: {fileID: 6153394010585547894, guid: 9f1028a6b31f4704ca55c98bb328540a, type: 3}
   logPrefab: {fileID: 4775174157173856373, guid: bb9c1d25106c13b4682e2fca23ec70a7, type: 3}
+  gameObjStatePrefab: {fileID: 7207563062073095928, guid: 1aff0e11e4002c64c886ec3abd88dc7d, type: 3}
 --- !u!114 &1915118957 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5048130105732457301, guid: 689093d32c115b540803e1995f892595, type: 3}

@@ -17,10 +17,19 @@ public class ADV_Inventory : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    // ADV_Inventory.cs
+    private void Start()
+    {
+        var objState = GameObjectsState.objState;
+        if (objState != null)
+            LoadFromSaveData(objState.objStateData.inventory);
+    }
+
     public void AddItem(string itemId, int quantity = 1)
     {
         if (!_items.ContainsKey(itemId)) _items[itemId] = 0;
         _items[itemId] += quantity;
+
         Debug.Log($"Added {quantity}x {itemId}. Total: {_items[itemId]}");
     }
 
@@ -56,6 +65,8 @@ public class ADV_Inventory : MonoBehaviour
     // for UI — returns everything with its definition resolved
     public List<(ADV_ItemDefinition def, int qty)> GetAllItems()
     {
+        Debug.Log($"Getting all items. Count: {_items.Count}");
+
         var result = new List<(ADV_ItemDefinition, int)>();
         foreach (var kvp in _items)
         {

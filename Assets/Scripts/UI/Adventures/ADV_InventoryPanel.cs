@@ -25,6 +25,7 @@ public class ADV_InventoryPanel : Panel
     {
         objState = GameObject.FindWithTag("GameObjState").GetComponent<GameObjectsState>();
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
+        
         base.Open();
 
         LoadInventory();
@@ -32,6 +33,8 @@ public class ADV_InventoryPanel : Panel
 
     private void LoadInventory()
     {
+        Debug.Log("Loading inventory panel...");
+
         // clear old slots
         foreach (Transform child in inventoryContent)
             Destroy(child.gameObject);
@@ -41,6 +44,8 @@ public class ADV_InventoryPanel : Panel
         {
             Debug.Log($"Loading inventory item: {qty}");
             ADV_InventorySlotUI slot = Instantiate(slotPrefab, inventoryContent);
+
+            slot.name = def.name;
             slot.Setup(def, qty);
         }
     }

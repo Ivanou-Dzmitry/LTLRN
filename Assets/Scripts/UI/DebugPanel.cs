@@ -29,8 +29,12 @@ public class DebugPanel : Panel
             return;
         }
         
-        resetGameBtn.onClick.AddListener(OnResetClicked);
-        resetSectionBtn.onClick.AddListener(OnResetSectionClick);
+        if(resetGameBtn != null)
+            resetGameBtn.onClick.AddListener(OnResetClicked);
+
+        if (resetSectionBtn != null)
+            resetSectionBtn.onClick.AddListener(OnResetSectionClick);
+
         resetStateBtn.onClick.AddListener(OnResetStateClick);
         resetInventoryBtn.onClick.AddListener(OnResetInventoryClick);
 

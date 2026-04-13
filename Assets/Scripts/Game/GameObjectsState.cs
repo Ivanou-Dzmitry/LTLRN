@@ -134,8 +134,11 @@ public class GameObjectsState : MonoBehaviour
             Debug.Log("State file created: " + filePath);
         }
 
+        //inventory load
         if (ADV_Inventory.Instance != null)
             ADV_Inventory.Instance.LoadFromSaveData(objStateData.inventory);
+        else
+            Debug.LogWarning("ADV_Inventory instance not found. Inventory data will not be loaded.");
     }
 
     public void SaveStateToFile()
