@@ -24,7 +24,8 @@ public abstract class ADV_InteractionBase : MonoBehaviour
         Destructible,
         Door,
         Enemy,
-        Movable
+        Movable,
+        NPC
     }
 
     public enum ObjectState { Normal, Destroyed, Collected, Closed, Opened, Move, Attack }
