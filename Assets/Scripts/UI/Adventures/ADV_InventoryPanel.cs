@@ -1,4 +1,5 @@
 using LTLRN.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class ADV_InventoryPanel : Panel
     [Header("Invent Content")]
     [SerializeField] private Transform inventoryContent;
     [SerializeField] private ADV_InventorySlotUI slotPrefab;  //assign in Inspector
+    [SerializeField] private TMP_Text descriptionText;
 
     public override void Initialize()
     {
@@ -25,7 +27,9 @@ public class ADV_InventoryPanel : Panel
     {
         objState = GameObject.FindWithTag("GameObjState").GetComponent<GameObjectsState>();
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
-        
+
+        ADV_InventorySlotUI.OnSlotSelected += OnSlotSelected;
+
         base.Open();
 
         LoadInventory();
@@ -48,11 +52,22 @@ public class ADV_InventoryPanel : Panel
             slot.name = def.name;
             slot.Setup(def, qty);
         }
-    }
 
+        descriptionText.text = "...";
+    }
     private void CloseInventoryPanel()
     {
         gameLogic.gameState = GameLogic.GameState.Play;
         PanelManager.CloseAll();
+    }
+
+    private void OnSlotSelected(ADV_InventorySlotUI slot)
+    {
+        descriptionText.text = slot.GetDescription();
+    }
+
+    private void OnDestroy()
+    {
+        ADV_InventorySlotUI.OnSlotSelected -= OnSlotSelected;
     }
 }

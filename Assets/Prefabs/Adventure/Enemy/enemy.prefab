@@ -5022,7 +5022,7 @@ ParticleSystemRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -9916,7 +9916,7 @@ ParticleSystemRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -10062,13 +10062,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ADV_Enemy
   objectId: 
-  health: 2
+  health: 5
+  meta: 
   objectParticles:
   - {fileID: 1312204841449706822}
   - {fileID: 2954372184511023073}
   interactionType: 4
   baseDamage: 1
-  moveSpeed: 1
+  moveSpeed: 0.75
   chaseRange: 2
   attackRange: 1
   obstacleLayer:
