@@ -9,6 +9,7 @@ public class ADV_DialogPanel : MonoBehaviour
     private GameLogic gameLogic;
     private Animator animator;
     private const float ANIMATION_DURATION = 1f;
+    private const float TYPEWRITER_DELAY  = 0.03f;
 
     [SerializeField] private Button closeDiallogButton;
     [SerializeField] private TMP_Text dialogText;
@@ -59,6 +60,21 @@ public class ADV_DialogPanel : MonoBehaviour
         //remove listeners
         closeDiallogButton.onClick.RemoveListener(OnDiallogClose);
         submitButton.onClick.RemoveListener(HandleSubmit);
+    }
+
+    public IEnumerator ShowDiallogueTextRoutine(string text)
+    {
+        dialogText.maxVisibleCharacters = 0;
+        dialogText.text = text;
+        dialogText.ForceMeshUpdate();
+        
+        int totalChars = dialogText.textInfo.characterCount;
+
+        for (int i = 0; i <= totalChars; i++)
+        {
+            dialogText.maxVisibleCharacters = i;
+            yield return new WaitForSeconds(TYPEWRITER_DELAY);
+        }
     }
 
 }

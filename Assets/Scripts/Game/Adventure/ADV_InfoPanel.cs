@@ -40,7 +40,7 @@ public class ADV_InfoPanel : MonoBehaviour
 
         int totalChars = infoPanelText.textInfo.characterCount;
 
-        Debug.Log($"Showing info panel with text: '{text}' ({totalChars} chars)");  
+        //Debug.Log($"Showing info panel with text: '{text}' ({totalChars} chars)");  
 
         for (int i = 0; i <= totalChars; i++)
         {

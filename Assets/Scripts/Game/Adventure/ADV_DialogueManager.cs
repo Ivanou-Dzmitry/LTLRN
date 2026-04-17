@@ -10,8 +10,10 @@ public class ADV_DialogueManager : MonoBehaviour
 {
     public enum DialogueState
     {
+        None,
         Start,
-        End
+        End,
+        Possible
     }
 
     private GameLogic gameLogic;
@@ -36,6 +38,7 @@ public class ADV_DialogueManager : MonoBehaviour
     public Button communicateButton;
     private ButtonImage communicateBtn;
 
+    [Header("Dialogue Buttons")]
     public Button closePanelButton;
     public Button nextStoryButton;
 
@@ -64,21 +67,26 @@ public class ADV_DialogueManager : MonoBehaviour
 
         closePanelButton.onClick.AddListener(OnClosePanel);
         nextStoryButton.onClick.AddListener(NextStory);
+
+        dialogueState = DialogueState.None;
     }
 
     private void Start()
     {
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
 
+        //set dialogue off
         dialogueIsPalying = false;
         dialogPanelTop.SetActive(false);
 
+        //get player class
         playerClass = player.GetComponent<Player>();
 
         //get dialog panel class
         dialogPanelClass = dialogPanelTop.GetComponent<ADV_DialogPanel>();
 
-        dialogueState = DialogueState.End;
+        //set state
+        dialogueState = DialogueState.None;
     }
 
     public void OnSubmit(InputAction.CallbackContext context)
@@ -154,8 +162,12 @@ public class ADV_DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
+            //show next line
             dialogueText.text = currentStory.Continue();
-            
+
+            //typewriter effect
+            StartCoroutine(dialogPanelClass.ShowDiallogueTextRoutine(dialogueText.text));
+
             //show butttons
             if (!currentStory.canContinue)
             {

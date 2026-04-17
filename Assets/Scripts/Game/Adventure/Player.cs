@@ -94,19 +94,22 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var dialogueState = ADV_DialogueManager.Instance.dialogueState;
+        var gameState = gameLogic.gameState;
+
         //move only if not dialgue
-        if (ADV_DialogueManager.Instance.dialogueState == ADV_DialogueManager.DialogueState.End || gameLogic.gameState == GameLogic.GameState.Play)
+        if (dialogueState == ADV_DialogueManager.DialogueState.End || dialogueState == ADV_DialogueManager.DialogueState.None || gameState == GameLogic.GameState.Play)
         {
             rigidbodyPlayer.linearVelocity = moveInputPlayer.normalized * _speed;
             stickControler.enabled = true;
         }
 
-        if (ADV_DialogueManager.Instance.dialogueState == ADV_DialogueManager.DialogueState.Start || gameLogic.gameState == GameLogic.GameState.Pause)
+        if (dialogueState == ADV_DialogueManager.DialogueState.Start || gameState == GameLogic.GameState.Pause)
         {
             rigidbodyPlayer.linearVelocity = Vector3.zero;
             stickControler.enabled = false;
         }
-            
+
     }
 
     // Called automatically by PlayerInput
@@ -150,8 +153,14 @@ public class Player : MonoBehaviour
     }
 
     public void StartAttack()
-    {        
-        animator.SetBool("attacking", true);
+    {
+        var dialogueState = ADV_DialogueManager.Instance.dialogueState;
+        
+        //noanimate attack if dialogue possible or end
+        if (dialogueState != ADV_DialogueManager.DialogueState.None)
+            return;
+
+        animator.SetBool("attacking", true);        
         currentPlayerState = PlayerState.Attack;        
     }
 
@@ -254,9 +263,12 @@ public class Player : MonoBehaviour
         inkText = tilesUtilsClass.GetDialogueFromCollider(collider);
 
         //run diallogue if found
-        if (inkText != null)
+        if (inkText != null && currentPlayerState != PlayerState.Attack)
         {
-            readyForDialogue = true;
+             readyForDialogue = true;
+
+            //dialogue possible
+            ADV_DialogueManager.Instance.dialogueState = ADV_DialogueManager.DialogueState.Possible;
 
             InteractIconRoutine(true);
         }
@@ -296,6 +308,9 @@ public class Player : MonoBehaviour
         inkText = null;
 
         InteractIconRoutine(false);
+
+        //no diallogue
+        ADV_DialogueManager.Instance.dialogueState = ADV_DialogueManager.DialogueState.None;
     }
 
     //collision for vfx, collision etc
