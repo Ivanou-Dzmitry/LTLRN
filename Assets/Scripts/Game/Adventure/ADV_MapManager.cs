@@ -13,12 +13,16 @@ public class ADV_MapManager : MonoBehaviour
     private ADV_CameraMove cameraMoveClass;
 
     public Worlds worlds; 
-    private MapsManager mapsManager;
-    private Map currentMap;
-
+    private MapsManager mapsManager;    
     private Tilemap worldMap;
 
+    //localization
+    private LanguageSwitcher locManager;
+    private Languages currentLang;
+
     [Header("Map")]
+    public Map currentMap;
+    public ADV_GameEvent currentMapEvent;
     public GameObject mapPanel;
     private const int MAP_SORTING_ORDER = 13;
     public string currentMapID;
@@ -80,6 +84,9 @@ public class ADV_MapManager : MonoBehaviour
         //get logic
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
         cameraMoveClass = Camera.main.GetComponent<ADV_CameraMove>();
+
+        //get current language
+        locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();        
     }
 
     private void LoadMap()
@@ -173,12 +180,16 @@ public class ADV_MapManager : MonoBehaviour
             //set name
             currentMapID = currentMap.mapID;
 
+            //set events
+            currentMapEvent = currentMap.onMapEvents;
+
             //show panel with map info if needed
             if (map.showMapInfo)
             {
                 infoPanel.SetActive(true);
                 ADV_InfoPanel iPanel = infoPanel.GetComponent<ADV_InfoPanel>();
-                iPanel.ShowInfo(map.mapInfo);
+              
+                iPanel.ShowInfo(currentMap.description.GetLocalizedString());
             }
                 
             return true;
@@ -193,6 +204,7 @@ public class ADV_MapManager : MonoBehaviour
     private void MapTransfer(Vector2 position, string direction)
     {
         Debug.Log($">>> My position is at Row {playerPositionOnMap.x}, Column {playerPositionOnMap.y} Direction: {direction}");
+
         int rows = mapValues.GetLength(0);
         int columns = mapValues.GetLength(1);
 

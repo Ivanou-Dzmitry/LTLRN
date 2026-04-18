@@ -37,6 +37,9 @@ public class UIColorPalette : ScriptableObject
     public Color SuccessLight;
 
     [Header("Grays")]
+    public Color Gray2Light;
+    public Color Gray4Light;
+    public Color Gray5Light;
     public Color Gray3Dark;
     public Color Gray2Dark;
 }

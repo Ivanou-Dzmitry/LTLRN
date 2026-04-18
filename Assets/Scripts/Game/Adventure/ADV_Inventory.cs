@@ -65,7 +65,7 @@ public class ADV_Inventory : MonoBehaviour
     // for UI — returns everything with its definition resolved
     public List<(ADV_ItemDefinition def, int qty)> GetAllItems()
     {
-        Debug.Log($"Getting all items. Count: {_items.Count}");
+        //Debug.Log($"Getting all items. Count: {_items.Count}");
 
         var result = new List<(ADV_ItemDefinition, int)>();
         foreach (var kvp in _items)

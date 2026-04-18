@@ -353,6 +353,42 @@ MonoBehaviour:
     m_Localized: Exam
     m_Metadata:
       m_Items: []
+  - m_Id: 44463188709793792
+    m_Localized: Items
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44463544667791360
+    m_Localized: Tasks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44464908835807232
+    m_Localized: List of collected objects. Select an object to read its description.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44492762000711680
+    m_Localized: List of actions to take on this map.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44496479840165888
+    m_Localized: Collect Dead pixel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44495912849956864
+    m_Localized: Destroy pot.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44508681204719616
+    m_Localized: You are on map number 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44508742143762432
+    m_Localized: This is map 2.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44510622534131712
+    m_Localized: This is map 1. Inital map
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

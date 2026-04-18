@@ -425,6 +425,50 @@ MonoBehaviour:
     m_Key: ExamTxt
     m_Metadata:
       m_Items: []
+  - m_Id: 44463188709793792
+    m_Key: 'ItemsTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44463544667791360
+    m_Key: 'TasksTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44464908835807232
+    m_Key: CollectedObjDescTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44492762000711680
+    m_Key: W01M01_EventDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44495912849956864
+    m_Key: CondDestrPot01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44496479840165888
+    m_Key: 'CondCollectPixel01
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44508681204719616
+    m_Key: W01M02_MapInfo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44508742143762432
+    m_Key: 'W01M02_MapDescription
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44510622534131712
+    m_Key: W01M01_MapDescription
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

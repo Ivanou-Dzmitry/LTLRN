@@ -1,11 +1,16 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Localization;
 
 [CreateAssetMenu(menuName = "ADV/Game Event")]
 public class ADV_GameEvent : ScriptableObject
 {
     public List<ADV_Condition> conditions;
     public List<ADV_Action> actions;
+
+    [Header("Localization")]
+    public LocalizedString description;
 
     private bool triggered = false;
 
@@ -25,5 +30,17 @@ public class ADV_GameEvent : ScriptableObject
             a.Execute();
 
         triggered = true;
+    }
+
+    // sync call — use only if table is preloaded
+    public string GetDescription()
+    {
+        return description.GetLocalizedString();
+    }
+
+    // async call — safe anytime
+    public async System.Threading.Tasks.Task<string> GetDescriptionAsync()
+    {
+        return await description.GetLocalizedStringAsync().Task;
     }
 }

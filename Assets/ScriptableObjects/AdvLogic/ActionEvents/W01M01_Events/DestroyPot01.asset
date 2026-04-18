@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f449255e40026a24fb1c43d3b40e12c0, type: 3}
+  m_Name: DestroyPot01
+  m_EditorClassIdentifier: Assembly-CSharp::ADV_Condition_ObjectDestroyed
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+    m_TableEntryReference:
+      m_KeyId: 44495912849956864
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  objectId: 
+  references:
+    version: 2
+    RefIds: []

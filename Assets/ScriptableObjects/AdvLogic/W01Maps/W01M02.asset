@@ -15,4 +15,25 @@ MonoBehaviour:
   mapPrefab: {fileID: 1193945062205075607, guid: 0f8c1807b31215147a713c403807d455, type: 3}
   mapID: W1M2
   showMapInfo: 1
-  mapInfo: You enter map 2
+  mapInfo:
+    m_TableReference:
+      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+    m_TableEntryReference:
+      m_KeyId: 44508681204719616
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+    m_TableEntryReference:
+      m_KeyId: 44508742143762432
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  onMapEvents: {fileID: 0}
+  references:
+    version: 2
+    RefIds: []
