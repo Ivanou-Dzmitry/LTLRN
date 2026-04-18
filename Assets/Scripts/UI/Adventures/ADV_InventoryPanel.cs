@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class GridLayoutConfig
+{
+    public Vector2 cellSize;
+    public Vector2 spacing;
+}
+
 public class ADV_InventoryPanel : Panel
 {
     private GameObjectsState objState;
@@ -14,6 +21,7 @@ public class ADV_InventoryPanel : Panel
     private LanguageSwitcher locManager;
     private Languages currentLang;
 
+    //root panel
     [SerializeField] private Transform inventoryContent;
 
     [Header("Buttons")]
@@ -24,12 +32,21 @@ public class ADV_InventoryPanel : Panel
     private System.Action[] tabActions;
     private int currentTabIndex = -1;
 
+    [SerializeField] private GridLayoutGroup grid;
+
+    [Header("Layouts")]
+    [SerializeField] private GridLayoutConfig inventoryLayout;
+    [SerializeField] private GridLayoutConfig taskLayout;
+    [SerializeField] private GridLayoutConfig mapLayout;
+
     [Header("Invent Content")]
-    [SerializeField] private ADV_InventorySlotUI inventSlotPrefab;  //Inventory slot prefab
-    [SerializeField] private TMP_Text inventoryDescriptionText;
+    [SerializeField] private ADV_InventorySlotUI inventSlotPrefab;  //Inventory slot prefab    
 
     [Header("Tasks Content")]
-    [SerializeField] private ADV_InventorySlotUI taskSlotPrefab;  //Inventory slot prefab
+    [SerializeField] private ADV_TaskSlotUI taskSlotPrefab;  //Inventory slot prefab
+
+    [Header("Description")]
+    [SerializeField] private TMP_Text inventoryDescriptionText;
 
     public override void Initialize()
     {
@@ -90,7 +107,9 @@ public class ADV_InventoryPanel : Panel
         // clear old slots
         foreach (Transform child in inventoryContent)
             Destroy(child.gameObject);
-
+        
+        ApplyLayout(inventoryLayout);
+        
         // spawn one slot per item
         foreach (var (def, qty) in ADV_Inventory.Instance.GetAllItems())
         {
@@ -139,8 +158,17 @@ public class ADV_InventoryPanel : Panel
             return;
         }
 
+        ApplyLayout(taskLayout);
+
         //load description  from event      
-        inventoryDescriptionText.text = mapManager.currentMapEvent.GetDescription();
+        inventoryDescriptionText.text = mapManager.currentMapEvent.GetDescription();        
+
+        foreach (var condition in mapManager.currentMapEvent.conditions)
+        {
+            var slot = Instantiate(taskSlotPrefab, inventoryContent);
+            slot.SetupTask(condition);
+            slot.name = condition.name;
+        }
 
         Debug.Log("Loading tasks panel...");
     }
@@ -150,6 +178,8 @@ public class ADV_InventoryPanel : Panel
         // clear old slots
         foreach (Transform child in inventoryContent)
             Destroy(child.gameObject);
+
+        ApplyLayout(mapLayout);
 
         inventoryDescriptionText.text = "...";
 
@@ -170,5 +200,13 @@ public class ADV_InventoryPanel : Panel
                 ? palette.Gray2Light   // selected
                 : palette.Panel01;  // deselected
         }
+    }
+
+    private void ApplyLayout(GridLayoutConfig config)
+    {
+        grid.cellSize = config.cellSize;
+        grid.spacing = config.spacing;
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)inventoryContent);
     }
 }

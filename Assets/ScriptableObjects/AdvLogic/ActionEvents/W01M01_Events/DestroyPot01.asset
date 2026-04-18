@@ -21,7 +21,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  objectId: 
+  objectId: pot01
   references:
     version: 2
     RefIds: []

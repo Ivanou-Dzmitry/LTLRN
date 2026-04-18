@@ -469,6 +469,10 @@ MonoBehaviour:
     m_Key: W01M01_MapDescription
     m_Metadata:
       m_Items: []
+  - m_Id: 44592801234608128
+    m_Key: CondCollectPixel02
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

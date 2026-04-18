@@ -1324,9 +1324,19 @@ MonoBehaviour:
   - {fileID: 1225222583}
   - {fileID: 126437956}
   - {fileID: 2090316545}
+  grid: {fileID: 1470586606}
+  inventoryLayout:
+    cellSize: {x: 256, y: 256}
+    spacing: {x: 0, y: 0}
+  taskLayout:
+    cellSize: {x: 1000, y: 96}
+    spacing: {x: 0, y: 8}
+  mapLayout:
+    cellSize: {x: 200, y: 250}
+    spacing: {x: 0, y: 0}
   inventSlotPrefab: {fileID: 7505023181883845836, guid: 19a3b50bb06b2e247b185c53f4de6e2f, type: 3}
+  taskSlotPrefab: {fileID: 5057668579438805458, guid: 68bead08f4094194995bdeb731703bcb, type: 3}
   inventoryDescriptionText: {fileID: 1596578332}
-  taskSlotPrefab: {fileID: 0}
 --- !u!1001 &460225283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5914,7 +5924,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 1080}
+  m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1470586606
 MonoBehaviour:
@@ -5936,7 +5946,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 256, y: 256}
+  m_CellSize: {x: 1000, y: 96}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -7357,7 +7367,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9d7e069066cae41b5376c46f97cdf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ADV_MapEventController
-  events: []
+  events:
+  - {fileID: 11400000, guid: 91cbbd11723ae7d43a1b38ad17a91845, type: 2}
+  - {fileID: 11400000, guid: 3b9c5658311d1dc4e93dfc13525ef88e, type: 2}
 --- !u!114 &1805206905 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
@@ -7494,6 +7506,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ADV_MapManager
   worlds: {fileID: 11400000, guid: 63265f109bf295946a939e50d453ab7e, type: 2}
+  currentMap: {fileID: 0}
+  currentMapEvent: {fileID: 0}
   mapPanel: {fileID: 89687049}
   currentMapID: 
   mapButton: {fileID: 113302266}

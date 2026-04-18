@@ -75,4 +75,16 @@ public class ADV_Inventory : MonoBehaviour
         }
         return result;
     }
+
+    //return items count for condition checking
+    public int GetItemsCount(string itemId)
+    {
+        if (string.IsNullOrEmpty(itemId))
+            return 0;
+
+        if (_items.TryGetValue(itemId, out int count))
+            return count;
+
+        return 0;
+    }
 }

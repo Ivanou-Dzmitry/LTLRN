@@ -33,7 +33,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  onMapEvents: {fileID: 0}
+  onMapEvents: {fileID: 11400000, guid: 3b9c5658311d1dc4e93dfc13525ef88e, type: 2}
   references:
     version: 2
     RefIds: []

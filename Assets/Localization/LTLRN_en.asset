@@ -389,6 +389,10 @@ MonoBehaviour:
     m_Localized: This is map 1. Inital map
     m_Metadata:
       m_Items: []
+  - m_Id: 44592801234608128
+    m_Localized: Find the second dead pixel.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

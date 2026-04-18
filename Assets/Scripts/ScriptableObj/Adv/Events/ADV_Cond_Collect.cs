@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Localization;
 
 [CreateAssetMenu(menuName = "ADV/Conditions/Collect Item")]
 public class ADV_Cond_Collect : ADV_Condition
@@ -7,9 +6,13 @@ public class ADV_Cond_Collect : ADV_Condition
     public string itemId;
     public int requiredAmount;
 
+    //return true if the player has collected the required amount of the item
     public override bool IsMet()
-    {        
-        return false; //ADV_Inventory.Instance.GetAllItems() >= requiredAmount;
+    {
+        if (string.IsNullOrEmpty(itemId) || requiredAmount <= 0)
+            return false;
+
+        return ADV_Inventory.Instance.GetItemsCount(itemId) >= requiredAmount;
     }
 
 }

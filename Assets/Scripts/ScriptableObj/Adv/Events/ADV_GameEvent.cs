@@ -26,6 +26,9 @@ public class ADV_GameEvent : ScriptableObject
 
         Debug.Log($"Event triggered: {name}");
 
+        if (actions == null || actions.Count == 0)
+            return;
+
         foreach (var a in actions)
             a.Execute();
 

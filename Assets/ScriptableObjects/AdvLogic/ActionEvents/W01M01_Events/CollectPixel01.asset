@@ -21,8 +21,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  itemId: 
-  requiredAmount: 0
+  itemId: dpixel01
+  requiredAmount: 1
   references:
     version: 2
     RefIds: []
