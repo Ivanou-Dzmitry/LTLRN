@@ -473,6 +473,14 @@ MonoBehaviour:
     m_Key: CondCollectPixel02
     m_Metadata:
       m_Items: []
+  - m_Id: 44958324325670912
+    m_Key: W01M01_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44958426670882816
+    m_Key: W01M02_Desc
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

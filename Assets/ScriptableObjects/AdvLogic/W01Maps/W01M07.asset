@@ -13,3 +13,27 @@ MonoBehaviour:
   m_Name: W01M07
   m_EditorClassIdentifier: Assembly-CSharp::Map
   mapPrefab: {fileID: 8465753879198310617, guid: a3b6c6fc4b7e62040af3db14e2e582fa, type: 3}
+  mapID: W1M7
+  showMapInfo: 0
+  mapInfo:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  description:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  onMapEvents: {fileID: 0}
+  references:
+    version: 2
+    RefIds: []

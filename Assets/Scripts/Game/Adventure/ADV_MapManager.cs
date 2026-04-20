@@ -12,7 +12,7 @@ public class ADV_MapManager : MonoBehaviour
     private GameLogic gameLogic;
     private ADV_CameraMove cameraMoveClass;
 
-    public Worlds worlds; 
+    public Worlds worlds; //world
     private MapsManager mapsManager;    
     private Tilemap worldMap;
 
@@ -21,8 +21,10 @@ public class ADV_MapManager : MonoBehaviour
     private Languages currentLang;
 
     [Header("Map")]
-    public Map currentMap;
+    public Map currentMap; //map
+
     public ADV_GameEvent currentMapEvent;
+    //public Tilemap miniMapTilemap;
     public GameObject mapPanel;
     private const int MAP_SORTING_ORDER = 13;
     public string currentMapID;
@@ -31,8 +33,9 @@ public class ADV_MapManager : MonoBehaviour
     public Button mapButton;
     private ButtonImage mapBtn;
 
+    [Header("Mini Map")]
     private bool mapOpened = false;
-    private GameObject miniMap = null;
+    public GameObject miniMap = null;
     private GameObject currentMapInstance = null;
 
     private string[,] mapValues;
@@ -128,8 +131,9 @@ public class ADV_MapManager : MonoBehaviour
         //instance map prefab
         InstanceMapPrefab(currentMap);
 
+        //build world map for minimap
         if (MiniMapCreate())
-            BuidWorld(miniMap);
+            BuildWorld(miniMap);
 
         string mapName = currentMap.mapPrefab.name;
                
@@ -291,7 +295,7 @@ public class ADV_MapManager : MonoBehaviour
         return false;
     }
 
-    private void BuidWorld(GameObject map)
+    private void BuildWorld(GameObject map)
     {
         worldMap = map.GetComponentInChildren<Tilemap>();
 
@@ -406,6 +410,7 @@ public class ADV_MapManager : MonoBehaviour
         return new Vector2(-1, -1);
     }
 
+    //player marker position on minimap logic
     void UpdateMiniMapMarkerPosition(Transform marker)
     {
         if (marker == null) return;

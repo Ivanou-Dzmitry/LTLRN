@@ -1,7 +1,9 @@
 using LTLRN.UI;
+using SuperTiled2Unity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -45,6 +47,10 @@ public class ADV_InventoryPanel : Panel
     [Header("Tasks Content")]
     [SerializeField] private ADV_TaskSlotUI taskSlotPrefab;  //Inventory slot prefab
 
+
+    [Header("Map Items Content")]
+    [SerializeField] private ADV_MapSlotUI mapItemPrefab;  //Map item prefab
+
     [Header("Description")]
     [SerializeField] private TMP_Text inventoryDescriptionText;
 
@@ -63,6 +69,7 @@ public class ADV_InventoryPanel : Panel
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
 
         ADV_InventorySlotUI.OnSlotSelected += OnSlotSelected;
+        ADV_MapSlotUI.OnMapSlotSelected += OnMapSlotClicked;
 
         base.Open();
 
@@ -133,14 +140,21 @@ public class ADV_InventoryPanel : Panel
         PanelManager.CloseAll();
     }
 
-    private void OnSlotSelected(ADV_InventorySlotUI slot)
+    private void OnSlotSelected(ADV_InventorySlotUI slotInventory)
     {
-        inventoryDescriptionText.text = slot.GetDescription();
+        inventoryDescriptionText.text = slotInventory.GetDescription();
+    }
+
+    private void OnMapSlotClicked(ADV_MapSlotUI slotMap)
+    {
+        inventoryDescriptionText.text = slotMap.GetDescription();
+        Debug.Log($"Selected map item: {slotMap.name}");
     }
 
     private void OnDestroy()
     {
         ADV_InventorySlotUI.OnSlotSelected -= OnSlotSelected;
+        ADV_MapSlotUI.OnMapSlotSelected -= OnMapSlotClicked;
     }
 
     private void LoadTasks()
@@ -180,10 +194,45 @@ public class ADV_InventoryPanel : Panel
             Destroy(child.gameObject);
 
         ApplyLayout(mapLayout);
-
         inventoryDescriptionText.text = "...";
 
-        Debug.Log("Loading map panel...");
+        Tilemap tm = mapManager.miniMap.GetComponentInChildren<Tilemap>();
+        var bounds = tm.cellBounds;
+
+        for (int y = bounds.yMax - 1; y >= bounds.yMin; y--)
+        {
+            for (int x = bounds.xMin; x < bounds.xMax; x++)
+            {
+                Vector3Int pos = new Vector3Int(x, y, 0);
+
+                if (!tm.HasTile(pos)) continue;
+
+                TileBase tile = tm.GetTile(pos);
+
+                if (tile is not SuperTile superTile) continue;
+
+                string locKey = "";
+                
+                foreach (var prop in superTile.m_CustomProperties)
+                {
+                    if (prop.m_Name == "LocKey") locKey = prop.GetValueAsString();                    
+                }
+
+
+                Sprite sprite = tm.GetSprite(pos);
+
+                if (sprite != null)
+                {
+                    var img = Instantiate(mapItemPrefab, inventoryContent);
+                    img.sprite = sprite;
+                    img.name = $"{sprite.name}_pos{x}.{Mathf.Abs(y)}";
+
+                    img.SetupMapItem(locKey);
+
+                    //Debug.Log($"{sprite.name} - {locKey}");
+                }
+            }
+        }
     }
 
     private void SelectTab(int index)
