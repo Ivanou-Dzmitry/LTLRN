@@ -1,24 +1,22 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
-using TMPro;
-using System.Collections;
 
 public class ADV_MapManager : MonoBehaviour
 {
     private GameData gameData;
     private GameLogic gameLogic;
-    private ADV_CameraMove cameraMoveClass;
+    //private ADV_CameraMove cameraMoveClass;
 
     public Worlds worlds; //world
     private MapsManager mapsManager;    
     private Tilemap worldMap;
 
     //localization
-    private LanguageSwitcher locManager;
-    private Languages currentLang;
+    //private LanguageSwitcher locManager;
+    //private Languages currentLang;
 
     [Header("Map")]
     public Map currentMap; //map
@@ -37,6 +35,12 @@ public class ADV_MapManager : MonoBehaviour
     private bool mapOpened = false;
     public GameObject miniMap = null;
     private GameObject currentMapInstance = null;
+    
+    //room
+    private GameObject currentRoomInstance = null;
+
+    //cache exits by roomId for faster access
+    private Dictionary<string, Transform> exitPoints = new();
 
     private string[,] mapValues;
 
@@ -50,16 +54,20 @@ public class ADV_MapManager : MonoBehaviour
     [SerializeField] private GameObject player;
     //private Player playerClass;
     private Vector2 playerPositionOnMap = Vector2.zero;
-    public GameObject playerMarkerOnMap;
+    [SerializeField] private GameObject playerMarkerOnMap;
 
     //public Vector2 cameraChange;
     private Vector3 playerPositionShift;
 
+    //constants
     private Vector3 PLAYER_TOP = new Vector3 (0,-15f,0);
     private Vector3 PLAYER_BOTTOM = new Vector3(0, 15f, 0);
     private Vector3 PLAYER_RIGHT = new Vector3(-11, 0, 0);
     private Vector3 PLAYER_LEFT = new Vector3(11, 0f, 0);
 
+    private Vector3 PLAYER_IN_ROOM = new Vector3(6, -15, 0);
+
+    //panel
     public GameObject mainPanel;
     ADV_MainGamePanel mainPanelUI;
 
@@ -86,10 +94,10 @@ public class ADV_MapManager : MonoBehaviour
 
         //get logic
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
-        cameraMoveClass = Camera.main.GetComponent<ADV_CameraMove>();
+        //cameraMoveClass = Camera.main.GetComponent<ADV_CameraMove>();
 
         //get current language
-        locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();        
+        //locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();        
     }
 
     private void LoadMap()
@@ -164,11 +172,6 @@ public class ADV_MapManager : MonoBehaviour
 
     private bool InstanceMapPrefab(Map map)
     {
-        /*        // Clear old
-                foreach (Transform child in transform)
-                {
-                    Destroy(child.gameObject);
-                }*/
         if(infoPanel.activeSelf)
             infoPanel.SetActive(false);
 
@@ -186,6 +189,14 @@ public class ADV_MapManager : MonoBehaviour
 
             //set events
             currentMapEvent = currentMap.onMapEvents;
+
+            // cache all exits by roomId
+            exitPoints.Clear();
+
+            foreach (var exit in currentMapInstance.GetComponentsInChildren<ADV_RoomExit>())
+                exitPoints[exit.roomId] = exit.transform;
+
+            //Debug.Log($">>>Map {currentMapID} loaded. Exits found: {exitPoints.Count}");
 
             //show panel with map info if needed
             if (map.showMapInfo)
@@ -207,7 +218,7 @@ public class ADV_MapManager : MonoBehaviour
 
     private void MapTransfer(Vector2 position, string direction)
     {
-        Debug.Log($">>> My position is at Row {playerPositionOnMap.x}, Column {playerPositionOnMap.y} Direction: {direction}");
+        //Debug.Log($">>> My position is at Row {playerPositionOnMap.x}, Column {playerPositionOnMap.y} Direction: {direction}");
 
         int rows = mapValues.GetLength(0);
         int columns = mapValues.GetLength(1);
@@ -242,7 +253,7 @@ public class ADV_MapManager : MonoBehaviour
 
         string mapName = mapValues[newRow, newCol];
 
-        Debug.Log($">>> Next position is at Row {newRow}, Column {newCol} Map: {mapName}");
+        //Debug.Log($">>> Next position is at Row {newRow}, Column {newCol} Map: {mapName}");
 
         //Debug.Log($"{mapName}");
 
@@ -250,29 +261,27 @@ public class ADV_MapManager : MonoBehaviour
         {
             if (mapsManager.maps[i].mapPrefab.name == mapName)
             {
-                Destroy(currentMapInstance);
+                if(currentRoomInstance != null)
+                    Destroy(currentRoomInstance);
 
-                //Debug.Log($"{i}");
-                InstanceMapPrefab(mapsManager.maps[i]);
+                Destroy(currentMapInstance);
                 
+                InstanceMapPrefab(mapsManager.maps[i]);
+
                 player.transform.position += playerPositionShift;
 
                 currentMapIndex = i;
                 gameData.saveData.currentMapIndex = currentMapIndex;
                 gameData.SaveToFile();
-                /*                cameraMoveClass.minPosition += cameraChange;
-                                cameraMoveClass.maxPosition += cameraChange;*/
-
+   
                 playerPositionOnMap = FindMapPosition(mapValues, mapName);
 
-                mainPanelUI.PanelFadeOut();                
+                mainPanelUI.PanelFadeOut();
+
                 break;
             }
                 
         }
-
-
-        //Debug.Log($">>> New position: Row {newRow}, Column {newCol} | Value: {mapValues[newRow, newCol]}");
 
     }
 
@@ -294,6 +303,102 @@ public class ADV_MapManager : MonoBehaviour
                 
         return false;
     }
+
+    public bool RoomCheck(Collision2D collision)
+    {
+        string[] customProperty = tilesUtilsClass.GetCustomPropertiesFromObject(collision);
+
+        if (customProperty != null)
+        {
+            if (customProperty[1] == "room")
+            {
+                string roomName = customProperty[0];
+
+                //index based on name, because order in array can be different
+                int index = System.Array.FindIndex(
+                    currentMap.roomPrefabs,
+                    r => r.name == roomName
+                );
+
+                if (index >= 0)
+                {
+                    // save player position. save position of exit to return back  
+                    Transform exit = GetExitFromRoom(currentMap.roomPrefabs[index].name);
+                    gameData.saveData.playerPosition = exit.position;
+                    gameData.SaveToFile();
+
+                    //transfer to room
+                    TransferToRoom(index);                    
+                    return true;
+                }
+                else
+                {
+                    if(roomName == "roomExit")
+                    {
+                        string roomId = currentRoomInstance.name.Replace("(Clone)", "").Trim();
+
+                        mainPanelUI.PanelFadeOut();
+
+                        // rebuild map + exitPoints
+                        InstanceMapPrefab(currentMap);
+
+                        // exits are loaded — safe to look up
+                        ExitRoom(currentRoomInstance, roomId, player.transform);
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void ExitRoom(GameObject roomInstance, string roomId, Transform player)
+    {
+        if (roomInstance != null)
+            Destroy(roomInstance);
+
+        Transform exit = GetExitFromRoom(roomId);
+
+        if (exit != null)
+            player.position = exit.position;
+
+        //exit to map. Set player location - MAP
+        Player playerClass = player.GetComponent<Player>();
+        playerClass.currentPlayerLocation = Player.PlayerLocation.Map;
+    }
+
+    public Transform GetExitFromRoom(string roomId)
+    {
+        if (exitPoints.TryGetValue(roomId, out var exit))
+            return exit;
+
+        return null;
+    }
+
+    private void TransferToRoom(int index)
+    {
+        Destroy(currentMapInstance);
+
+        //instance room
+        currentRoomInstance = Instantiate(currentMap.roomPrefabs[index], Vector3.zero, Quaternion.identity);
+        currentRoomInstance.transform.parent = transform;
+        currentRoomInstance.name = currentMap.roomPrefabs[index].name;
+
+        //set player position in room
+        player.transform.position = PLAYER_IN_ROOM;
+
+        mainPanelUI.PanelFadeOut();
+
+        //set player location - ROOM
+        Player playerClass = player.GetComponent<Player>();
+        playerClass.currentPlayerLocation = Player.PlayerLocation.Room;
+
+        //show panel with room description
+        infoPanel.SetActive(true);
+        ADV_InfoPanel iPanel = infoPanel.GetComponent<ADV_InfoPanel>();
+        iPanel.ShowInfo(currentMap.roomDescription[index].GetLocalizedString());
+    }
+
 
     private void BuildWorld(GameObject map)
     {

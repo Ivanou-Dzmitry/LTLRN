@@ -481,6 +481,24 @@ MonoBehaviour:
     m_Key: W01M02_Desc
     m_Metadata:
       m_Items: []
+  - m_Id: 45252846544908288
+    m_Key: WorldMapDescTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45263297529933824
+    m_Key: DeadPixelName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45263436394950656
+    m_Key: DeadPixelDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45649273100070912
+    m_Key: 'W01M01Room01_Description
+
+'
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

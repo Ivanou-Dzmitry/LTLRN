@@ -362,11 +362,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 44464908835807232
-    m_Localized: List of collected objects. Select an object to read its description.
+    m_Localized: List of collected items. Select an item to see its description.
     m_Metadata:
       m_Items: []
   - m_Id: 44492762000711680
-    m_Localized: List of actions to take on this map.
+    m_Localized: List of tasks to take on this map.
     m_Metadata:
       m_Items: []
   - m_Id: 44496479840165888
@@ -399,6 +399,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 44958426670882816
     m_Localized: Map 2 description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45252846544908288
+    m_Localized: World map. Select a fragment to see the description.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45263297529933824
+    m_Localized: Dead Pixel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45263436394950656
+    m_Localized: This is dead pixel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45649273100070912
+    m_Localized: You have entered the secret room.
     m_Metadata:
       m_Items: []
   references:

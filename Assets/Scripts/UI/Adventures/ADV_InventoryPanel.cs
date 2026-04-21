@@ -54,6 +54,10 @@ public class ADV_InventoryPanel : Panel
     [Header("Description")]
     [SerializeField] private TMP_Text inventoryDescriptionText;
 
+    [Header("Player")]
+    [SerializeField] private GameObject player;    
+    private Vector2 playerPositionOnMap = Vector2.zero;    
+
     public override void Initialize()
     {
         if (IsInitialized) return;
@@ -147,8 +151,7 @@ public class ADV_InventoryPanel : Panel
 
     private void OnMapSlotClicked(ADV_MapSlotUI slotMap)
     {
-        inventoryDescriptionText.text = slotMap.GetDescription();
-        Debug.Log($"Selected map item: {slotMap.name}");
+        inventoryDescriptionText.text = slotMap.GetDescription();        
     }
 
     private void OnDestroy()
@@ -183,8 +186,6 @@ public class ADV_InventoryPanel : Panel
             slot.SetupTask(condition);
             slot.name = condition.name;
         }
-
-        Debug.Log("Loading tasks panel...");
     }
 
     private void LoadMap()
@@ -194,10 +195,11 @@ public class ADV_InventoryPanel : Panel
             Destroy(child.gameObject);
 
         ApplyLayout(mapLayout);
-        inventoryDescriptionText.text = "...";
 
         Tilemap tm = mapManager.miniMap.GetComponentInChildren<Tilemap>();
         var bounds = tm.cellBounds;
+
+        string mapName = mapManager.currentMap.name;
 
         for (int y = bounds.yMax - 1; y >= bounds.yMin; y--)
         {
@@ -212,10 +214,12 @@ public class ADV_InventoryPanel : Panel
                 if (tile is not SuperTile superTile) continue;
 
                 string locKey = "";
-                
+                string imgName = "";
+
                 foreach (var prop in superTile.m_CustomProperties)
                 {
-                    if (prop.m_Name == "LocKey") locKey = prop.GetValueAsString();                    
+                    if (prop.m_Name == "LocKey") locKey = prop.GetValueAsString();    
+                    if (prop.m_Name == "MapID") imgName = prop.GetValueAsString();
                 }
 
 
@@ -225,14 +229,25 @@ public class ADV_InventoryPanel : Panel
                 {
                     var img = Instantiate(mapItemPrefab, inventoryContent);
                     img.sprite = sprite;
-                    img.name = $"{sprite.name}_pos{x}.{Mathf.Abs(y)}";
+                    img.name = $"{imgName}_pos{x}.{Mathf.Abs(y)}";
 
-                    img.SetupMapItem(locKey);
+                    Vector3 markerOffset = Vector3.zero;
+
+                    if (imgName == mapName)
+                        markerOffset = GetPlayerMarkerPosition();                   
+
+                    img.SetupMapItem(locKey, imgName, mapName, markerOffset);
 
                     //Debug.Log($"{sprite.name} - {locKey}");
                 }
             }
         }
+
+        inventoryDescriptionText.text = LocalizationHelper.GetSafe(
+            "LTLRN",
+            "WorldMapDescTxt",
+            "No description"
+        );
     }
 
     private void SelectTab(int index)
@@ -257,5 +272,39 @@ public class ADV_InventoryPanel : Panel
         grid.spacing = config.spacing;
 
         LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)inventoryContent);
+    }
+
+    private Vector3 GetPlayerMarkerPosition()
+    {        
+        Vector3 basePos = Vector3.zero;
+        Vector3 playerPos = player.transform.position;
+
+        float offsetValuePos = 65f;
+        float offsetValueNeg = -65f;
+
+        float offsetX = 0f;
+        float offsetY = 0f;
+
+        // ----- Y logic -----
+        if (playerPos.y >= -15f && playerPos.y <= -10f)
+        {
+            offsetY = offsetValueNeg;
+        }
+        else if (playerPos.y >= -6f && playerPos.y <= -0.8f)
+        {
+            offsetY = offsetValuePos;
+        }
+
+        // ----- X logic -----
+        if (playerPos.x >= 0.6f && playerPos.x <= 3f)
+        {
+            offsetX = offsetValueNeg;
+        }
+        else if (playerPos.x >= 7.5f && playerPos.x <= 11f)
+        {
+            offsetX = offsetValuePos;
+        }
+
+        return new Vector3(basePos.x + offsetX, basePos.y + offsetY, basePos.z);
     }
 }

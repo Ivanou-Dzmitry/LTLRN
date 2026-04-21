@@ -4,6 +4,7 @@
  <tile id="0">
   <properties>
    <property name="LocKey" value="W01M01_Desc"/>
+   <property name="MapID" value="W01M01"/>
    <property name="Name" value="map01"/>
    <property name="Type" value="map"/>
   </properties>
@@ -11,6 +12,7 @@
  <tile id="1">
   <properties>
    <property name="LocKey" value="W01M02_Desc"/>
+   <property name="MapID" value="W01M02"/>
    <property name="Name" value="map02"/>
    <property name="Type" value="map"/>
   </properties>
@@ -18,6 +20,7 @@
  <tile id="2">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map03"/>
    <property name="Type" value="map"/>
   </properties>
@@ -25,6 +28,7 @@
  <tile id="3">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map04"/>
    <property name="Type" value="map"/>
   </properties>
@@ -32,6 +36,7 @@
  <tile id="4">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map05"/>
    <property name="Type" value="map"/>
   </properties>
@@ -39,6 +44,7 @@
  <tile id="5">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map06"/>
    <property name="Type" value="map"/>
   </properties>
@@ -46,6 +52,7 @@
  <tile id="6">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map07"/>
    <property name="Type" value="map"/>
   </properties>
@@ -53,6 +60,7 @@
  <tile id="7">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map08"/>
    <property name="Type" value="map"/>
   </properties>
@@ -60,6 +68,7 @@
  <tile id="8">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map09"/>
    <property name="Type" value="map"/>
   </properties>
@@ -67,6 +76,7 @@
  <tile id="9">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map10"/>
    <property name="Type" value="map"/>
   </properties>
@@ -74,6 +84,7 @@
  <tile id="10">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map11"/>
    <property name="Type" value="map"/>
   </properties>
@@ -81,6 +92,7 @@
  <tile id="11">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map12"/>
    <property name="Type" value="map"/>
   </properties>
@@ -88,6 +100,7 @@
  <tile id="12">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map0"/>
    <property name="Type" value="map"/>
   </properties>
@@ -95,6 +108,7 @@
  <tile id="13">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map0"/>
    <property name="Type" value="map"/>
   </properties>
@@ -102,6 +116,7 @@
  <tile id="14">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map0"/>
    <property name="Type" value="map"/>
   </properties>
@@ -109,6 +124,7 @@
  <tile id="15">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map0"/>
    <property name="Type" value="map"/>
   </properties>
@@ -119,6 +135,7 @@
  <tile id="16">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map0"/>
    <property name="Type" value="map"/>
   </properties>
@@ -129,6 +146,7 @@
  <tile id="17">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map0"/>
    <property name="Type" value="map"/>
   </properties>
@@ -139,6 +157,7 @@
  <tile id="18">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map19"/>
    <property name="Type" value="map"/>
   </properties>
@@ -146,6 +165,7 @@
  <tile id="19">
   <properties>
    <property name="LocKey" value="W01M"/>
+   <property name="MapID" value="W01M"/>
    <property name="Name" value="map20"/>
    <property name="Type" value="map"/>
   </properties>

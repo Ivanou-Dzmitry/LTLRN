@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="24" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="7">
+<map version="1.10" tiledversion="1.12.1" orientation="orthogonal" renderorder="left-down" width="24" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="7">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -15,7 +15,7 @@
  </layer>
  <layer id="6" name="roads" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYCAONLIzMDQBcTM7kRpIBEPZfEegmU4ctDMf5nZam88I9MNhGpo/FON21PxR80fNHzV/1PxR80fNHzWfHHAQaO4hdtq0rSgFALj4M2I=
+   eJzt1N0KgCAMBeDVzXwt7cmqJzNfrNWIvFhgsIHCDuzSD3/wALRlRYCNZsfGBT8zsh/JTMHOf/Zu7U90hmLoj/i27rvfk393Dc1SWZq+ZLnPqXs+Bn6HpNj9dc9Lo+lfXX8gz6y0/4yvWQzu/yvuu9+zn4U/0UtOy3hD1w==
   </data>
  </layer>
  <layer id="8" name="fence" width="24" height="32">
@@ -40,10 +40,10 @@
     <property name="Type" value="entrance"/>
    </properties>
   </object>
-  <object id="2" name="interior" x="80.9565" y="255.957" width="14" height="6.06454">
+  <object id="2" name="room" x="81" y="260" width="14" height="6.06454">
    <properties>
-    <property name="Name" value="hut"/>
-    <property name="Type" value="interior"/>
+    <property name="Name" value="W01M01Room01"/>
+    <property name="Type" value="room"/>
    </properties>
   </object>
   <object id="3" name="log" x="122" y="120" width="62" height="32">

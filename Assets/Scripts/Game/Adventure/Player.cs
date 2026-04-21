@@ -70,11 +70,20 @@ public class Player : MonoBehaviour
         Talk
     }
 
+    public enum PlayerLocation
+    {
+        Map,
+        Room
+    }
+
+
+
     //for direction
     private MoveDirection currentDirection;
     private MoveDirection currentDirectionLast;
 
     public PlayerState currentPlayerState;
+    public PlayerLocation currentPlayerLocation;
 
     private void Awake()
     {
@@ -90,6 +99,8 @@ public class Player : MonoBehaviour
     {
         //get logic
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
+
+        currentPlayerLocation = PlayerLocation.Map;
     }
 
     private void FixedUpdate()
@@ -318,13 +329,15 @@ public class Player : MonoBehaviour
     {
         readyForInteract = true;
 
-        Debug.Log($"IN Collision: {collision.collider.name}");
+        //Debug.Log($"IN Collision: {collision.collider.name}");
 
         //set current collision for use
         currentCollision = collision;
 
         //check collision with exit IMPORTNAT
         bool isExit = mapManagerClass.ExitCheck(collision);
+
+        bool isRoom = mapManagerClass.RoomCheck(collision);
 
         //get tilemap from collision
         currentTilemap = collision.collider.GetComponentInParent<Tilemap>();

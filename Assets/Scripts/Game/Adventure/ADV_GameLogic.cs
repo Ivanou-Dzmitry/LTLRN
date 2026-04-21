@@ -140,8 +140,12 @@ public class GameLogic : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        gameData.saveData.playerPosition = player.transform.position;
-        gameData.SaveToFile();
+        // save player position. save only if player is on the map, not in a room
+        if (playerClass.currentPlayerLocation == Player.PlayerLocation.Map)
+        {
+            gameData.saveData.playerPosition = player.transform.position;
+            gameData.SaveToFile();
+        }
     }
 
     private void OnDestroy()

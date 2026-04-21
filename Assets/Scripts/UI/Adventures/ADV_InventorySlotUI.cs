@@ -4,9 +4,6 @@ using TMPro;
 
 public class ADV_InventorySlotUI : MonoBehaviour
 {
-    private LanguageSwitcher locManager;
-    private Languages currentLang;
-
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text quantityLabel;
     [SerializeField] private TMP_Text descriptionLabel;
@@ -15,6 +12,7 @@ public class ADV_InventorySlotUI : MonoBehaviour
     [Header("Frame")]
     [SerializeField] private Image frameImage;
     [SerializeField] private Button slotButton;
+    [SerializeField] private Image frame;
 
     private ADV_ItemDefinition itemDef;
 
@@ -25,24 +23,19 @@ public class ADV_InventorySlotUI : MonoBehaviour
 
     public void Setup(ADV_ItemDefinition def, int quantity)
     {
-        locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();
-
         itemDef = def;
 
         icon.sprite = def.icon;
         quantityLabel.text = quantity > 1 ? quantity.ToString() : "";
-
-        //get current language
-        currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
-
+  
         //load propper language description
-        if (currentLang == Languages.RU)            
-            descriptionLabel.text = def.displayNameRU;
-        else
-            descriptionLabel.text = def.displayNameEN;
+        descriptionLabel.text = def.itemName.GetLocalizedString();
 
         slotButton.onClick.AddListener(OnSlotClicked);
         OnSlotSelected += HandleSelectionChanged;
+
+        //hide frame by default
+        frame.gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -53,23 +46,18 @@ public class ADV_InventorySlotUI : MonoBehaviour
 
     private void OnSlotClicked()
     {
-        if (currentLang == Languages.RU)
-            descriptionText = itemDef.descriptionLang01;
-        else
-            descriptionText = itemDef.descriptionLang02;
+        descriptionText = itemDef.itemDescription.GetLocalizedString();
 
         OnSlotSelected?.Invoke(this);
     }
 
     private void HandleSelectionChanged(ADV_InventorySlotUI selected)
     {
-        frameImage.color = selected == this ? palette.Success : Color.black;
+        //frameImage.color = selected == this ? palette.Success : Color.black;
+        frame.gameObject.SetActive(selected == this);
 
         //load propper language description
-        if (currentLang == Languages.RU)
-            descriptionText = itemDef.descriptionLang01;
-        else
-            descriptionText = itemDef.descriptionLang02;
+        descriptionText = itemDef.itemDescription.GetLocalizedString();
     }
 
     public string GetDescription()

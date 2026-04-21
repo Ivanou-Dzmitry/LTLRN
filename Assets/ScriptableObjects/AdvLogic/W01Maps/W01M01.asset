@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: W01M01
   m_EditorClassIdentifier: Assembly-CSharp::Map
   mapPrefab: {fileID: 4430078392526201593, guid: 1c46e718f512b2046a25047f5a2542db, type: 3}
-  mapID: W1M1
+  mapID: W01M01
   showMapInfo: 0
   mapInfo:
     m_TableReference:
@@ -29,6 +29,17 @@ MonoBehaviour:
       m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
     m_TableEntryReference:
       m_KeyId: 44510622534131712
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  roomPrefabs:
+  - {fileID: 3344924461648215396, guid: 338ac5e25e5994b43a294d188920d81f, type: 3}
+  roomDescription:
+  - m_TableReference:
+      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+    m_TableEntryReference:
+      m_KeyId: 45649273100070912
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

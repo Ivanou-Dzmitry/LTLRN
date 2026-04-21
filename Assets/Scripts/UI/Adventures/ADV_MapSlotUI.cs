@@ -1,4 +1,3 @@
-using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
@@ -7,6 +6,8 @@ public class ADV_MapSlotUI : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private Button slotButton;
+    [SerializeField] private Image frame;
+    [SerializeField] private Image playerMarkerPosition;
 
     [Header("Localization")]
     public LocalizedString description;
@@ -20,27 +21,55 @@ public class ADV_MapSlotUI : MonoBehaviour
         set => icon.sprite = value;
     }
 
-    public void SetupMapItem(string desc)
+    public void SetupMapItem(string desc, string imgName, string mapName, Vector3 markerOffset)
     {       
         description.TableReference = "LTLRN";
         description.TableEntryReference = desc;
 
         descriptionText = description.GetLocalizedString();
-        slotButton.onClick.AddListener(OnMapSlotClicked);
+        
+        if(slotButton!=null)
+            slotButton.onClick.AddListener(OnMapSlotClicked);
+
+        OnMapSlotSelected += HandleSelectionChanged;
+
+        //frame hide by default
+        if (frame != null)
+            frame.gameObject.SetActive(false);
+
+        //marker hide by default
+        if (playerMarkerPosition != null)
+        {
+            if (mapName == imgName)
+            {
+                playerMarkerPosition.gameObject.SetActive(true);
+                RectTransform markerRect = playerMarkerPosition.GetComponent<RectTransform>();
+                markerRect.anchoredPosition += (Vector2)markerOffset;
+            }                
+            else
+                playerMarkerPosition.gameObject.SetActive(false);
+        }            
     }
 
     private void OnMapSlotClicked()
-    {
-        Debug.Log($"Map slot clicked: {descriptionText}");
+    {                
+        descriptionText = description.GetLocalizedString();
 
         OnMapSlotSelected?.Invoke(this);
+    }
+
+    private void HandleSelectionChanged(ADV_MapSlotUI selected)
+    {
+        frame.gameObject.SetActive(selected == this);
+        descriptionText = description.GetLocalizedString();
     }
 
     public string GetDescription() => descriptionText;
 
     private void OnDestroy()
     {
-        OnMapSlotSelected = null;
+        OnMapSlotSelected -= HandleSelectionChanged;
         slotButton.onClick.RemoveListener(OnMapSlotClicked);
     }
+
 }

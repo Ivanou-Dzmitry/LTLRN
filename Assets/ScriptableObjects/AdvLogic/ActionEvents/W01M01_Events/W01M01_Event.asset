@@ -15,6 +15,7 @@ MonoBehaviour:
   conditions:
   - {fileID: 11400000, guid: 79d5f0bc44820f7418d5cd15002fe762, type: 2}
   - {fileID: 11400000, guid: 0bf65acecff89d14cb3e8cb6b17fd552, type: 2}
+  - {fileID: 11400000, guid: 2e2caccb6a7a8dd4caf0efe5854b2ea0, type: 2}
   actions: []
   description:
     m_TableReference:

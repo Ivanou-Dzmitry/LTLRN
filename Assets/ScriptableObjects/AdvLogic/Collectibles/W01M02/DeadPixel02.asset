@@ -13,10 +13,32 @@ MonoBehaviour:
   m_Name: DeadPixel02
   m_EditorClassIdentifier: Assembly-CSharp::ADV_ItemDefinition
   itemId: dpixel02
+  icon: {fileID: 21300000, guid: f33a971d4f656df48bccb252f40c5283, type: 3}
+  mapName: 
   displayNameRU: "\u0411\u0438\u0442\u044B\u0439 \u043F\u0438\u043A\u0441\u0435\u043B\u044C"
   displayNameEN: Dead pixel
-  icon: {fileID: 21300000, guid: f33a971d4f656df48bccb252f40c5283, type: 3}
   descriptionLang01: "\u0410 \u044D\u0442\u043E \u0411\u0438\u0442\u044B\u0439 \u043F\u0438\u043A\u0441\u0435\u043B\u044C
     \u21162"
   descriptionLang02: And this is Dead pixel #1
+  itemName:
+    m_TableReference:
+      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+    m_TableEntryReference:
+      m_KeyId: 45263297529933824
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  itemDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+    m_TableEntryReference:
+      m_KeyId: 45263436394950656
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   stackLimit: 1
+  references:
+    version: 2
+    RefIds: []
