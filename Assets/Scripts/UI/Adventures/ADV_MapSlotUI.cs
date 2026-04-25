@@ -23,7 +23,7 @@ public class ADV_MapSlotUI : MonoBehaviour
 
     public void SetupMapItem(string desc, string imgName, string mapName, Vector3 markerOffset)
     {       
-        description.TableReference = "LTLRN";
+        description.TableReference = "KELIAS_INVENTORY";
         description.TableEntryReference = desc;
 
         descriptionText = description.GetLocalizedString();

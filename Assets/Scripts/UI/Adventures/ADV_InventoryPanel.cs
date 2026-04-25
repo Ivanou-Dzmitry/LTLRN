@@ -133,7 +133,7 @@ public class ADV_InventoryPanel : Panel
 
         //load description from loctable
         inventoryDescriptionText.text = LocalizationHelper.GetSafe(
-            "LTLRN",
+            "KELIAS_INVENTORY",
             "CollectedObjDescTxt",
             "No description"
         );
@@ -244,7 +244,7 @@ public class ADV_InventoryPanel : Panel
         }
 
         inventoryDescriptionText.text = LocalizationHelper.GetSafe(
-            "LTLRN",
+            "KELIAS_INVENTORY",
             "WorldMapDescTxt",
             "No description"
         );

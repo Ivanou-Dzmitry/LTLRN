@@ -106,7 +106,7 @@ public class MenuManager : MonoBehaviour
             {
                 string uiMessage = "Failed to retrieve Google play games authorization code";
 
-                string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+                string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "GuestLoginTxt");
 
                 ShowError(ErrorMenu.Action.SignIn, uiMessage, locText);
 
@@ -134,7 +134,7 @@ public class MenuManager : MonoBehaviour
         catch (Exception exception)
         {
             Debug.LogException(exception);
-            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error01");
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error01");
             string uiMessage = locText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.StartService, uiMessage, "Retry");
         }
@@ -190,7 +190,7 @@ public class MenuManager : MonoBehaviour
             // Compare error code to AuthenticationErrorCodes
             // Notify the player with the proper error message
 
-            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "GuestLoginTxt");
             ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
             Debug.LogException(ex);
         }
@@ -200,7 +200,7 @@ public class MenuManager : MonoBehaviour
             // Compare error code to CommonErrorCodes
             // Notify the player with the proper error message
 
-            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "GuestLoginTxt");
             ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
             Debug.LogException(ex);
         }
@@ -218,7 +218,7 @@ public class MenuManager : MonoBehaviour
         catch (AuthenticationException ex) when(ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
         {
             // Prompt the player with an error message.
-            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "GuestLoginTxt");
             string errorM = "This user is already linked with another account. Log in instead.";
             ShowError(ErrorMenu.Action.SignIn, errorM, locText);
             Debug.LogWarning(errorM);
@@ -228,7 +228,7 @@ public class MenuManager : MonoBehaviour
         {
             // Compare error code to AuthenticationErrorCodes
 
-            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "GuestLoginTxt");
             ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
             Debug.LogException(ex);
         }
@@ -240,7 +240,7 @@ public class MenuManager : MonoBehaviour
             // Compare error code to CommonErrorCodes
             // Notify the player with the proper error message
 
-            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "GuestLoginTxt");
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "GuestLoginTxt");
             ShowError(ErrorMenu.Action.SignIn, ex.ToString(), locText);
             Debug.LogException(ex);
         }
@@ -312,7 +312,7 @@ public class MenuManager : MonoBehaviour
         catch (Exception exception)
         {
             Debug.LogException(exception);
-            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error01");
+            string locText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error01");
             string uiMessage = locText + FirstSentence(exception.Message);            
             ShowError(ErrorMenu.Action.StartService, uiMessage, "Retry");
         }
@@ -373,14 +373,14 @@ public class MenuManager : MonoBehaviour
         catch (AuthenticationException exception)
         {
             Debug.LogException(exception);
-            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error02");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error02");
             ShowError(ErrorMenu.Action.OpenAuthMenu, errText + exception, "OK");
         }
         catch (RequestFailedException exception)
         {
             Debug.LogException(exception);
-            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error03");
-            string btnText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "RetryTxt01");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error03");
+            string btnText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "RetryTxt01");
             ShowError(ErrorMenu.Action.SignIn, errText + exception, btnText);
         }
     }
@@ -407,14 +407,14 @@ public class MenuManager : MonoBehaviour
         catch (AuthenticationException exception)
         {
             Debug.LogException(exception);
-            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error04");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error04");
             string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
         catch (RequestFailedException exception)
         {
             Debug.LogException(exception);
-            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error05");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error05");
             string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
@@ -442,14 +442,14 @@ public class MenuManager : MonoBehaviour
         {
             Debug.LogException(exception);
             //Failed to sign you up. Try again. \n Error: 06
-            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error06");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error06");
             string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
         catch (RequestFailedException exception)
         {
             Debug.LogException(exception);
-            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error06");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error06");
             string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }
@@ -533,7 +533,7 @@ public class MenuManager : MonoBehaviour
         catch (AuthenticationException exception)
         {
             //Problem with sign in.\n Error: Error07
-            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error07");
+            string errText = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "Error07");
             string uiMessage = errText + FirstSentence(exception.Message);
             ShowError(ErrorMenu.Action.OpenAuthMenu, uiMessage, "OK");
         }

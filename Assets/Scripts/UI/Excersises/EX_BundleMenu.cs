@@ -183,7 +183,7 @@ public class EX_BundleMenu : Panel
         string btnText02 = string.Empty;
         btnText02 = LangList.LT.ToString();
 
-        string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
+        string test = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TestTxt");
 
         //final text on button
         if (sec.sectionLanguage == Section.SectionLanguage.TARGET)
@@ -210,8 +210,8 @@ public class EX_BundleMenu : Panel
         button.sectionIcon.gameObject.SetActive(true); //show icon
         //button.sectionText.gameObject.SetActive(false);
 
-        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ImageTxt");
-        string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "ImageTxt");
+        string test = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TestTxt");
 
         //set button text
         button.sectionText.text = $"{test}\n{text}";
@@ -231,8 +231,8 @@ public class EX_BundleMenu : Panel
         //set difficulty text
         //button.sectionDifficulty.text = sec.difficultyType.ToString();
 
-        string test = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestTxt");
-        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ListenTxt");
+        string test = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TestTxt");
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "ListenTxt");
 
         //set button text
         button.sectionText.text = $"{LangList.LT.ToString()}\n{text}";
@@ -253,7 +253,7 @@ public class EX_BundleMenu : Panel
         button.sectionIcon.gameObject.SetActive(true); //show icon
         //button.sectionText.gameObject.SetActive(false);
 
-        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "LearnTxt");
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "LearnTxt");
 
         button.sectionText.text = text;
 
@@ -273,7 +273,7 @@ public class EX_BundleMenu : Panel
         button.sectionIcon.gameObject.SetActive(true);
         button.sectionIcon.sprite = sectionTypeIcons[2]; //exam icon
 
-        string text = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "ExamTxt");
+        string text = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "ExamTxt");
 
         button.sectionText.text = $"{text} {sec.difficultyType.ToString()}";
 

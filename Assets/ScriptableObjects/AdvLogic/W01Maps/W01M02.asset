@@ -26,13 +26,15 @@ MonoBehaviour:
     m_LocalVariables: []
   description:
     m_TableReference:
-      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+      m_TableCollectionName: GUID:54eb17b2e240b7443b062310ea9718ce
     m_TableEntryReference:
-      m_KeyId: 44508742143762432
+      m_KeyId: 6530990661632
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  roomPrefabs: []
+  roomDescription: []
   onMapEvents: {fileID: 11400000, guid: 3b9c5658311d1dc4e93dfc13525ef88e, type: 2}
   references:
     version: 2

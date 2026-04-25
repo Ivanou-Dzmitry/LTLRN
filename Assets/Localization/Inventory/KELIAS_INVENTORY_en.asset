@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: KELIAS_INVENTORY_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 54eb17b2e240b7443b062310ea9718ce, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 510654472192
+    m_Localized: List of collected items. Select an item to see its description.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1423066587136
+    m_Localized: World map. Select a fragment to see the description.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2120952635392
+    m_Localized: Map 1 description.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2211755122688
+    m_Localized: Map 2 description.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4631344242688
+    m_Localized: Dead Pixel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4647538450432
+    m_Localized: This is Dead Pixel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5725243891712
+    m_Localized: List of tasks to take on this map.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6530990661632
+    m_Localized: You on map 2 now!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6898042593280
+    m_Localized: You on map 1 now. Base map.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7369603997696
+    m_Localized: You have entered the secret room.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

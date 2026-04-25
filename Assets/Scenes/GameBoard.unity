@@ -7194,9 +7194,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ADV_IconsManager
   icons:
   - id: hero
-    icon: {fileID: -1624825992, guid: c79a918b28766e542a0c6dabbdb3b590, type: 3}
+    icon: {fileID: 21300000, guid: 9b35314a5f57ebb468d245dda6fad87a, type: 3}
   - id: npc01
-    icon: {fileID: -1134461952, guid: 48ed4c34ebb1a9c4a88849b311751c07, type: 3}
+    icon: {fileID: 21300000, guid: 879c8835d71bc424db2bc7af4eb8148c, type: 3}
   - id: info
     icon: {fileID: 21300000, guid: 1df73ce217cfac94085fbf2496cc8cb7, type: 3}
 --- !u!4 &1785663688

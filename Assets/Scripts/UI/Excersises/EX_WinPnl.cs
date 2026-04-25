@@ -56,7 +56,7 @@ public class ExWinPnl : Panel
 
         //get question count
         int scoreValue = exGameLogic.tempScore;
-        string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
+        string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "FromSTxt");
         int qCount = exGameLogic.questionsCount;
 
         //based on qustion count

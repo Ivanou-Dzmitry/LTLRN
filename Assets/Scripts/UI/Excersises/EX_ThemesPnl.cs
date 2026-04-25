@@ -183,7 +183,7 @@ public class EX_ThemesPanel : Panel
             if (sectionsCount == 0)
             {
                 //get local description
-                string wipTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TopicWIPTxt");
+                string wipTxt = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TopicWIPTxt");
 
                 themeBtnComponent.topPnlImg.color = palette.Panel02;
                 themeBtnComponent.button.interactable = false;

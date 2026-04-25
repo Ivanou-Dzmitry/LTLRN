@@ -1443,10 +1443,10 @@ public class ExGameLogic : MonoBehaviour
         yield return LocalizationSettings.InitializationOperation;
 
         // Get localized string from table - test
-        string textForTest = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "TestingLevelTxt");
+        string textForTest = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TestingLevelTxt");
 
         // Get localized string from table - learning
-        string textForLearn = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "LangLevel");
+        string textForLearn = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "LangLevel");
 
         //Debug.Log($"{textForTest}, {textForLearn}");
 

@@ -114,7 +114,7 @@ public class AuthentificationMenu : Panel
             {
                 ErrorMenu panel = (ErrorMenu)PanelManager.GetSingleton("error");
                 //Password must be 8-30 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one symbol. Error8
-                string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "Error08");
+                string errText = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN_UI", "Error08");
                 panel.Open(ErrorMenu.Action.None, errText, "OK");
             }
         }

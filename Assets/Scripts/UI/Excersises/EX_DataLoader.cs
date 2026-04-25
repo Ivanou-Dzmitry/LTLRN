@@ -216,7 +216,7 @@ public class ExDataLoader : MonoBehaviour
 
         //get result
         int result = dbUtils.GetSectionResult(section.name);
-        string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "FromSTxt");
+        string fromTxt = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "FromSTxt");
         string resultText = $"{result} {fromTxt} {questionsCount}";
         sectionPanel.sectionResultText.text = resultText;
 

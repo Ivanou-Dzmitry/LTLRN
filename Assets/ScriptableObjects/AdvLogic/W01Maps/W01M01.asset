@@ -26,9 +26,9 @@ MonoBehaviour:
     m_LocalVariables: []
   description:
     m_TableReference:
-      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+      m_TableCollectionName: GUID:54eb17b2e240b7443b062310ea9718ce
     m_TableEntryReference:
-      m_KeyId: 44510622534131712
+      m_KeyId: 6898042593280
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -37,9 +37,9 @@ MonoBehaviour:
   - {fileID: 3344924461648215396, guid: 338ac5e25e5994b43a294d188920d81f, type: 3}
   roomDescription:
   - m_TableReference:
-      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+      m_TableCollectionName: GUID:54eb17b2e240b7443b062310ea9718ce
     m_TableEntryReference:
-      m_KeyId: 45649273100070912
+      m_KeyId: 7369603997696
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

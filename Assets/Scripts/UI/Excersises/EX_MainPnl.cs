@@ -198,7 +198,7 @@ public class EX_MainPanel : Panel
             infoText.name = "NoLikedContentText";
             infoText.gameObject.SetActive(visible);
             
-            string info = LocalizationSettings.StringDatabase.GetLocalizedString("LTLRN", "NoLikesTxt");
+            string info = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "NoLikesTxt");
             infoText.text = info;            
         }
     }

@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: KELIAS_INVENTORY Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: KELIAS_INVENTORY
+  m_TableCollectionNameGuidString: 54eb17b2e240b7443b062310ea9718ce
+  m_Entries:
+  - m_Id: 510654472192
+    m_Key: CollectedObjDescTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1423066587136
+    m_Key: WorldMapDescTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2120952635392
+    m_Key: W01M01_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2211755122688
+    m_Key: W01M02_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4631344242688
+    m_Key: DeadPixelName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4647538450432
+    m_Key: DeadPixelDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5725243891712
+    m_Key: W01M01_EventDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6530990661632
+    m_Key: W01M02_MapDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6898042593280
+    m_Key: W01M01_MapDescription
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7369603997696
+    m_Key: W01M01Room01_Description
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 986153660658483236
+  references:
+    version: 2
+    RefIds:
+    - rid: 986153660658483236
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1777137018890

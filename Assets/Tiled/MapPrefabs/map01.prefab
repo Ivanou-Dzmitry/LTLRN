@@ -5155,7 +5155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4841198627243906125
 Transform:
   m_ObjectHideFlags: 0
@@ -5423,7 +5423,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ADV_DialogueTrigger
   inkJSON: {fileID: 4900000, guid: 87bd92c0e8e28cf4e9fb88986da8f059, type: 3}
-  speakerImage: {fileID: 0}
 --- !u!58 &2487947577912495929
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5860,7 +5859,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ADV_DialogueTrigger
   inkJSON: {fileID: 4900000, guid: b2f7cd72262cbdc4e98a1293c0320c5a, type: 3}
-  speakerImage: {fileID: 0}
 --- !u!4 &8423604500225483726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4057539430980267573, guid: 439a806f89bc2bf4ba418d6482aa6623, type: 3}
