@@ -1,3 +1,0 @@
-Sveiki!
-
-Mano vardas Name!

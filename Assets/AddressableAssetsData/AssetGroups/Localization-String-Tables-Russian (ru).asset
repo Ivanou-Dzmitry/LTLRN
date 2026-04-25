@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Russian (ru)
   m_GUID: 50fa12b8cc977e24eb519d101e30c399
   m_SerializeEntries:
+  - m_GUID: a1e369062f209764db2bff638bfcd211
+    m_Address: KELIAS_DLG_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd7bcce01709bef42a4025b27b9ddf20
     m_Address: LTLRN_ru
     m_ReadOnly: 1

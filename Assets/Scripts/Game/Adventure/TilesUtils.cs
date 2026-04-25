@@ -83,14 +83,18 @@ public class TilesUtils : MonoBehaviour
 
     //for dialog system
     public TextAsset GetDialogueFromCollider(Collider2D collider)
-    {        
+    {
+        //Debug.Log($"[GetDialogue] Collider: '{collider?.name}', GameObject: '{collider?.gameObject.name}'");
+
         ADV_DialogueTrigger trigger = collider.GetComponentInParent<ADV_DialogueTrigger>();
 
-        if (trigger != null)
-        {                        
-            return trigger.inkJSON;
+        if (trigger == null)
+        {
+            //Debug.LogWarning($"[GetDialogue] No ADV_DialogueTrigger found on '{collider?.gameObject.name}' or its parents.");
+            return null;
         }
-            
-        return null;
+
+        //Debug.Log($"[GetDialogue] Trigger found on '{trigger.gameObject.name}', inkJSON: '{trigger.inkJSON?.name ?? "NULL"}'");
+        return trigger.inkJSON;
     }
 }

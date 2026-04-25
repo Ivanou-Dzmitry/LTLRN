@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-English (en)
   m_GUID: 3cc81bac67184294d9ae3f59389edf60
   m_SerializeEntries:
+  - m_GUID: 80d2dc7584127d14b97e51277d9afec5
+    m_Address: KELIAS_DLG_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba4a78a27ffc77449bc44d66f353f0b2
     m_Address: LTLRN_en
     m_ReadOnly: 1

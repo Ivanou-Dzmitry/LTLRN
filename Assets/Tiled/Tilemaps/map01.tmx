@@ -15,7 +15,7 @@
  </layer>
  <layer id="6" name="roads" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1N0KgCAMBeDVzXwt7cmqJzNfrNWIvFhgsIHCDuzSD3/wALRlRYCNZsfGBT8zsh/JTMHOf/Zu7U90hmLoj/i27rvfk393Dc1SWZq+ZLnPqXs+Bn6HpNj9dc9Lo+lfXX8gz6y0/4yvWQzu/yvuu9+zn4U/0UtOy3hD1w==
+   eJztllEKgCAQRM0fvZZ6supk5cVaE2kJC4XdSNiB+fTpZjOoVJtmo9QCXk3jgk6NzHfA9JaPX87OzZ9ghsjIH/FuhS/8P/HPrgEHxKLk11jCz8I972y+B0/Y/bjna6bkp67fTbYmOv9mLmZk+P5PEv73/NJD+P9PmQgEe+CcUWcg6S1nFDOUHGjGGfA+d/e84Q5mVVFW
   </data>
  </layer>
  <layer id="8" name="fence" width="24" height="32">
@@ -25,7 +25,7 @@
  </layer>
  <layer id="7" name="decor" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQw0sHmgHjCDgwsjA4ArEbowD7ZJRQC/gCsRuNDS/FYjbaGj+KBgFQxl4EFHWepNRHruTqMdziJb5g8Hd5MQPsYCY9DEKiAMAl20FEg==
+   eJxjYBgFQw0sHmgHjCDgwsjA4ArEbowD7ZJRQC/gCsRuNDS/FYjbaGj+KBgFQxl4EFHWepNRHruTqMdziJb5A+VucuIEFwDFlQ8bA4MvEPuxQcRg6YJa9vQAze0F4j42hBiy2aSmF3RwBmjuWSA+x0ZY7UABAId9C2U=
   </data>
  </layer>
  <layer id="9" name="buildings" width="24" height="32">

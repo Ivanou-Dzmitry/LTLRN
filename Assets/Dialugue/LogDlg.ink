@@ -1,2 +1,0 @@
-Sveiki!
-Mano vardas Logas!

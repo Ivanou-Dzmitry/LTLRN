@@ -11,8 +11,14 @@ public class ADV_DialogPanel : MonoBehaviour
     private const float ANIMATION_DURATION = 1f;
     private const float TYPEWRITER_DELAY  = 0.03f;
 
-    [SerializeField] private Button closeDiallogButton;
+    [Header("Dialogue Text")]
     [SerializeField] private TMP_Text dialogText;
+
+    [Header("Image")]
+    [SerializeField] private Image characterImage;
+
+    [Header("Buttons")]
+    [SerializeField] private Button closeDiallogButton;
     [SerializeField] private Button submitButton;
 
     private void Awake()
@@ -74,6 +80,14 @@ public class ADV_DialogPanel : MonoBehaviour
         {
             dialogText.maxVisibleCharacters = i;
             yield return new WaitForSeconds(TYPEWRITER_DELAY);
+        }
+    }
+
+    public void SetCharacterImage(Sprite image)
+    {
+        if (characterImage != null)
+        {
+            characterImage.sprite = image;            
         }
     }
 
