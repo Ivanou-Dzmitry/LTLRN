@@ -17,9 +17,24 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.4807958, g: 0.6853022, b: 0.69182384, a: 1}
   themeNameTargetLang: "Veiksma\u017Eod\u017Eiai"
   themeName:
-    ru: "\u0413\u043B\u0430\u0433\u043E\u043B\u044B"
-    en: Verbs
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9873322467328
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C c\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 "
-    en: We study verbs.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9917190692864
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections: []
+  references:
+    version: 2
+    RefIds: []

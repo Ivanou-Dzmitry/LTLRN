@@ -14,9 +14,12 @@ public class EX_ThemesPanel : Panel
     private GameData gameData;
     private DBUtils dbUtils;
 
+    //for name display
     public TMP_Text userName;
-    
+       
     private ExDataLoader dataLoader;
+
+    //prefab and container for themes
     public GameObject themeButtonPrefab;
     public RectTransform themesContainer;
 
@@ -36,6 +39,7 @@ public class EX_ThemesPanel : Panel
             yield break;
         }
 
+        //get component (with safety check)
         dbUtils = dbUtilsObj.GetComponent<DBUtils>();
 
         if (dbUtils == null)
@@ -50,12 +54,15 @@ public class EX_ThemesPanel : Panel
             yield return null;
         }
 
+        // Find ExDataLoader (with safety check)
         dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
 
         if (dataLoader != null)
         {
+            //important - load themes after data is ready
             LoadThemes();
 
+            // Set tempSectionManager to current sectionManager to ensure ApplySelectedTheme works correctly
             dataLoader.tempSectionManager = dataLoader.sectionManager;
         }
     }
@@ -65,9 +72,10 @@ public class EX_ThemesPanel : Panel
     public void LoadThemes()
     {
         //load player name
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        if(gameData == null)
+            gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
-        //final string
+        //set player name at the top of panel
         if (gameData != null)
             userName.text = $", {gameData.saveData.playerName}!";        
 
@@ -77,6 +85,7 @@ public class EX_ThemesPanel : Panel
             Destroy(child.gameObject);
         }
 
+        // Loop through themes and create buttons
         for (int i = 0; i < dataLoader.themes.theme.Length; i++)
         {
             //prefab instance
@@ -97,12 +106,19 @@ public class EX_ThemesPanel : Panel
             // Initialize button data            
             EX_ThemeBtn themeBtnComponent = themeButton.GetComponent<EX_ThemeBtn>();
 
-            Locale locale = GetLocale();
+            //Locale locale = GetLocale();
             SectionManager currentTheme = dataLoader.themes.theme[i];
 
             //load data into button component
             //name sys
-            themeBtnComponent.themeName.text = currentTheme.GetThemeName(currentTheme, locale);
+            try
+            {
+                themeBtnComponent.themeName.text = currentTheme.themeName.GetLocalizedString();//currentTheme.GetThemeName(currentTheme, locale);
+            }
+            catch
+            {
+                themeBtnComponent.themeName.text = "Loc not assigned yet";
+            }
             
             //name target (lern lang)
             themeBtnComponent.themeNameLocal.text = currentTheme.themeNameTargetLang;
@@ -125,7 +141,7 @@ public class EX_ThemesPanel : Panel
             themeBtnComponent.sectionsCount.text = sectionsCount.ToString();
 
             int qCount = 0;
-            int completeCount = 0;
+            //int completeCount = 0;
 
             //try basic
             qCount = currentTheme.GetTotalQuestionCount();

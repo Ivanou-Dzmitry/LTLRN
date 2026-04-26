@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Localization;
 using static QuestionT01;
 using static QuestionT02;
 
@@ -61,18 +62,12 @@ public class Section : ScriptableObject
     [Tooltip("Auto. System.")]
     public bool isLiked;
 
+    [Header("Localization")]
     [Header("Title")]
-    public LocalizedText sectionTitle;
-
-    [System.Serializable]
-    public class LocalizedText
-    {
-        [TextArea] public string ru;
-        [TextArea] public string en;
-    }
+    public LocalizedString sectionTitle;
 
     [Header("Description")]
-    public LocalizedText sectionDescription;
+    public LocalizedString sectionDescription;
 
     [Header("Info text")]
     public DatabaseReference sectionInfo;

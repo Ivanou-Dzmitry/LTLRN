@@ -121,8 +121,24 @@ public class SectionPanel : MonoBehaviour
             sectionImage.sprite = section.sectionIcon;
 
         //set panel view
-        sectionHeaderText.text = GetTitle(section);
-        sectionDescriptionText.text = GetDescription(section);
+        //set header and description with localization
+        try
+        {
+            sectionHeaderText.text = section.sectionTitle.GetLocalizedString(); //GetTitle(section);
+        }
+        catch
+        {
+            sectionHeaderText.text = "Loc not assigned yet";
+        }
+
+        try
+        {
+            sectionDescriptionText.text = section.sectionDescription.GetLocalizedString(); //GetDescription(section);
+        }
+        catch
+        {
+            sectionDescriptionText.text = "Loc not assigned yet";
+        }
 
         //set difficulty
         diffText.text = section.difficultyType.ToString();
@@ -133,70 +149,11 @@ public class SectionPanel : MonoBehaviour
         headerImage.color = section.sectionHeaderColor;
     }
 
-/*    public void PlayButtonToggle(int questions)
-    {
-        //toggle play button interactable state based on questions count
-       // ButtonImage buttonImage = playSectionButton.GetComponent<ButtonImage>();
-
-        if (questions > 0)
-        {
-            playSectionButton.interactable = true;
-            //buttonImage.SetDisabled(false);
-        }
-        else
-        {
-            playSectionButton.interactable = false;
-            //buttonImage.SetDisabled(true);
-        }
-    }*/
-
     private void OnDestroy()
     {
         //remove listeners
         likeButton.onClick.RemoveListener(OnLike);
         playSectionButton.onClick.RemoveListener(OnClicked);
-    }
-
-    public string GetDescription(Section section)
-    {        
-        if (section == null || section.sectionDescription == null)
-            return string.Empty;
-        
-        Locale locale = GetLocale();
-
-        if (locale == null)
-            return section.sectionDescription.en;
-
-        switch (locale.Identifier.Code)
-        {
-            case "ru":
-                return section.sectionDescription.ru;
-
-            case "en":
-            default:
-                return section.sectionDescription.en;
-        }
-    }
-
-    public string GetTitle(Section section)
-    {        
-        if (section == null || section.sectionTitle == null)
-            return string.Empty;
-
-        Locale locale = GetLocale();
-
-        if (locale == null)
-            return section.sectionTitle.en;
-
-        switch (locale.Identifier.Code)
-        {
-            case "ru":
-                return section.sectionTitle.ru;
-
-            case "en":
-            default:
-                return section.sectionTitle.en;
-        }
     }
 
     private Locale GetLocale()

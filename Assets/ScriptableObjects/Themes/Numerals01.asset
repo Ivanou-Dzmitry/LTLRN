@@ -17,11 +17,23 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.49411765, g: 0.86558187, b: 0.9882353, a: 1}
   themeNameTargetLang: "Skai\u010Diai"
   themeName:
-    ru: "\u0427\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435"
-    en: Numerals
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9338938777600
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435."
-    en: Study numerals.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9397667422208
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections:
   - {fileID: 11400000, guid: eed356a3ff30ab64ba6f91f54bbcc973, type: 2}
   - {fileID: 11400000, guid: 943f4eff7a5edfd4e9b8057f79c76483, type: 2}
@@ -31,3 +43,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5461955b0a1336a489badc869f055d79, type: 2}
   - {fileID: 11400000, guid: 7393a5fd7da564b4f9a0bf35db75cba0, type: 2}
   - {fileID: 11400000, guid: 3775c72ba3f1b1645a323ba5bd4c3bd4, type: 2}
+  references:
+    version: 2
+    RefIds: []

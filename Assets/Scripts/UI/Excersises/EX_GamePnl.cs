@@ -73,12 +73,15 @@ public class Ex_GamePanel : Panel
 
         if(exGameLogic != null)
         {
-            //theme
-            if(lang =="EN")
-                themeNameSysLang.text = exGameLogic.sectionManager.themeName.en;
-            else
-                themeNameSysLang.text = exGameLogic.sectionManager.themeName.ru;
-            
+            try
+            {
+                themeNameSysLang.text = exGameLogic.sectionManager.themeName.GetLocalizedString();
+            }
+            catch
+            {
+                themeNameSysLang.text = "Loc not assigned yet";
+            }
+
             //theme on target
             themeNameTargetLang.text = exGameLogic.sectionManager.themeNameTargetLang;
 

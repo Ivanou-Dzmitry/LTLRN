@@ -17,10 +17,25 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.9176471, g: 0.5568628, b: 0.9843138, a: 1}
   themeNameTargetLang: "\u012Evard\u017Eiai"
   themeName:
-    ru: "\u041C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F "
-    en: Pronouns
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9773003104256
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u043C\u0435\u0441\u0442\u043E\u0438\u043C\u0435\u043D\u0438\u044F "
-    en: We study pronouns.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9822848212992
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections:
   - {fileID: 11400000, guid: 65c92a42e633699478c06f7b84e810d5, type: 2}
+  references:
+    version: 2
+    RefIds: []

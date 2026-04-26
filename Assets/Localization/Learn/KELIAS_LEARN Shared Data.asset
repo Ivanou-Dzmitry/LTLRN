@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: KELIAS_LEARN Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: KELIAS_LEARN
+  m_TableCollectionNameGuidString: 35fabb205f03f2b4d83068aff6519fed
+  m_Entries:
+  - m_Id: 5698891079680
+    m_Key: 'AdjectivesTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5852109004800
+    m_Key: 'AdjectivesDesc
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8346583228416
+    m_Key: AdverbsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8411209064448
+    m_Key: AdverbsDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8474513694720
+    m_Key: ConjunctionsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8734707343360
+    m_Key: ConjunctionsDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8799496757248
+    m_Key: GerminalParticiplesTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8837144829952
+    m_Key: GerminalParticiplesDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8890118889472
+    m_Key: HalfParticiplesTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8940945465344
+    m_Key: HalfParticiplesDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8999028187136
+    m_Key: InterrogativesTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9090157830144
+    m_Key: InterrogativesDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9139935830016
+    m_Key: NounsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9200816152576
+    m_Key: NounsDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9338938777600
+    m_Key: NumeralsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9397667422208
+    m_Key: NumeralsDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9447164403712
+    m_Key: ParticiplesTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9500650168320
+    m_Key: ParticiplesDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9551627739136
+    m_Key: ParticlesTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9610113114112
+    m_Key: ParticlesDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9666383896576
+    m_Key: PrepositionsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9723376099328
+    m_Key: PrepositionsDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9773003104256
+    m_Key: PronounsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9822848212992
+    m_Key: PronounsDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9873322467328
+    m_Key: VerbsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9917190692864
+    m_Key: VerbsDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11664571293696
+    m_Key: ColorsTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11777242882048
+    m_Key: Colors01Desc
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 986153683663454208
+  references:
+    version: 2
+    RefIds:
+    - rid: 986153683663454208
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1777223853042

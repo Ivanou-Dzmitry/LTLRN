@@ -111,7 +111,16 @@ public class ExDataLoader : MonoBehaviour
             //set theme button name
             if (locale != null && themeBtn != null)
             {
-                themeBtn.buttonTextStr = sectionManager.GetThemeName(sectionManager, locale);
+                //set top button text with localization. If no loc assigned - set default text
+                try
+                {
+                    themeBtn.buttonTextStr = sectionManager.themeName.GetLocalizedString();
+                }
+                catch
+                {
+                    themeBtn.buttonTextStr = "No Loc assigned yet";
+                }
+
                 themeBtn.RefreshState();
             }
 
@@ -190,8 +199,8 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.sectionImage.sprite = section.sectionIcon;
 
         //set header and description
-        sectionPanel.sectionHeaderText.text = sectionPanel.GetTitle(section);
-        sectionPanel.sectionDescriptionText.text = sectionPanel.GetDescription(section);
+        sectionPanel.sectionHeaderText.text = section.sectionTitle.GetLocalizedString();
+        sectionPanel.sectionDescriptionText.text = section.sectionDescription.GetLocalizedString();
 
         //set liked state
         bool isLiked = dbUtils.GetSectionLikedStatus(sectionName);

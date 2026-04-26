@@ -17,9 +17,24 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.442519, g: 0, b: 0.72327036, a: 1}
   themeNameTargetLang: "Dalelyt\u0117s"
   themeName:
-    ru: "\u0427\u0430\u0441\u0442\u0438\u0446\u044B"
-    en: Particles
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9551627739136
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0447\u0430\u0441\u0442\u0438\u0446\u044B. "
-    en: We study particles.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9610113114112
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections: []
+  references:
+    version: 2
+    RefIds: []

@@ -21,12 +21,23 @@ MonoBehaviour:
   sectionHeaderColor: {r: 0.9960785, g: 0.7960785, b: 0.21960786, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u0426\u0432\u0435\u0442\u0430"
-    en: Colors
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 11664571293696
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
-      \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0446\u0432\u0435\u0442\u043E\u0432."
-    en: We study and repeat the names of colors.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 11777242882048
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionInfo:
     tableName: Rules01
     columnName: RU
@@ -54,3 +65,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d1c5836192f6614292ede4559d8fece, type: 2}
   isContainBundleQuestion: 0
   questions: []
+  references:
+    version: 2
+    RefIds: []

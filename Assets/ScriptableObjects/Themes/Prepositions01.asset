@@ -17,9 +17,24 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.84276724, g: 0.3289232, b: 0, a: 1}
   themeNameTargetLang: Prielinksniai
   themeName:
-    ru: "\u041F\u0440\u0435\u0434\u043B\u043E\u0433\u0438"
-    en: Prepositions
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9666383896576
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u043F\u0440\u0435\u0434\u043B\u043E\u0433\u0438."
-    en: We study Prepositions.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9723376099328
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections: []
+  references:
+    version: 2
+    RefIds: []

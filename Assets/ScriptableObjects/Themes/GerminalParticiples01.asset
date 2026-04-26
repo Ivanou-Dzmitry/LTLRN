@@ -17,9 +17,24 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.8553459, g: 0.34697986, b: 0.73235667, a: 1}
   themeNameTargetLang: Padalyviai
   themeName:
-    ru: "\u0414\u0435\u0435\u043F\u0440\u0438\u0447\u0430\u0441\u0442\u0438\u044F "
-    en: Germinal Participles
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 8799496757248
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0434\u0435\u0435\u043F\u0440\u0438\u0447\u0430\u0441\u0442\u0438\u044F."
-    en: We study germinal participles.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 8837144829952
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections: []
+  references:
+    version: 2
+    RefIds: []

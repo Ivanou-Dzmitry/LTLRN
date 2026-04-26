@@ -17,11 +17,23 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.42745098, g: 0.85490197, b: 0.8071769, a: 1}
   themeNameTargetLang: "Daiktavard\u017Eiai"
   themeName:
-    ru: "\u0421\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 "
-    en: Nouns
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9139935830016
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C c\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 "
-    en: We study nouns.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 9200816152576
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections:
   - {fileID: 11400000, guid: e7fc1697d1efff84abe56ec83dd59164, type: 2}
   - {fileID: 11400000, guid: d7843664f27265d4cb38aa2be0524e51, type: 2}
@@ -29,3 +41,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 919137e90ed76bf41acc1d336189623f, type: 2}
   - {fileID: 11400000, guid: 2846f927438245c418641a8263c1ce0f, type: 2}
   - {fileID: 11400000, guid: 419d826348f428548a0477120b6876bb, type: 2}
+  references:
+    version: 2
+    RefIds: []

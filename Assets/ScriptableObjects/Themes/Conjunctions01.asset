@@ -17,9 +17,24 @@ MonoBehaviour:
   themeHeaderColor: {r: 0.51503253, g: 0.70440245, b: 0.22372524, a: 1}
   themeNameTargetLang: Jungtukai
   themeName:
-    ru: "\u0421\u043E\u044E\u0437\u044B"
-    en: Conjunctions
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 8474513694720
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   themeDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0441\u043E\u044E\u0437\u044B. "
-    en: We study conjunctions.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 8734707343360
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sections: []
+  references:
+    version: 2
+    RefIds: []

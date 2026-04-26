@@ -23,8 +23,15 @@ public class SectionManager : ScriptableObject
 
     [Header("Additional data")]
     public string themeNameTargetLang;
-    public LocalizedText themeName;    
-    public LocalizedText themeDescription;
+
+
+    [Header("Localization")]
+    
+    [Header("Name")]
+    public LocalizedString themeName;
+
+    [Header("Description")]
+    public LocalizedString themeDescription;
 
     [Header("Theme Sections")]
     public Section[] sections;
@@ -76,48 +83,6 @@ public class SectionManager : ScriptableObject
 
             default:
                 return 1f;
-        }
-    }
-
-    public string GeThemetDescription(SectionManager theme, Locale locale)
-    {
-        if (theme == null || theme.themeDescription == null)
-            return string.Empty;
-
-        //Locale locale = GetLocale();
-
-        if (locale == null)
-            return theme.themeDescription.en;
-
-        switch (locale.Identifier.Code)
-        {
-            case "ru":
-                return theme.themeDescription.ru;
-
-            case "en":
-            default:
-                return theme.themeDescription.en;
-        }
-    }
-
-    public string GetThemeName(SectionManager theme, Locale locale)
-    {
-        if (theme == null || theme.themeName == null)
-            return string.Empty;
-
-        //Locale locale = GetLocale();
-
-        if (locale == null)
-            return theme.themeName.en;
-
-        switch (locale.Identifier.Code)
-        {
-            case "ru":
-                return theme.themeName.ru;
-
-            case "en":
-            default:
-                return theme.themeName.en;
         }
     }
 

@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: b496876c72558e2439f93af0371485af
   m_SerializeEntries:
+  - m_GUID: 35fabb205f03f2b4d83068aff6519fed
+    m_Address: Assets/Localization/Learn/KELIAS_LEARN Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 54eb17b2e240b7443b062310ea9718ce
     m_Address: Assets/Localization/Inventory/KELIAS_INVENTORY Shared Data.asset
     m_ReadOnly: 1
