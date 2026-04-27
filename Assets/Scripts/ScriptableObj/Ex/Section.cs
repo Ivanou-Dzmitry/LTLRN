@@ -63,17 +63,18 @@ public class Section : ScriptableObject
     public bool isLiked;
 
     [Header("Localization")]
-    [Header("Title")]
     public LocalizedString sectionTitle;
-
-    [Header("Description")]
     public LocalizedString sectionDescription;
 
     [Header("Info text")]
     public DatabaseReference sectionInfo;
 
+    [Header("Sections")]
     public Section[] bundleSections;
+    public Section[] bundleTests;
+    public Section bundleExam;
 
+    [Header("Bundle Question")]
     public bool isContainBundleQuestion;
 
     [Header("Type01 and Type02")]

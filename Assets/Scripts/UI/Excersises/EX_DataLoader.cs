@@ -85,54 +85,50 @@ public class ExDataLoader : MonoBehaviour
     }
 
     //IMPORTANT
-    public bool LoadExerciseData()
+    public bool LoadExerciseData(int level=0)
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
-        locManager = GameObject.FindWithTag("LangSwitcher").GetComponent<LanguageSwitcher>();
 
         //load theme
-        if (gameData != null)
-            sectionManager = themes.theme[gameData.saveData.selectedThemeIndex];
+        if (gameData == null)
+            return false;        
 
-        if (sectionManager != null)
-        {
-            //get total levels
-            totalQuestions = sectionManager.GetTotalQuestionCount();
-            totalSections = sectionManager.sections.Length;
+        //set section - load from save            
+        sectionManager = themes.theme[gameData.saveData.selectedThemeIndex];
+
+        if (sectionManager == null)
+            return false;
+
+
+        //get and set total Questions and Setions
+        totalQuestions = sectionManager.GetTotalQuestionCount();
+        totalSections = sectionManager.sections.Length;
             
-            //get data
-            ButtonImage themeBtn = themeButton.GetComponent<ButtonImage>();
-            Locale locale = null;
+        //get data
+        ButtonImage themeBtn = themeButton.GetComponent<ButtonImage>();
 
-            //get locale
-            if (locManager != null)
-                locale = locManager.GetLocale();
-
-            //set theme button name
-            if (locale != null && themeBtn != null)
-            {
-                //set top button text with localization. If no loc assigned - set default text
-                try
-                {
-                    themeBtn.buttonTextStr = sectionManager.themeName.GetLocalizedString();
-                }
-                catch
-                {
-                    themeBtn.buttonTextStr = "No Loc assigned yet";
-                }
-
-                themeBtn.RefreshState();
-            }
-
-            //set name on target lang
-            themeNameTargetLangTxt.text = sectionManager.themeNameTargetLang;
-
-            CreateSectionPanels();            
-
-            return true;
+        if (themeBtn == null)
+            return false;
+            
+        //set top button text with localization. If no loc assigned - set default text
+        try
+        {
+            themeBtn.buttonTextStr = sectionManager.themeName.GetLocalizedString();
+        }
+        catch
+        {
+            themeBtn.buttonTextStr = "No Loc assigned yet";
         }
 
-        return false;
+        themeBtn.RefreshState();
+        
+        //set name on target lang
+        themeNameTargetLangTxt.text = sectionManager.themeNameTargetLang;
+
+        //create panels
+        CreateSectionPanels();            
+
+        return true;        
     }
 
     //IMPORTANT

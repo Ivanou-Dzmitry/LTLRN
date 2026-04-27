@@ -92,7 +92,7 @@ public class EX_ThemesPanel : Panel
             string themeName = dataLoader.themes.theme[i].name;
             GameObject themeButton = Instantiate(themeButtonPrefab, themesContainer.transform);
             
-            //set name
+            //set button name
             themeButton.name = themeName;
 
             // Ensure theme exists in DB
@@ -106,61 +106,68 @@ public class EX_ThemesPanel : Panel
             // Initialize button data            
             EX_ThemeBtn themeBtnComponent = themeButton.GetComponent<EX_ThemeBtn>();
 
-            //Locale locale = GetLocale();
+            //exit
+            if (themeBtnComponent == null)
+                return;
+
+            //set current theme                        
             SectionManager currentTheme = dataLoader.themes.theme[i];
 
+            //exit
+            if (currentTheme == null)
+                return;
+
             //load data into button component
-            //name sys
+            
+            //localized theme name
             try
             {
-                themeBtnComponent.themeName.text = currentTheme.themeName.GetLocalizedString();//currentTheme.GetThemeName(currentTheme, locale);
+                themeBtnComponent.themeName.text = currentTheme.themeName.GetLocalizedString();
             }
             catch
             {
                 themeBtnComponent.themeName.text = "Loc not assigned yet";
             }
             
-            //name target (lern lang)
+            //thame name in target lang (lern lang LT, LV etc)
             themeBtnComponent.themeNameLocal.text = currentTheme.themeNameTargetLang;
 
-            //set theme
-            themeBtnComponent.sectionManager = dataLoader.themes.theme[i];
+            //set theme            
+            themeBtnComponent.sectionManager = currentTheme;
             
             //set theme button icon
             themeBtnComponent.themeIcon.sprite = dataLoader.themes.theme[i].themeIcon;
+            
+            //set index. For save
             themeBtnComponent.themeIndex = i;
 
-            //dificulty
-            //themeBtnComponent.themeDifSlider.value = currentTheme.GetThemeDifValue(currentTheme.themeDifficulty);
-            //themeBtnComponent.themeDifficulty.text = dataLoader.themes.theme[i].themeDifficulty.ToString(); ;
-
-            //load info
+            //load sections count
             int sectionsCount = currentTheme.sections.Length;
+
+            //set valused for progress bar
+            themeBtnComponent.themeProgressSlider.maxValue = sectionsCount;
+            themeBtnComponent.themeProgressSlider.value = 0;
 
             //set sections count and questions count
             themeBtnComponent.sectionsCount.text = sectionsCount.ToString();
 
+            //for questions count
             int qCount = 0;
             //int completeCount = 0;
 
-            //try basic
+            // Step 1 - try to get questions count - basic
             qCount = currentTheme.GetTotalQuestionCount();
 
-            //try bundle
-            if(qCount == 0)
+            // Step 2 - try to get questions count - try bundle
+            if (qCount == 0)
                 qCount = currentTheme.GetBundleTotalQuestionCount();
 
-            //set questions count
+            //set questions count (any)
             themeBtnComponent.questionsCount.text = qCount.ToString(); // bundle
-
-            themeBtnComponent.themeProgressSlider.maxValue = sectionsCount;
-            themeBtnComponent.themeProgressSlider.value = 0;
             
-            //Debug.Log(dataLoader.themes.theme.Length);
-            //Debug.Log(currentTheme.sections.Length);
-
-            int comp = 0;
-            int totalSections = 0;
+            //initial values
+            int completeSections = 0;
+            int totalCompleteSections = 0;
 
             foreach (var section in currentTheme.sections)
             {
@@ -168,28 +175,30 @@ public class EX_ThemesPanel : Panel
 
                 foreach (var bundleSection in section.bundleSections)
                 {
-                    totalSections++;
+                    totalCompleteSections++;
 
                     bool isComplete = dbUtils.GetSectionComplete(bundleSection.name);
                     if (isComplete)
                     {
-                        comp++;
+                        completeSections++;
                     }
                 }
             }
 
             //tasks cont
-            themeBtnComponent.tasksCount.text = totalSections.ToString();
+            themeBtnComponent.tasksCount.text = totalCompleteSections.ToString();
 
-            //set slider
-            themeBtnComponent.themeProgressSlider.maxValue = totalSections;
+            //set slider max value
+            themeBtnComponent.themeProgressSlider.maxValue = totalCompleteSections;
             //themeBtnComponent.themeProgressSlider.value = comp;
 
-            themeBtnComponent.themeProgressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(comp, 0.5f);
+            //slider animator
+            themeBtnComponent.themeProgressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(completeSections, 0.5f);
 
             //fill slider with theme color
             Image fillImage = themeBtnComponent.themeProgressSlider.fillRect.GetComponent<Image>();
 
+            //set slider color
             Color color = dataLoader.themes.theme[i].themeHeaderColor;
             color.a = 0.5f; // 50% opacity
 
@@ -198,9 +207,10 @@ public class EX_ThemesPanel : Panel
             //set color Gray if no sections, set button interactable
             if (sectionsCount == 0)
             {
-                //get local description
+                //get local description for WIP themes
                 string wipTxt = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TopicWIPTxt");
 
+                //set UI
                 themeBtnComponent.topPnlImg.color = palette.Panel02;
                 themeBtnComponent.button.interactable = false;
                 themeBtnComponent.themeDescription.text = wipTxt;
@@ -227,20 +237,7 @@ public class EX_ThemesPanel : Panel
             gameData.SaveToFile();
         }
     }
-
-    private Locale GetLocale()
-    {
-        string savedLang = gameData.saveData.lang.ToLower();
-
-        Locale locale = LocalizationSettings.AvailableLocales.Locales
-            .FirstOrDefault(l => l.Identifier.Code == savedLang);
-
-        if (locale != null)
-            LocalizationSettings.SelectedLocale = locale;
-
-        return locale;
-    }
-
+    
 }
 
 

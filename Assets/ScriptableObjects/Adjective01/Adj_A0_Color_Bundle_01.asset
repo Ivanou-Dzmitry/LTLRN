@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
-  m_Name: Colors_Bundle_01
+  m_Name: Adj_A0_Color_Bundle_01
   m_EditorClassIdentifier: Assembly-CSharp::Section
   isBundle: 1
   sectionType: 5
   sectionLanguage: 3
-  difficultyType: 7
+  difficultyType: 0
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: d6bd577c83e72c245ac1bd353701a9d5, type: 3}
   sectionHeaderColor: {r: 0.9960785, g: 0.7960785, b: 0.21960786, a: 1}
@@ -59,10 +59,11 @@ MonoBehaviour:
     whereValue: 
   bundleSections:
   - {fileID: 11400000, guid: f18d47c7c8c9eee4a85fc168065faf1c, type: 2}
+  bundleTests:
   - {fileID: 11400000, guid: 8b1d7210594db924e9ae972dd7685f0d, type: 2}
   - {fileID: 11400000, guid: aae0509f55ea6b54fb8ac3fe3f189353, type: 2}
   - {fileID: 11400000, guid: fbd8b3e11c8c7d543a40a5223a7db781, type: 2}
-  - {fileID: 11400000, guid: 7d1c5836192f6614292ede4559d8fece, type: 2}
+  bundleExam: {fileID: 11400000, guid: 7d1c5836192f6614292ede4559d8fece, type: 2}
   isContainBundleQuestion: 0
   questions: []
   references:

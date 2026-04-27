@@ -83,7 +83,7 @@ public class GameObjectsState : MonoBehaviour
             stateDict[item.id] = item.state;
         }
 
-        Debug.Log("State cache built with " + stateDict.Count + " entries.");
+        //Debug.Log("State cache built with " + stateDict.Count + " entries.");
     }
 
     public bool ResetInteractionStates()
