@@ -1,7 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using static Section;
 
 
 //button for select theme
@@ -16,6 +17,17 @@ public class EX_ThemeBtn : MonoBehaviour
 
     [Header("Level buttons")]
     public Button[] levelButtons;
+
+    // maps button index to difficulty — order must match levelButtons array
+    private readonly DifficultyType[] difficultyMap = new[]
+    {
+        DifficultyType.A0,
+        DifficultyType.A1,
+        DifficultyType.A2,
+        DifficultyType.B1,
+        DifficultyType.B2,
+        DifficultyType.C1
+    };
 
     [Header("Button")]
     public Button button;
@@ -71,7 +83,37 @@ public class EX_ThemeBtn : MonoBehaviour
 
     private void Start()
     {
+        //get data
+        dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
+        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
         TogglePanel();
+
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            int index = i; // capture for closure
+            levelButtons[i].onClick.AddListener(() =>
+            {
+                //Load data
+                if (dataLoader.tempSectionManager != null)
+                {
+                    //set section from theme to loader
+                    dataLoader.sectionManager = sectionManager;
+
+                    //save selected theme index
+                    gameData.saveData.selectedThemeIndex = themeIndex;
+                    gameData.SaveToFile();
+                }
+
+                Debug.Log($"[EX_ThemeBtn] sectionManager set: '{sectionManager.name}' | difficulty: {difficultyMap[index]}");
+
+                //work with panels
+                PanelManager.CloseAll();
+                PanelManager.Open("exmain");
+
+                dataLoader.LoadExerciseData(difficultyMap[index]);
+            });
+        }
     }
 
     public void UpdateUI()

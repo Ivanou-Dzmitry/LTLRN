@@ -40,10 +40,6 @@ public class Section : ScriptableObject
         Bundle
     }
 
-    //Description:
-    //type1 - with next button
-    //type2 - without next button. Result at the end.
-
     [Header("Type")]
     public SectionType sectionType = SectionType.Text;
 

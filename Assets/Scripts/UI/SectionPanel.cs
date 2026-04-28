@@ -95,6 +95,9 @@ public class SectionPanel : MonoBehaviour
         //toggle like state
         isLiked = !isLiked;
 
+        if (likeButtonImage == null)
+            return;
+
         //update like button color
         likeButtonImage.color = isLiked
             ? palette.Secondary
@@ -108,6 +111,9 @@ public class SectionPanel : MonoBehaviour
     {
         //set like state
         isLiked = liked;
+
+        if(likeButtonImage==null)
+            return;
 
         likeButtonImage.color = isLiked
             ? palette.Secondary

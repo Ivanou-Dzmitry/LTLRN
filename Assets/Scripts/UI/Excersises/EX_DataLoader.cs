@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
-using System.Threading.Tasks;
+using static Section;
 
 public class ExDataLoader : MonoBehaviour
 {
@@ -85,7 +86,7 @@ public class ExDataLoader : MonoBehaviour
     }
 
     //IMPORTANT
-    public bool LoadExerciseData(int level=0)
+    public bool LoadExerciseData(DifficultyType level = DifficultyType.A0)
     {
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
@@ -235,6 +236,8 @@ public class ExDataLoader : MonoBehaviour
         if (bundlePanelPrefab == null)
             return;
 
+        Debug.Log("HERE!");
+
         //instance object
         GameObject panel = Instantiate(bundlePanelPrefab, sectionsRectTransform);
         RectTransform rt = panel.GetComponent<RectTransform>();
@@ -290,7 +293,7 @@ public class ExDataLoader : MonoBehaviour
 
             // Get question count regardless of type
             int questionsCount = 0;
-            if (section.bundleSections[j].sectionType != Section.SectionType.LearnType01)
+            if (section.bundleSections[j].sectionType != SectionType.LearnType01)
                 questionsCount = GetQuestionCount(section.bundleSections[j]);
             
             bundleQuestionCount += questionsCount;
@@ -303,14 +306,16 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.bundleSections = section.bundleSections;
         }
 
-        //set ready topic count
-        float percentTopic = (float)bundleProgress / bundleLenght * 100f;
-        sectionPanel.topicsCount.text = $"{percentTopic:0}%";
+        Debug.Log("HERE2");
 
-        //set slider
-        //sectionPanel.progressSlider.value = bundleProgress;
-        sectionPanel.progressSlider.GetComponent<EX_SliderAnimator>()
-              .AnimateTo(bundleProgress, 0.5f);
+        //set ready topic count
+        /*        float percentTopic = (float)bundleProgress / bundleLenght * 100f;
+                sectionPanel.topicsCount.text = $"{percentTopic:0}%";
+
+                //set slider
+                //sectionPanel.progressSlider.value = bundleProgress;
+                sectionPanel.progressSlider.GetComponent<EX_SliderAnimator>()
+                      .AnimateTo(bundleProgress, 0.5f);*/
 
         //set time
         sectionPanel.sectionTimeText.text = FormatTime(bundleTime);
@@ -327,6 +332,8 @@ public class ExDataLoader : MonoBehaviour
         sectionPanel.sectionResultText.text = $"{percentQ:0}%";
 
         sectionPanel.currentSection = section;
+
+        Debug.Log("HERE3");
     }
 
 
