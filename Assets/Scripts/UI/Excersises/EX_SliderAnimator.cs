@@ -8,15 +8,25 @@ public class EX_SliderAnimator : MonoBehaviour
 
     public void AnimateTo(float target, float duration)
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning("Slider inactive!");
+            return;
+        }
+
         if (animationCoroutine != null)
             StopCoroutine(animationCoroutine);
-
+ 
         animationCoroutine = StartCoroutine(Animate(target, duration));
+
     }
 
     private IEnumerator Animate(float target, float duration)
     {
         Slider slider = GetComponent<Slider>();
+
+        if (slider == null)
+            yield return null;
 
         float start = 0;
         float time = 0f;

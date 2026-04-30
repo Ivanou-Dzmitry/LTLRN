@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9338938777600
-    m_Localized: Numeral
+    m_Localized: Numerals
     m_Metadata:
       m_Items: []
   - m_Id: 9397667422208
@@ -128,6 +128,102 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 11777242882048
     m_Localized: Study and repeat the names of colors.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076098114940928
+    m_Localized: 1-10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076273558482944
+    m_Localized: 10-90
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076531738865664
+    m_Localized: 11-19
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076639557644288
+    m_Localized: 20-29
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076743106621440
+    m_Localized: 100-110
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076948229058560
+    m_Localized: 111-119
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1077056907669504
+    m_Localized: 120-130
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1077213753667584
+    m_Localized: 1000
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1077480742088704
+    m_Localized: Study numerals from 0 to 10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1079725143519232
+    m_Localized: Study numerals from 10 to 90 (tens)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1079758488236032
+    m_Localized: Study numerals from 11 to 19
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1079797134553088
+    m_Localized: Study numerals from 20 to 29
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080451534057472
+    m_Localized: Study numerals from 100 to 110
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080539094347776
+    m_Localized: Study numerals from 111 to 119
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080570744565760
+    m_Localized: Study numerals from 120 to 130
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080636544806912
+    m_Localized: Study numerals from 1000 and more
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1385314243473408
+    m_Localized: Meat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1385399375261696
+    m_Localized: Learn the names of different types of meat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1386564729073664
+    m_Localized: Fruits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1386672187142144
+    m_Localized: Learn the names of different types of fruits.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1387202967924736
+    m_Localized: Month
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1387281527238656
+    m_Localized: Learn the names of month.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1387333838598144
+    m_Localized: Learn the names of days of the week.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1387305833230336
+    m_Localized: Days of the week
     m_Metadata:
       m_Items: []
   references:

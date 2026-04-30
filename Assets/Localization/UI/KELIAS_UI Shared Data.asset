@@ -455,6 +455,12 @@ MonoBehaviour:
     m_Key: CondCollectPixel02
     m_Metadata:
       m_Items: []
+  - m_Id: 48531592584421376
+    m_Key: 'SelectLevelTxt
+
+'
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

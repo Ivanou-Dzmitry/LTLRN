@@ -67,8 +67,6 @@ public class Section : ScriptableObject
 
     [Header("Sections")]
     public Section[] bundleSections;
-    public Section[] bundleTests;
-    public Section bundleExam;
 
     [Header("Bundle Question")]
     public bool isContainBundleQuestion;

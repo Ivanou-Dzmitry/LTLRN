@@ -21,12 +21,23 @@ MonoBehaviour:
   sectionHeaderColor: {r: 0.04705883, g: 0.854902, b: 0.76470596, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: "\u0414\u043D\u0438 \u043D\u0435\u0434\u0435\u043B\u0438"
-    en: Days of the week
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1387305833230336
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
-      \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044F \u0434\u043D\u0435\u0439 \u043D\u0435\u0434\u0435\u043B\u0438."
-    en: Learn, and repeat the names of the days of the week.
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1387333838598144
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionInfo:
     tableName: Rules01
     columnName: RU
@@ -51,3 +62,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cda1d6cf8fac817459bb6663880ea116, type: 2}
   isContainBundleQuestion: 0
   questions: []
+  references:
+    version: 2
+    RefIds: []

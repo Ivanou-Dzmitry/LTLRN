@@ -236,8 +236,6 @@ public class ExDataLoader : MonoBehaviour
         if (bundlePanelPrefab == null)
             return;
 
-        Debug.Log("HERE!");
-
         //instance object
         GameObject panel = Instantiate(bundlePanelPrefab, sectionsRectTransform);
         RectTransform rt = panel.GetComponent<RectTransform>();
@@ -306,16 +304,14 @@ public class ExDataLoader : MonoBehaviour
             sectionPanel.bundleSections = section.bundleSections;
         }
 
-        Debug.Log("HERE2");
-
         //set ready topic count
-        /*        float percentTopic = (float)bundleProgress / bundleLenght * 100f;
-                sectionPanel.topicsCount.text = $"{percentTopic:0}%";
+        float percentTopic = (float)bundleProgress / bundleLenght * 100f;
+        sectionPanel.topicsCount.text = $"{percentTopic:0}%";
 
-                //set slider
-                //sectionPanel.progressSlider.value = bundleProgress;
-                sectionPanel.progressSlider.GetComponent<EX_SliderAnimator>()
-                      .AnimateTo(bundleProgress, 0.5f);*/
+        //set slider
+        //sectionPanel.progressSlider.value = bundleProgress;
+        sectionPanel.progressSlider.GetComponent<EX_SliderAnimator>()
+                .AnimateTo(bundleProgress, 0.5f);
 
         //set time
         sectionPanel.sectionTimeText.text = FormatTime(bundleTime);
@@ -332,8 +328,6 @@ public class ExDataLoader : MonoBehaviour
         sectionPanel.sectionResultText.text = $"{percentQ:0}%";
 
         sectionPanel.currentSection = section;
-
-        Debug.Log("HERE3");
     }
 
 

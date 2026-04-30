@@ -59,6 +59,10 @@ MonoBehaviour:
     whereValue: 
   bundleSections:
   - {fileID: 11400000, guid: f18d47c7c8c9eee4a85fc168065faf1c, type: 2}
+  - {fileID: 11400000, guid: 8b1d7210594db924e9ae972dd7685f0d, type: 2}
+  - {fileID: 11400000, guid: aae0509f55ea6b54fb8ac3fe3f189353, type: 2}
+  - {fileID: 11400000, guid: fbd8b3e11c8c7d543a40a5223a7db781, type: 2}
+  - {fileID: 11400000, guid: 7d1c5836192f6614292ede4559d8fece, type: 2}
   bundleTests:
   - {fileID: 11400000, guid: 8b1d7210594db924e9ae972dd7685f0d, type: 2}
   - {fileID: 11400000, guid: aae0509f55ea6b54fb8ac3fe3f189353, type: 2}

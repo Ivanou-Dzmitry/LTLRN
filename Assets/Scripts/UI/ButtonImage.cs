@@ -15,7 +15,9 @@ public class ButtonImage : MonoBehaviour
         Disabled,
         Transparent,
         PrimaryLight,
-        SuccessLight,        
+        SuccessLight,
+        Gray3Dark,
+        Gray2Light
     }
 
     public enum TextColor
@@ -127,6 +129,8 @@ public class ButtonImage : MonoBehaviour
             ButtonColor.Transparent => palette.TransparentPanel,
             ButtonColor.PrimaryLight => palette.PrimaryLight,
             ButtonColor.SuccessLight => palette.SuccessLight,
+            ButtonColor.Gray3Dark => palette.Gray3Dark,
+            ButtonColor.Gray2Light => palette.Gray2Light,            
             _ => palette.Primary
         };
     }

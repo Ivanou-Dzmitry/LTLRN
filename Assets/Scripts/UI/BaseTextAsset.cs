@@ -9,7 +9,9 @@ public class BaseTextAsset : MonoBehaviour
         Secondary,
         Gray6Light,
         Gray6Dark,
-        Gray4Dark
+        Gray4Dark,
+        Gray3Dark,
+        Gray2Light
     }
 
     public enum TextSize
@@ -18,7 +20,8 @@ public class BaseTextAsset : MonoBehaviour
         Base = 1,
         Medium = 2,
         BasePlus = 3,
-        MediumPlus = 4
+        MediumPlus = 4,
+        BaseMinus = 5
     }
 
     [Header("References")]
@@ -53,6 +56,8 @@ public class BaseTextAsset : MonoBehaviour
             TextColor.Gray6Light => palette.Gray6Ligth,
             TextColor.Gray6Dark => palette.Gray6Dark,
             TextColor.Gray4Dark => palette.Gray4Dark,
+            TextColor.Gray3Dark => palette.Gray3Dark,
+            TextColor.Gray2Light => palette.Gray2Light,
             _ => palette.TextPrimary
         };
     }
@@ -66,6 +71,7 @@ public class BaseTextAsset : MonoBehaviour
             TextSize.Base => 30f,
             TextSize.BasePlus => 40f,
             TextSize.MediumPlus => 65f,
+            TextSize.BaseMinus => 24f,
             _ => 30f
         };
     }

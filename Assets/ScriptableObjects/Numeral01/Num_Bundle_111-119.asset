@@ -21,13 +21,23 @@ MonoBehaviour:
   sectionHeaderColor: {r: 0.91764706, g: 0.8044011, b: 0.24705878, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: 111-119
-    en: 111-119
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1076948229058560
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C  \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
-      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u043E\u0442
-      111 \u0434\u043E 119"
-    en: Study and repeat numerals from 111 to 119
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1080539094347776
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionInfo:
     tableName: Short_vowels
     columnName: ID
@@ -40,5 +50,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c8eb252ff79a9b24594e90d626350b72, type: 2}
   - {fileID: 11400000, guid: 3f6f844214721d04ab2dbd6d07bdbe15, type: 2}
   - {fileID: 11400000, guid: 5d194a970189d0144bad1cf3fcfcd79d, type: 2}
+  bundleTests: []
+  bundleExam: {fileID: 0}
   isContainBundleQuestion: 0
   questions: []
+  references:
+    version: 2
+    RefIds: []

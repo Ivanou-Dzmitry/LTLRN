@@ -177,7 +177,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4041682511257600
-    m_Localized: 'Select a topic to study and training level
+    m_Localized: 'Select a topic to study.
 
 '
     m_Metadata:
@@ -375,6 +375,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 44592801234608128
     m_Localized: Find the second dead pixel.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 48531592584421376
+    m_Localized: Select level
     m_Metadata:
       m_Items: []
   references:

@@ -43,6 +43,7 @@ public class EX_MainPanel : Panel
     public RectTransform panel_02;
     public RectTransform panel_03;
 
+    [Header("Text prefab")]
     public TMP_Text textPrefab;
     private TMP_Text infoText;
 
@@ -51,10 +52,10 @@ public class EX_MainPanel : Panel
     public RectTransform scrollPanel;
 
     // for ui layout
-    private const float PANEL01_HEIGHT = 230f;
-    private const float PANEL03_HEIGHT = 152f;
-    private const float SPACING = 24;
-    private const float HEADER_HEIGHT = 96f;
+    private const float PANEL01_HEIGHT = 440f;
+    private const float PANEL03_HEIGHT = 208f;
+    private const float SPACING = 0;
+    private const float HEADER_HEIGHT = 0f;
 
     public override void Initialize()
     {
@@ -68,10 +69,10 @@ public class EX_MainPanel : Panel
 
         likeFilterButton.onClick.AddListener(ToggleLikeFilter);
         likeFBtn = likeFilterButton.GetComponent<ButtonImage>();
+        //inital color for like filter button
+        likeFBtn.buttonIcon.color = palette.Transparent50Panel;
 
         openLBoardBtn.onClick.AddListener(OpenLeaderboard);
-
-        likeFBtn.buttonIcon.color = palette.DisabledButton;
     }
 
     private void Start()
@@ -112,28 +113,29 @@ public class EX_MainPanel : Panel
     void SetPanelHeight()
     {
         Rect safeArea = Screen.safeArea;
-
-        // Set main panel bottom padding to safe area
-        //base.SetBottom(safeArea.yMin/2);
-
-        // Get canvas scale factor
         float scaleFactor = canvasRoot.scaleFactor;
 
-        // Calculate available height in safe area (accounting for canvas scale)
+        // safe area in screen pixels - convert to canvas units
         float safeAreaHeight = safeArea.height / scaleFactor;
 
-        // Calculate panel_02 height
+        // also account for bottom offset (home bar on iPhone)
+        float bottomOffset = safeArea.y / scaleFactor;
+        // and top offset (notch)
+        float topOffset = (Screen.height - safeArea.y - safeArea.height) / scaleFactor;
+
+        Debug.Log($"[SafeArea] screen: {Screen.height}px | safeArea: {safeArea} | scaleFactor: {scaleFactor}");
+        Debug.Log($"[SafeArea] safeAreaHeight: {safeAreaHeight} | top: {topOffset} | bottom: {bottomOffset}");
+
+        // panel02 fills whatever is left
         float panel02Height = safeAreaHeight - PANEL01_HEIGHT - PANEL03_HEIGHT;
         panel02Height = Mathf.Max(panel02Height, 0f);
 
-        //Debug.Log($"{safeAreaHeight}, {PANEL01_HEIGHT}, {panel02Height}, {PANEL03_HEIGHT}");
+        Debug.Log($"[SetPanelHeight] p01: {PANEL01_HEIGHT} | p02: {panel02Height} | p03: {PANEL03_HEIGHT}");
 
-        // Set heights
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL01_HEIGHT);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
         panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL03_HEIGHT);
 
-        // Set scroll panel height
         float scrollPanelHeight = panel02Height - HEADER_HEIGHT - SPACING;
         scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, scrollPanelHeight);
     }
@@ -153,9 +155,9 @@ public class EX_MainPanel : Panel
         filterLikedOnly = !filterLikedOnly;
 
         if(filterLikedOnly)
-            likeFBtn.buttonIcon.color = palette.Secondary;
+            likeFBtn.buttonIcon.color = palette.Error;
         else
-            likeFBtn.buttonIcon.color = palette.DisabledButton;
+            likeFBtn.buttonIcon.color = palette.Transparent50Panel;
 
         int likedCount = 0;
 
@@ -199,7 +201,15 @@ public class EX_MainPanel : Panel
             infoText.gameObject.SetActive(visible);
             
             string info = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "NoLikesTxt");
-            infoText.text = info;            
+            infoText.text = info;
+            
+            //set width to fit panel
+            RectTransform rt = infoText.GetComponent<RectTransform>();
+            RectTransform contentRect = contentPanel as RectTransform;
+            if (contentRect != null)
+            {
+                rt.sizeDelta = new Vector2(contentRect.rect.width, rt.sizeDelta.y);
+            }
         }
     }
 

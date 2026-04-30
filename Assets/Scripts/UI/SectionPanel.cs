@@ -32,8 +32,10 @@ public class SectionPanel : MonoBehaviour
 
     [Header("Buttons")]
     public Button likeButton;
-    private Image likeButtonImage;
+    [SerializeField] private Image likeButtonImage;
     [SerializeField] public bool isLiked = false;
+
+    [Header("Play Section")]
     public Button playSectionButton;
 
     [Header("Section")]
@@ -57,8 +59,8 @@ public class SectionPanel : MonoBehaviour
             playSectionButton = GetComponent<Button>();
 
         //initialize like button color
-        likeButtonImage = likeButton.GetComponent<Image>();
-        likeButtonImage.color = palette.DisabledButton;
+        //likeButtonImage = likeButton.GetComponent<Image>();
+        likeButtonImage.color = palette.Transparent50Panel;
 
         //add listeners
         likeButton.onClick.AddListener(OnLike);
@@ -100,8 +102,8 @@ public class SectionPanel : MonoBehaviour
 
         //update like button color
         likeButtonImage.color = isLiked
-            ? palette.Secondary
-            : palette.DisabledButton;
+            ? palette.Gray3Dark
+            : palette.Transparent50Panel;
 
         //update database
         dbUtils.UpdateSectionLiked(currentSection.name, isLiked);
@@ -116,8 +118,8 @@ public class SectionPanel : MonoBehaviour
             return;
 
         likeButtonImage.color = isLiked
-            ? palette.Secondary
-            : palette.DisabledButton;
+            ? palette.Gray3Dark
+            : palette.Transparent50Panel;
     }
 
     public void Initialize(Section section)

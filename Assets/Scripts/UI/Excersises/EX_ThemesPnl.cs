@@ -141,16 +141,6 @@ public class EX_ThemesPanel : Panel
             //set index. For save
             themeBtnComponent.themeIndex = i;
 
-            //load sections count
-            int sectionsCount = currentTheme.sections.Length;
-
-            //set valused for progress bar
-            themeBtnComponent.themeProgressSlider.maxValue = sectionsCount;
-            themeBtnComponent.themeProgressSlider.value = 0;
-
-            //set sections count and questions count
-            themeBtnComponent.sectionsCount.text = sectionsCount.ToString();
-
             //for questions count
             int qCount = 0;
             //int completeCount = 0;
@@ -163,67 +153,7 @@ public class EX_ThemesPanel : Panel
                 qCount = currentTheme.GetBundleTotalQuestionCount();
 
             //set questions count (any)
-            themeBtnComponent.questionsCount.text = qCount.ToString(); // bundle
-            
-            //initial values
-            int completeSections = 0;
-            int totalCompleteSections = 0;
-
-            foreach (var section in currentTheme.sections)
-            {
-                if (!section.isBundle) continue;
-
-                foreach (var bundleSection in section.bundleSections)
-                {
-                    totalCompleteSections++;
-
-                    bool isComplete = dbUtils.GetSectionComplete(bundleSection.name);
-                    if (isComplete)
-                    {
-                        completeSections++;
-                    }
-                }
-            }
-
-            //tasks cont
-            themeBtnComponent.tasksCount.text = totalCompleteSections.ToString();
-
-            //set slider max value
-            themeBtnComponent.themeProgressSlider.maxValue = totalCompleteSections;
-            //themeBtnComponent.themeProgressSlider.value = comp;
-
-            //slider animator
-            themeBtnComponent.themeProgressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(completeSections, 0.5f);
-
-            //fill slider with theme color
-            Image fillImage = themeBtnComponent.themeProgressSlider.fillRect.GetComponent<Image>();
-
-            //set slider color
-            Color color = dataLoader.themes.theme[i].themeHeaderColor;
-            color.a = 0.5f; // 50% opacity
-
-            fillImage.color = color;
-
-            //set color Gray if no sections, set button interactable
-            if (sectionsCount == 0)
-            {
-                //get local description for WIP themes
-                string wipTxt = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TopicWIPTxt");
-
-                //set UI
-                themeBtnComponent.topPnlImg.color = palette.Panel02;
-                themeBtnComponent.button.interactable = false;
-                themeBtnComponent.themeDescription.text = wipTxt;
-            }
-            else
-            {
-                themeBtnComponent.topPnlImg.color = dataLoader.themes.theme[i].themeHeaderColor;
-                themeBtnComponent.button.interactable = true;
-                //description
-                //themeBtnComponent.themeDescription.text = currentTheme.GeThemetDescription(currentTheme, locale);
-            }
-
-            themeBtnComponent.UpdateUI();
+            themeBtnComponent.questionsCount.text = qCount.ToString(); // bundle          
         }
     }
 

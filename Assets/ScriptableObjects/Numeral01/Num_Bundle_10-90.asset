@@ -21,13 +21,23 @@ MonoBehaviour:
   sectionHeaderColor: {r: 0.24705878, g: 0.91764706, b: 0.41322696, a: 1}
   isLiked: 0
   sectionTitle:
-    ru: 10-90
-    en: 10-90
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1076273558482944
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionDescription:
-    ru: "\u0418\u0437\u0443\u0447\u0430\u0435\u043C  \u0438 \u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C
-      \u0434\u0435\u0441\u044F\u0442\u043A\u0438 \u043E\u0442 10 \u0434\u043E 90
-      (10, 20, 30, \u0438 \u0442.\u0434.)."
-    en: Review and practice the tens from 10 to 90 (10, 20, 30, etc.).
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1079725143519232
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   sectionInfo:
     tableName: Short_vowels
     columnName: ID
@@ -40,5 +50,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea08136938dcf0747ae4d2335ecd3f8b, type: 2}
   - {fileID: 11400000, guid: 6e165bb983faad741ac1532c5ab981b6, type: 2}
   - {fileID: 11400000, guid: ecb4459fddc77734f8b0ea6f38cf8447, type: 2}
+  bundleTests: []
+  bundleExam: {fileID: 0}
   isContainBundleQuestion: 0
   questions: []
+  references:
+    version: 2
+    RefIds: []
