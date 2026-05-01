@@ -127,13 +127,13 @@ public class ExDataLoader : MonoBehaviour
         themeNameTargetLangTxt.text = sectionManager.themeNameTargetLang;
 
         //create panels
-        CreateSectionPanels();            
+        CreateSectionPanels(level);            
 
         return true;        
     }
 
     //IMPORTANT
-    private void CreateSectionPanels()
+    private void CreateSectionPanels(DifficultyType level = DifficultyType.A0)
     {
         // Clear old panels (important when reloading)
         foreach (Transform child in sectionsRectTransform)
@@ -146,15 +146,16 @@ public class ExDataLoader : MonoBehaviour
             // OPTIONAL: initialize panel data
             Section section = sectionManager.sections[i];
 
+            //load regular sections
             if (!section.isBundle && section.questions.Length > 0 && section.questions != null)
             {
-                LoadSections(section, i); //section type1
+                LoadSections(section, i, level); //section type1
             }
             
             //load bundle sections            
             if (section.isBundle && section.bundleSections.Length > 0 && section.bundleSections != null)
             {
-                LoadBundle(section, i);
+                LoadBundle(section, i, level);
             }
         }
 
@@ -169,9 +170,13 @@ public class ExDataLoader : MonoBehaviour
         return $"{minutes:00}:{secs:00}";
     }
 
-    private void LoadSections(Section section, int i)
+    private void LoadSections(Section section, int i, DifficultyType level = DifficultyType.A0)
     {
         if (sectionPanelPrefab == null)
+            return;
+
+        //IMPORTANT - check difficulty
+        if (section.difficultyType != level)
             return;
 
         //prefab instance
@@ -231,10 +236,14 @@ public class ExDataLoader : MonoBehaviour
         sectionPanel.sectionIndex = i;        
     }
 
-    private void LoadBundle(Section section, int i)
+    private void LoadBundle(Section section, int i, DifficultyType level = DifficultyType.A0)
     {
         if (bundlePanelPrefab == null)
             return;
+        
+        // IMPORTANT - check difficulty
+        if (section.difficultyType != level)
+           return;
 
         //instance object
         GameObject panel = Instantiate(bundlePanelPrefab, sectionsRectTransform);

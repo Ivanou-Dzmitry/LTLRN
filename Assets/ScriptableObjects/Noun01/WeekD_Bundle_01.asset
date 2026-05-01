@@ -15,7 +15,7 @@ MonoBehaviour:
   isBundle: 1
   sectionType: 5
   sectionLanguage: 3
-  difficultyType: 7
+  difficultyType: 0
   sectionNumber: 1
   sectionIcon: {fileID: 21300000, guid: e48223f53dbc22d4db9d0937d4e28e4a, type: 3}
   sectionHeaderColor: {r: 0.04705883, g: 0.854902, b: 0.76470596, a: 1}

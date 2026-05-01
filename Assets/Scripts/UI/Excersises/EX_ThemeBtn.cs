@@ -95,6 +95,20 @@ public class EX_ThemeBtn : MonoBehaviour
 
         TogglePanel();
 
+        // set button interact
+        for (int i = 0; i < levelButtons.Length; i++)
+        {
+            bool hasLevel = sectionManager.sections.Any(s => s.difficultyType == difficultyMap[i]);           
+            //levelButtons[i].interactable = hasLevel;
+
+            var btnImage = levelButtons[i].GetComponent<ButtonImage>();
+
+            if (btnImage != null)
+            {
+                btnImage.SetDisabled(!hasLevel); // or whatever method you have
+            }
+        }
+
         //add listeners to level buttons
         for (int i = 0; i < levelButtons.Length; i++)
         {
@@ -118,16 +132,39 @@ public class EX_ThemeBtn : MonoBehaviour
                 PanelManager.CloseAll();
                 PanelManager.Open("exmain");
 
+                //important! load data for selected difficulty
                 dataLoader.LoadExerciseData(difficultyMap[index]);
             });
         }
-
-        UpdateUI();
+       
+        UpdateThemeBtnUI();
     }
 
-    public void UpdateUI()
+    public void UpdateThemeBtnUI()
     {
+        //localized theme name
+        try
+        {
+            themeName.text = sectionManager.themeName.GetLocalizedString();
+        }
+        catch
+        {
+            themeName.text = "Loc not assigned yet";
+        }
+
+        //thame name in target lang (lern lang LT, LV etc)
+        themeNameLocal.text = sectionManager.themeNameTargetLang;
+
+        //set theme button icon
+        themeIcon.sprite = sectionManager.themeIcon;
+
         int sCont = sectionManager.sections.Count();
+
+        //get localized "Sections" text
+        string locString01 = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "SectionsTxt");
+
+        //set sections count and questions count
+        sectionsCount.text = $"{sCont} {locString01.ToLower()}";
 
         //set color Gray if no sections, set button interactable
         if (sCont == 0)
@@ -154,7 +191,20 @@ public class EX_ThemeBtn : MonoBehaviour
         if (sectionsCount.text == "0")
         {
             infoPanel.gameObject.SetActive(false);
-        }            
+        }
+
+        //for questions count
+        int qCount = 0;
+        
+        // Step 1 - try to get questions count - basic
+        qCount = sectionManager.GetTotalQuestionCount();
+
+        // Step 2 - try to get questions count - try bundle
+        if (qCount == 0)
+            qCount = sectionManager.GetBundleTotalQuestionCount();
+
+        //set questions count (any)
+        questionsCount.text = qCount.ToString(); // bundle       
     }
 
     private void SaveLoadData()
@@ -208,7 +258,7 @@ public class EX_ThemeBtn : MonoBehaviour
         size.y = height;
         panelTransform.sizeDelta = size;
 
-        //iocn flip
+        //icon flip
         Vector3 scale = imageExpandTransform.localScale;
         scale.y = isExpanded ? -1f : 1f;
         imageExpandTransform.localScale = scale;
@@ -216,20 +266,18 @@ public class EX_ThemeBtn : MonoBehaviour
         //panels show/hide
         bottomPanel.gameObject.SetActive(isExpanded);
 
-        if(isExpanded)
-            SliderStuff();
+        //slider animation
+        if (isExpanded)
+            SliderAnimator();
     }
 
-    private void SliderStuff()
+    private void SliderAnimator()
     {
 
         int sCont = sectionManager.sections.Count();
         //set valused for progress bar
         themeProgressSlider.maxValue = sCont;
         themeProgressSlider.value = 0;
-
-        //set sections count and questions count
-        sectionsCount.text = sCont.ToString() + " sections";
 
         //initial values
         int completeSections = 0;
@@ -270,7 +318,7 @@ public class EX_ThemeBtn : MonoBehaviour
 
         fillImage.color = tColor;
 
-        UpdateUI();
+        UpdateThemeBtnUI();
     }
 
 }

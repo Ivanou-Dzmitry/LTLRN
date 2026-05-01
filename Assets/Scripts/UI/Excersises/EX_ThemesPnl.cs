@@ -23,8 +23,13 @@ public class EX_ThemesPanel : Panel
     public GameObject themeButtonPrefab;
     public RectTransform themesContainer;
 
+    //slider
+    [SerializeField] private Scrollbar themePanelScroll;
+
     private void Start()
     {
+        themePanelScroll.value = 1f; // Set initial value to 1
+
         StartCoroutine(WaitAndLoadData());
     }
 
@@ -57,14 +62,17 @@ public class EX_ThemesPanel : Panel
         // Find ExDataLoader (with safety check)
         dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
 
-        if (dataLoader != null)
-        {
-            //important - load themes after data is ready
-            LoadThemes();
-
-            // Set tempSectionManager to current sectionManager to ensure ApplySelectedTheme works correctly
-            dataLoader.tempSectionManager = dataLoader.sectionManager;
+        if (dataLoader == null)
+            {
+            Debug.LogError("ExDataLoader GameObject with tag 'ExDataLoader' not found!");
+            yield break;
         }
+
+        //important - load themes after data is ready
+        LoadThemes();
+
+        // Set tempSectionManager to current sectionManager to ensure ApplySelectedTheme works correctly
+        dataLoader.tempSectionManager = dataLoader.sectionManager;
     }
 
 
@@ -117,43 +125,12 @@ public class EX_ThemesPanel : Panel
             if (currentTheme == null)
                 return;
 
-            //load data into button component
-            
-            //localized theme name
-            try
-            {
-                themeBtnComponent.themeName.text = currentTheme.themeName.GetLocalizedString();
-            }
-            catch
-            {
-                themeBtnComponent.themeName.text = "Loc not assigned yet";
-            }
-            
-            //thame name in target lang (lern lang LT, LV etc)
-            themeBtnComponent.themeNameLocal.text = currentTheme.themeNameTargetLang;
-
+            //load data into button component                     
             //set theme            
-            themeBtnComponent.sectionManager = currentTheme;
-            
-            //set theme button icon
-            themeBtnComponent.themeIcon.sprite = dataLoader.themes.theme[i].themeIcon;
+            themeBtnComponent.sectionManager = currentTheme;           
             
             //set index. For save
-            themeBtnComponent.themeIndex = i;
-
-            //for questions count
-            int qCount = 0;
-            //int completeCount = 0;
-
-            // Step 1 - try to get questions count - basic
-            qCount = currentTheme.GetTotalQuestionCount();
-
-            // Step 2 - try to get questions count - try bundle
-            if (qCount == 0)
-                qCount = currentTheme.GetBundleTotalQuestionCount();
-
-            //set questions count (any)
-            themeBtnComponent.questionsCount.text = qCount.ToString(); // bundle          
+            themeBtnComponent.themeIndex = i;   
         }
     }
 

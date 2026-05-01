@@ -95,7 +95,7 @@ public class EX_MainPanel : Panel
         if (gameData != null)
         {
             UpdateButton(starsBtnImage, gameData.saveData.stars);
-            UpdateButton(lifeBtnImage, gameData.saveData.life);
+            //UpdateButton(lifeBtnImage, gameData.saveData.life);
             UpdateButton(crystalsBtnImage, gameData.saveData.crystals);
         }
     }
@@ -123,14 +123,14 @@ public class EX_MainPanel : Panel
         // and top offset (notch)
         float topOffset = (Screen.height - safeArea.y - safeArea.height) / scaleFactor;
 
-        Debug.Log($"[SafeArea] screen: {Screen.height}px | safeArea: {safeArea} | scaleFactor: {scaleFactor}");
-        Debug.Log($"[SafeArea] safeAreaHeight: {safeAreaHeight} | top: {topOffset} | bottom: {bottomOffset}");
+        //Debug.Log($"[SafeArea] screen: {Screen.height}px | safeArea: {safeArea} | scaleFactor: {scaleFactor}");
+        //Debug.Log($"[SafeArea] safeAreaHeight: {safeAreaHeight} | top: {topOffset} | bottom: {bottomOffset}");
 
         // panel02 fills whatever is left
         float panel02Height = safeAreaHeight - PANEL01_HEIGHT - PANEL03_HEIGHT;
         panel02Height = Mathf.Max(panel02Height, 0f);
 
-        Debug.Log($"[SetPanelHeight] p01: {PANEL01_HEIGHT} | p02: {panel02Height} | p03: {PANEL03_HEIGHT}");
+        //Debug.Log($"[SetPanelHeight] p01: {PANEL01_HEIGHT} | p02: {panel02Height} | p03: {PANEL03_HEIGHT}");
 
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL01_HEIGHT);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);

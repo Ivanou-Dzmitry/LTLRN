@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using static Section;
 
 //panel for section
 public class SectionPanel : MonoBehaviour
@@ -13,6 +14,10 @@ public class SectionPanel : MonoBehaviour
     private DBUtils dbUtils;
 
     private EX_BundleMenu bundlePanel;
+
+    [Header("Section")]
+    public Section currentSection; //important
+    public int sectionIndex;
 
     [Header("UI")]    
     public Image sectionImage;
@@ -38,9 +43,7 @@ public class SectionPanel : MonoBehaviour
     [Header("Play Section")]
     public Button playSectionButton;
 
-    [Header("Section")]
-    public Section currentSection; //important
-    public int sectionIndex;
+
 
     public RectTransform questionsRectTransform;
 
@@ -67,7 +70,7 @@ public class SectionPanel : MonoBehaviour
 
         //play section
         if (playSectionButton != null)
-            playSectionButton.onClick.AddListener(OnClicked);
+            playSectionButton.onClick.AddListener(PlaySection);
 
         //get game data
         gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
@@ -76,10 +79,35 @@ public class SectionPanel : MonoBehaviour
     private void Start()
     {
         //get db utils        
-        dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
+        dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();     
+        dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();        
     }
 
-    private void OnClicked()
+    private void PlaySection()
+    {
+        if (dataLoader == null)
+            return;
+
+        if (isBundleSection)
+        {
+            //load only lear type
+            if(currentSection.bundleSections[0].sectionType == SectionType.LearnType01)
+            {
+                dataLoader.sectionClass = currentSection.bundleSections[0];
+                gameData.saveData.sectionToLoad = currentSection.bundleSections[0];
+            }
+        }
+        else
+        {
+            dataLoader.sectionClass = currentSection;
+            gameData.saveData.sectionToLoad = currentSection;
+        }
+
+            //load game
+            PanelManager.OpenScene("ExGame");
+    }
+
+/*    private void OnClicked()
     {
         //for bundle sections, open bundle menu and load sections into it, otherwise load game directly with selected section
         if (isBundleSection)
@@ -90,7 +118,7 @@ public class SectionPanel : MonoBehaviour
         {
             LoadBasic();
         }
-    }
+    }*/
 
     private void OnLike()
     {
@@ -161,21 +189,7 @@ public class SectionPanel : MonoBehaviour
     {
         //remove listeners
         likeButton.onClick.RemoveListener(OnLike);
-        playSectionButton.onClick.RemoveListener(OnClicked);
-    }
-
-    private Locale GetLocale()
-    {
-        
-        string savedLang = gameData.saveData.lang.ToLower();
-
-        Locale locale = LocalizationSettings.AvailableLocales.Locales
-            .FirstOrDefault(l => l.Identifier.Code == savedLang);
-
-        if (locale != null)
-            LocalizationSettings.SelectedLocale = locale;
-
-        return locale;
+        playSectionButton.onClick.RemoveListener(PlaySection);
     }
 
     private void LoadBundle(string bundleSectionName)

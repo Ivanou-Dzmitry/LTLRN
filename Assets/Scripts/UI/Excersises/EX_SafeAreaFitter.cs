@@ -32,6 +32,6 @@ public class SafeAreaFitter : MonoBehaviour
         rt.offsetMin = Vector2.zero;
         rt.offsetMax = Vector2.zero;
 
-        Debug.Log($"[SafeAreaFitter] Applied: min={anchorMin} max={anchorMax}");
+        //Debug.Log($"[SafeAreaFitter] Applied: min={anchorMin} max={anchorMax}");
     }
 }

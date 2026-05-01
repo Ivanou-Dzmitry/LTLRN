@@ -24,14 +24,19 @@ public class Ex_GamePanel : Panel
 
     [Header("UI")]
     public Canvas canvasRoot;
-    public RectTransform panel_01;
-    public RectTransform panel_02;
-    public RectTransform panel_03;
+    [SerializeField] private RectTransform panel_01;
+    [SerializeField] private RectTransform panel_02;
+    [SerializeField] private RectTransform panel_03;
+    [SerializeField] private RectTransform scrollPanel;
+
+    [Header("Buttons")]
     public Button infoButton;
     
     // for ui layout
-    private const float PANEL_01_HEIGHT = 270f;
-    private const float PANEL_03_HEIGHT = 152f;
+    private const float PANEL_01_HEIGHT = 395f;
+    private const float PANEL_03_HEIGHT = 208f;
+
+    private const float PANEL_BUTTONS_HEIGHT = 208f;
 
     //private const float HEADER_HEIGHT = 152f;
 
@@ -121,6 +126,8 @@ public class Ex_GamePanel : Panel
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_01_HEIGHT);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
         panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_03_HEIGHT);
+
+        scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height - PANEL_BUTTONS_HEIGHT);
     }
 
     private void OnInfoClicked()

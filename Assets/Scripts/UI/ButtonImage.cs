@@ -97,10 +97,11 @@ public class ButtonImage : MonoBehaviour
         if (buttonImage == null || palette == null)
             return;
 
+        //set disabled colors
         if (!button.interactable)
         {
-            buttonImage.color = palette.DisabledButton;
-            buttonText.color = palette.Gray4Dark;
+            buttonImage.color = palette.Gray2Light;
+            buttonText.color = palette.Gray2Light;
             return;
         }
 

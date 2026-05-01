@@ -118,7 +118,7 @@ public class ExGameLogic : MonoBehaviour
     private const float CHECK_DELAY = 10f;
     private Coroutine resultRoutine;
     private const int QUESTIONS_COUNT = 4;
-    private const int LEARN_PANEL_PADDING = 24;
+    //private const int LEARN_PANEL_PADDING = 24;
 
     //question data handler
     private ExQManager01 qData;
@@ -782,8 +782,8 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-            // Learn type 01
-            if (question.questionType == QuestionType.Learn)
+        // Learn type 01
+        if (question.questionType == QuestionType.Learn)
         {
             for(int i = 0; i < tempQuestions.Count; i++)
             {
@@ -851,8 +851,8 @@ public class ExGameLogic : MonoBehaviour
         RectTransform rt = questionInstance.GetComponent<RectTransform>();
         rt.localScale = Vector3.one;
         rt.anchoredPosition = Vector2.zero;
-        rt.offsetMin = Vector2.zero;
-        rt.offsetMax = Vector2.zero;
+/*        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;*/
     }
 
     //check button click
@@ -1454,8 +1454,8 @@ public class ExGameLogic : MonoBehaviour
         ScrollRect scRect = panelScroll.GetComponent<ScrollRect>();
 
         //get height of question container
-        ExQManager01 uiPrefab = questionPrefabs[4].GetComponent<ExQManager01>();
-        float learnPanelHeight = uiPrefab.questionContainer.rect.height + LEARN_PANEL_PADDING;
+/*        ExQManager01 uiPrefab = questionPrefabs[4].GetComponent<ExQManager01>();
+        float learnPanelHeight = uiPrefab.questionContainer.rect.height + LEARN_PANEL_PADDING;*/
 
         //UI diff in learn mode
         if (!isLearnSection)
@@ -1475,9 +1475,9 @@ public class ExGameLogic : MonoBehaviour
             scRect.vertical = true;
 
             //set height of question container based on questions count
-            float height = tempQuestions.Count * learnPanelHeight;
+/*            float height = tempQuestions.Count * learnPanelHeight;
 
-            questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);
+            questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);*/
 
             //set text
             skillLevelText.text = textForLearn;
