@@ -1,8 +1,6 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using static Section;
 
@@ -88,23 +86,35 @@ public class SectionPanel : MonoBehaviour
         if (dataLoader == null)
             return;
 
+        var learnSection = currentSection.bundleSections
+            .FirstOrDefault(s => s.sectionType == SectionType.LearnType01);
+
         if (isBundleSection)
         {
             //load only lear type
-            if(currentSection.bundleSections[0].sectionType == SectionType.LearnType01)
+            if(learnSection != null)
             {
-                dataLoader.sectionClass = currentSection.bundleSections[0];
-                gameData.saveData.sectionToLoad = currentSection.bundleSections[0];
+                dataLoader.sectionClass = learnSection;
+                gameData.saveData.sectionToLoad = learnSection;
+
+                //bundle
+                gameData.saveData.bundleSections = bundleSections;
+
+                //save name
+                gameData.saveData.sectionName = currentSection.name;
             }
         }
         else
         {
             dataLoader.sectionClass = currentSection;
+            gameData.saveData.selectedSectionIndex = sectionIndex;
             gameData.saveData.sectionToLoad = currentSection;
         }
 
-            //load game
-            PanelManager.OpenScene("ExGame");
+        gameData.SaveToFile();
+
+        //load game
+        PanelManager.OpenScene("ExGame");
     }
 
 /*    private void OnClicked()

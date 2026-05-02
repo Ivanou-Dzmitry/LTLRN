@@ -1,10 +1,7 @@
 using LTLRN.UI;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EX_MainPanel : Panel
@@ -38,10 +35,10 @@ public class EX_MainPanel : Panel
     public Button runRandomThemeButton;
 
     [Header("UI")]
-    public Canvas canvasRoot;
-    public RectTransform panel_01;
-    public RectTransform panel_02;
-    public RectTransform panel_03;
+/*    public Canvas canvasMRoot;
+    public RectTransform panelM_01;
+    public RectTransform panelM_02;
+    public RectTransform panelM_03;*/
 
     [Header("Text prefab")]
     public TMP_Text textPrefab;
@@ -49,13 +46,13 @@ public class EX_MainPanel : Panel
 
     [SerializeField] private TMP_Text errorTextAsset;
 
-    public RectTransform scrollPanel;
+    [SerializeField] private RectTransform scrollPanel;
 
     // for ui layout
-    private const float PANEL01_HEIGHT = 440f;
-    private const float PANEL03_HEIGHT = 208f;
-    private const float SPACING = 0;
-    private const float HEADER_HEIGHT = 0f;
+/*    private const float PANEL01_HEIGHT = 440f;
+    private const float PANEL03_HEIGHT = 208f;*/
+/*    private const float SPACING = 0;
+    private const float HEADER_HEIGHT = 0f;*/
 
     public override void Initialize()
     {
@@ -83,10 +80,13 @@ public class EX_MainPanel : Panel
         if (gameData == null) return;
 
         LoadGameData();
-        
+
+        base.Open();
+
         SetPanelHeight();
-        
-        base.Open();        
+
+        //float scrollPanelHeight = panel02Height - HEADER_HEIGHT - SPACING;
+        scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);             
     }
 
     private void LoadGameData()
@@ -110,10 +110,10 @@ public class EX_MainPanel : Panel
         btn.RefreshState();
     }
 
-    void SetPanelHeight()
+/*    void SetPanelHeight()
     {
         Rect safeArea = Screen.safeArea;
-        float scaleFactor = canvasRoot.scaleFactor;
+        float scaleFactor = canvasMRoot.scaleFactor;
 
         // safe area in screen pixels - convert to canvas units
         float safeAreaHeight = safeArea.height / scaleFactor;
@@ -132,13 +132,13 @@ public class EX_MainPanel : Panel
 
         //Debug.Log($"[SetPanelHeight] p01: {PANEL01_HEIGHT} | p02: {panel02Height} | p03: {PANEL03_HEIGHT}");
 
-        panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL01_HEIGHT);
-        panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
-        panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL03_HEIGHT);
+        panelM_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL01_HEIGHT);
+        panelM_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
+        panelM_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL03_HEIGHT);
 
         float scrollPanelHeight = panel02Height - HEADER_HEIGHT - SPACING;
         scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, scrollPanelHeight);
-    }
+    }*/
 
     private void ToggleLikeFilter()
     {

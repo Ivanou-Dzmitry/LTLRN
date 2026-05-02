@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using static Section;

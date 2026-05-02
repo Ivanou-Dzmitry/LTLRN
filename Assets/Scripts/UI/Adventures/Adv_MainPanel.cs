@@ -3,14 +3,14 @@ using LTLRN.UI;
 
 public class Adv_MainPanel : Panel
 {
-    [Header("UI")]
-    public Canvas canvasRoot;
-    public RectTransform panel_01;
-    public RectTransform panel_02;
-    public RectTransform panel_03;
+    /*   [Header("UI")]
+       public Canvas canvasRoot;
+       public RectTransform panel_01;
+       public RectTransform panel_02;
+       public RectTransform panel_03;*/
 
-    private float panel01Height = 128f;
-    private float panel03Height = 192f;
+    /*    private float panel01Height = 128f;
+        private float panel03Height = 192f;*/
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +19,7 @@ public class Adv_MainPanel : Panel
         base.Open();
     }
 
-    void SetPanelHeight()
+/*    void SetPanelHeight()
     {
         Rect safeArea = Screen.safeArea;
 
@@ -40,6 +40,6 @@ public class Adv_MainPanel : Panel
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel01Height);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
         panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel03Height);
-    }
+    }*/
 
 }

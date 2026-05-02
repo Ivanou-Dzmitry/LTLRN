@@ -1,10 +1,7 @@
 using LTLRN.UI;
 using System.Collections;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 //panel with theme choosed
@@ -22,6 +19,7 @@ public class EX_ThemesPanel : Panel
     //prefab and container for themes
     public GameObject themeButtonPrefab;
     public RectTransform themesContainer;
+    public RectTransform scrollPanel;
 
     //slider
     [SerializeField] private Scrollbar themePanelScroll;
@@ -31,6 +29,9 @@ public class EX_ThemesPanel : Panel
         themePanelScroll.value = 1f; // Set initial value to 1
 
         StartCoroutine(WaitAndLoadData());
+
+        SetPanelHeight();
+        scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
     }
 
     private IEnumerator WaitAndLoadData()

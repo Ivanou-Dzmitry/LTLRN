@@ -370,7 +370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0.00012207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &207922006
@@ -2146,19 +2146,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.a
-      value: 0.7176471
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.b
-      value: 0.8468414
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.g
-      value: 0.8468414
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.r
-      value: 0.99371064
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
@@ -4918,6 +4918,13 @@ MonoBehaviour:
   panelImage: {fileID: 1148451104}
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
   panelColor: 0
+  canvasRoot: {fileID: 0}
+  panel_01: {fileID: 0}
+  panel_02: {fileID: 0}
+  panel_03: {fileID: 0}
+  PANEL_01_HEIGHT: 395
+  PANEL_03_HEIGHT: 200
+  panel02Height: 0
   exitButton: {fileID: 343577720}
   headerText: {fileID: 1328468212}
   sectionTypeIcons:
@@ -5555,7 +5562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4096145154094965966, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 4096145154094965966, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_SizeDelta.y
@@ -7008,6 +7015,13 @@ MonoBehaviour:
   panelImage: {fileID: 1537830721}
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
   panelColor: 2
+  canvasRoot: {fileID: 404929007}
+  panel_01: {fileID: 2003871359}
+  panel_02: {fileID: 2022636707}
+  panel_03: {fileID: 952960300}
+  PANEL_01_HEIGHT: 440
+  PANEL_03_HEIGHT: 200
+  panel02Height: 0
   lifeBtn: {fileID: 1942110487}
   crystalsBtn: {fileID: 908226440}
   starsBtn: {fileID: 2073363210}
@@ -7015,10 +7029,6 @@ MonoBehaviour:
   likeFilterButton: {fileID: 1750970817}
   contentPanel: {fileID: 1289463539}
   runRandomThemeButton: {fileID: 1656312535}
-  canvasRoot: {fileID: 404929007}
-  panel_01: {fileID: 2003871359}
-  panel_02: {fileID: 2022636707}
-  panel_03: {fileID: 952960300}
   textPrefab: {fileID: 7473636883127349873, guid: 8ea0ad0399ae41c419999ca5c2fd9fb2, type: 3}
   errorTextAsset: {fileID: 2146009803}
   scrollPanel: {fileID: 1375588999}
@@ -8753,9 +8763,17 @@ MonoBehaviour:
   panelImage: {fileID: 1636626195}
   palette: {fileID: 11400000, guid: 4f7e8a7a1b00d6045bc07793a9020ed6, type: 2}
   panelColor: 2
+  canvasRoot: {fileID: 404929007}
+  panel_01: {fileID: 896810985}
+  panel_02: {fileID: 202015711}
+  panel_03: {fileID: 0}
+  PANEL_01_HEIGHT: 240
+  PANEL_03_HEIGHT: 0
+  panel02Height: 0
   userName: {fileID: 802163735}
   themeButtonPrefab: {fileID: 3009451885566515141, guid: 7b299466019929647ba911405cda2011, type: 3}
   themesContainer: {fileID: 1344290784}
+  scrollPanel: {fileID: 1145584779}
   themePanelScroll: {fileID: 1651189041}
 --- !u!114 &1636626195 stripped
 MonoBehaviour:
@@ -10444,7 +10462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4096145154094965966, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 4096145154094965966, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_SizeDelta.y
@@ -11594,19 +11612,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.b
-      value: 0.7610062
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.g
-      value: 0.7610062
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6360893888529154648, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Color.r
-      value: 0.7610062
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7052922696757609624, guid: 384b72e585b56d64389b89913b571684, type: 3}
       propertyPath: m_Type

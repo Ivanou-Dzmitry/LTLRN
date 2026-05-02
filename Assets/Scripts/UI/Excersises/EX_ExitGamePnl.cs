@@ -32,6 +32,8 @@ public class EX_ExitGamePnl : Panel
         
         base.Open();
 
+        SetPanelHeight();
+
         //run animation
         returnBtn.PlayAnimation(true, ButtonImage.ButtonAnimation.Scale.ToString());
     }

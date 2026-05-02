@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 using UnityEngine.UI;
 
 public class SectionButton : MonoBehaviour
@@ -30,10 +29,10 @@ public class SectionButton : MonoBehaviour
     private void OnClicked()
     {
         //get data loader and game data
-        dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
+        //dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();
         dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
 
-        //set current section
+/*        //set current section
         if (dataLoader != null)
         {
             dataLoader.sectionClass = sectionName;
@@ -42,7 +41,7 @@ public class SectionButton : MonoBehaviour
                 dbUtils.SetSectionComplete(sectionName.name, true);
 
             //Debug.Log("Section set to: " + sectionName.ToString());
-        }
+        }*/
 
         //get game data
         if (gameData == null)

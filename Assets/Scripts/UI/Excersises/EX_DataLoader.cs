@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Linq;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using static Section;

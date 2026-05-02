@@ -9,32 +9,33 @@ public class Ex_GamePanel : Panel
     private ExGameLogic exGameLogic;
 
     //buttons
-    private ButtonImage starsBtnImage;
-    private ButtonImage lifeBtnImage;
+    //private ButtonImage starsBtnImage;
+    //private ButtonImage lifeBtnImage;
     private ButtonImage crystalsBtnImage;
 
     [Header("Game data")]
-    public Button lifeBtn;
+    //public Button lifeBtn;
     public Button crystalsBtn;
-    public Button starsBtn;
+    //public Button starsBtn;
     public TMP_Text themeNameSysLang;
     public TMP_Text themeNameTargetLang;
     public TMP_Text sectionDifficulty;
     public TMP_Text sectionDescribeTxt;
 
     [Header("UI")]
-    public Canvas canvasRoot;
-    [SerializeField] private RectTransform panel_01;
+    //public Canvas canvasRoot;
+/*    [SerializeField] private RectTransform panel_01;
     [SerializeField] private RectTransform panel_02;
-    [SerializeField] private RectTransform panel_03;
+    [SerializeField] private RectTransform panel_03;*/
     [SerializeField] private RectTransform scrollPanel;
+
 
     [Header("Buttons")]
     public Button infoButton;
     
     // for ui layout
     private const float PANEL_01_HEIGHT = 395f;
-    private const float PANEL_03_HEIGHT = 208f;
+    private const float PANEL_03_HEIGHT = 200f;
 
     private const float PANEL_BUTTONS_HEIGHT = 208f;
 
@@ -43,8 +44,8 @@ public class Ex_GamePanel : Panel
     public override void Initialize()
     {
         // Cache components once
-        starsBtnImage = starsBtn.GetComponent<ButtonImage>();
-        lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
+        //starsBtnImage = starsBtn.GetComponent<ButtonImage>();
+        //lifeBtnImage = lifeBtn.GetComponent<ButtonImage>();
         crystalsBtnImage = crystalsBtn.GetComponent<ButtonImage>();
 
         infoButton.onClick.AddListener(OnInfoClicked);
@@ -56,6 +57,8 @@ public class Ex_GamePanel : Panel
         
         SetPanelHeight();
 
+        scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height - PANEL_BUTTONS_HEIGHT);
+
         LoadGameData();
     }
 
@@ -65,8 +68,8 @@ public class Ex_GamePanel : Panel
         
         if (gameData != null)
         {
-            UpdateButton(starsBtnImage, gameData.saveData.stars);
-            UpdateButton(lifeBtnImage, gameData.saveData.life);
+            //UpdateButton(starsBtnImage, gameData.saveData.stars);
+            //UpdateButton(lifeBtnImage, gameData.saveData.life);
             UpdateButton(crystalsBtnImage, gameData.saveData.crystals);
         }
     }
@@ -103,7 +106,7 @@ public class Ex_GamePanel : Panel
         btn.RefreshState();
     }
 
-    void SetPanelHeight()
+/*    void SetPanelHeight()
     {
         Rect safeArea = Screen.safeArea;
 
@@ -125,10 +128,8 @@ public class Ex_GamePanel : Panel
         // Set heights
         panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_01_HEIGHT);
         panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
-        panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_03_HEIGHT);
-
-        scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height - PANEL_BUTTONS_HEIGHT);
-    }
+        panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_03_HEIGHT);        
+    }*/
 
     private void OnInfoClicked()
     {

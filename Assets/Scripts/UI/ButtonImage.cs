@@ -24,8 +24,8 @@ public class ButtonImage : MonoBehaviour
     {
         Primary,
         Secondary,
-        OnPrimary,
-        OnAccent,
+        Black,
+        White,
         Disabled
     }
 
@@ -77,7 +77,7 @@ public class ButtonImage : MonoBehaviour
 
     private void ApplyAll()
     {
-        ApplyButtonColor();
+        //ApplyButtonColor();
         ApplyButtonText();
     }
 
@@ -92,7 +92,7 @@ public class ButtonImage : MonoBehaviour
         buttonText.color = GetTextColor(selectedTextColor);
     }
 
-    private void ApplyButtonColor()
+    private void ApplyButtonColor(ButtonColor color)
     {
         if (buttonImage == null || palette == null)
             return;
@@ -107,11 +107,11 @@ public class ButtonImage : MonoBehaviour
 
         if(currentState == ButtonState.Normal)
         {
-            buttonImage.color = GetButtonColor(selectedButtonColor);
+            buttonImage.color = GetButtonColor(color);
         }
         else if(currentState == ButtonState.Selected)
         {
-            buttonImage.color = GetButtonColor(ButtonColor.SuccessLight);
+            buttonImage.color = GetButtonColor(color);
         }
             
     }
@@ -142,9 +142,9 @@ public class ButtonImage : MonoBehaviour
         {
             TextColor.Primary => palette.TextPrimary,
             TextColor.Secondary => palette.TextSecondary,
-            TextColor.OnPrimary => palette.TextPrimary,
-            TextColor.OnAccent => palette.TextPrimary,
-            TextColor.Disabled => palette.TextSecondary,
+            TextColor.Black => palette.Accent,
+            TextColor.White => palette.TextSecondary,
+            TextColor.Disabled => palette.Gray2Light,
             _ => palette.TextPrimary
         };
     }
@@ -153,13 +153,18 @@ public class ButtonImage : MonoBehaviour
     public void SetButtonColor(ButtonColor color)
     {
         selectedButtonColor = color;
-        ApplyButtonColor();
+        ApplyButtonColor(color);
     }
 
     public void SetTextColor(TextColor color)
     {
         selectedTextColor = color;
         ApplyButtonText();
+    }
+
+    public void SetIconColor(ButtonColor color)
+    {
+        buttonIcon.color = GetButtonColor(color);        
     }
 
     public void SetText(string text)
@@ -172,13 +177,26 @@ public class ButtonImage : MonoBehaviour
     {
         button.interactable = !disabled;
         currentState = disabled ? ButtonState.Disabled : ButtonState.Normal;
-        ApplyButtonColor();
+
+        if (disabled)
+        {
+            SetIconColor(ButtonColor.Gray2Light);
+            SetTextColor(TextColor.Disabled);
+        }
+        else
+        {
+            SetIconColor(ButtonColor.Gray3Dark);
+            SetTextColor(TextColor.Black);
+        }
+            
+
+        //ApplyButtonColor();
     }
 
     public void SetSelected(bool selected)
     {
         currentState = selected ? ButtonState.Selected : ButtonState.Normal;
-        ApplyButtonColor();
+        //ApplyButtonColor();
     }
 
     public void RefreshState()

@@ -123,7 +123,6 @@ public class ExQManager01 : MonoBehaviour
             if (answerIcons[1] != null)
                 answerIcons[1].color = palette.Gray6Dark;
         }
-
     }
 
 
@@ -192,14 +191,15 @@ public class ExQManager01 : MonoBehaviour
         //set answer index in game logic IMPORTANT
         exGameLogic.currentAnswerIndex = index;
 
-        // Reset all buttons to Primary
+/*        // Reset all buttons to Primary
         foreach (var answer in answerButtons)
         {
-            answer.buttonImage.SetButtonColor(ButtonImage.ButtonColor.Primary);
-        }
+            Debug.Log($"Resetting button: {answer.answerText}");
+            answer.buttonImage.SetButtonColor(ButtonImage.ButtonColor.Success);
+        }*/
 
         // Highlight selected button
-        answerButtons[index].buttonImage.SetButtonColor(ButtonImage.ButtonColor.SuccessLight);
+        //answerButtons[index].buttonImage.SetButtonColor(ButtonImage.ButtonColor.SuccessLight);
         selectedAnswerIndex = index;
 
         //check
@@ -267,6 +267,8 @@ public class ExQManager01 : MonoBehaviour
         foreach (var answer in answerButtons)
         {
             answer.buttonImage.SetButtonColor(ButtonImage.ButtonColor.Primary);
+            answer.buttonImage.SetIconColor(ButtonImage.ButtonColor.Primary);
+            answer.buttonImage.SetTextColor(ButtonImage.TextColor.Disabled);
         }
 
         // Show correct answer in green
@@ -326,18 +328,21 @@ public class ExQManager01 : MonoBehaviour
 
     private void ButtonStateSwitcher(int index, bool correct)
     {
+        //set colors
         if (correct)
         {
             answerButtons[index].buttonImage.SetButtonColor(ButtonImage.ButtonColor.Success);
-            answerButtons[index].buttonImage.buttonIcon.sprite = answerIcon[0]; // right icon            
+            answerButtons[index].buttonImage.buttonIcon.sprite = answerIcon[0]; // right icon
+            answerButtons[index].buttonImage.buttonIcon.color = palette.Secondary;
+            answerButtons[index].buttonImage.SetTextColor(ButtonImage.TextColor.Black);
         }
         else
         {
             answerButtons[index].buttonImage.SetButtonColor(ButtonImage.ButtonColor.Disabled);
-            answerButtons[index].buttonImage.buttonIcon.sprite = answerIcon[1]; // wrong icon             
+            answerButtons[index].buttonImage.buttonIcon.sprite = answerIcon[1]; // wrong icon
+            answerButtons[index].buttonImage.buttonIcon.color = palette.Gray6Dark;
+            answerButtons[index].buttonImage.SetTextColor(ButtonImage.TextColor.Black); 
         }
-
-        answerButtons[index].buttonImage.buttonIcon.color = palette.Gray6Ligth;
     }
 
 

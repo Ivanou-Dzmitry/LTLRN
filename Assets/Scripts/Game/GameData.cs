@@ -15,6 +15,8 @@ public class SaveData
 
     public Section sectionToLoad;
     public Section[] bundleSections;
+    public string sectionName;
+    public Section nextSection;
 
     [Header("Player")]
     public string playerName;
@@ -120,6 +122,8 @@ public class GameData : MonoBehaviour
 
             gameData.saveData.selectedThemeIndex = 0;
             gameData.saveData.selectedSectionIndex = 0;
+            gameData.saveData.sectionName = "";
+            gameData.saveData.nextSection = null;
 
             //player position
             gameData.saveData.playerPosition = new Vector3 (5, -14, 0);

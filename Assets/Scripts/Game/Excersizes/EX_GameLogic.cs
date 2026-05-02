@@ -2,16 +2,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using static QuestionBase;
 using System.Linq;
+using static Section;
+
+
 
 
 #if UNITY_ANDROID
@@ -35,7 +34,7 @@ public class ExGameLogic : MonoBehaviour
         public string questionText;
         public string[] answerFirstWord;
         public string[] answerSecondWord;
-        public string[] qSoundClipName;        
+        public string[] qSoundClipName;
         public string[] questionImageFile;
         public int imagesCount;
         public int correctAnswerNumber;
@@ -53,7 +52,7 @@ public class ExGameLogic : MonoBehaviour
     private SoundManager soundManager;
     private ScoreManager scoreManager;
     private LanguageSwitcher locManager;
-    
+
     [Header("App State")]
     public GameState gameState;
 
@@ -68,7 +67,7 @@ public class ExGameLogic : MonoBehaviour
     public Themes themes;
     public SectionManager sectionManager;
     public Section currentSection;
-    private Section nextSection;
+    public Section nextSection;
     public QuestionBase currentQuestion;
 
     [Header("GEN")]
@@ -91,6 +90,10 @@ public class ExGameLogic : MonoBehaviour
     public Button interruptGameButton;
     public Button finishButton;
     public Button takeTestButton;
+    public Button nextThemeButton;
+
+    [Header("Panel with tests")]
+    [SerializeField] private EX_TestSelectorPnl testSelectorPanel;
 
     [Header("Answer")]
     public int currentAnswerIndex = -1;
@@ -136,6 +139,7 @@ public class ExGameLogic : MonoBehaviour
         nextButton.gameObject.SetActive(true);
         finishButton.gameObject.SetActive(false);
         takeTestButton.gameObject.SetActive(false);
+        nextThemeButton.gameObject.SetActive(false);
 
         //checkBtn = checkButton.GetComponent<ButtonImage>();
         nextBtn = nextButton.GetComponent<ButtonImage>();
@@ -144,10 +148,11 @@ public class ExGameLogic : MonoBehaviour
         nextButton.onClick.AddListener(nextBtnClicked);
         interruptGameButton.onClick.AddListener(OnGameInterrupt);
         takeTestButton.onClick.AddListener(OnTakeTest);
+        nextThemeButton.onClick.AddListener(ToNextSection);
     }
 
     private void Start()
-    {        
+    {
         StartCoroutine(WaitAndLoadData());
     }
 
@@ -166,7 +171,7 @@ public class ExGameLogic : MonoBehaviour
         while (!dbUtils.IsReady)
         {
             yield return null;
-        }        
+        }
 
         // IMPORTANT
         LoadGameData();
@@ -200,11 +205,11 @@ public class ExGameLogic : MonoBehaviour
                     //if (index >= 0 && index < sectionManager.sections.Length)
                     tempSection = sectionManager.sections[index];
                 }
-                catch (Exception e)                
+                catch (Exception e)
                 {
                     Debug.LogWarning($"Load 0 section. {e} Maybe section is bundle.");
                     tempSection = sectionManager.sections[0];
-                }            
+                }
 
                 // Avoid empty bundle
                 if (tempSection.isBundle)
@@ -215,12 +220,12 @@ public class ExGameLogic : MonoBehaviour
                         tempBundleSection = gameData.saveData.sectionToLoad;
                         currentSection = tempBundleSection;
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Debug.LogWarning($"Load 0 bundle. {e}");
                         tempBundleSection = tempSection.bundleSections[0];
                         currentSection = tempBundleSection;
-                    }            
+                    }
                 }
                 else
                 {
@@ -248,29 +253,29 @@ public class ExGameLogic : MonoBehaviour
             {
                 //question generator
                 tempQuestions = qGen.QuestionGenerator(currentSection.questions[0]);
-  
+
                 //round 2
-                if(tempQuestions == null)
+                if (tempQuestions == null)
                     tempQuestions = new List<QuestionBase>(currentSection.questions);
-            }                                       
+            }
             else
-                tempQuestions = new List<QuestionBase>(gameData.saveData.sectionToLoad.questions);            
+                tempQuestions = new List<QuestionBase>(gameData.saveData.sectionToLoad.questions);
 
             //shuffle if not learn section
-            if(!isLearnSection)
+            if (!isLearnSection)
                 ShuffleQuestions(tempQuestions);
 
             //load first question
             if (tempQuestions != null && tempQuestions.Count > 0)
-                currentQuestion = tempQuestions[0];       
-            }
-            else
-            {
-                Debug.LogError("GameData not found in scene!");            
-            }
+                currentQuestion = tempQuestions[0];
+        }
+        else
+        {
+            Debug.LogError("GameData not found in scene!");
+        }
 
         //load sound
-        if(soundManager != null)
+        if (soundManager != null)
         {
             soundManager.LoadSoundData();
         }
@@ -301,7 +306,7 @@ public class ExGameLogic : MonoBehaviour
 
         //set UI depends on type - test or learn
         StartCoroutine(SetupUI());
-                   
+
         //start time
         sessionStartTime = Time.time;
 
@@ -315,11 +320,11 @@ public class ExGameLogic : MonoBehaviour
         PanelManager.Open("exgamemain");
 
         //load game panel
-        Ex_GamePanel gamePanel= panelUI.gameObject.GetComponent<Ex_GamePanel>();
+        Ex_GamePanel gamePanel = panelUI.gameObject.GetComponent<Ex_GamePanel>();
 
         //get current language
         currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
-       
+
         //set UI lang
         gamePanel.SetUIData(currentLang.ToString());
     }
@@ -371,7 +376,7 @@ public class ExGameLogic : MonoBehaviour
         QuestionData data = new QuestionData();
 
         //get auto flag
-        bool isAuto = question.isAutomated;        
+        bool isAuto = question.isAutomated;
 
         //load q text from db
         if (questionLang == QuestionLang.LT.ToString() || questionLang == QuestionLang.IMG.ToString())
@@ -417,7 +422,7 @@ public class ExGameLogic : MonoBehaviour
         //if no answers defined - set default
         if (question.answerReferences != null)
             firstAnswerWordsCount = question.answerReferences.Length;
-        
+
         //set auto default
         if (firstAnswerWordsCount == 0)
             firstAnswerWordsCount = QUESTIONS_COUNT; //default 4
@@ -442,14 +447,14 @@ public class ExGameLogic : MonoBehaviour
             else
                 dynamicColumnName = qp.Value.ColumnName;
 
-                data.answerFirstWord = DBUtils.Instance.AutoResolveReference(
-                    qp.Value.TableName,
-                    dynamicColumnName,
-                    qp.Value.RecordID,
-                    questionLang,                    
-                    sysLang,
-                    true
-                );
+            data.answerFirstWord = DBUtils.Instance.AutoResolveReference(
+                qp.Value.TableName,
+                dynamicColumnName,
+                qp.Value.RecordID,
+                questionLang,
+                sysLang,
+                true
+            );
 
             //set correct answer
             data.correctAnswerNumber = DBUtils.Instance.GetCorrectIndex();
@@ -466,10 +471,10 @@ public class ExGameLogic : MonoBehaviour
         /*  SECOND START */
 
         //load second word
-        int secondAnswerWordsCount = 0;        
+        int secondAnswerWordsCount = 0;
 
         //optional 2nd word answers
-        if (question.answerSecondWord != null) 
+        if (question.answerSecondWord != null)
             secondAnswerWordsCount = question.answerSecondWord.Length;
 
         //set auto default second word
@@ -477,7 +482,7 @@ public class ExGameLogic : MonoBehaviour
             secondAnswerWordsCount = QUESTIONS_COUNT; //default 4
 
         data.answerSecondWord = new string[secondAnswerWordsCount];
-                      
+
         //load answers
         for (int i = 0; i < question.answerSecondWord.Length; i++)
         {
@@ -506,10 +511,10 @@ public class ExGameLogic : MonoBehaviour
 
             //try to get sound
             try
-            {                
+            {
                 soundFileName = DBUtils.Instance.GetSound(tableName, data.questionText, columnName);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.LogError("Error getting sound file name: " + e.Message);
             }
@@ -549,12 +554,12 @@ public class ExGameLogic : MonoBehaviour
 
         if (isAuto)
         {
-            
+
             //auto data - get image based on selected question
             string imageFileName = DBUtils.Instance.GetImage(tableName, data.questionText, columnName);
 
             //Debug.Log($"imageFileName: {imageFileName}");
-           
+
             if (!string.IsNullOrEmpty(imageFileName))
             {
                 data.questionImageFile = new[] { imageFileName }; // Length = 1                
@@ -564,13 +569,13 @@ public class ExGameLogic : MonoBehaviour
                 //try get image for complex questions with many pictures
                 try
                 {
-                    data.questionImageFile = new[] { DBUtils.Instance.ResolveReference(question.questionImageFile[0]) };                    
+                    data.questionImageFile = new[] { DBUtils.Instance.ResolveReference(question.questionImageFile[0]) };
                 }
-                catch 
+                catch
                 {
                     //Debug.LogException(ex);(Exception ex)
                     data.questionImageFile = Array.Empty<string>();   // Length = 0
-                }                
+                }
             }
         }
         else
@@ -589,11 +594,11 @@ public class ExGameLogic : MonoBehaviour
             }
         }
 
-        
+
         //get count of images - question with images Type2
         if (question.imagesCount > 0)
             data.imagesCount = question.imagesCount;
-        else if(question.questionType == QuestionType.Image)
+        else if (question.questionType == QuestionType.Image)
             data.imagesCount = DBUtils.Instance.GetImagesCount(tableName, data.questionText, columnName);
 
         //cat for sound and img
@@ -613,7 +618,7 @@ public class ExGameLogic : MonoBehaviour
         if (sectionData.infoText.Length > 0)
             sectionInfo = sectionData.infoText;
         else
-            sectionInfo = "No data";                 
+            sectionInfo = "No data";
     }
 
     //load question
@@ -623,8 +628,8 @@ public class ExGameLogic : MonoBehaviour
         Languages currentLang = LanguageSwitcher.GetLanguageFromLocale(locManager.GetLocale());
 
         //step 2 - load prepared data with selected language IMPORTANT
-        QuestionData data = LoadQuestionData(question, currentLang.ToString());      
-        
+        QuestionData data = LoadQuestionData(question, currentLang.ToString());
+
         bool isAuto = question.isAutomated;
 
         //clear previous question
@@ -676,7 +681,7 @@ public class ExGameLogic : MonoBehaviour
             //after 10 show 1 image
             if (imagesCount > 10)
             {
-                imagesCount = 1;                
+                imagesCount = 1;
                 string countText = $"x{data.imagesCount}";
                 qImage.ShowImagesCountText(countText);
             }
@@ -702,17 +707,17 @@ public class ExGameLogic : MonoBehaviour
                         //load images
                         LoadImages(data.questionImageFile.Length, question, data);
 
-/*                        for (int i = 0; i < data.questionImageFile.Length; i++)
-                        {
-                            GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
-                            newImg.name = "QImage_" + i;
-                            Image img = newImg.GetComponent<Image>();
-                            img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[i]);
-                            img.SetNativeSize();
-                            img.color = question.questionImageColor;
-                            float randomZ = UnityEngine.Random.Range(-5f, 5f);
-                            img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
-                        }*/
+                        /*                        for (int i = 0; i < data.questionImageFile.Length; i++)
+                                                {
+                                                    GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
+                                                    newImg.name = "QImage_" + i;
+                                                    Image img = newImg.GetComponent<Image>();
+                                                    img.sprite = DBUtils.Instance.LoadSpriteByName(data.questionCategory, data.questionImageFile[i]);
+                                                    img.SetNativeSize();
+                                                    img.color = question.questionImageColor;
+                                                    float randomZ = UnityEngine.Random.Range(-5f, 5f);
+                                                    img.rectTransform.localEulerAngles = new Vector3(0f, 0f, randomZ);
+                                                }*/
                     }
 
                     //load sound. Avoid load name - but clip is not ready. In db just name.                    
@@ -742,7 +747,7 @@ public class ExGameLogic : MonoBehaviour
                 currentQuestion.ApplyQuestionText(data, qData.qestionText);
 
                 //build inputs
-                if(qData.qestionText.text != null)
+                if (qData.qestionText.text != null)
                     BuildQuestionWithInputs(qData.qestionText.text, qData.questionContainer);
             }
         }
@@ -769,7 +774,7 @@ public class ExGameLogic : MonoBehaviour
                 {
                     currentQuestion.ApplyQuestionText(data, qData.qestionText);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Debug.LogError("Error setting question text: " + e.Message);
                 }
@@ -785,7 +790,7 @@ public class ExGameLogic : MonoBehaviour
         // Learn type 01
         if (question.questionType == QuestionType.Learn)
         {
-            for(int i = 0; i < tempQuestions.Count; i++)
+            for (int i = 0; i < tempQuestions.Count; i++)
             {
                 QuestionUILoad(tempQuestions[i], 4);
 
@@ -807,7 +812,8 @@ public class ExGameLogic : MonoBehaviour
                     try
                     {
                         qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);
-                    }catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
                         Debug.LogWarning("Error loading image or Emtpy Image: " + e.Message);
                     }
@@ -837,7 +843,7 @@ public class ExGameLogic : MonoBehaviour
     {
         // Clear previous content
         foreach (Transform child in container)
-            Destroy(child.gameObject);        
+            Destroy(child.gameObject);
 
         qData.AddDataToQuestionContainer(source);
     }
@@ -851,8 +857,8 @@ public class ExGameLogic : MonoBehaviour
         RectTransform rt = questionInstance.GetComponent<RectTransform>();
         rt.localScale = Vector3.one;
         rt.anchoredPosition = Vector2.zero;
-/*        rt.offsetMin = Vector2.zero;
-        rt.offsetMax = Vector2.zero;*/
+        /*        rt.offsetMin = Vector2.zero;
+                rt.offsetMax = Vector2.zero;*/
     }
 
     //check button click
@@ -867,11 +873,11 @@ public class ExGameLogic : MonoBehaviour
         int selectedIndex = qData.GetSelectedAnswerIndex();
 
         //Debug.Log($"selectedIndex={selectedIndex}");
-        
+
         //get correct index
         int correctIndex = (int)currentQuestion.correctAnswerNumber;
 
-        if( correctIndex < 0 )
+        if (correctIndex < 0)
             correctIndex = DBUtils.Instance.GetCorrectIndex();
 
         //Debug.Log(currentSection.sectionType.ToString());
@@ -894,7 +900,7 @@ public class ExGameLogic : MonoBehaviour
         if (selectedIndex == correctIndex)
         {
             qData.CheckAnswer(selectedIndex, correctIndex);
-            
+
             //increase temp score
             tempScore += currentQuestion.rewardAmount;
         }
@@ -929,7 +935,7 @@ public class ExGameLogic : MonoBehaviour
             {
                 ResultProcessing();
             }
-                
+
         }
     }
 
@@ -980,7 +986,7 @@ public class ExGameLogic : MonoBehaviour
             }
             else
             {
-                qData.CheckInputAnswer(input, correctAnswerText, false);                
+                qData.CheckInputAnswer(input, correctAnswerText, false);
             }
 
             if (qCounter < currentSection.questions.Length - 1)
@@ -1006,7 +1012,7 @@ public class ExGameLogic : MonoBehaviour
         //open progress
         finishButton.gameObject.SetActive(true);
         EX_ProgressButton progressButton = finishButton.GetComponent<EX_ProgressButton>();
-        
+
         // Subscribe
         progressButton.OnProgressClicked += ResultProcessingImmediate;
 
@@ -1016,7 +1022,7 @@ public class ExGameLogic : MonoBehaviour
         progressText.text = $"{questionsCount}/{questionsCount}";
 
         yield return new WaitForSeconds(delay);
-        
+
         ResultProcessing();
     }
 
@@ -1032,7 +1038,7 @@ public class ExGameLogic : MonoBehaviour
     }
 
     private void ResultProcessing()
-    {              
+    {
         GameFinishRoutine();
 
         //Debug.Log($"Session duration: {sessionDuration:F2} seconds");
@@ -1044,7 +1050,7 @@ public class ExGameLogic : MonoBehaviour
     private void GameFinishRoutine()
     {
         //get time
-        sessionDuration = Time.time - sessionStartTime;        
+        sessionDuration = Time.time - sessionStartTime;
     }
 
     public void nextBtnClicked()
@@ -1078,7 +1084,7 @@ public class ExGameLogic : MonoBehaviour
             QuestionDataLoadUI(question);
 
             //set button state
-            if(!isLearnSection)
+            if (!isLearnSection)
                 NextButtonRoutine(ButtonImage.ButtonAnimation.Idle.ToString());
             else
                 NextButtonRoutine(ButtonImage.ButtonAnimation.Scale.ToString());
@@ -1119,7 +1125,7 @@ public class ExGameLogic : MonoBehaviour
         progressText.text = $"{qCounter}/{currentSection.questions.Length}";
 
         //get question
-        currentQuestion = tempQuestions[qCounter];            
+        currentQuestion = tempQuestions[qCounter];
 
         //question load
         QuestionBase question = currentQuestion;
@@ -1128,7 +1134,7 @@ public class ExGameLogic : MonoBehaviour
 
         //set button state
         NextButtonRoutine(ButtonImage.ButtonAnimation.Scale.ToString());
-        
+
     }
 
     void AnimateProgress(float from, float to, float duration)
@@ -1196,7 +1202,7 @@ public class ExGameLogic : MonoBehaviour
 
         PanelManager.CloseAll();
 
-        PanelManager.OpenScene("ExMenu");                
+        PanelManager.OpenScene("ExMenu");
 
         return true;
     }
@@ -1223,7 +1229,7 @@ public class ExGameLogic : MonoBehaviour
         if (currentSection != null && !currentSection.isBundle)
             savedProgress = dbUtils.GetSectionProgress(currentSection.name);
 
-        if(currentProgress > savedProgress && currentSection != null)
+        if (currentProgress > savedProgress && currentSection != null)
             dbUtils.SetSectionProgress(currentSection.name, currentProgress);
     }
 
@@ -1237,7 +1243,7 @@ public class ExGameLogic : MonoBehaviour
         {
             dbUtils.SetSectionResult(currentSection.name, tempScore);
             scoreManager.SaveCrystals(tempScore);
-            
+
             LeaderboardManager.Instance.ReportScore(tempScore);
         }
 
@@ -1251,7 +1257,7 @@ public class ExGameLogic : MonoBehaviour
         {
             dbUtils.SetSectionComplete(currentSection.name, true);
             scoreManager.AddStar(1);
-        }            
+        }
         else
             dbUtils.SetSectionComplete(currentSection.name, false);
 
@@ -1265,7 +1271,7 @@ public class ExGameLogic : MonoBehaviour
         float savedTime = dbUtils.GetSectionTime(currentSection.name);
 
         //avoid initial data = 0
-        if(savedTime < 1)
+        if (savedTime < 1)
             dbUtils.SetSectionTime(currentSection.name, currentTime);
         else if (currentTime < savedTime)
             dbUtils.SetSectionTime(currentSection.name, currentTime);
@@ -1303,7 +1309,7 @@ public class ExGameLogic : MonoBehaviour
 
         try
         {
-            nextSection = bundleSections[nextIndex];            
+            nextSection = bundleSections[nextIndex];
             return true;
         }
         catch
@@ -1322,18 +1328,18 @@ public class ExGameLogic : MonoBehaviour
 
         if (!hasNext)
             return;
-        
+
         //set current section
         currentSection = sectionManager.sections[nextIndex];
-        
+
         //set selected section index
         gameData.saveData.selectedSectionIndex = nextIndex;
-        
+
         //save data
         gameData.SaveToFile();
-        
+
         //load next section
-        PanelManager.CloseAll();        
+        PanelManager.CloseAll();
         PanelManager.OpenScene("ExGame");
     }
 
@@ -1345,7 +1351,7 @@ public class ExGameLogic : MonoBehaviour
         int nextIndex = curentBundleIndex + 1;
 
         if (!hasNext)
-            return;        
+            return;
 
         Section[] bundleSections = gameData.saveData.bundleSections;
 
@@ -1407,7 +1413,7 @@ public class ExGameLogic : MonoBehaviour
     }
 
     private void LoadImages(int imagesCount, QuestionBase question, QuestionData data)
-    {        
+    {
         for (int i = 0; i < imagesCount; i++)
         {
             GameObject newImg = Instantiate(qData.imagePrefab, qData.qImagePanel);
@@ -1425,13 +1431,13 @@ public class ExGameLogic : MonoBehaviour
     {
         //disable check button for question and enable for learn
         if (nextButton != null & isLearnSection == false)
-        {            
+        {
             nextButton.interactable = false;
             nextBtn.PlayAnimation(false, animationName);
             nextBtn.RefreshState();
         }
         else if (nextButton != null & isLearnSection == true)
-        {                        
+        {
             nextButton.interactable = true;
             nextBtn.PlayAnimation(true, animationName);
             nextBtn.RefreshState();
@@ -1454,8 +1460,8 @@ public class ExGameLogic : MonoBehaviour
         ScrollRect scRect = panelScroll.GetComponent<ScrollRect>();
 
         //get height of question container
-/*        ExQManager01 uiPrefab = questionPrefabs[4].GetComponent<ExQManager01>();
-        float learnPanelHeight = uiPrefab.questionContainer.rect.height + LEARN_PANEL_PADDING;*/
+        /*        ExQManager01 uiPrefab = questionPrefabs[4].GetComponent<ExQManager01>();
+                float learnPanelHeight = uiPrefab.questionContainer.rect.height + LEARN_PANEL_PADDING;*/
 
         //UI diff in learn mode
         if (!isLearnSection)
@@ -1465,32 +1471,42 @@ public class ExGameLogic : MonoBehaviour
 
             //set text
             skillLevelText.text = textForTest;
+
+            progressBar.gameObject.SetActive(true);
+            progressText.gameObject.SetActive(true);
         }
         else
         {
             //hide unnecessary buttons and progress
             nextButton.gameObject.SetActive(false);
+            nextThemeButton.gameObject.SetActive(false);
             progressBar.gameObject.SetActive(false);
             progressText.gameObject.SetActive(false);
             scRect.vertical = true;
 
             //set height of question container based on questions count
-/*            float height = tempQuestions.Count * learnPanelHeight;
+            /*            float height = tempQuestions.Count * learnPanelHeight;
 
-            questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);*/
+                        questionArea.sizeDelta = new Vector2(questionArea.sizeDelta.x, height);*/
 
             //set text
             skillLevelText.text = textForLearn;
 
             //show button TakeTest
             takeTestButton.gameObject.SetActive(true);
+            nextThemeButton.gameObject.SetActive(true);
         }
     }
 
 
     private void OnTakeTest()
     {
-        //get sections in bundle
+
+        PanelManager.Open("testselector");
+
+        testSelectorPanel.SectionLoader(gameData.saveData.bundleSections);
+
+/*        //get sections in bundle
         Section[] bundleSections = gameData.saveData.bundleSections;
 
         if (bundleSections == null)
@@ -1500,15 +1516,80 @@ public class ExGameLogic : MonoBehaviour
             return;
         else
         {
+            //show controls
+            progressBar.gameObject.SetActive(true);
+            progressText.gameObject.SetActive(true);
+            
             gameData.saveData.selectedSectionIndex = 1;
             gameData.saveData.sectionToLoad = bundleSections[1];
             gameData.SaveToFile();
         }
 
         PanelManager.CloseAll();
-        
+
         //load game
-        PanelManager.OpenScene("ExGame");
+        PanelManager.OpenScene("ExGame");*/
     }
 
+
+    private Section GetNextS()
+    {
+        //Section nextSection = null;
+        Section[] sections = sectionManager.sections;
+
+        if (sections == null || sections.Length == 0) return null;
+
+        if (gameData == null)
+            return null;
+
+        string currentSectionName = gameData.saveData.sectionName;
+
+        // find by name instead of reference equality
+        int index = Array.FindIndex(sections, s => s.name == currentSectionName);
+
+        if (index >= 0 && index < sections.Length - 1)
+        {
+            nextSection = sections[index + 1];
+            return nextSection;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void ToNextSection()
+    {        
+        Section[] sections = sectionManager.sections;
+        
+        GetNextS();
+
+        if (nextSection!=null)
+        {
+            //nextSection = sections[index + 1];
+            Debug.Log($"[ToNextSection] Next: '{nextSection.name}'");
+        }
+        else
+        {
+            ButtonImage button = nextThemeButton.GetComponent<ButtonImage>();
+            button.SetDisabled(true);
+            Debug.Log($"[ToNextSection] No next section.");
+            return;
+        }
+
+        //get learn 
+        var learnSection = nextSection.bundleSections
+            .FirstOrDefault(s => s.sectionType == SectionType.LearnType01);
+
+        //save data
+        gameData.saveData.sectionToLoad = learnSection;        
+        gameData.saveData.sectionName = nextSection.name;
+        gameData.saveData.nextSection = nextSection;
+        gameData.SaveToFile();
+
+        PanelManager.CloseAll();
+        //load game
+        PanelManager.OpenScene("ExGame");
+
+    }
 }
