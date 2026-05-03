@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Themes
   m_EditorClassIdentifier: Assembly-CSharp::Themes
   theme:
+  - {fileID: 11400000, guid: c7f959c6a79b85f46837403af72a73d1, type: 2}
   - {fileID: 11400000, guid: 4feca93990f8ca3488f083320d666b1e, type: 2}
   - {fileID: 11400000, guid: 2408a4a49d703e7488d8c4f7d5071fe6, type: 2}
   - {fileID: 11400000, guid: 84c71a1a79ef54540872726597cf1ac2, type: 2}

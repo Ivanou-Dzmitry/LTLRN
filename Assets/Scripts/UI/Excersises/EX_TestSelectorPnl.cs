@@ -53,11 +53,6 @@ public class EX_TestSelectorPnl : Panel
 
         if (dbUtils == null)
             dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
-
-/*        if (dataLoader == null)
-            dataLoader = GameObject.FindWithTag("ExDataLoader").GetComponent<ExDataLoader>();*/
-
-       // SectionLoader(exGameLogic.currentSection.bundleSections);
     }
 
     public void SectionLoader(Section[] section) //, string bundleName, string bndlSecName)
@@ -66,35 +61,12 @@ public class EX_TestSelectorPnl : Panel
         foreach (Transform child in testsRectTransform)
         {
             Destroy(child.gameObject);
-        }
-
-        //set current section - root
-        //bundleSectionName = bndlSecName;
-        bundleSections = section;
-
-        Debug.Log(section.Length);
-
-        //get levels from db
-        //string selLevels = dbUtils.GetSectionLevels(bndlSecName);
-
-        // Normalize levels string
-        //string normValueSelLevels = NormalizeLevels(selLevels);
-
-        //UpdateAvailableLevels();
-
-        //set values of selected levels based on db value
-        //ApplyLevelsFromDB(normValueSelLevels);
-
-        //ValidateSelectedLevels();
-
-        //set selected levels of difficulty buttons
-        //UpdateLevelButtonsUI();
+        }       
 
         //button instances
-        foreach (Section sec in bundleSections)
+        foreach (Section sec in section)
         {
-            //string difficulty = sec.difficultyType.ToString();
-
+            //skip learn
             if (sec.sectionType == Section.SectionType.LearnType01)
                 continue;
 
@@ -145,13 +117,13 @@ public class EX_TestSelectorPnl : Panel
 
     private void SetupTextSection(Section sec, SectionButton button)
     {
+        //get system language code
         Locale locale = GetLocale();
         string btnText01 = locale.Identifier.Code.ToUpperInvariant();
 
+        //get target language code
         string btnText02 = string.Empty;
         btnText02 = LangList.LT.ToString();
-
-        //string test = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "TestTxt");
 
         //final text on button
         if (sec.sectionLanguage == Section.SectionLanguage.TARGET)
@@ -163,9 +135,10 @@ public class EX_TestSelectorPnl : Panel
             button.sectionText.text = $"{btnText01}{ARROW_RIGHT}{btnText02}";
         }
 
+        //set icon
         button.sectionIcon.sprite = sectionTypeIcons[4];
-        //button.sectionIcon.gameObject.SetActive(false);
 
+        //slider
         SetProgressSlider(sec, button);
     }
 
@@ -225,7 +198,7 @@ public class EX_TestSelectorPnl : Panel
 
     private void SetProgressSlider(Section sec, SectionButton button, bool complete = false)
     {
-        int questionsCount = 10;//dataLoader.GetQuestionCount(sec);
+        int questionsCount = GetQuestionCount(sec);
 
         button.progressSlider.maxValue = questionsCount;
 
@@ -234,13 +207,13 @@ public class EX_TestSelectorPnl : Panel
         //set slider value based on result or complete status
         if (complete)
         {
-            //button.progressSlider.value = questionsCount;
+            button.progressSlider.value = questionsCount;
             button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(questionsCount, 0.5f);
         }
 
         else
         {
-            //button.progressSlider.value = result;
+            button.progressSlider.value = result;
             button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(result, 0.5f);
         }
     }
@@ -256,6 +229,22 @@ public class EX_TestSelectorPnl : Panel
             LocalizationSettings.SelectedLocale = locale;
 
         return locale;
+    }
+
+    public int GetQuestionCount(Section section)
+    {
+        if (section.questions == null || section.questions.Length <= 0)
+            return 0;
+
+        //if contain bundle - bundle always 0
+        if (section.isContainBundleQuestion)
+        {
+            return section.questions[0].questionReferences.Length;
+        }
+        else
+        {
+            return section.questions.Length;
+        }
     }
 
     private void ClosePanel()

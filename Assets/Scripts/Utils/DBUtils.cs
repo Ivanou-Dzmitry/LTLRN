@@ -37,7 +37,7 @@ public class DBUtils : MonoBehaviour
     private bool isDataInitialized = false;
     private const string dbDataName = "keliasdata.db"; 
 
-    private const int DB_VERSION = 3; // Increment this when you update the database
+    private const int DB_VERSION = 1; // Increment this when you update the database
     private const string VERSION_KEY = "database_version";
 
     //loading IMAGES
@@ -1206,6 +1206,38 @@ public class DBUtils : MonoBehaviour
         catch (System.Exception ex)
         {
             Debug.LogError($"Error getting image: {ex.Message}");
+            return null;
+        }
+    }
+
+    public string GetCategory(string tableName, string nomSingValue, string columnName = null)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(nomSingValue))
+            return null;
+
+        string searchColumn = (columnName != null && columnName != WordColumn.NomSing.ToString())
+            ? columnName
+            : WordColumn.NomSing.ToString();
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string query = $"SELECT Category FROM [{tableName}] WHERE [{searchColumn}] = ?";
+                string result = connection.ExecuteScalar<string>(query, nomSingValue);
+                Debug.Log($"[GetCategory] table='{tableName}' where {searchColumn}='{nomSingValue}' > '{result}'");
+                return result;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[GetCategory] Error: {ex.Message}");
             return null;
         }
     }

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351b13381c0821045b4f77b8da9f1b62, type: 3}
+  m_Name: Alphabet01
+  m_EditorClassIdentifier: Assembly-CSharp::SectionManager
+  themeDifficulty: 0
+  themeIcon: {fileID: 21300000, guid: a896e698a0498444bb9e025b8e95ca8e, type: 3}
+  themeHeaderColor: {r: 0.28627452, g: 0.8470589, b: 0.43921572, a: 1}
+  themeNameTargetLang: "Ab\u0117c\u0117l\u0117"
+  themeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 2441330036891648
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  themeDescription:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  sections:
+  - {fileID: 11400000, guid: 01a3f9ef03681684186106824d79c6fa, type: 2}
+  references:
+    version: 2
+    RefIds: []

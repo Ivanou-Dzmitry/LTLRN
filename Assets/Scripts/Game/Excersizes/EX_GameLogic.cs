@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,14 +9,10 @@ using static QuestionBase;
 using System.Linq;
 using static Section;
 
-
-
-
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 #endif
-
 
 public enum GameState
 {
@@ -602,7 +597,13 @@ public class ExGameLogic : MonoBehaviour
             data.imagesCount = DBUtils.Instance.GetImagesCount(tableName, data.questionText, columnName);
 
         //cat for sound and img
-        data.questionCategory = DBUtils.Instance.ResolveReference(question.questionCategory);
+        if (isAuto)
+        {
+            string categoryName = DBUtils.Instance.GetCategory(tableName, data.questionText, columnName);
+            data.questionCategory = categoryName;
+        }            
+        else
+            data.questionCategory = DBUtils.Instance.ResolveReference(question.questionCategory);
 
         return data;
     }
@@ -811,6 +812,7 @@ public class ExGameLogic : MonoBehaviour
                     //avoid empty image reference error
                     try
                     {
+                        //load image
                         qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);
                     }
                     catch (Exception e)
@@ -1501,34 +1503,11 @@ public class ExGameLogic : MonoBehaviour
 
     private void OnTakeTest()
     {
-
+        //open panel
         PanelManager.Open("testselector");
 
+        //load data
         testSelectorPanel.SectionLoader(gameData.saveData.bundleSections);
-
-/*        //get sections in bundle
-        Section[] bundleSections = gameData.saveData.bundleSections;
-
-        if (bundleSections == null)
-            return;
-
-        if (gameData == null)
-            return;
-        else
-        {
-            //show controls
-            progressBar.gameObject.SetActive(true);
-            progressText.gameObject.SetActive(true);
-            
-            gameData.saveData.selectedSectionIndex = 1;
-            gameData.saveData.sectionToLoad = bundleSections[1];
-            gameData.SaveToFile();
-        }
-
-        PanelManager.CloseAll();
-
-        //load game
-        PanelManager.OpenScene("ExGame");*/
     }
 
 
@@ -1564,16 +1543,10 @@ public class ExGameLogic : MonoBehaviour
         
         GetNextS();
 
-        if (nextSection!=null)
-        {
-            //nextSection = sections[index + 1];
-            Debug.Log($"[ToNextSection] Next: '{nextSection.name}'");
-        }
-        else
+        if (nextSection == null)
         {
             ButtonImage button = nextThemeButton.GetComponent<ButtonImage>();
-            button.SetDisabled(true);
-            Debug.Log($"[ToNextSection] No next section.");
+            button.SetDisabled(true);            
             return;
         }
 
@@ -1582,14 +1555,15 @@ public class ExGameLogic : MonoBehaviour
             .FirstOrDefault(s => s.sectionType == SectionType.LearnType01);
 
         //save data
-        gameData.saveData.sectionToLoad = learnSection;        
-        gameData.saveData.sectionName = nextSection.name;
+        gameData.saveData.sectionToLoad = learnSection;
         gameData.saveData.nextSection = nextSection;
+        gameData.saveData.sectionName = nextSection.name;
+        gameData.saveData.bundleSections = nextSection.bundleSections;
         gameData.SaveToFile();
 
         PanelManager.CloseAll();
+        
         //load game
         PanelManager.OpenScene("ExGame");
-
     }
 }
