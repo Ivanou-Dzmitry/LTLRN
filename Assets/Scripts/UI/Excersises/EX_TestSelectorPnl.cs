@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Diagnostics;
+using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
@@ -52,7 +53,7 @@ public class EX_TestSelectorPnl : Panel
             exGameLogic = GameObject.FindWithTag("ExGameLogic").GetComponent<ExGameLogic>();
 
         if (dbUtils == null)
-            dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();
+            dbUtils = GameObject.FindWithTag("DBUtils").GetComponent<DBUtils>();       
     }
 
     public void SectionLoader(Section[] section) //, string bundleName, string bndlSecName)
@@ -247,8 +248,10 @@ public class EX_TestSelectorPnl : Panel
         }
     }
 
-    private void ClosePanel()
-    {
+    public void ClosePanel()
+    {        
+        _animator.gameObject.SetActive(true);
+
         _animator.SetBool("hidePanel", true);
         
         StartCoroutine(CloseAfterAnimation());

@@ -389,6 +389,10 @@ MonoBehaviour:
     m_Localized: Select test
     m_Metadata:
       m_Items: []
+  - m_Id: 50258076667899904
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

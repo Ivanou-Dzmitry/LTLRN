@@ -467,6 +467,10 @@ MonoBehaviour:
     m_Key: SelectTestTxt
     m_Metadata:
       m_Items: []
+  - m_Id: 50258076667899904
+    m_Key: CloseTxt
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
