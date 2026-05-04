@@ -1561,7 +1561,7 @@ public class ExGameLogic : MonoBehaviour
         gameData.saveData.bundleSections = nextSection.bundleSections;
         gameData.SaveToFile();
 
-        PanelManager.CloseAll();
+        //PanelManager.CloseAll();
         
         //load game
         PanelManager.OpenScene("ExGame");

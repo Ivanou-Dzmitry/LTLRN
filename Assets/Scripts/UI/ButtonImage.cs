@@ -196,6 +196,20 @@ public class ButtonImage : MonoBehaviour
     public void SetSelected(bool selected)
     {
         currentState = selected ? ButtonState.Selected : ButtonState.Normal;
+
+        if (selected)
+        {
+            SetButtonColor(ButtonColor.SuccessLight);
+            SetIconColor(ButtonColor.Gray3Dark);
+            SetTextColor(TextColor.Black);
+        }
+        else
+        {
+            SetButtonColor(ButtonColor.Secondary);
+            SetIconColor(ButtonColor.Gray3Dark);
+            SetTextColor(TextColor.Black);
+        }
+
         //ApplyButtonColor();
     }
 

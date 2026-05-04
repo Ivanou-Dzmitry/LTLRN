@@ -23,23 +23,13 @@ public class Ex_GamePanel : Panel
     public TMP_Text sectionDescribeTxt;
 
     [Header("UI")]
-    //public Canvas canvasRoot;
-/*    [SerializeField] private RectTransform panel_01;
-    [SerializeField] private RectTransform panel_02;
-    [SerializeField] private RectTransform panel_03;*/
     [SerializeField] private RectTransform scrollPanel;
-
 
     [Header("Buttons")]
     public Button infoButton;
     
     // for ui layout
-    private const float PANEL_01_HEIGHT = 395f;
-    private const float PANEL_03_HEIGHT = 200f;
-
     private const float PANEL_BUTTONS_HEIGHT = 208f;
-
-    //private const float HEADER_HEIGHT = 152f;
 
     public override void Initialize()
     {

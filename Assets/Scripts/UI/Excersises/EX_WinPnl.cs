@@ -40,6 +40,8 @@ public class ExWinPnl : Panel
         nextBtn = nextButton.GetComponent<ButtonImage>();
 
         base.Initialize();
+
+        SetPanelHeight();
     }
 
 

@@ -57,6 +57,8 @@ public class SettingsPanel : Panel
             feedbackButton.onClick.AddListener(OpenFeedbackPage);
 
         base.Initialize();
+
+        SetPanelHeight();
     }
 
     private void SoundToggle()
@@ -83,7 +85,7 @@ public class SettingsPanel : Panel
 /*        if(dbUtils!=null && dbLog!=null)
             dbLog.text = "DB: " + dbUtils.CheckConnection();*/
 
-        base.Open();
+        base.Open();       
     }
 
     private void LoadData()

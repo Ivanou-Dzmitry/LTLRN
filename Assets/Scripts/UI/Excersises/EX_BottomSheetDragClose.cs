@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class EX_BottomSheetDragClose : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -12,20 +13,22 @@ public class EX_BottomSheetDragClose : MonoBehaviour,
     private Vector2 startPointerPos;
     private Vector2 startSheetPos;
 
-    public System.Action OnClose; // assign ClosePanel()
+    public float closeSpeed = 2000f;
+    public float targetY = -1080f; // off-screen
+
+    private Coroutine closeRoutine;
+
+    public System.Action OnClose; 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         panelAnimator.enabled = false;
-
-        Debug.Log("Begin Drag: " + eventData.position);
         startPointerPos = eventData.position;
         startSheetPos = sheet.anchoredPosition;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging: " + eventData.position);
         float deltaY = eventData.position.y - startPointerPos.y;
 
         // only allow downward drag
@@ -37,18 +40,31 @@ public class EX_BottomSheetDragClose : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("End Drag: " + eventData.position);
         float deltaY = eventData.position.y - startPointerPos.y;
 
         if (deltaY < -closeThreshold)
         {
-            panelAnimator.enabled = true;
-            panel.ClosePanel();
+            if (closeRoutine != null) StopCoroutine(closeRoutine);
+            closeRoutine = StartCoroutine(AnimateClose());
         }
         else
         {
             // snap back
             sheet.anchoredPosition = startSheetPos;
         }
+    }
+
+    private IEnumerator AnimateClose()
+    {
+        while (sheet.anchoredPosition.y > targetY)
+        {
+            sheet.anchoredPosition += Vector2.down * closeSpeed * Time.deltaTime;
+            yield return null;
+        }
+
+        sheet.anchoredPosition = new Vector2(sheet.anchoredPosition.x, targetY);
+
+        panelAnimator.enabled = true;
+        PanelManager.Close("testselector");
     }
 }

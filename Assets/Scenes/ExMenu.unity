@@ -8548,6 +8548,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -64
       objectReference: {fileID: 0}
+    - target: {fileID: 8553703335352390707, guid: 689093d32c115b540803e1995f892595, type: 3}
+      propertyPath: canvasRoot
+      value: 
+      objectReference: {fileID: 404929007}
     - target: {fileID: 8642543260700099755, guid: 689093d32c115b540803e1995f892595, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

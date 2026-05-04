@@ -65,6 +65,8 @@ public class ADV_InventoryPanel : Panel
         closeInventoryButton.onClick.AddListener(CloseInventoryPanel);
 
         base.Initialize();
+
+        SetPanelHeight();
     }
 
     public override void Open()
@@ -98,7 +100,7 @@ public class ADV_InventoryPanel : Panel
         //default to inventory tab #1
         SelectTab(0);
         LoadClasses();
-        LoadInventory();              
+        LoadInventory();        
     }
 
     private void LoadClasses()
