@@ -13,9 +13,6 @@ public class ErrorMenu : Panel
     [SerializeField] private Button actionButton = null;
     [SerializeField] private Button feedbackButton;
 
-    private GameData gameData;
-    //error panel
-
     public enum Action
     {
         None = 0, StartService = 1, SignIn = 2, OpenAuthMenu = 3
@@ -34,6 +31,8 @@ public class ErrorMenu : Panel
         feedbackButton.onClick.AddListener(OpenFeedbackPage);
 
         base.Initialize();
+
+        SetPanelHeight();
     }
 
     public override void Open()
@@ -75,7 +74,6 @@ public class ErrorMenu : Panel
                 break;
         }
     }
-
 
     public void OpenFeedbackPage()
     {

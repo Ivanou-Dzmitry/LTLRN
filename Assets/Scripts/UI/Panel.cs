@@ -11,11 +11,15 @@ namespace LTLRN.UI
 
         [SerializeField] private RectTransform container = null;
 
+        [SerializeField] private bool Resize = false;
+
         private bool initialized = false;
         public bool IsInitialized { get { return initialized; } }
 
         private bool isOpen = false;
         public bool IsOpen { get { return isOpen; } }
+
+
 
         private Canvas canvas = null;
         public Canvas Canvas { get { return canvas; } set { canvas = value; } }
@@ -70,6 +74,10 @@ namespace LTLRN.UI
             transform.SetAsLastSibling();
             container.gameObject.SetActive(true);
             isOpen = true;
+
+
+            if (Resize)
+                SetPanelHeight();
         }
 
         public virtual void Close()
@@ -127,6 +135,12 @@ namespace LTLRN.UI
         public void SetPanelHeight()
         {
             Rect safeArea = Screen.safeArea;
+
+            if (canvasRoot == null)
+                return;
+
+            if(panel_01 == null || panel_02 == null)
+                return;
 
             // Get canvas scale factor
             float scaleFactor = canvasRoot.scaleFactor;

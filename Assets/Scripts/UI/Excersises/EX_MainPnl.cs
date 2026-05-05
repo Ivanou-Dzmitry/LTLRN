@@ -83,8 +83,6 @@ public class EX_MainPanel : Panel
 
         base.Open();
 
-        SetPanelHeight();
-
         //float scrollPanelHeight = panel02Height - HEADER_HEIGHT - SPACING;
         scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);             
     }

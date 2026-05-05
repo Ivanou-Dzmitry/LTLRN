@@ -20,7 +20,6 @@ public class ExWinPnl : Panel
     public Slider resultSlider;
     [SerializeField] private TMP_Text resultSliderText;
 
-
     [Header("Result")]
     [SerializeField] private TMP_Text score;
     [SerializeField] private TMP_Text time;

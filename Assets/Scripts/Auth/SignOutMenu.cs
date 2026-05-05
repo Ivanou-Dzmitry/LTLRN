@@ -10,8 +10,6 @@ public class SignOutMenu : Panel
     [SerializeField] private Button logoutButton = null;
     [SerializeField] private TMP_Text nameText = null;
 
-    private GameData gameData;
-
     public override void Initialize()
     {
         if (IsInitialized)

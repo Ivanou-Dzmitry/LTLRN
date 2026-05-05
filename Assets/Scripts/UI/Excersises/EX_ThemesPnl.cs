@@ -12,8 +12,14 @@ public class EX_ThemesPanel : Panel
     private DBUtils dbUtils;
 
     //for name display
-    public TMP_Text userName;
-       
+
+    [Header("User name")]
+    [SerializeField] private TMP_Text userName;
+
+    [Header("User icon")]
+    [SerializeField] private Image userImage;
+    [SerializeField] private UIImagesGallery imagesGallery;
+
     private ExDataLoader dataLoader;
 
     //prefab and container for themes
@@ -30,7 +36,6 @@ public class EX_ThemesPanel : Panel
 
         StartCoroutine(WaitAndLoadData());
 
-        SetPanelHeight();
         scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
     }
 
@@ -87,6 +92,10 @@ public class EX_ThemesPanel : Panel
         //set player name at the top of panel
         if (gameData != null)
             userName.text = $", {gameData.saveData.playerName}!";        
+        
+        //set image
+        userImage.sprite = imagesGallery.userAvatar[gameData.saveData.playerIconIndex];
+
 
         // Clear old panels (important when reloading)
         foreach (Transform child in themesContainer)
