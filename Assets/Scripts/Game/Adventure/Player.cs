@@ -39,6 +39,9 @@ public class Player : MonoBehaviour
     public PolygonCollider2D[] attackColliders;
     [SerializeField] private float kickForce = 5;
 
+    [Header("Light")]
+    [SerializeField] private Transform playerLight;
+
     [Header("Joystick")]
     [SerializeField] private GameObject joystick;
     private OnScreenStick stickControler;
@@ -235,22 +238,43 @@ public class Player : MonoBehaviour
             return;
         }
 
+        MoveDirection newDirection;
+
         if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
         {
-            currentDirection = input.x > 0
+            newDirection = input.x > 0
                 ? MoveDirection.Right
                 : MoveDirection.Left;
-
-            currentDirectionLast = currentDirection;
         }
         else
         {
-            currentDirection = input.y > 0
+            newDirection = input.y > 0
                 ? MoveDirection.Up
                 : MoveDirection.Down;
-
-            currentDirectionLast = currentDirection;
         }
+
+        // update only if changed
+        if (newDirection != currentDirection)
+        {
+            currentDirection = newDirection;
+            currentDirectionLast = currentDirection;
+
+            UpdateLightDirection();
+        }
+    }
+
+    private void UpdateLightDirection()
+    {
+        float angle = currentDirection switch
+        {
+            MoveDirection.Up => 0f,
+            MoveDirection.Down => 180f,
+            MoveDirection.Left => 90f,
+            MoveDirection.Right => -90f,
+            _ => 180f
+        };
+
+        playerLight.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
     //run player annimation

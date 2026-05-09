@@ -25,18 +25,18 @@ public class ADV_MainGamePanel : MonoBehaviour
 
     private Image panelImage;
 
-    private const float PANEL01_HEIGHT = 0f;
-    private const float PANEL03_HEIGHT = 450f;
+    private const float PANEL01_HEIGHT = 305f;
+    private const float PANEL03_HEIGHT = 400f;
 
     private void Start()
-    {
-        SetPanelHeight();
-
+    {       
         LoadData();
 
         panelImage = panel02.GetComponent<Image>();
 
         PanelFadeOut();
+
+        SetPanelHeight();
     }
 
     private void LoadData()
@@ -63,6 +63,8 @@ public class ADV_MainGamePanel : MonoBehaviour
 
         // Calculate available height in safe area (accounting for canvas scale)
         float safeAreaHeight = safeArea.height / scaleFactor;
+
+        Debug.Log($"Safe Area Height: {safeAreaHeight}");
 
         // Calculate panel_02 height
         float panel02Height = safeAreaHeight - PANEL01_HEIGHT - PANEL03_HEIGHT;

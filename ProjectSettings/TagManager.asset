@@ -30,7 +30,7 @@ TagManager:
   - UI
   - Particles
   - Obstacles
-  - 
+  - Player
   - 
   - 
   - 
@@ -61,5 +61,9 @@ TagManager:
   - name: Particles
     uniqueID: 248089697
     locked: 0
+  - name: Player
+    uniqueID: 3403477333
+    locked: 0
   m_RenderingLayers:
   - Default
+  - Player

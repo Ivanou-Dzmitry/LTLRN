@@ -15,22 +15,22 @@
  </layer>
  <layer id="6" name="roads" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJztllEKgCAQRM0fvZZ6supk5cVaE2kJC4XdSNiB+fTpZjOoVJtmo9QCXk3jgk6NzHfA9JaPX87OzZ9ghsjIH/FuhS/8P/HPrgEHxKLk11jCz8I972y+B0/Y/bjna6bkp67fTbYmOv9mLmZk+P5PEv73/NJD+P9PmQgEe+CcUWcg6S1nFDOUHGjGGfA+d/e84Q5mVVFW
+   eJzt1GEKgzAMBWAhJ5O5gzj1ILKTVE/SeJL2JCa4QtZtrj9Sx6QPHgjiZ4q2VfU9LfUWtUt4LjUj9SrshnpX9DlyDZqzcwzk9W3xf+pz/nn+4p/H57Nmos6Qx2cLqUvxX2Lg8z0N3z58fPMeLR/h2feg5zvYPJ9p/r0U/1g/nEOT4v8j7Tiavo18VD7/nfDDfsvxfcN+q+l6EH5PvSQaK8wkV68=
   </data>
  </layer>
  <layer id="8" name="fence" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJw7ysLAcIwAdgdidOBGhL4jQNyBRS+1QPuo+aPmj5o/av6o+aPmj5o/av6o+aPmDzPzWYG4jUaYBYgBiB87Zg==
+   eJxbwsDA8IgAfsyACR4SoW8pEB/Gopda4OCo+aPmj5o/av6o+aPmj5o/av6o+aPmDzPzjwDxIhrho0AMAGhFThs=
   </data>
  </layer>
  <layer id="7" name="decor" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQw0sHmgHjCDgwsjA4ArEbowD7ZJRQC/gCsRuNDS/FYjbaGj+KBgFQxl4EFHWepNRHruTqMdziJb5A+VucuIEFwDFlQ8bA4MvEPuxQcRg6YJa9vQAze0F4j42hBiy2aSmF3RwBmjuWSA+x0ZY7UABAId9C2U=
+   eJxjYBgFo2AUEALLBtoBo4BuQBWI1QbaEaNgFIxQsIIINavJMHc5iepXkmHHYAAD5W5y4gQXAMWVDjMDgy4Q6zFDxGDpglr2+ADN9QViP2aEGLLZpKYXdJADNDcXiPOYCasdKAAAIXgLBQ==
   </data>
  </layer>
  <layer id="9" name="buildings" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt0MkNgDAQBEH7ZWwHxhUYYALjSooOYiR4TEv1nZU2BOec+76EDhkFVbzfY8CICbN4f8GKDQ27eP/AiQs3HvF+ivwfGQU1ig8455z7TS8jNAhn
+   eJztzLcNgEAABMHPgKcQzBeCKwRXCK5ptoiTILiVJt0QnHPu+zLkKBBRiv8VajRokcT/Dj0GjJjE/xkLVmzYxf8DJy7ceMR/55xz/+kFRgcHIg==
   </data>
  </layer>
  <objectgroup id="10" name="obects">
@@ -44,18 +44,6 @@
    <properties>
     <property name="Name" value="W01M01Room01"/>
     <property name="Type" value="room"/>
-   </properties>
-  </object>
-  <object id="3" name="log" x="122" y="120" width="62" height="32">
-   <properties>
-    <property name="Name" value="log"/>
-    <property name="Type" value="decor"/>
-   </properties>
-  </object>
-  <object id="4" name="stump" x="208" y="213" width="35" height="32">
-   <properties>
-    <property name="Name" value="stump"/>
-    <property name="Type" value="decor"/>
    </properties>
   </object>
   <object id="5" name="sign" x="192" y="48" width="48" height="48">

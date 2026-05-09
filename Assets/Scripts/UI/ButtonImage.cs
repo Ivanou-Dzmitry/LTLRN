@@ -206,7 +206,7 @@ public class ButtonImage : MonoBehaviour
         else
         {
             SetButtonColor(ButtonColor.Secondary);
-            SetIconColor(ButtonColor.Gray3Dark);
+            SetIconColor(ButtonColor.Accent);
             SetTextColor(TextColor.Black);
         }
 

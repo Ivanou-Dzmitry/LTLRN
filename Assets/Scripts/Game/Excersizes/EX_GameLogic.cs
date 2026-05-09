@@ -831,8 +831,12 @@ public class ExGameLogic : MonoBehaviour
                     }
 
                     //get learn data and translate
-                    qData.learnData01.text = dbUtils.GetLearnData(currentQuestion.questionReference);
-                    qData.learnData02.text = dbUtils.GetTranslate(currentQuestion.questionReference, currentLang.ToString());
+
+                    string rawTxt01 = dbUtils.GetLearnData(currentQuestion.questionReference);
+                    qData.learnData01.text = AccentFormatter.FormatAccents(rawTxt01);
+
+                    string rawTxt02 = dbUtils.GetTranslate(currentQuestion.questionReference, currentLang.ToString());
+                    qData.learnData02.text = AccentFormatter.FormatAccents(rawTxt02);
 
                     //load sound. Avoid load name - but clip is not ready. In db just name.
                     qData.qAudioClip = LoadAudioAndSetButton(learnData.questionCategory, learnData.qSoundClipName, qData.soundBtn);
