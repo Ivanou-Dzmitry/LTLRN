@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static Section;
 
 [Serializable]
 public class SaveData
@@ -13,10 +14,14 @@ public class SaveData
     public int selectedThemeIndex;
     public int selectedSectionIndex;
 
+    [Header("Learn Data")]
     public Section sectionToLoad;
     public Section[] bundleSections;
     public string sectionName;
     public Section nextSection;
+
+    [Header("Difficulty")]
+    public DifficultyType selectedDifficulty;
 
     [Header("Player")]
     public string playerName;
@@ -111,6 +116,8 @@ public class GameData : MonoBehaviour
             //default values
             bool result = AddDefaultData();
             Debug.Log("No save file found. Created new save data with default values. Result: " + result);
+            if (result)
+                SaveToFile();
         }
     }
 
@@ -124,6 +131,8 @@ public class GameData : MonoBehaviour
             gameData.saveData.selectedSectionIndex = 0;
             gameData.saveData.sectionName = "";
             gameData.saveData.nextSection = null;
+
+            gameData.saveData.selectedDifficulty = DifficultyType.A0;
 
             //player position
             gameData.saveData.playerPosition = new Vector3 (5, -14, 0);
@@ -156,7 +165,7 @@ public class GameData : MonoBehaviour
 
             saveData.debugMode = false;
 
-            return false;
+            return true;
         }
         catch
         (Exception ex)
@@ -176,6 +185,12 @@ public class GameData : MonoBehaviour
         if (saveData.lang == string.Empty)
         {
             saveData.lang = "en";
+        }
+
+        // difficulty fallback
+        if (!Enum.IsDefined(typeof(DifficultyType), gameData.saveData.selectedDifficulty))
+        {
+            gameData.saveData.selectedDifficulty = DifficultyType.A0;
         }
 
         SaveToFile();

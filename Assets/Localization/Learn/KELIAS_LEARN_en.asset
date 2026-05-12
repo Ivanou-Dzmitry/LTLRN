@@ -234,6 +234,14 @@ MonoBehaviour:
     m_Localized: Learning letters
     m_Metadata:
       m_Items: []
+  - m_Id: 5816075885273088
+    m_Localized: Ordinal numbers from 1 to 10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5816153773498368
+    m_Localized: Study ordinal numbers.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

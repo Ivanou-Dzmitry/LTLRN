@@ -43,6 +43,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5461955b0a1336a489badc869f055d79, type: 2}
   - {fileID: 11400000, guid: 7393a5fd7da564b4f9a0bf35db75cba0, type: 2}
   - {fileID: 11400000, guid: 3775c72ba3f1b1645a323ba5bd4c3bd4, type: 2}
+  - {fileID: 11400000, guid: 8e9706c4eb602ba46a223489a89dde64, type: 2}
   references:
     version: 2
     RefIds: []

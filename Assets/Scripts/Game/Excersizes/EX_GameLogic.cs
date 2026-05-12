@@ -1469,6 +1469,23 @@ public class ExGameLogic : MonoBehaviour
         /*        ExQManager01 uiPrefab = questionPrefabs[4].GetComponent<ExQManager01>();
                 float learnPanelHeight = uiPrefab.questionContainer.rect.height + LEARN_PANEL_PADDING;*/
 
+
+        //disable button if no next section
+        GetNextS();
+
+        if (nextSection == null)
+        {
+            ButtonImage button = nextThemeButton.GetComponent<ButtonImage>();
+            button.SetDisabled(true);
+        }
+
+        //disable button if no next section in bundle
+        if (gameData.saveData.bundleSections.Length <= 1)
+        {
+            ButtonImage button = takeTestButton.GetComponent<ButtonImage>();
+            button.SetDisabled(true);
+        }
+
         //UI diff in learn mode
         if (!isLearnSection)
         {

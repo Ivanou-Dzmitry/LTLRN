@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -78,18 +79,36 @@ public class ExDataLoader : MonoBehaviour
         //run waiting panel
         PanelManager.Open("waiting");
 
-        // Now load your data IMPORTANT
-        LoadExerciseData();
+        if (gameData == null)
+            gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+
+        //load difficulty
+        DifficultyType diff = gameData.saveData.selectedDifficulty;
+
+        // validate enum value
+        if (!Enum.IsDefined(typeof(DifficultyType), diff))
+        {
+            Debug.LogWarning($"Invalid difficulty in save: {diff}. Fallback to A0");
+            diff = DifficultyType.A0;
+        }
+
+        //load data
+        LoadExerciseData(diff);
     }
 
     //IMPORTANT
     public bool LoadExerciseData(DifficultyType level = DifficultyType.A0)
     {
-        gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
+        if (gameData == null)
+            gameData = GameObject.FindWithTag("GameData").GetComponent<GameData>();
 
         //load theme
         if (gameData == null)
-            return false;        
+            return false;
+
+        //save difficulty
+        gameData.saveData.selectedDifficulty = level;
+        gameData.SaveToFile();
 
         //set section - load from save            
         sectionManager = themes.theme[gameData.saveData.selectedThemeIndex];

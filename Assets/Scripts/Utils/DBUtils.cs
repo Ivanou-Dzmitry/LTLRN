@@ -1231,7 +1231,7 @@ public class DBUtils : MonoBehaviour
             {
                 string query = $"SELECT Category FROM [{tableName}] WHERE [{searchColumn}] = ?";
                 string result = connection.ExecuteScalar<string>(query, nomSingValue);
-                Debug.Log($"[GetCategory] table='{tableName}' where {searchColumn}='{nomSingValue}' > '{result}'");
+                //Debug.Log($"[GetCategory] table='{tableName}' where {searchColumn}='{nomSingValue}' > '{result}'");
                 return result;
             }
         }

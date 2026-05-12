@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
+  m_Name: NumCard_Bundle_0-10
+  m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 1
+  sectionType: 5
+  sectionLanguage: 3
+  difficultyType: 0
+  sectionNumber: 0
+  sectionIcon: {fileID: 21300000, guid: 6b57f1ca382a15744b25d56a49f03ad8, type: 3}
+  sectionHeaderColor: {r: 0.65882355, g: 0.67058825, b: 0.9843137, a: 1}
+  isLiked: 0
+  sectionTitle:
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1076098114940928
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  sectionDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 1077480742088704
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  sectionInfo:
+    tableName: Short_vowels
+    columnName: ID
+    recordID: 1
+    value: 1
+    whereColumn: ID
+    whereValue: 
+  bundleSections:
+  - {fileID: 11400000, guid: 4e55c46576db8c8449d47ce25ddfe2bb, type: 2}
+  - {fileID: 11400000, guid: d8f02cd64a8ff0145aae03a7a20042fe, type: 2}
+  - {fileID: 11400000, guid: aa5a675aac82ad14ca40620c12515158, type: 2}
+  - {fileID: 11400000, guid: ce6ad44ed59036346a932d3e47af6177, type: 2}
+  - {fileID: 11400000, guid: 26f7791a8b174b94ea55d6b8af419ada, type: 2}
+  isContainBundleQuestion: 0
+  questions: []
+  references:
+    version: 2
+    RefIds: []
