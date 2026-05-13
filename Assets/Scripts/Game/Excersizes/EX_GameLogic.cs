@@ -130,17 +130,17 @@ public class ExGameLogic : MonoBehaviour
     {
         PanelManager.Open("waiting");
 
-        //buttons activation
-        nextButton.gameObject.SetActive(true);
+        //buttons activation        
         finishButton.gameObject.SetActive(false);
         takeTestButton.gameObject.SetActive(false);
         nextThemeButton.gameObject.SetActive(false);
 
         //checkBtn = checkButton.GetComponent<ButtonImage>();
+        nextButton.gameObject.SetActive(true);
         nextBtn = nextButton.GetComponent<ButtonImage>();
+        nextButton.onClick.AddListener(nextBtnClicked);
 
         //button listeners        
-        nextButton.onClick.AddListener(nextBtnClicked);
         interruptGameButton.onClick.AddListener(OnGameInterrupt);
         takeTestButton.onClick.AddListener(OnTakeTest);
         nextThemeButton.onClick.AddListener(ToNextSection);
@@ -1474,16 +1474,26 @@ public class ExGameLogic : MonoBehaviour
         GetNextS();
 
         if (nextSection == null)
-        {
-            ButtonImage button = nextThemeButton.GetComponent<ButtonImage>();
-            button.SetDisabled(true);
+        {           
+            ButtonImage buttonI = null;
+
+            if (nextThemeButton != null)
+                buttonI = nextThemeButton.GetComponent<ButtonImage>();
+            
+            if(buttonI != null)
+                buttonI.SetDisabled(true);
         }
 
         //disable button if no next section in bundle
         if (gameData.saveData.bundleSections.Length <= 1)
         {
-            ButtonImage button = takeTestButton.GetComponent<ButtonImage>();
-            button.SetDisabled(true);
+            ButtonImage buttonI = null;
+
+            if (takeTestButton != null)
+                buttonI = takeTestButton.GetComponent<ButtonImage>();
+
+            if (buttonI != null)
+                buttonI.SetDisabled(true);            
         }
 
         //UI diff in learn mode

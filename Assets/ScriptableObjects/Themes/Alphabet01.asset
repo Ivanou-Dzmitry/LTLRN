@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SectionManager
   themeDifficulty: 0
   themeIcon: {fileID: 21300000, guid: a896e698a0498444bb9e025b8e95ca8e, type: 3}
-  themeHeaderColor: {r: 0.28627452, g: 0.8470589, b: 0.43921572, a: 1}
+  themeHeaderColor: {r: 0.9843138, g: 0.7607844, b: 0.8470589, a: 1}
   themeNameTargetLang: "Ab\u0117c\u0117l\u0117"
   themeName:
     m_TableReference:

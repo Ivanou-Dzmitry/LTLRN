@@ -173,8 +173,22 @@ public class ButtonImage : MonoBehaviour
         ApplyButtonText();
     }
 
+    private void EnsureButton()
+    {
+        if (button == null)      
+            button = GetComponent<Button>();        
+    }
+
     public void SetDisabled(bool disabled)
     {
+        EnsureButton();
+
+        if (button == null)
+        {
+            Debug.LogError($"Button is NULL on {gameObject.name}");
+            return;
+        }
+
         button.interactable = !disabled;
         currentState = disabled ? ButtonState.Disabled : ButtonState.Normal;
 

@@ -50,6 +50,35 @@ public class SaveData
 
     [Header("Debug")]
     public bool debugMode = false;
+
+    public void Patch()
+    {
+        // strings
+        sectionName ??= "";
+        
+        if (string.IsNullOrEmpty(lang))
+            lang = "en";
+        
+        playerName ??= "";
+        playerPass ??= "";
+
+        // arrays
+        bundleSections ??= Array.Empty<Section>();
+
+        // enums
+        if (!Enum.IsDefined(typeof(DifficultyType), selectedDifficulty))
+            selectedDifficulty = DifficultyType.A0;
+
+        // values
+        if (life <= 0)
+            life = 5;
+
+        if (stars < 0)
+            stars = 0;
+
+        if (crystals < 0)
+            crystals = 0;
+    }
 }
 
 public class GameData : MonoBehaviour
@@ -108,8 +137,12 @@ public class GameData : MonoBehaviour
             string loadedData = File.ReadAllText(filePath);
             saveData = JsonUtility.FromJson<SaveData>(loadedData);
 
-            // Fix any size mismatch
-            PatchSavedData();
+            if (saveData == null)
+                saveData = new SaveData();
+
+            // Patch data
+            saveData.Patch();
+            SaveToFile();
         }
         else
         {
@@ -165,6 +198,8 @@ public class GameData : MonoBehaviour
 
             saveData.debugMode = false;
 
+            saveData.Patch();
+
             return true;
         }
         catch
@@ -173,27 +208,6 @@ public class GameData : MonoBehaviour
             Debug.LogError("Error while adding default data: " + ex.Message);
             return false;
         }
-    }
-
-
-    private void PatchSavedData()
-    {
-        // Ensure life is at least 1
-        if (gameData.saveData.life == 0)
-            gameData.saveData.life = 5;
-               
-        if (saveData.lang == string.Empty)
-        {
-            saveData.lang = "en";
-        }
-
-        // difficulty fallback
-        if (!Enum.IsDefined(typeof(DifficultyType), gameData.saveData.selectedDifficulty))
-        {
-            gameData.saveData.selectedDifficulty = DifficultyType.A0;
-        }
-
-        SaveToFile();
     }
 
     private void OnDisable()

@@ -18,7 +18,7 @@ MonoBehaviour:
   difficultyType: 0
   sectionNumber: 0
   sectionIcon: {fileID: 21300000, guid: a896e698a0498444bb9e025b8e95ca8e, type: 3}
-  sectionHeaderColor: {r: 0.28627452, g: 0.84705883, b: 0.4392157, a: 1}
+  sectionHeaderColor: {r: 0.9450981, g: 0.39607847, b: 0.58431375, a: 1}
   isLiked: 0
   sectionTitle:
     m_TableReference:

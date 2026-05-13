@@ -235,7 +235,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 5816075885273088
-    m_Localized: Ordinal numbers from 1 to 10
+    m_Localized: 'Ordinal: 1-10'
     m_Metadata:
       m_Items: []
   - m_Id: 5816153773498368
