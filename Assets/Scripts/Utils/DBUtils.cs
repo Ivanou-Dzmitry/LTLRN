@@ -47,6 +47,11 @@ public class DBUtils : MonoBehaviour
 
     private int correctAnswerIndex = -1;
 
+    //atlas
+    private string loadedAtlasPath;
+    private string atlasResourcePath; // e.g. "Atlases/animals"
+    private Sprite[] atlasSprites;
+
     //for sound
     private enum SoundColumn
     {
@@ -1091,25 +1096,24 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    public Sprite LoadSpriteByName(string folder, string imageName)
+    public Sprite LoadSpriteByName(string folder, string imageName, int spriteNum = -1)
     {
         if (string.IsNullOrEmpty(folder) || string.IsNullOrEmpty(imageName))
-            return null;
+            return TryGetFromAtlas(spriteNum);
 
         imageName = Path.GetFileNameWithoutExtension(imageName);
 
         if (!spriteCache.ContainsKey(folder))
-        {
             LoadSpriteFolder(folder);
-        }
 
         if (spriteCache[folder].TryGetValue(imageName, out Sprite sprite))
-        {
             return sprite;
-        }
 
-        Debug.LogWarning($"Sprite not found: {folder}/{imageName}");
-        return null;
+       //Debug.LogWarning($"Sprite not found: {folder}/{imageName} — trying atlas index {spriteNum}");
+
+        atlasResourcePath = $"{IMAGES_ROOT}/{folder}/{imageName}"; // set atlas path for fallback
+
+        return TryGetFromAtlas(spriteNum);
     }
 
     private void LoadSpriteFolder(string folder)
@@ -1130,6 +1134,70 @@ public class DBUtils : MonoBehaviour
 
         spriteCache.Add(folder, dict);
     }
+
+    private Sprite TryGetFromAtlas(int spriteNum)
+    {
+        if (spriteNum < 0)
+            return null;
+
+        // reload atlas if path changed
+        if (atlasSprites == null || loadedAtlasPath != atlasResourcePath)
+        {
+            LoadAtlas();
+        }
+
+        if (atlasSprites == null || atlasSprites.Length == 0)
+            return null;
+
+        if (spriteNum < atlasSprites.Length)
+        {
+            //Debug.Log($"[Atlas] Returning sprite[{spriteNum}] = '{atlasSprites[spriteNum].name}'");
+            return atlasSprites[spriteNum];
+        }
+
+        Debug.LogWarning($"[Atlas] Index {spriteNum} out of range (atlas has {atlasSprites.Length} sprites)");
+
+        return null;
+    }
+
+    private void LoadAtlas()
+    {
+        if (string.IsNullOrEmpty(atlasResourcePath))
+        {
+            Debug.LogError("[Atlas] Atlas resource path is not set!");
+            return;
+        }
+
+        atlasSprites = Resources.LoadAll<Sprite>(atlasResourcePath);
+
+        loadedAtlasPath = atlasResourcePath;
+
+        if (atlasSprites == null || atlasSprites.Length == 0)
+        {
+            Debug.LogError($"[Atlas] No sprites loaded from '{atlasResourcePath}'");
+            return;
+        }
+
+        Array.Sort(atlasSprites, (a, b) =>
+        {
+            int numA = ExtractIndex(a.name);
+            int numB = ExtractIndex(b.name);
+
+            return numA.CompareTo(numB);
+        });
+
+        Debug.Log($"[Atlas] Loaded {atlasSprites.Length} sprites from '{atlasResourcePath}'");
+    }
+
+    private int ExtractIndex(string spriteName)
+    {
+        // Unity names slices as "textureName_0", "textureName_1" etc
+        int underscore = spriteName.LastIndexOf('_');
+        if (underscore >= 0 && int.TryParse(spriteName.Substring(underscore + 1), out int idx))
+            return idx;
+        return 0;
+    }
+
 
     //get sound based on column name
     public string GetSound(string tableName, string nomSingValue, string columnName = null)
@@ -1203,10 +1271,41 @@ public class DBUtils : MonoBehaviour
                 return result;
             }
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Debug.LogError($"Error getting image: {ex.Message}");
             return null;
+        }
+    }
+
+    public int GetSpriteNum(string tableName, string nomSingValue, string columnName = null)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogError("Database not initialized!");
+            return -1;
+        }
+
+        if (string.IsNullOrEmpty(nomSingValue))
+            return -1;
+
+        string searchColumn = (columnName != null && columnName != WordColumn.NomSing.ToString())
+            ? columnName
+            : WordColumn.NomSing.ToString();
+
+        try
+        {
+            using (var connection = new SQLiteConnection(dbPath))
+            {
+                string query = $"SELECT SpriteNum FROM [{tableName}] WHERE {searchColumn} = ?";
+                var result = connection.ExecuteScalar<int?>(query, nomSingValue);
+                return result ?? -1; // -1 = not found or null in db
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[GetSpriteNum] Error: {ex.Message}");
+            return -1;
         }
     }
 

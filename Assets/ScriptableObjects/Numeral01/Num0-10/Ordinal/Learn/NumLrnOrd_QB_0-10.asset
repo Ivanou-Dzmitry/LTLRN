@@ -40,8 +40,20 @@ MonoBehaviour:
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
+    recordID: 34
+    value: "nulin\u0117"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
     recordID: 24
     value: pirmas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 35
+    value: pirma
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
@@ -52,8 +64,20 @@ MonoBehaviour:
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
+    recordID: 36
+    value: antra
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
     recordID: 26
     value: "tre\u010Dias"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 37
+    value: "tre\u010Dia"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
@@ -64,8 +88,20 @@ MonoBehaviour:
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
+    recordID: 38
+    value: ketvirta
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
     recordID: 28
     value: penktas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 39
+    value: penkta
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
@@ -76,8 +112,20 @@ MonoBehaviour:
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
+    recordID: 40
+    value: "\u0161e\u0161ta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
     recordID: 30
     value: septintas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 41
+    value: septinta
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
@@ -88,14 +136,32 @@ MonoBehaviour:
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
+    recordID: 42
+    value: "a\u0161tunta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
     recordID: 32
     value: devintas
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
+    recordID: 43
+    value: devinta
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
     recordID: 33
     value: "de\u0161imtas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 44
+    value: "de\u0161imta"
     whereColumn: 
     whereValue: 
   answerReferences: []

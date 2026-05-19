@@ -34,68 +34,134 @@ MonoBehaviour:
   questionReferences:
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 1
-    value: "\u043D\u043E\u043B\u044C"
+    recordID: 23
+    value: "\u043D\u0443\u043B\u0435\u0432\u043E\u0439"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 2
-    value: "\u043E\u0434\u0438\u043D"
+    recordID: 34
+    value: "\u043D\u0443\u043B\u0435\u0432\u0430\u044F"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 3
-    value: "\u0434\u0432\u0430"
+    recordID: 24
+    value: "\u043F\u0435\u0440\u0432\u044B\u0439"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 4
-    value: "\u0442\u0440\u0438"
+    recordID: 35
+    value: "\u043F\u0435\u0440\u0432\u0430\u044F"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 5
-    value: "\u0447\u0435\u0442\u044B\u0440\u0435"
+    recordID: 25
+    value: "\u0432\u0442\u043E\u0440\u043E\u0439"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 6
-    value: "\u043F\u044F\u0442\u044C"
+    recordID: 36
+    value: "\u0432\u0442\u043E\u0440\u0430\u044F"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 7
-    value: "\u0448\u0435\u0441\u0442\u044C"
+    recordID: 26
+    value: "\u0442\u0440\u0435\u0442\u0438\u0439"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 8
-    value: "\u0441\u0435\u043C\u044C"
+    recordID: 37
+    value: "\u0442\u0440\u0435\u0442\u044C\u044F"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 9
-    value: "\u0432\u043E\u0441\u0435\u043C\u044C"
+    recordID: 27
+    value: "\u0447\u0435\u0442\u0432\u0451\u0440\u0442\u044B\u0439"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 10
-    value: "\u0434\u0435\u0432\u044F\u0442\u044C"
+    recordID: 38
+    value: "\u0447\u0435\u0442\u0432\u0451\u0440\u0442\u0430\u044F"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: RU
-    recordID: 11
-    value: "\u0434\u0435\u0441\u044F\u0442\u044C"
+    recordID: 28
+    value: "\u043F\u044F\u0442\u044B\u0439"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: RU
+    recordID: 39
+    value: "\u043F\u044F\u0442\u0430\u044F"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 29
+    value: "\u0161e\u0161tas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 40
+    value: "\u0161e\u0161ta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 30
+    value: septintas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 41
+    value: septinta
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 31
+    value: "a\u0161tuntas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 42
+    value: "a\u0161tunta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 32
+    value: devintas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 43
+    value: devinta
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 33
+    value: "de\u0161imtas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 44
+    value: "de\u0161imta"
     whereColumn: 
     whereValue: 
   answerReferences: []

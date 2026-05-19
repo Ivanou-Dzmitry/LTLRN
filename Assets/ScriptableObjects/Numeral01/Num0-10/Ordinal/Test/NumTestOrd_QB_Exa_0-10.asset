@@ -34,68 +34,134 @@ MonoBehaviour:
   questionReferences:
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 1
-    value: "n\xF9lis"
+    recordID: 23
+    value: nulinis
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 2
-    value: vienas
+    recordID: 34
+    value: "nulin\u0117"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 3
-    value: du
+    recordID: 24
+    value: pirmas
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 4
-    value: trys
+    recordID: 35
+    value: pirma
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 5
-    value: keturi
+    recordID: 25
+    value: antras
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 6
-    value: penki
+    recordID: 36
+    value: antra
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 7
-    value: "\u0161e\u0161i"
+    recordID: 26
+    value: "tre\u010Dias"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 8
-    value: septyni
+    recordID: 37
+    value: "tre\u010Dia"
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 9
-    value: "a\u0161tuoni"
+    recordID: 27
+    value: ketvirtas
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 10
-    value: devyni
+    recordID: 38
+    value: ketvirta
     whereColumn: 
     whereValue: 
   - tableName: Numerals0_10
     columnName: NomSing
-    recordID: 11
-    value: "de\u0161imt"
+    recordID: 28
+    value: penktas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 39
+    value: penkta
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 29
+    value: "\u0161e\u0161tas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 40
+    value: "\u0161e\u0161ta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 30
+    value: septintas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 41
+    value: septinta
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 31
+    value: "a\u0161tuntas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 42
+    value: "a\u0161tunta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 32
+    value: devintas
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 43
+    value: devinta
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 33
+    value: "de\u0161imtas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 44
+    value: "de\u0161imta"
     whereColumn: 
     whereValue: 
   answerReferences: []

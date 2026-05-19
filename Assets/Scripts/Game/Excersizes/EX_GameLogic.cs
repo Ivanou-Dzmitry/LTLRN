@@ -34,6 +34,7 @@ public class ExGameLogic : MonoBehaviour
         public int imagesCount;
         public int correctAnswerNumber;
         public string questionCategory;
+        public int spriteNumber;
     }
 
     [System.Serializable]
@@ -551,9 +552,7 @@ public class ExGameLogic : MonoBehaviour
         {
 
             //auto data - get image based on selected question
-            string imageFileName = DBUtils.Instance.GetImage(tableName, data.questionText, columnName);
-
-            //Debug.Log($"imageFileName: {imageFileName}");
+            string imageFileName = DBUtils.Instance.GetImage(tableName, data.questionText, columnName);            
 
             if (!string.IsNullOrEmpty(imageFileName))
             {
@@ -572,6 +571,10 @@ public class ExGameLogic : MonoBehaviour
                     data.questionImageFile = Array.Empty<string>();   // Length = 0
                 }
             }
+
+            //get sprite number for image questions
+            int spriteNum = DBUtils.Instance.GetSpriteNum(tableName, data.questionText, columnName);
+            data.spriteNumber = spriteNum;
         }
         else
         {
@@ -813,7 +816,7 @@ public class ExGameLogic : MonoBehaviour
                     try
                     {
                         //load image
-                        qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0]);
+                        qData.learnImage.sprite = DBUtils.Instance.LoadSpriteByName(learnData.questionCategory, learnData.questionImageFile[0], learnData.spriteNumber);
                     }
                     catch (Exception e)
                     {
