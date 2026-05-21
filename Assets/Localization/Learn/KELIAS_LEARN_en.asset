@@ -258,6 +258,14 @@ MonoBehaviour:
     m_Localized: 'Ordinal: 20-29'
     m_Metadata:
       m_Items: []
+  - m_Id: 9023704489160704
+    m_Localized: Study ordinal numbers. Tens
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9023587400970240
+    m_Localized: 'Ordinal: 10-90'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
