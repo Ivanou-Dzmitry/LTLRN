@@ -290,6 +290,14 @@ MonoBehaviour:
     m_Localized: 'Ordinal: 120-130'
     m_Metadata:
       m_Items: []
+  - m_Id: 9397058303848448
+    m_Localized: Study ordinal numbers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9397003635290112
+    m_Localized: 'Ordinal: 1000+'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -34,56 +34,110 @@ MonoBehaviour:
   questionReferences:
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 1
-    value: "\u0161imtas vienuolika"
+    recordID: 10
+    value: "\u0161imtas vienuoliktas"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 2
-    value: "\u0161imtas dvylika"
+    recordID: 19
+    value: "\u0161imtas vienuolikta"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 3
-    value: "\u0161imtas trylika"
+    recordID: 11
+    value: "\u0161imtas dvyliktas"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 4
-    value: "\u0161imtas keturiolika"
+    recordID: 20
+    value: "\u0161imtas dvylikta"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 5
-    value: "\u0161imtas penkiolika"
+    recordID: 12
+    value: "\u0161imtas tryliktas"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 6
-    value: "\u0161imtas \u0161e\u0161iolika"
+    recordID: 21
+    value: "\u0161imtas trylikta"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 7
-    value: "\u0161imtas septyniolika"
+    recordID: 13
+    value: "\u0161imtas keturioliktas"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 8
-    value: "\u0161imtas a\u0161tuoniolika"
+    recordID: 22
+    value: "\u0161imtas keturiolikta"
     whereColumn: 
     whereValue: 
   - tableName: Numerals111_119
     columnName: NomSing
-    recordID: 9
-    value: "\u0161imtas devyniolika"
+    recordID: 14
+    value: "\u0161imtas penkioliktas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 23
+    value: "\u0161imtas penkiolikta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 15
+    value: "\u0161imtas \u0161e\u0161ioliktas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 24
+    value: "\u0161imtas \u0161e\u0161iolikta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 16
+    value: "\u0161imtas septynioliktas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 25
+    value: "\u0161imtas septyniolikta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 17
+    value: "\u0161imtas a\u0161tuonioliktas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 26
+    value: "\u0161imtas a\u0161tuoniolikta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 18
+    value: "\u0161imtas devynioliktas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals111_119
+    columnName: NomSing
+    recordID: 27
+    value: "\u0161imtas devyniolikta"
     whereColumn: 
     whereValue: 
   answerReferences: []
