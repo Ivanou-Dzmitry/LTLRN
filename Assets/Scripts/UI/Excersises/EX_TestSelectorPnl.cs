@@ -130,14 +130,17 @@ public class EX_TestSelectorPnl : Panel
         if (sec.sectionLanguage == Section.SectionLanguage.TARGET)
         {
             button.sectionText.text = $"{btnText02}{ARROW_RIGHT}{btnText01}";
+            //set icon
+            button.sectionIcon.sprite = sectionTypeIcons[1];
         }
         else if (sec.sectionLanguage == Section.SectionLanguage.SYS)
         {
             button.sectionText.text = $"{btnText01}{ARROW_RIGHT}{btnText02}";
+            //set icon
+            button.sectionIcon.sprite = sectionTypeIcons[3];
         }
 
-        //set icon
-        button.sectionIcon.sprite = sectionTypeIcons[4];
+
 
         //slider
         SetProgressSlider(sec, button);

@@ -314,6 +314,10 @@ MonoBehaviour:
     m_Localized: Small Talk 3
     m_Metadata:
       m_Items: []
+  - m_Id: 10110274939969536
+    m_Localized: Small Talk 1
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

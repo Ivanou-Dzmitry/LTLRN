@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SectionManager
   themeDifficulty: 0
   themeIcon: {fileID: 21300000, guid: 551d6e8fb53475f4abc34fe2fafdfc9e, type: 3}
-  themeHeaderColor: {r: 1, g: 0.83921576, b: 0.6509804, a: 1}
+  themeHeaderColor: {r: 0.68235296, g: 0.9568628, b: 0.7411765, a: 1}
   themeNameTargetLang: Lengvi pokalbiai
   themeName:
     m_TableReference:
