@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
+  m_Name: NumOrdTest_QB_Trg_1000_01
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
+  isAutomated: 1
+  questionCategory:
+    tableName: Numerals0_10
+    columnName: Category
+    recordID: 1
+    value: Numerals
+    whereColumn: ID
+    whereValue: 
+  questionLang: 1
+  questionDifficulty: 0
+  questionType: 0
+  isQuestionBundle: 1
+  questionReference:
+    tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 2
+    value: vienas
+    whereColumn: ID
+    whereValue: 
+  questionReferences:
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 13
+    value: "t\u016Bkstantasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 25
+    value: "t\u016Bkstantoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 14
+    value: "t\u016Bkstantis pirmas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 26
+    value: "t\u016Bkstantis pirma"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 15
+    value: "t\u016Bkstantis de\u0161imtas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 27
+    value: "t\u016Bkstantis de\u0161imta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 16
+    value: "t\u016Bkstantis \u0161imtasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 28
+    value: "t\u016Bkstantis \u0161imtoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 17
+    value: "t\u016Bkstantis du\u0161imtasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 29
+    value: "t\u016Bkstantis du\u0161imtoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 18
+    value: "t\u016Bkstantis tri\u0161imtasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 30
+    value: "t\u016Bkstantis tri\u0161imtoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 19
+    value: "dut\u016Bkstantasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 31
+    value: "dut\u016Bkstantoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 20
+    value: "trit\u016Bkstantasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 32
+    value: "trit\u016Bkstantoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 21
+    value: "keturt\u016Bkstantasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 33
+    value: "keturt\u016Bkstantoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 22
+    value: "de\u0161imtt\u016Bkstantasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 34
+    value: "de\u0161imtt\u016Bkstantoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 23
+    value: "vienuolikat\u016Bkstantasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 35
+    value: "vienuolikat\u016Bkstantoji"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 24
+    value: "dvide\u0161imtt\u016Bkstantasis"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals1000_01
+    columnName: NomSing
+    recordID: 36
+    value: "dvide\u0161imtt\u016Bkstantoji"
+    whereColumn: 
+    whereValue: 
+  answerReferences: []
+  answerSecondWord: []
+  soundReferences: []
+  questionImageFile: []
+  imagesCount: 1
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
+  correctAnswerNumber: -1
+  rewardAmount: 1
+  answerColumn: []
+  questionDescription: 

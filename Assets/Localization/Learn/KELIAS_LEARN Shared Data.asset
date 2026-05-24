@@ -307,6 +307,24 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 10020515643187200
+    m_Key: SmallTalkText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10024515134349312
+    m_Key: 'SmallTalkDesc
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10081026183323648
+    m_Key: SmallTalk2Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10081159008542720
+    m_Key: SmallTalk3Text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

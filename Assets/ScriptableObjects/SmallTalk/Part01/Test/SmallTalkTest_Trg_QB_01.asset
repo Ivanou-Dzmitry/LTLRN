@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 564ba32def351074a9a5d2d6c8a3782b, type: 3}
+  m_Name: SmallTalkTest_Trg_QB_01
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
+  isAutomated: 1
+  questionCategory:
+    tableName: Short_vowels
+    columnName: ID
+    recordID: 1
+    value: 1
+    whereColumn: ID
+    whereValue: 
+  questionLang: 1
+  questionDifficulty: 0
+  questionType: 0
+  isQuestionBundle: 1
+  questionReference:
+    tableName: Numerals0_10
+    columnName: NomSing
+    recordID: 2
+    value: vienas
+    whereColumn: ID
+    whereValue: 
+  questionReferences:
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 1
+    value: Kaip sekasi?
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 2
+    value: Kaip tu jautiesi?
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 3
+    value: Kas naujo?
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 4
+    value: Kas geresnio?
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 5
+    value: "A\u010Di\u016B"
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 6
+    value: "D\u0117koju"
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 7
+    value: "D\u0117kui"
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 8
+    value: "Seniai nesimat\u0117me."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 9
+    value: Kaip gyveni?
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 10
+    value: Kaip gyvenate?
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 11
+    value: "D\u017Eiaugiuosi tave pamat\u0119s."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 12
+    value: "D\u017Eiaugiuosi tave pama\u010Diusi."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 13
+    value: "D\u017Eiaugiuosi tave matyti."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 14
+    value: "D\u017Eiaugiuosi tave i\u0161gird\u0119s."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 15
+    value: "D\u017Eiaugiuosi tave i\u0161girdusi."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 16
+    value: "D\u017Eiaugiuosi tave gird\u0117ti."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 17
+    value: "Laukiau tavo skambu\u010Dio."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 18
+    value: "A\u010Di\u016B u\u017E skambut\u012F."
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 19
+    value: Malonu susitikti!
+    whereColumn: 
+    whereValue: 
+  - tableName: SmallTalk01
+    columnName: NomSing
+    recordID: 20
+    value: Nuostabu!
+    whereColumn: 
+    whereValue: 
+  answerReferences: []
+  answerSecondWord: []
+  soundReferences: []
+  questionImageFile: []
+  imagesCount: 1
+  questionImageColor: {r: 1, g: 1, b: 1, a: 1}
+  correctAnswerNumber: -1
+  rewardAmount: 1
+  answerColumn: []
+  questionDescription: 

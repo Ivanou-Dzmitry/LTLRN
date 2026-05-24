@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63267aaa64b787546865e2b36ff6ca8b, type: 3}
+  m_Name: SmallTalk_Bundle_01
+  m_EditorClassIdentifier: Assembly-CSharp::Section
+  isBundle: 1
+  sectionType: 5
+  sectionLanguage: 3
+  difficultyType: 0
+  sectionNumber: 0
+  sectionIcon: {fileID: 21300000, guid: 551d6e8fb53475f4abc34fe2fafdfc9e, type: 3}
+  sectionHeaderColor: {r: 1, g: 0.83921576, b: 0.6509804, a: 1}
+  isLiked: 0
+  sectionTitle:
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 10020515643187200
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  sectionDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:35fabb205f03f2b4d83068aff6519fed
+    m_TableEntryReference:
+      m_KeyId: 10024515134349312
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  sectionInfo:
+    tableName: Rules01
+    columnName: RU
+    recordID: 1
+    value: " \u0423\u043F\u043E\u0442\u0440\u0435\u0431\u043B\u044F\u0435\u043C \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435
+      \u0432\u043C\u0435\u0441\u0442\u0435 \u0441\u043E \u0441\u043B\u043E\u0432\u0430\u043C\u0438
+      \u0432 \u0436\u0435\u043D\u0441\u043A\u043E\u043C \u0438 \u043C\u0443\u0436\u0441\u043A\u043E\u043C
+      \u0440\u043E\u0434\u0435: \u043A\u0430\u043A \u0438 \u0432 \u0440\u0443\u0441\u0441\u043A\u043E\u043C
+      \u044F\u0437\u044B\u043A\u0435, \u0432 \u043B\u0438\u0442\u043E\u0432\u0441\u043A\u043E\u043C
+      \u0447\u0438\u0441\u043B\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u0435 \u0441\u043E\u0433\u043B\u0430\u0441\u0443\u044E\u0442\u0441\u044F
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438
+      \u0432 \u0440\u043E\u0434\u0435, \u0447\u0438\u0441\u043B\u0435, \u043F\u0430\u0434\u0435\u0436\u0435
+      = \u0438\u0437\u043C\u0435\u043D\u044F\u044E\u0442\u0441\u044F \u0432\u043C\u0435\u0441\u0442\u0435
+      \u0441 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u044B\u043C\u0438."
+    whereColumn: ID
+    whereValue: 
+  bundleSections:
+  - {fileID: 11400000, guid: 291cdee40cbe1b34fb6369611e86fd4f, type: 2}
+  - {fileID: 11400000, guid: 444c3d437809c694a944fb0a016ad4b6, type: 2}
+  - {fileID: 11400000, guid: 15f9f21c19adebb47b8230d1363057d1, type: 2}
+  - {fileID: 11400000, guid: ca7f7fbf39cca914a8430f90c188287f, type: 2}
+  - {fileID: 11400000, guid: 154cdaf943306504986e34640607d77a, type: 2}
+  isContainBundleQuestion: 0
+  questions: []
+  references:
+    version: 2
+    RefIds: []

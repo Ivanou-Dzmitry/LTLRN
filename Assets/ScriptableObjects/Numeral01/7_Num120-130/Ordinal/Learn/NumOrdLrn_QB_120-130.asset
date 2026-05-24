@@ -34,68 +34,134 @@ MonoBehaviour:
   questionReferences:
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 1
-    value: "\u0161imtas dvide\u0161imt"
+    recordID: 12
+    value: "\u0161imtas dvide\u0161imtas"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 2
-    value: "\u0161imtas dvide\u0161imt vienas"
+    recordID: 23
+    value: "\u0161imtas dvide\u0161imta"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 3
-    value: "\u0161imtas dvide\u0161imt du"
+    recordID: 13
+    value: "\u0161imtas dvide\u0161imt pirmas"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 4
-    value: "\u0161imtas dvide\u0161imt trys"
+    recordID: 24
+    value: "\u0161imtas dvide\u0161imt pirma"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 5
-    value: "\u0161imtas dvide\u0161imt keturi"
+    recordID: 14
+    value: "\u0161imtas dvide\u0161imt antras"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 6
-    value: "\u0161imtas dvide\u0161imt penki"
+    recordID: 25
+    value: "\u0161imtas dvide\u0161imt antra"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 7
-    value: "\u0161imtas dvide\u0161imt \u0161e\u0161i"
+    recordID: 15
+    value: "\u0161imtas dvide\u0161imt tre\u010Dias"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 8
-    value: "\u0161imtas dvide\u0161imt septyni"
+    recordID: 26
+    value: "\u0161imtas dvide\u0161imt tre\u010Dia"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 9
-    value: "\u0161imtas dvide\u0161imt a\u0161tuoni"
+    recordID: 16
+    value: "\u0161imtas dvide\u0161imt ketvirtas"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 10
-    value: "\u0161imtas dvide\u0161imt devyni"
+    recordID: 27
+    value: "\u0161imtas dvide\u0161imt ketvirta"
     whereColumn: 
     whereValue: 
   - tableName: Numerals120_130
     columnName: NomSing
-    recordID: 11
-    value: "\u0161imtas trisde\u0161imt"
+    recordID: 17
+    value: "\u0161imtas dvide\u0161imt penktas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 28
+    value: "\u0161imtas dvide\u0161imt penkta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 18
+    value: "\u0161imtas dvide\u0161imt \u0161e\u0161tas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 29
+    value: "\u0161imtas dvide\u0161imt \u0161e\u0161ta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 19
+    value: "\u0161imtas dvide\u0161imt septintas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 30
+    value: "\u0161imtas dvide\u0161imt septinta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 20
+    value: "\u0161imtas dvide\u0161imt a\u0161tuntas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 31
+    value: "\u0161imtas dvide\u0161imt a\u0161tunta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 21
+    value: "\u0161imtas dvide\u0161imt devintas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 32
+    value: "\u0161imtas dvide\u0161imt devinta"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 22
+    value: "\u0161imtas trisde\u0161imtas"
+    whereColumn: 
+    whereValue: 
+  - tableName: Numerals120_130
+    columnName: NomSing
+    recordID: 33
+    value: "\u0161imtas trisde\u0161imta"
     whereColumn: 
     whereValue: 
   answerReferences: []

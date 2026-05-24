@@ -298,6 +298,22 @@ MonoBehaviour:
     m_Localized: 'Ordinal: 1000+'
     m_Metadata:
       m_Items: []
+  - m_Id: 10020515643187200
+    m_Localized: Small Talk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10024515134349312
+    m_Localized: Simple everyday conversations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10081026183323648
+    m_Localized: Small Talk 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10081159008542720
+    m_Localized: Small Talk 3
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
