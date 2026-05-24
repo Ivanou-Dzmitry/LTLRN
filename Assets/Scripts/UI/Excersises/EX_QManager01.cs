@@ -32,8 +32,7 @@ public class ExQManager01 : MonoBehaviour
     public Sprite[] answerIcon;
 
     [Header("Sound")]
-    public AudioClip qAudioClip;
-    //public Button soundBtn;
+    public AudioClip qAudioClip;    
 
     [Header("Particles")]
     public ParticleSystem playSoundPart;

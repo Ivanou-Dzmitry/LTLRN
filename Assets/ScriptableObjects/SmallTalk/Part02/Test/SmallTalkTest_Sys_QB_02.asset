@@ -152,12 +152,6 @@ MonoBehaviour:
     value: "Viskas kaip buv\u0119."
     whereColumn: 
     whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
-    recordID: 41
-    value: Viskas taip pat.
-    whereColumn: 
-    whereValue: 
   answerReferences: []
   answerSecondWord: []
   soundReferences: []

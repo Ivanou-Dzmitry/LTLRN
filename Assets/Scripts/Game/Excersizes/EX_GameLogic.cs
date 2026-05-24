@@ -654,6 +654,7 @@ public class ExGameLogic : MonoBehaviour
 
             if (qData != null)
             {
+                //sound button
                 qData.soundPlayButton.GetComponent<ButtonImage>().SetDisabled(false);
 
                 //set question text
@@ -1400,7 +1401,13 @@ public class ExGameLogic : MonoBehaviour
         // Validate input
         if (soundNames == null || soundNames.Length == 0 || index >= soundNames.Length || string.IsNullOrEmpty(soundNames[index]))
         {
+            //set button state
             soundButton?.SetDisabled(true);
+
+            //hide button if no sound
+            if (soundButton != null)
+                soundButton.gameObject.SetActive(false);
+
             return null;
         }
 
@@ -1410,11 +1417,14 @@ public class ExGameLogic : MonoBehaviour
         // Update button state based on result
         if (audio != null)
         {
+            //set button state
             soundButton?.SetDisabled(false);
         }
         else
         {
+            //set button state disabled if audio failed to load
             soundButton?.SetDisabled(true);
+
             Debug.LogWarning($"Failed to load audio: {soundNames[index]} from category: {category}");
         }
 

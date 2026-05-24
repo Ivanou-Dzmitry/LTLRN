@@ -46,12 +46,6 @@ MonoBehaviour:
     whereValue: 
   - tableName: SmallTalk01
     columnName: NomSing
-    recordID: 23
-    value: Nuostabiai atrodote!
-    whereColumn: 
-    whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
     recordID: 24
     value: Puiku.
     whereColumn: 
@@ -112,12 +106,6 @@ MonoBehaviour:
     whereValue: 
   - tableName: SmallTalk01
     columnName: NomSing
-    recordID: 34
-    value: Viskas eina savo linkme.
-    whereColumn: 
-    whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
     recordID: 35
     value: Viskas tvarkoje.
     whereColumn: 
@@ -150,12 +138,6 @@ MonoBehaviour:
     columnName: NomSing
     recordID: 40
     value: "Viskas kaip buv\u0119."
-    whereColumn: 
-    whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
-    recordID: 41
-    value: Viskas taip pat.
     whereColumn: 
     whereValue: 
   answerReferences: []

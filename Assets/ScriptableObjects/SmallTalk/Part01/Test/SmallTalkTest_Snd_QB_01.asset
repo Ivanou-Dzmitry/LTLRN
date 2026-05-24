@@ -100,32 +100,8 @@ MonoBehaviour:
     whereValue: 
   - tableName: SmallTalk01
     columnName: NomSing
-    recordID: 12
-    value: "D\u017Eiaugiuosi tave pama\u010Diusi."
-    whereColumn: 
-    whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
-    recordID: 13
-    value: "D\u017Eiaugiuosi tave matyti."
-    whereColumn: 
-    whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
     recordID: 14
     value: "D\u017Eiaugiuosi tave i\u0161gird\u0119s."
-    whereColumn: 
-    whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
-    recordID: 15
-    value: "D\u017Eiaugiuosi tave i\u0161girdusi."
-    whereColumn: 
-    whereValue: 
-  - tableName: SmallTalk01
-    columnName: NomSing
-    recordID: 16
-    value: "D\u017Eiaugiuosi tave gird\u0117ti."
     whereColumn: 
     whereValue: 
   - tableName: SmallTalk01
@@ -160,5 +136,8 @@ MonoBehaviour:
   questionImageColor: {r: 1, g: 1, b: 1, a: 1}
   correctAnswerNumber: -1
   rewardAmount: 1
-  answerColumn: []
+  answerColumn:
+  - recordID: 0
+    tableName: SmallTalk01
+    columnName: NomSing
   questionDescription: 
