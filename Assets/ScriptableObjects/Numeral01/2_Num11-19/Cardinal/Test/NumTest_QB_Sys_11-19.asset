@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: NumTest_QB_Sys_11-19
   m_EditorClassIdentifier: Assembly-CSharp::QuestionT02
   isAutomated: 1
+  questionWithSound: 0
   questionCategory:
     tableName: Numerals0_10
     columnName: Category

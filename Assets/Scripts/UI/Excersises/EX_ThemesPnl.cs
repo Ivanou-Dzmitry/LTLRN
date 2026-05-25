@@ -31,12 +31,10 @@ public class EX_ThemesPanel : Panel
     [SerializeField] private Scrollbar themePanelScroll;
 
     private void Start()
-    {
-        themePanelScroll.value = 1f; // Set initial value to 1
-
+    {       
         StartCoroutine(WaitAndLoadData());
 
-        scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
+        scrollPanel.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);        
     }
 
     private IEnumerator WaitAndLoadData()
@@ -79,6 +77,8 @@ public class EX_ThemesPanel : Panel
 
         // Set tempSectionManager to current sectionManager to ensure ApplySelectedTheme works correctly
         dataLoader.tempSectionManager = dataLoader.sectionManager;
+
+        themePanelScroll.value = 1f; // Set initial value to 1
     }
 
 

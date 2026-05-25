@@ -25,6 +25,9 @@ public abstract class QuestionBase : ScriptableObject
     [Header("Automatization")]
     public bool isAutomated;
 
+    [Header("Sound")]
+    public bool questionWithSound = true;
+
     [Header("Category")]
     public DatabaseReference questionCategory;
 

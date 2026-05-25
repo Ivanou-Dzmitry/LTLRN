@@ -663,8 +663,11 @@ public class ExGameLogic : MonoBehaviour
                 //set answers
                 currentQuestion.ApplyAnswers(data, qData);
 
-                //load sound. Avoid load name - but clip is not ready. In db just name.
-                qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
+                if(question.questionWithSound)
+                    //load sound. Avoid load name - but clip is not ready. In db just name.
+                    qData.qAudioClip = LoadAudioAndSetButton(data.questionCategory, data.qSoundClipName, qData.soundBtn);
+                else
+                    qData.soundBtn.gameObject.SetActive(false);
             }
         }
 
