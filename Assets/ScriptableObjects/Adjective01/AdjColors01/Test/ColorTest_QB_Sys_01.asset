@@ -24,7 +24,7 @@ MonoBehaviour:
   questionLang: 0
   questionDifficulty: 0
   questionType: 0
-  isQuestionBundle: 0
+  isQuestionBundle: 1
   questionReference:
     tableName: Colors01
     columnName: RU

@@ -21,7 +21,7 @@ MonoBehaviour:
     value: Numerals
     whereColumn: ID
     whereValue: 
-  questionLang: 1
+  questionLang: 0
   questionDifficulty: 0
   questionType: 0
   isQuestionBundle: 1

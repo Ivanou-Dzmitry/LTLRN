@@ -85,11 +85,13 @@ public class ExWinPnl : Panel
         bool nextBundle = exGameLogic.GetNextBundleSection();
 
         //turn button on/off based on next section availability
-        if (next)
-            NextSectionButton(next);
+        // final state
+        bool hasNext = next || nextBundle;
 
-        if(nextBundle)
-            NextSectionButton(nextBundle);        
+        Debug.Log($"Next section: {next}, Next in bundle: {nextBundle}, Has next: {hasNext}");
+
+        // update button once
+        NextSectionButton(hasNext);
     }
     
     private void NextSectionButton(bool isNextEsists)
@@ -119,6 +121,7 @@ public class ExWinPnl : Panel
         PanelManager.OpenScene("ExGame");
     }
 
+    //next section
     private void OnNextClick()
     {
         //standart next section

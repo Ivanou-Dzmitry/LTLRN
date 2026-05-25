@@ -1298,38 +1298,80 @@ public class ExGameLogic : MonoBehaviour
 
     public bool GetNextSection()
     {
-        int nextIndex = gameData.saveData.selectedSectionIndex + 1;
-
-        try
+        if (sectionManager == null || sectionManager.sections == null)
         {
-            nextSection = sectionManager.sections[nextIndex];
-            Debug.Log("Go to next section");
-            return true;
-        }
-        catch
-        {
-            Debug.Log("No more themes available.");
+            Debug.LogError("[GetNextSection] sectionManager or sections is null.");
             return false;
         }
+
+        int nextIndex = gameData.saveData.selectedSectionIndex + 1;
+
+        if (nextIndex >= sectionManager.sections.Length)
+        {
+            Debug.Log($"[GetNextSection] No more sections. Current: {gameData.saveData.selectedSectionIndex} / {sectionManager.sections.Length - 1}");
+            return false;
+        }
+
+        nextSection = sectionManager.sections[nextIndex];
+        Debug.Log($"[GetNextSection] Next: '{nextSection.name}' [{nextIndex}]");
+        return true;
     }
 
     public bool GetNextBundleSection()
     {
-        Section[] bundleSections = gameData.saveData.bundleSections;
-
-        int curentBundleIndex = gameData.saveData.selectedSectionIndex;
-        int nextIndex = curentBundleIndex + 1;
-
-        try
+        if (sectionManager == null || sectionManager.sections == null)
         {
-            nextSection = bundleSections[nextIndex];
-            return true;
-        }
-        catch
-        {
-            Debug.Log("No more themes in bundle available.");
+            Debug.LogError("[GetNextBundleSection] sectionManager or sections is null.");
             return false;
         }
+
+        // find parent section by name
+        int sectionIndex = Array.FindIndex(
+            sectionManager.sections,
+            s => s.name == gameData.saveData.sectionName
+        );
+
+        if (sectionIndex < 0)
+        {
+            Debug.LogError($"[GetNextBundleSection] Section '{gameData.saveData.sectionName}' not found.");
+            return false;
+        }
+
+        Section[] bundleSections = sectionManager.sections[sectionIndex].bundleSections;
+
+        if (bundleSections == null || bundleSections.Length == 0)
+        {
+            Debug.LogWarning("[GetNextBundleSection] No bundle sections found.");
+            return false;
+        }
+
+        // find current position
+        int currentIndex = Array.FindIndex(bundleSections, s => s == currentSection);
+
+        if (currentIndex < 0)
+        {
+            Debug.LogWarning($"[GetNextBundleSection] currentSection '{currentSection?.name}' not found in bundle.");
+            return false;
+        }
+
+        // sync save data if out of date
+        if (gameData.saveData.selectedSectionIndex != currentIndex)
+            gameData.saveData.selectedSectionIndex = currentIndex;
+
+        int nextIndex = currentIndex + 1;
+
+        if (nextIndex >= bundleSections.Length)
+        {
+            Debug.Log("[GetNextBundleSection] No more sections in bundle.");
+            gameData.SaveToFile();
+            return false;
+        }
+
+        nextSection = bundleSections[nextIndex];
+        gameData.SaveToFile();
+
+        Debug.Log($"[GetNextBundleSection] Next section: '{nextSection.name}' [{nextIndex}/{bundleSections.Length - 1}]");
+        return true;
     }
 
     public void NextSection()
