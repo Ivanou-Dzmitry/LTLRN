@@ -9,6 +9,7 @@ using static QuestionBase;
 using System.Linq;
 using static Section;
 
+
 #if UNITY_ANDROID
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
@@ -53,8 +54,8 @@ public class ExGameLogic : MonoBehaviour
     public GameState gameState;
 
     [Header("Data Info")]
-    public Slider progressBar;
-    public TMP_Text progressText;
+    public Slider progressBar; //progress bar for question count
+    public TMP_Text progressText; //progress text for question count
     public TMP_Text skillLevelText; //Language proficiency level, or test difficulty level
     public int questionsCount = 0;
     private Coroutine progressRoutine;
@@ -62,7 +63,8 @@ public class ExGameLogic : MonoBehaviour
     [Header("Data")]
     public Themes themes;
     public SectionManager sectionManager;
-    public Section currentSection;
+    public Section currentBundelSection;
+    public Section currentSection;    
     public Section nextSection;
     public QuestionBase currentQuestion;
 
@@ -184,7 +186,7 @@ public class ExGameLogic : MonoBehaviour
         //load theme
         if (gameData != null)
         {
-            //load selected theme
+            //load selected theme - important!
             sectionManager = themes.theme[gameData.saveData.selectedThemeIndex];
 
             //load selected section
@@ -192,52 +194,76 @@ public class ExGameLogic : MonoBehaviour
             {
                 int index = gameData.saveData.selectedSectionIndex;
 
-                Section tempSection = null;
-                Section tempBundleSection = null;
-
-                // Validate index. try load from save, id fail load 0
-                try
+                // validate main section index
+                if (index < 0 || index >= sectionManager.sections.Length)
                 {
-                    //if (index >= 0 && index < sectionManager.sections.Length)
-                    tempSection = sectionManager.sections[index];
-                }
-                catch (Exception e)
-                {
-                    Debug.LogWarning($"Load 0 section. {e} Maybe section is bundle.");
-                    tempSection = sectionManager.sections[0];
+                    Debug.LogWarning($"Invalid section index: {index}. Loading 0.");
+                    index = 0;
                 }
 
-                // Avoid empty bundle
+                //set current temp section
+                Section tempSection = sectionManager.sections[index];
+
+                // bundle section
                 if (tempSection.isBundle)
                 {
-                    //try load from save, id fail load 0
-                    try
+                    Section tempBundleSection = gameData.saveData.sectionToLoad;
+
+                    // validate saved bundle section
+                    if (tempBundleSection == null)
                     {
-                        tempBundleSection = gameData.saveData.sectionToLoad;
-                        currentSection = tempBundleSection;
+                        Debug.LogWarning("Saved bundle section is null. Loading first bundle section.");
+
+                        if (tempSection.bundleSections != null &&
+                            tempSection.bundleSections.Length > 0)
+                        {
+                            tempBundleSection = tempSection.bundleSections[0];
+                        }
                     }
-                    catch (Exception e)
-                    {
-                        Debug.LogWarning($"Load 0 bundle. {e}");
-                        tempBundleSection = tempSection.bundleSections[0];
-                        currentSection = tempBundleSection;
-                    }
+
+                    currentSection = tempBundleSection;
                 }
                 else
                 {
                     currentSection = tempSection;
                 }
+            }
 
+            //work with bundle
+            string sectionName = gameData.saveData.sectionName;
+
+            //validate saved section name
+            if (string.IsNullOrEmpty(sectionName))
+            {
+                Debug.LogWarning("Saved section name is empty");
+                return;
+            }
+
+            //set current bundle section
+            currentBundelSection = Array.Find(
+                sectionManager.sections,
+                s => s != null &&
+                     s.isBundle &&
+                     s.name == sectionName
+            );
+
+            if (currentBundelSection == null)
+            {
+                Debug.LogWarning($"Bundle section not found: {sectionName}");
+            }
+            else
+            {
+                Debug.Log($"Loaded bundle section: {currentBundelSection.name}");
             }
 
             //Important - set type of section - learn or exam
 
             //get section type: learn
-            if (currentSection.sectionType == Section.SectionType.LearnType01)
+            if (currentSection.sectionType == SectionType.LearnType01)
                 isLearnSection = true;
 
             //get section type: exam
-            if (currentSection.sectionType == Section.SectionType.Exam)
+            if (currentSection.sectionType == SectionType.Exam)
                 isExamSection = true;
 
             //disable buttons for exam section
@@ -323,6 +349,10 @@ public class ExGameLogic : MonoBehaviour
 
         //set UI lang
         gamePanel.SetUIData(currentLang.ToString());
+
+        //reset next section
+        gameData.saveData.nextSection = null;
+        gameData.SaveToFile();
     }
 
     void ShuffleQuestions(List<QuestionBase> list)
@@ -1209,11 +1239,9 @@ public class ExGameLogic : MonoBehaviour
     public bool ExitGame()
     {
         //save progress and time
-        SaveGameProgress();
-        bool saveOp = SaveResult();
-        SaveTime();
+        SaveProgressRoutine();
 
-        PanelManager.CloseAll();
+        //PanelManager.CloseAll();
 
         PanelManager.OpenScene("ExMenu");
 
@@ -1238,9 +1266,15 @@ public class ExGameLogic : MonoBehaviour
 
         int savedProgress = 0;
 
+        
+
         //avoid empty section and bundles
         if (currentSection != null && !currentSection.isBundle)
+        {
+            dbUtils.EnsureSectionExists(currentSection.name);
             savedProgress = dbUtils.GetSectionProgress(currentSection.name);
+        }
+            
 
         if (currentProgress > savedProgress && currentSection != null)
             dbUtils.SetSectionProgress(currentSection.name, currentProgress);
@@ -1260,7 +1294,8 @@ public class ExGameLogic : MonoBehaviour
             LeaderboardManager.Instance.ReportScore(tempScore);
         }
 
-        //questions done
+        //questions done        
+        dbUtils.EnsureSectionExists(currentSection.name);
         int done = dbUtils.GetSectionProgress(currentSection.name);
 
         bool complete = dbUtils.GetSectionComplete(currentSection.name);
@@ -1277,7 +1312,7 @@ public class ExGameLogic : MonoBehaviour
         return true;
     }
 
-    private void SaveTime()
+    private void SaveTestTime()
     {
         float currentTime = sessionDuration;
 
@@ -1298,6 +1333,9 @@ public class ExGameLogic : MonoBehaviour
 
     public bool GetNextSection()
     {
+        if (nextSection != null)
+            return true;
+
         if (sectionManager == null || sectionManager.sections == null)
         {
             Debug.LogError("[GetNextSection] sectionManager or sections is null.");
@@ -1312,7 +1350,15 @@ public class ExGameLogic : MonoBehaviour
             return false;
         }
 
-        nextSection = sectionManager.sections[nextIndex];
+        // Check if next section is a bundle and get the first section of the bundle if it is
+        if (sectionManager.sections[nextIndex].isBundle)
+        {
+            currentBundelSection = sectionManager.sections[nextIndex];
+            nextSection = sectionManager.sections[nextIndex].bundleSections[0];
+        }            
+        else
+            nextSection = sectionManager.sections[nextIndex];
+
         Debug.Log($"[GetNextSection] Next: '{nextSection.name}' [{nextIndex}]");
         return true;
     }
@@ -1376,14 +1422,20 @@ public class ExGameLogic : MonoBehaviour
 
     public void NextSection()
     {
-        //get next section
-        bool hasNext = GetNextSection();
+        SaveProgressRoutine();
 
-        int nextIndex = gameData.saveData.selectedSectionIndex + 1;
+        bool hasNext;
+
+        if(nextSection == null)
+            hasNext = GetNextSection();
+        else
+            hasNext = true;
 
         if (!hasNext)
             return;
-
+            
+        int nextIndex = gameData.saveData.selectedSectionIndex + 1;
+ 
         //set current section
         currentSection = sectionManager.sections[nextIndex];
 
@@ -1394,39 +1446,141 @@ public class ExGameLogic : MonoBehaviour
         gameData.SaveToFile();
 
         //load next section
-        PanelManager.CloseAll();
+        //PanelManager.CloseAll();
         PanelManager.OpenScene("ExGame");
+    }
+
+
+    public void NextBundle()
+    {
+        // move to next normal section
+        if (nextSection != null)
+        {
+            // next section is also bundle
+            if (nextSection.isBundle &&
+                nextSection.bundleSections != null &&
+                nextSection.bundleSections.Length > 0)
+            {
+                gameData.saveData.bundleSections = nextSection.bundleSections;
+
+                gameData.saveData.sectionToLoad =
+                    nextSection.bundleSections[0];
+
+                currentSection = nextSection.bundleSections[0];
+            }
+            else
+            {
+                // normal section
+                gameData.saveData.sectionToLoad = nextSection.bundleSections[0];
+
+                currentSection = nextSection;
+            }
+
+            gameData.saveData.sectionName = nextSection.name;
+
+            gameData.SaveToFile();
+
+            PanelManager.CloseAll();
+            PanelManager.OpenScene("ExGame");
+        }
+        else
+        {
+            Debug.LogWarning("No next section after bundle");
+        }
     }
 
     public void NextBundleSection()
     {
-        bool hasNext = GetNextBundleSection();
-
-        int curentBundleIndex = gameData.saveData.selectedSectionIndex;
-        int nextIndex = curentBundleIndex + 1;
-
-        if (!hasNext)
-            return;
+        SaveProgressRoutine();
 
         Section[] bundleSections = gameData.saveData.bundleSections;
 
-        if (bundleSections == null)
-            return;
-
-        if (gameData == null)
-            return;
-        else
+        if (bundleSections == null || bundleSections.Length == 0)
         {
-            gameData.saveData.selectedSectionIndex = nextIndex;
-            gameData.saveData.sectionToLoad = bundleSections[nextIndex];
-            gameData.SaveToFile();
+            Debug.LogWarning("Bundle sections are empty");
+            return;
         }
 
-        PanelManager.CloseAll();
+        // find current bundle section index
+        int currentBundleIndex = Array.FindIndex(
+            bundleSections,
+            s => s != null &&
+                 currentSection != null &&
+                 s.name == currentSection.name
+        );
 
-        //load game
+        if (currentBundleIndex < 0)
+        {
+            Debug.LogWarning("Current bundle section not found");
+            return;
+        }        
+
+        int nextIndex = currentBundleIndex + 1;
+
+        // validate next index
+        if (nextIndex >= bundleSections.Length)
+        {
+            Debug.Log("Bundle finished");            
+            return;
+        }
+
+        // save next bundle section
+        gameData.saveData.sectionToLoad = bundleSections[nextIndex];
+
+        // OPTIONAL:
+        currentSection = bundleSections[nextIndex];
+
+        gameData.SaveToFile();
+
+        // load game
         PanelManager.OpenScene("ExGame");
     }
+
+    private void SaveProgressRoutine()
+    {
+        //save progress and time
+        SaveGameProgress();
+
+        bool saveOp = SaveResult();
+
+        SaveTestTime();
+    }
+
+
+    /*    public void NextBundleSection()
+        {
+            bool hasNext;
+
+            if (nextSection == null)
+                hasNext = GetNextBundleSection();
+            else
+                hasNext = true;
+
+            if (!hasNext)
+                return;
+
+            int curentBundleIndex = gameData.saveData.selectedSectionIndex;
+            int nextIndex = curentBundleIndex + 1;
+
+            Section[] bundleSections = gameData.saveData.bundleSections;
+
+            if (bundleSections == null)
+                return;
+
+            if (gameData == null)
+                return;
+            else
+            {
+                gameData.saveData.selectedSectionIndex = nextIndex;
+                gameData.saveData.sectionToLoad = bundleSections[nextIndex];
+                gameData.SaveToFile();
+            }
+
+            PanelManager.CloseAll();
+
+            //load game
+            PanelManager.OpenScene("ExGame");
+        }*/
 
     private void OnDestroy()
     {
@@ -1557,6 +1711,10 @@ public class ExGameLogic : MonoBehaviour
         //UI diff in learn mode
         if (!isLearnSection)
         {
+            //hide unnecessary buttons and progress
+            progressBar.gameObject.SetActive(true);
+            progressText.gameObject.SetActive(true);
+
             NextButtonRoutine(ButtonImage.ButtonAnimation.Idle.ToString()); //question
             scRect.vertical = false;
 
@@ -1568,6 +1726,10 @@ public class ExGameLogic : MonoBehaviour
         }
         else
         {
+            //hide unnecessary buttons and progress
+            progressBar.gameObject.SetActive(false);
+            progressText.gameObject.SetActive(false);
+
             //hide unnecessary buttons and progress
             nextButton.gameObject.SetActive(false);
             nextThemeButton.gameObject.SetActive(false);

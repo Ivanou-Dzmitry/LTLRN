@@ -14,6 +14,8 @@ public class SectionButton : MonoBehaviour
     public TMP_Text sectionDifficulty;
     public Button button;
     public Slider progressSlider;
+    public Animator _animatorIcon;
+    public Image completeBadgeImage;
 
     [Header("Data")]
     public Section sectionName;

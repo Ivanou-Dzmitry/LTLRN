@@ -19,7 +19,7 @@ public class EX_TestSelectorPnl : Panel
 
     [Header("Buttons")]
     [SerializeField] private Button closePanelButton;
-    [SerializeField] private Animator _animator;
+    [SerializeField] private Animator _animator;    
 
     [Header("UI")]
     [SerializeField] private RectTransform testsRectTransform;
@@ -140,10 +140,13 @@ public class EX_TestSelectorPnl : Panel
             button.sectionIcon.sprite = sectionTypeIcons[3];
         }
 
-
-
         //slider
         SetProgressSlider(sec, button);
+
+        //icon animation, badge
+        bool isComplete = dbUtils.GetSectionComplete(sec.name);
+        button.completeBadgeImage.gameObject.SetActive(isComplete);
+        IconAnimation(button._animatorIcon, isComplete);
     }
 
     private void SetupImageSection(Section sec, SectionButton button)
@@ -162,6 +165,11 @@ public class EX_TestSelectorPnl : Panel
         //button.sectionDifficulty.text = sec.difficultyType.ToString();
 
         SetProgressSlider(sec, button);
+
+        //icon animation, badge
+        bool isComplete = dbUtils.GetSectionComplete(sec.name);
+        button.completeBadgeImage.gameObject.SetActive(isComplete);
+        IconAnimation(button._animatorIcon, isComplete);
     }
 
     private void SetupSoundSection(Section sec, SectionButton button)
@@ -180,6 +188,11 @@ public class EX_TestSelectorPnl : Panel
         button.sectionText.text = $"{text}"; //{LangList.LT.ToString()}\n
 
         SetProgressSlider(sec, button);
+
+        //icon animation, badge
+        bool isComplete = dbUtils.GetSectionComplete(sec.name);
+        button.completeBadgeImage.gameObject.SetActive(isComplete);
+        IconAnimation(button._animatorIcon, isComplete);
     }
 
     private void SetupExamSection(Section sec, SectionButton button)
@@ -191,35 +204,36 @@ public class EX_TestSelectorPnl : Panel
         string text = LocalizationSettings.StringDatabase.GetLocalizedString("KELIAS_UI", "ExamTxt");
 
         button.sectionText.text = $"{text}"; // {sec.difficultyType.ToString()}";
+
+        SetProgressSlider(sec, button);
+
+        //icon animation, badge
+        bool isComplete = dbUtils.GetSectionComplete(sec.name);
+        button.completeBadgeImage.gameObject.SetActive(isComplete);
+        IconAnimation(button._animatorIcon, isComplete);
     }
 
     private void SetupInputSection(Section sec, SectionButton button)
     {
-        ///
-
-        
+        //WIP        
     }
 
-    private void SetProgressSlider(Section sec, SectionButton button, bool complete = false)
+    private void IconAnimation(Animator iconAnimator, bool testComplete)
+    {
+        iconAnimator.SetBool("testComplete", testComplete);
+    }
+
+    private void SetProgressSlider(Section sec, SectionButton button)
     {
         int questionsCount = GetQuestionCount(sec);
 
         button.progressSlider.maxValue = questionsCount;
 
-        int result = dbUtils.GetSectionResult(sec.name);
+        int result = dbUtils.GetSectionResult(sec.name);        
 
-        //set slider value based on result or complete status
-        if (complete)
-        {
-            button.progressSlider.value = questionsCount;
-            button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(questionsCount, 0.5f);
-        }
-
-        else
-        {
-            button.progressSlider.value = result;
-            button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(result, 0.5f);
-        }
+        //set slider value based on result
+        button.progressSlider.value = result;
+        button.progressSlider.GetComponent<EX_SliderAnimator>().AnimateTo(result, 0.5f);        
     }
 
     private Locale GetLocale()
