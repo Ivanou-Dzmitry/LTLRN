@@ -5,94 +5,134 @@ using UnityEngine;
 
 public class LogManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static LogManager log;
 
     private string gameLogFilePath;
     private string sysLogFilePath;
 
     private DateTime startTime;
-    const string GAME_LOG_FILE_NAME = "ltlrn_log.csv";
-    const string SYS_LOG_FILE_NAME = "ltlrn_syslog.csv";
 
-    public string questionID;
+    private const string GAME_LOG_FILE_NAME = "ltlrn_log.csv";
+    private const string SYS_LOG_FILE_NAME  = "ltlrn_syslog.csv";
+
+    public string QuestionID { get; set; } = "";
 
     private void Awake()
     {
         if (log == null)
         {
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
             log = this;
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+            return;
         }
+
+        // Subscribe here so crash messages are captured even before Start().
+        Application.logMessageReceived += OnUnityLogMessage;
+    }
+
+    private void OnDestroy()
+    {
+        Application.logMessageReceived -= OnUnityLogMessage;
     }
 
     void Start()
     {
-        //log for game
         gameLogFilePath = Path.Combine(Application.persistentDataPath, GAME_LOG_FILE_NAME);
-        
-        //log for sys
-        sysLogFilePath = Path.Combine(Application.persistentDataPath, SYS_LOG_FILE_NAME);
+        sysLogFilePath  = Path.Combine(Application.persistentDataPath, SYS_LOG_FILE_NAME);
 
-        startTime = DateTime.Now;
+        startTime  = DateTime.Now;
+        QuestionID = "";
 
-        questionID = "";
+        EnsureFileWithHeader(sysLogFilePath,  "Time,Message");
+        EnsureFileWithHeader(gameLogFilePath, "Duration(sec),QuestionID");
+    }
 
-        if (!File.Exists(sysLogFilePath))
+    /// <summary>Writes a timestamped entry to the system log.</summary>
+    public void WriteSysLog(string message)
+    {
+        try
         {
-            File.WriteAllText(sysLogFilePath, "Time, Message\n");
+            string timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string line = $"{timeStamp},{EscapeCsvField(message)}";
+            File.AppendAllText(sysLogFilePath, line + Environment.NewLine);
         }
-
-        if (!File.Exists(gameLogFilePath))
+        catch (Exception ex)
         {
-            File.WriteAllText(gameLogFilePath, "Duration(sec)\n");
-            WriteSysLog("Game log file exist.");
+            // Last-resort: can't write to log, at least surface it in the console.
+            Debug.LogError($"LogManager: Failed to write sys log — {ex.Message}");
+        }
+    }
+
+    /// <summary>Records total session duration and current question ID to the game log.</summary>
+    public void EndGameSession()
+    {
+        DateTime endTime  = DateTime.Now;
+        TimeSpan duration = endTime - startTime;
+
+        // TotalSeconds gives the full duration, not just the seconds component (0-59).
+        int totalSeconds = (int)duration.TotalSeconds;
+
+        string logEntry = $"{totalSeconds},{EscapeCsvField(QuestionID)}";
+
+        try
+        {
+            using var fs     = new FileStream(gameLogFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+            using var writer = new StreamWriter(fs, Encoding.UTF8);
+            writer.WriteLine(logEntry);
+
+            WriteSysLog($"Session ended. Duration: {totalSeconds}s, QuestionID: {QuestionID}");
+        }
+        catch (IOException ex)
+        {
+            string msg = $"Error writing game log: {ex.Message}";
+            Debug.LogError(msg);
+            WriteSysLog(msg);
         }
     }
 
     /// <summary>
-    /// Write a line into the system log file.
+    /// Captures Unity errors and exceptions (including uncaught ones) and writes them to the sys log.
     /// </summary>
-    public void WriteSysLog(string message)
+    private void OnUnityLogMessage(string message, string stackTrace, LogType type)
     {
-        string timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        string line = $"{timeStamp},{message}";
-        File.AppendAllText(sysLogFilePath, line + Environment.NewLine);
+        if (type == LogType.Error || type == LogType.Exception || type == LogType.Assert)
+        {
+            string entry = $"[{type}] {message}";
+            if (!string.IsNullOrEmpty(stackTrace))
+                entry += $" | {stackTrace.Replace(Environment.NewLine, " ")}";
+
+            WriteSysLog(entry);
+        }
     }
 
-    public void EndGameSession()
+    private void EnsureFileWithHeader(string path, string header)
     {
-        DateTime endTime = DateTime.Now;
-        TimeSpan duration = endTime - startTime;
-        int secondsOnly = duration.Seconds;
-
-        //string to save
-        string logEntry = $"{secondsOnly}, {questionID}";
-
-        try
+        if (!File.Exists(path))
         {
-            // Use FileStream with FileShare.ReadWrite to avoid file access conflicts
-            using (FileStream fs = new FileStream(gameLogFilePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite))
-            using (StreamWriter writer = new StreamWriter(fs, Encoding.UTF8))
+            try
             {
-                writer.WriteLine(logEntry);
+                File.WriteAllText(path, header + Environment.NewLine);
             }
-
-            string logText = $"Log file saved at: {gameLogFilePath}";
-
-            Debug.Log(logText);
-            WriteSysLog(logText);
-        }
-        catch (IOException ex)
-        {
-            string logText = $"Error writing to log file: {ex.Message}";
-            Debug.LogError(logText);
-            WriteSysLog(logText);
+            catch (Exception ex)
+            {
+                Debug.LogError($"LogManager: Could not create log file '{path}' — {ex.Message}");
+            }
         }
     }
 
+    /// <summary>Wraps a CSV field in quotes if it contains a comma, quote, or newline.</summary>
+    private static string EscapeCsvField(string field)
+    {
+        if (string.IsNullOrEmpty(field))
+            return field;
+
+        if (field.Contains(',') || field.Contains('"') || field.Contains('\n'))
+            return $"\"{field.Replace("\"", "\"\"")}\"";
+
+        return field;
+    }
 }

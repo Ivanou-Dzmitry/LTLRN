@@ -397,6 +397,38 @@ MonoBehaviour:
     m_Localized: Correct
     m_Metadata:
       m_Items: []
+  - m_Id: 65285935341821952
+    m_Localized: PROFILE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65289672533794816
+    m_Localized: APPLICATION LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65290469552218112
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533064618602496
+    m_Localized: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533136030822400
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533213080186880
+    m_Localized: ' Speech speed'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533537085976576
+    m_Localized: SOUND
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65534084664946688
+    m_Localized: INFORMATION
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

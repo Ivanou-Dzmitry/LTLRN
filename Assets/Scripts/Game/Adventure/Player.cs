@@ -1,5 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.Tilemaps;
@@ -11,7 +13,14 @@ public class Player : MonoBehaviour
     private GameLogic gameLogic;
 
     [Header("Movement")]
-    [SerializeField] private float _speed = 5f;
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float runMultiplier = 2f;
+    private float currentSpeed;
+    private Vector2 targetPosition;
+    private bool hasTarget;
+
+    [Header("Marker")]
+    [SerializeField] private CenterPanelClick centerPanelClick;
 
     //player staff
     private Rigidbody2D rigidbodyPlayer;
@@ -43,8 +52,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform playerLight;
 
     [Header("Joystick")]
-    [SerializeField] private GameObject joystick;
-    private OnScreenStick stickControler;
+    //[SerializeField] private GameObject joystick;
+    //private OnScreenStick stickControler;
 
     [Header("Utils")]
     public TilesUtils tilesUtilsClass;
@@ -95,7 +104,7 @@ public class Player : MonoBehaviour
         rigidbodyPlayer = GetComponent<Rigidbody2D>();
         colliderPlayer = GetComponent<BoxCollider2D>();
 
-        stickControler = joystick.GetComponent<OnScreenStick>();
+        //stickControler = joystick.GetComponent<OnScreenStick>();
     }
 
     private void Start()
@@ -104,36 +113,88 @@ public class Player : MonoBehaviour
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
 
         currentPlayerLocation = PlayerLocation.Map;
+
+        //set initial speed
+        currentSpeed = walkSpeed;
     }
 
     private void FixedUpdate()
     {
+        //get current dialogue state and game state
         var dialogueState = ADV_DialogueManager.Instance.dialogueState;
+
+        //get current game state
         var gameState = gameLogic.gameState;
 
-        //move only if not dialgue
-        if (dialogueState == ADV_DialogueManager.DialogueState.End || dialogueState == ADV_DialogueManager.DialogueState.None || gameState == GameLogic.GameState.Play)
+        // Possible = dialogue available but not started — player can still move freely.
+        bool canMove = (dialogueState == ADV_DialogueManager.DialogueState.End ||
+            dialogueState == ADV_DialogueManager.DialogueState.None ||
+            dialogueState == ADV_DialogueManager.DialogueState.Possible) &&
+                gameState == GameLogic.GameState.Play;
+
+        //stop movement if dialogue or pause
+        if (!canMove)
         {
-            rigidbodyPlayer.linearVelocity = moveInputPlayer.normalized * _speed;
-            stickControler.enabled = true;
+            rigidbodyPlayer.linearVelocity = Vector2.zero;
+
+            currentDirection = MoveDirection.None;
+            animator.SetBool("moving", false);
+
+            return;
         }
 
-        if (dialogueState == ADV_DialogueManager.DialogueState.Start || gameState == GameLogic.GameState.Pause)
+        //move player to target position if set
+        if (!hasTarget)
         {
-            rigidbodyPlayer.linearVelocity = Vector3.zero;
-            stickControler.enabled = false;
+            rigidbodyPlayer.linearVelocity = Vector2.zero;
+            return;
         }
 
+        //move player to target position        
+        Vector2 dir = targetPosition - rigidbodyPlayer.position;
+
+        //stop moving if close to target
+        if (dir.magnitude < 0.1f)
+        {
+            rigidbodyPlayer.linearVelocity = Vector2.zero;
+
+            currentDirection = MoveDirection.None;
+            //currentPlayerState = PlayerState.Idle;
+
+            animator.SetBool("moving", false);
+
+            hasTarget = false;
+            
+            centerPanelClick.HideMarker();
+
+            return;
+        }
+
+        ResolveDirection(dir);
+
+        currentPlayerState = PlayerState.Walk;
+
+        //PlayerAnimation(currentDirection);
+        PlayerAnimation(dir);
+
+        rigidbodyPlayer.linearVelocity = dir.normalized * currentSpeed;
+    }
+
+    public void SetTarget(Vector2 worldPos, bool run = false)
+    {
+        targetPosition = worldPos;
+        hasTarget = true;
+        currentSpeed = run ? walkSpeed * runMultiplier : walkSpeed;
     }
 
     // Called automatically by PlayerInput
-    public void OnMove(InputAction.CallbackContext context)
+/*    public void OnMove(InputAction.CallbackContext context)
     {
         //move only if not diallog
         if (ADV_DialogueManager.Instance.dialogueState == ADV_DialogueManager.DialogueState.Start || gameLogic.gameState == GameLogic.GameState.Pause)
         {
             currentDirection = MoveDirection.None;
-            PlayerAnimation(currentDirection);            
+            //PlayerAnimation(currentDirection);            
             return;
         }
 
@@ -146,7 +207,7 @@ public class Player : MonoBehaviour
         //animate player only if moving
         if (currentDirection != MoveDirection.None)
         {
-            PlayerAnimation(currentDirection);
+            //PlayerAnimation(currentDirection);
             currentPlayerState = PlayerState.Walk;
         }
         else
@@ -155,7 +216,7 @@ public class Player : MonoBehaviour
             currentPlayerState = PlayerState.Idle;
         }
             
-    }
+    }*/
 
     public void OnAttack(InputAction.CallbackContext context)
     {
@@ -278,12 +339,20 @@ public class Player : MonoBehaviour
     }
 
     //run player annimation
-    private void PlayerAnimation(MoveDirection direction)
-    {
-        animator.SetFloat("moveX", moveInputPlayer.x);
-        animator.SetFloat("moveY", moveInputPlayer.y);
+    /*    private void PlayerAnimation(MoveDirection direction)
+        {
+            animator.SetFloat("moveX", moveInputPlayer.x);
+            animator.SetFloat("moveY", moveInputPlayer.y);
 
-        animator.SetBool("moving", direction != MoveDirection.None);
+            animator.SetBool("moving", direction != MoveDirection.None);
+        }*/
+
+    private void PlayerAnimation(Vector2 dir)
+    {
+        animator.SetFloat("moveX", dir.x);
+        animator.SetFloat("moveY", dir.y);
+
+        animator.SetBool("moving", true);
     }
 
     //for diallog - ENTER

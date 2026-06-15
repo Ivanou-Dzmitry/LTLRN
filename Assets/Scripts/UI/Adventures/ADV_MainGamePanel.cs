@@ -25,8 +25,9 @@ public class ADV_MainGamePanel : MonoBehaviour
 
     private Image panelImage;
 
-    private const float PANEL01_HEIGHT = 305f;
-    private const float PANEL03_HEIGHT = 400f;
+    [Header("Paels")]
+    [SerializeField]  private float PANEL01_HEIGHT = 305f;
+    [SerializeField] private float PANEL03_HEIGHT = 400f;
 
     private void Start()
     {       

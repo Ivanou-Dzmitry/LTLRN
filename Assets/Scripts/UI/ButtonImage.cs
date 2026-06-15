@@ -94,7 +94,11 @@ public class ButtonImage : MonoBehaviour
 
     private void ApplyButtonColor(ButtonColor color)
     {
-        if (buttonImage == null || palette == null)
+        // Lazy init — works even if called before Awake (e.g. on an inactive object).
+        button      ??= GetComponent<Button>();
+        buttonImage ??= GetComponent<Image>();
+
+        if (button == null || buttonImage == null || palette == null)
             return;
 
         //set disabled colors

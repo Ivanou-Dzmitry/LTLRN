@@ -83,7 +83,7 @@ public class LanguageSwitcher : MonoBehaviour
         }
     }
 
-    private void UpdateButtonsUI()
+    public void UpdateButtonsUI()
     {
         string currentLang = LocalizationSettings.SelectedLocale.Identifier.Code.ToUpper();
 

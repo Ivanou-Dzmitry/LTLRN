@@ -147,17 +147,13 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        if (gameData.saveData.soundToggle == true)
-        {
-            effectsSource.PlayOneShot(clip);            
-            StartCoroutine(ResetLastPlayedClip(clip.length));
-        }        
-    }
+        if (clip == null || !gameData.saveData.soundToggle)
+            return;
 
-    private IEnumerator ResetLastPlayedClip(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        lastPlayedClip = null;
+        // Stop current effect so the new sound interrupts instead of layering on top.
+        effectsSource.Stop();
+        effectsSource.clip = clip;
+        effectsSource.Play();
     }
 
     public void PlayMusic(AudioClip clip)
@@ -261,14 +257,6 @@ public class SoundManager : MonoBehaviour
         if (musicClips == null || musicClips.Length == 0)
             return;
 
-        /*        if (scene.buildIndex < 0 || scene.buildIndex >= musicClips.Length)
-                {
-                    Debug.LogWarning(
-                        $"No music clip assigned for scene index {scene.buildIndex}"
-                    );
-                    return;
-                }*/
-
         lastPlayedClip = musicClips[0];
 
         if (gameData != null)
@@ -364,7 +352,7 @@ public class SoundManager : MonoBehaviour
             return clip;
         }
 
-        Debug.LogWarning($"AudioClip not found: {folder}/{clipName}");
+        LogManager.log?.WriteSysLog($"AudioClip not found: {folder}/{clipName}");        
         
         return null;
     }

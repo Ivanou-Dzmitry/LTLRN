@@ -34,6 +34,11 @@ public class SettingsPanel : Panel
     [Header("Feed")]
     public Button feedbackButton;
 
+    [Header("Lang")]
+    public Button lang01Button;
+    public Button lang02Button;
+    [SerializeField] private LanguageSwitcher languageSwitcher;
+
     [Header("DB")]
     public TMP_Text dbLog;
     private DBUtils dbUtils;
@@ -81,9 +86,7 @@ public class SettingsPanel : Panel
         userAvatarCarousel.LoadAvatar();
         
         LoadData();
-
-/*        if(dbUtils!=null && dbLog!=null)
-            dbLog.text = "DB: " + dbUtils.CheckConnection();*/
+        languageSwitcher?.UpdateButtonsUI();
 
         base.Open();       
     }
@@ -93,6 +96,7 @@ public class SettingsPanel : Panel
         if(gameData == null)
             return;
 
+        //get buttons
         soundBtnImg = soundButton.GetComponent<ButtonImage>().buttonIcon;
         musicBtnImg = musicButton.GetComponent<ButtonImage>().buttonIcon;
         speedBtnImg = soundSpeedButton.GetComponent<ButtonImage>().buttonIcon;
@@ -105,11 +109,13 @@ public class SettingsPanel : Panel
         
         bool soundToggle = gameData.saveData.soundToggle;        
 
+        //sound toggle
         if (soundToggle)
             soundBtnImg.sprite = imagesGallery.soundSprites[0];
         else
             soundBtnImg.sprite = imagesGallery.soundSprites[1];
 
+        //slider position
         musicSlider.value = gameData.saveData.musicVolume;
 
         //music toggle
@@ -120,6 +126,7 @@ public class SettingsPanel : Panel
         else
             musicBtnImg.sprite = imagesGallery.musicSprites[1];
 
+        //get sound speed
         float vsliderval = gameData.saveData.soundSpeed;
 
         if (vsliderval == 1)
@@ -138,6 +145,9 @@ public class SettingsPanel : Panel
         {
             speedBtnImg.sprite = imagesGallery.soundSpeedSprites[1];
         }
+
+        //lang
+        string lang = gameData.saveData.lang;
     }
 
     public void SaveSettings()
@@ -154,7 +164,6 @@ public class SettingsPanel : Panel
 
         gameData.saveData.soundVolume = soundSlider.value;
         soundManager.SetVolume("sound");
-
     }
 
     public void OnMuscSliderChange()

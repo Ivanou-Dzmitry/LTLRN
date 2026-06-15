@@ -477,6 +477,46 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 65285935341821952
+    m_Key: 'ProfileTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65289672533794816
+    m_Key: AppLanguageTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65290469552218112
+    m_Key: LanguageTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533064618602496
+    m_Key: 'VolumeTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533136030822400
+    m_Key: MusicTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533213080186880
+    m_Key: SpeechSpeedTxt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65533537085976576
+    m_Key: 'SoundTxt
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65534084664946688
+    m_Key: 'InfoTXT
+
+'
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
