@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3583514675299225658}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.63673, y: 4.4224005, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 82004984082774238}
   - component: {fileID: 6605047880585409976}
   - component: {fileID: 4443431409873214021}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 3889925693823644938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.635, y: 4.561, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4955,8 +4955,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.2}
-  m_Radius: 0.4
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.2
 --- !u!1 &8725232036127233712
 GameObject:
   m_ObjectHideFlags: 0
@@ -4967,7 +4967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6510698186062112842}
   - component: {fileID: 858463406613595300}
-  - component: {fileID: 5662072635890574858}
+  - component: {fileID: 3092553662258389417}
   m_Layer: 0
   m_Name: fireplace
   m_TagString: Untagged
@@ -5016,8 +5016,8 @@ MonoBehaviour:
     value: U u
     whereColumn: 
     whereValue: 
---- !u!60 &5662072635890574858
-PolygonCollider2D:
+--- !u!58 &3092553662258389417
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5046,25 +5046,9 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -2.6190906, y: 6.02816}
-      - {x: -4.0596247, y: 5.154917}
-      - {x: -3.8439748, y: 3.253012}
-      - {x: -1.6817844, y: 3.1881104}
-      - {x: -1.109671, y: 5.00237}
-  m_UseDelaunayMesh: 1
+  m_Radius: 0.5

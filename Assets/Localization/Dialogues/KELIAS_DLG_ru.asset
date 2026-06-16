@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Localized: "\u25A0"
     m_Metadata:
       m_Items: []
+  - m_Id: 18884998776123392
+    m_Localized: Labas!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

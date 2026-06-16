@@ -8082,6 +8082,8 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 879c8835d71bc424db2bc7af4eb8148c, type: 3}
   - id: info
     icon: {fileID: 21300000, guid: c93a39919859123488c10a02332445a6, type: 3}
+  - id: stork01
+    icon: {fileID: 21300000, guid: c93a39919859123488c10a02332445a6, type: 3}
 --- !u!4 &1785663688
 Transform:
   m_ObjectHideFlags: 0

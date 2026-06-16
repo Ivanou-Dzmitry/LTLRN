@@ -1,9 +1,7 @@
 using System.Collections;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using static ADV_InteractionBase;
@@ -15,9 +13,20 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runMultiplier = 2f;
+    [SerializeField] private PathFinder pathFinder;
+
     private float currentSpeed;
-    private Vector2 targetPosition;
+    private List<Vector2> _path;
+    private int _pathIndex;
     private bool hasTarget;
+
+    // Stuck detection: if player doesn't move for this long, cancel the path.
+    private const float StuckTimeout     = 0.4f;
+    private const float StuckDistSq      = 0.01f; // 0.1 units — less than one frame at walkSpeed
+    private const float StuckGracePeriod = 2f;    // no stuck checks for 2s after scene load
+    private float       _stuckTimer;
+    private Vector2     _stuckCheckPos;
+    private float       _stuckGraceEnd;
 
     [Header("Marker")]
     [SerializeField] private CenterPanelClick centerPanelClick;
@@ -116,6 +125,10 @@ public class Player : MonoBehaviour
 
         //set initial speed
         currentSpeed = walkSpeed;
+
+        // Suppress stuck detection briefly so physics can settle after spawn.
+        _stuckGraceEnd = Time.time + StuckGracePeriod;
+        _stuckCheckPos = rigidbodyPlayer.position;
     }
 
     private void FixedUpdate()
@@ -144,28 +157,31 @@ public class Player : MonoBehaviour
         }
 
         //move player to target position if set
-        if (!hasTarget)
+        if (!hasTarget || _path == null || _pathIndex >= _path.Count)
         {
             rigidbodyPlayer.linearVelocity = Vector2.zero;
+            hasTarget = false;
             return;
         }
 
-        //move player to target position        
-        Vector2 dir = targetPosition - rigidbodyPlayer.position;
+        //move player to target position
+        Vector2 waypoint = _path[_pathIndex];
+        Vector2 dir = waypoint - rigidbodyPlayer.position;
 
-        //stop moving if close to target
-        if (dir.magnitude < 0.1f)
+        //advance to next waypoint when close enough
+        if (dir.magnitude < 0.15f)
         {
-            rigidbodyPlayer.linearVelocity = Vector2.zero;
+            _pathIndex++;
 
-            currentDirection = MoveDirection.None;
-            //currentPlayerState = PlayerState.Idle;
-
-            animator.SetBool("moving", false);
-
-            hasTarget = false;
-            
-            centerPanelClick.HideMarker();
+            if (_pathIndex >= _path.Count)
+            {
+                // reached final waypoint
+                rigidbodyPlayer.linearVelocity = Vector2.zero;
+                currentDirection = MoveDirection.None;
+                animator.SetBool("moving", false);
+                hasTarget = false;
+                centerPanelClick.HideMarker();
+            }
 
             return;
         }
@@ -174,17 +190,74 @@ public class Player : MonoBehaviour
 
         currentPlayerState = PlayerState.Walk;
 
-        //PlayerAnimation(currentDirection);
         PlayerAnimation(dir);
 
         rigidbodyPlayer.linearVelocity = dir.normalized * currentSpeed;
+
+        // Stuck detection: cancel path if position barely changed for StuckTimeout seconds.
+        // Skip during grace period after scene load so physics can settle.
+        if (Time.time < _stuckGraceEnd)
+        {
+            _stuckCheckPos = rigidbodyPlayer.position;
+            _stuckTimer    = 0f;
+        }
+        else if ((rigidbodyPlayer.position - _stuckCheckPos).sqrMagnitude > StuckDistSq)
+        {
+            _stuckCheckPos = rigidbodyPlayer.position;
+            _stuckTimer    = 0f;
+        }
+        else
+        {
+            _stuckTimer += Time.fixedDeltaTime;
+            if (_stuckTimer >= StuckTimeout)
+            {
+                hasTarget = false;
+                _stuckTimer = 0f;
+                rigidbodyPlayer.linearVelocity = Vector2.zero;
+                animator.SetBool("moving", false);
+                centerPanelClick.HideMarker();
+            }
+        }
     }
 
-    public void SetTarget(Vector2 worldPos, bool run = false)
+    /// <summary>Immediately stops movement and clears the current path.</summary>
+    public void CancelPath()
     {
-        targetPosition = worldPos;
-        hasTarget = true;
-        currentSpeed = run ? walkSpeed * runMultiplier : walkSpeed;
+        hasTarget   = false;
+        _path       = null;
+        _stuckTimer = 0f;
+        rigidbodyPlayer.linearVelocity = Vector2.zero;
+        animator.SetBool("moving", false);
+        centerPanelClick.HideMarker();
+    }
+
+    /// <summary>
+    /// Sets a movement target. Returns false if the position is inside an obstacle or unreachable.
+    /// </summary>
+    public bool SetTarget(Vector2 worldPos, bool run = false)
+    {
+        if (pathFinder == null)
+        {
+            // Fallback: direct move without pathfinding.
+            _path = new List<Vector2> { worldPos };
+            _pathIndex = 0;
+            hasTarget = true;
+            currentSpeed = run ? walkSpeed * runMultiplier : walkSpeed;
+            return true;
+        }
+
+        List<Vector2> path = pathFinder.FindPath(rigidbodyPlayer.position, worldPos);
+
+        if (path == null || path.Count == 0)
+            return false;
+
+        _path          = path;
+        _pathIndex     = 0;
+        hasTarget      = true;
+        _stuckTimer    = 0f;
+        _stuckCheckPos = rigidbodyPlayer.position;
+        currentSpeed   = run ? walkSpeed * runMultiplier : walkSpeed;
+        return true;
     }
 
     // Called automatically by PlayerInput
@@ -369,12 +442,15 @@ public class Player : MonoBehaviour
         //run diallogue if found
         if (inkText != null && currentPlayerState != PlayerState.Attack)
         {
-             readyForDialogue = true;
+            readyForDialogue = true;
 
             //dialogue possible
             ADV_DialogueManager.Instance.dialogueState = ADV_DialogueManager.DialogueState.Possible;
 
             InteractIconRoutine(true);
+
+            // Player reached the NPC trigger zone — stop moving so we don't bump into the solid body.
+            CancelPath();
         }
 
         InteractionType interactionType = interactionManagerClass.GetInteraction(collider);
@@ -432,6 +508,10 @@ public class Player : MonoBehaviour
 
         bool isRoom = mapManagerClass.RoomCheck(collision);
 
+        // Cancel path on level/room transition — old waypoints are in the previous level's space.
+        if (isExit || isRoom)
+            CancelPath();
+
         //get tilemap from collision
         currentTilemap = collision.collider.GetComponentInParent<Tilemap>();
 
@@ -448,7 +528,7 @@ public class Player : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         currentCollision = null;
-        Debug.Log($"OUT Collision: {collision.collider.name}");
+        //Debug.Log($"OUT Collision: {collision.collider.name}");
     }
 
     private bool InteractIconRoutine(bool value)

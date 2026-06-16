@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060c61646fb94494080ea67f03a0fc5d, type: 3}
   m_Name: W01M02_Event
   m_EditorClassIdentifier: Assembly-CSharp::ADV_GameEvent
-  conditions:
-  - {fileID: 11400000, guid: d08ceb956e84b3d4bb44e0d92bc466ba, type: 2}
+  conditions: []
   actions: []
   description:
     m_TableReference:

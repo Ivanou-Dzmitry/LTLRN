@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: exitSign01txt
     m_Metadata:
       m_Items: []
+  - m_Id: 18884998776123392
+    m_Key: w01m01stork01-01
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

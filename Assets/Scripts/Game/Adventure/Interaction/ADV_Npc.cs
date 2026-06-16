@@ -5,6 +5,16 @@ public class ADV_Npc : ADV_InteractionBase
 {
     private Transform target;
 
+    [Header("Simple animation")]
+    [SerializeField] private bool simpleAnimation;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [Header("Sprites for simple animation")]
+    [SerializeField] private Sprite faceUp;
+    [SerializeField] private Sprite faceDown;
+    [SerializeField] private Sprite faceLeft;
+    [SerializeField] private Sprite faceRight;
+
     protected override void Start()
     {
         base.Start();
@@ -20,8 +30,26 @@ public class ADV_Npc : ADV_InteractionBase
     {
         Vector2 dir = (target.position - transform.position).normalized;
 
-        _animator.SetFloat("moveX", dir.x);
-        _animator.SetFloat("moveY", dir.y);
+        if (simpleAnimation)
+        {
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            {
+                spriteRenderer.sprite =
+                    dir.x > 0 ? faceRight : faceLeft;
+            }
+            else
+            {
+                spriteRenderer.sprite =
+                    dir.y > 0 ? faceUp : faceDown;
+            }
+
+            return;
+        }
+        else
+        {           
+            _animator.SetFloat("moveX", dir.x);
+            _animator.SetFloat("moveY", dir.y);
+        }
     }
 
     protected override void Die()

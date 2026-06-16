@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8651338568933122965}
   - component: {fileID: 6538919160004674233}
   - component: {fileID: 1477959956784843549}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: npc_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.015921474, y: 0.031761646}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -137,7 +137,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5976198, y: 0.75407124}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!95 &1477959956784843549
 Animator:
@@ -231,7 +231,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.75
+  m_Radius: 0.5
 --- !u!114 &6226458803145579781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,3 +262,9 @@ MonoBehaviour:
   meta: 
   objectParticles: []
   interactionType: 6
+  simpleAnimation: 0
+  spriteRenderer: {fileID: 0}
+  faceUp: {fileID: 0}
+  faceDown: {fileID: 0}
+  faceLeft: {fileID: 0}
+  faceRight: {fileID: 0}

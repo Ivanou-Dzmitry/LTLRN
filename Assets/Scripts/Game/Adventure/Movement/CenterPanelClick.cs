@@ -26,10 +26,10 @@ public class CenterPanelClick : MonoBehaviour, IPointerClickHandler
         Vector3 worldPos = _cam.ScreenToWorldPoint(eventData.position);
         worldPos.z = 0f;
 
-        clickMarker.transform.position = worldPos;
-        clickMarker.SetActive(true);
+        bool moved = player.SetTarget(worldPos, isDoubleClick);
 
-        player.SetTarget(worldPos, isDoubleClick);
+        clickMarker.transform.position = worldPos;
+        clickMarker.SetActive(moved);
     }
 
     public void HideMarker()

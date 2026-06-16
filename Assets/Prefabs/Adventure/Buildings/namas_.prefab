@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 666159554871149272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.013000011, y: -1.131, z: 0}
+  m_LocalPosition: {x: -0.013000011, y: -0.6610003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94,8 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5249056421123958810}
   - component: {fileID: 3000657101882114154}
-  - component: {fileID: 6744673663165809174}
-  m_Layer: 0
+  - component: {fileID: 1161558012017479466}
+  m_Layer: 7
   m_Name: namas01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 798890400800813436}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.473, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -176,8 +176,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!60 &6744673663165809174
-PolygonCollider2D:
+--- !u!61 &1161558012017479466
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -220,20 +220,8 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.03125, y: 1.15625}
-      - {x: 0, y: 1.15625}
-      - {x: -0.7521386, y: 0.6733575}
-      - {x: -0.75, y: -1.375}
-      - {x: -0.22947764, y: -1.375}
-      - {x: -0.22690678, y: -0.3851881}
-      - {x: 0.23606277, y: -0.37909126}
-      - {x: 0.23570395, y: -1.3719854}
-      - {x: 0.75, y: -1.375}
-      - {x: 0.75, y: 0.65625}
-      - {x: 0.75807, y: 0.6888113}
-  m_UseDelaunayMesh: 1
+  m_Size: {x: 1.75, y: 2.5}
+  m_EdgeRadius: 0
 --- !u!1 &4125300675961728268
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +248,7 @@ Transform:
   m_GameObject: {fileID: 4125300675961728268}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.53799987, y: -1.0099998, z: 0}
+  m_LocalPosition: {x: -0.53799987, y: -0.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -328,7 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6098589837081462760}
   - component: {fileID: 2048812505552738074}
-  - component: {fileID: 2118230412491902131}
+  - component: {fileID: 1491995270480609481}
   m_Layer: 0
   m_Name: namas_
   m_TagString: Untagged
@@ -377,8 +365,8 @@ MonoBehaviour:
     value: "n\xF9lis"
     whereColumn: 
     whereValue: 
---- !u!60 &2118230412491902131
-PolygonCollider2D:
+--- !u!58 &1491995270480609481
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -412,23 +400,7 @@ PolygonCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.014258083, y: 1.2210004}
-      - {x: -1.350283, y: 0.35892028}
-      - {x: -1.4218835, y: -2.2063105}
-      - {x: 1.2793028, y: -2.1920512}
-      - {x: 1.3146378, y: 0.38743657}
-  m_UseDelaunayMesh: 1
+  m_Radius: 1.69
 --- !u!1 &5718639550445034201
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +461,7 @@ Transform:
   m_GameObject: {fileID: 6904610118574906444}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45799994, y: -1.0099998, z: 0}
+  m_LocalPosition: {x: 0.45799994, y: -0.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

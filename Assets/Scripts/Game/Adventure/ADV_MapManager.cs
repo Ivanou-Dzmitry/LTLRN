@@ -306,12 +306,14 @@ public class ADV_MapManager : MonoBehaviour
 
     public bool RoomCheck(Collision2D collision)
     {
+        //get exit direction
         string[] customProperty = tilesUtilsClass.GetCustomPropertiesFromObject(collision);
 
         if (customProperty != null)
         {
             if (customProperty[1] == "room")
             {
+                //get room name
                 string roomName = customProperty[0];
 
                 //index based on name, because order in array can be different
@@ -320,6 +322,7 @@ public class ADV_MapManager : MonoBehaviour
                     r => r.name == roomName
                 );
 
+                //room found, transfer to room
                 if (index >= 0)
                 {
                     // save player position. save position of exit to return back  
@@ -342,8 +345,10 @@ public class ADV_MapManager : MonoBehaviour
                         // rebuild map + exitPoints
                         InstanceMapPrefab(currentMap);
 
-                        // exits are loaded — safe to look up
+                        // exits are loaded â€” safe to look up
                         ExitRoom(currentRoomInstance, roomId, player.transform);
+
+                        return true;
                     }
                 }
             }
@@ -357,13 +362,16 @@ public class ADV_MapManager : MonoBehaviour
         if (roomInstance != null)
             Destroy(roomInstance);
 
+        //get exit point from roomId
         Transform exit = GetExitFromRoom(roomId);
 
+        //set player position to exit point
         if (exit != null)
             player.position = exit.position;
 
         //exit to map. Set player location - MAP
         Player playerClass = player.GetComponent<Player>();
+
         playerClass.currentPlayerLocation = Player.PlayerLocation.Map;
     }
 
