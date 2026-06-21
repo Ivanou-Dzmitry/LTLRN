@@ -58,6 +58,14 @@ MonoBehaviour:
     m_Localized: You have entered the secret room.
     m_Metadata:
       m_Items: []
+  - m_Id: 19513658944155648
+    m_Localized: Your notebook. All collected words are stored here.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19931555185192960
+    m_Localized: Collect word
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

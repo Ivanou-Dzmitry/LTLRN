@@ -10,46 +10,40 @@
  <tileset firstgid="1" source="../Tilesets/kelias.tsx"/>
  <layer id="5" name="ground" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJztwwENAAAMw6DOv+kLOSSsmqqq+uIBEw4DAQ==
+   eJztw0EJAAAIBLC7LPbvaArBxwZrkqqqPjrq2QW4Ph+x
   </data>
  </layer>
  <layer id="6" name="roads" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1GEKgzAMBWAhJ5O5gzj1ILKTVE/SeJL2JCa4QtZtrj9Sx6QPHgjiZ4q2VfU9LfUWtUt4LjUj9SrshnpX9DlyDZqzcwzk9W3xf+pz/nn+4p/H57Nmos6Qx2cLqUvxX2Lg8z0N3z58fPMeLR/h2feg5zvYPJ9p/r0U/1g/nEOT4v8j7Tiavo18VD7/nfDDfsvxfcN+q+l6EH5PvSQaK8wkV68=
+   eJztVlsKAjEMLHiydfUgPvYg1pOsnkQ9ST2JDTQQh7RRbFGhA/OV7qRJJmyd6/gU86Kt/qXrf1W/NUr3HyKXCsdK+odIn7iO3CbuKulLbDL6ssZSXYMRp1qohlXkMZN37/R+EicjzmewN5yXc1B+D5Rx7YzVe+zdGXou5+ihfoxjTNO/Vd6pkr7ln1f8UdLXdmgsfGvpo0cm9zxbPMNx9KUEzwd9kvOT5h1rZ6nP6JOcH7TaLf0Q9e+J74DvZN2j43dAb55To//uv7+ngtC/NswVKmg/ADK9TZw=
   </data>
  </layer>
  <layer id="8" name="fence" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJxbwsDA8IgAfsyACR4SoW8pEB/Gopda4OCo+aPmj5o/av6o+aPmj5o/av6o+aPmDzPzjwDxIhrho0AMAGhFThs=
+   eJztlW0OgyAMhru76FW9h/Pjx26xDzav4fy3U4wmEElXQKmamPkm76/CA5QWagB4RzzAr/oJ8xrtOzN3KV0P/sH/c/5D+8y4csaVkXiIXwPf1+66ioyjcd96vvxwb8swIx7jp6o4bcfHO1MB/kv7YtwFxvhiuPeb4WdMPBM4J/xUtYFYjI9n/4D//KingC8V1rDtkym9mKI1z1AatltDknqxovWD7wrX21LZ/O/9/ccc7bF+tuKvVT+Wv9Te6R9dwZgf7n+fawVjv7r+AsjfjA8=
   </data>
  </layer>
  <layer id="7" name="decor" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUEALLBtoBo4BuQBWI1QbaEaNgFIxQsIIINavJMHc5iepXkmHHYAAD5W5y4gQXAMWVDjMDgy4Q6zFDxGDpglr2+ADN9QViP2aEGLLZpKYXdJADNDcXiPOYCasdKAAAIXgLBQ==
+   eJxjYBgFo2AUUAukAXH6QDtiFFAM1AbaAaNgxAJKyhA3IHanolsGAqygkbnLaWTuKKA+AMWVDjMDgy4Q6zHTxg4foLm+QOyHw3xK00sO0NxcIM6jkfupAQAljwe7
   </data>
  </layer>
  <layer id="9" name="buildings" width="24" height="32">
   <data encoding="base64" compression="zlib">
-   eJztzLcNgEAABMHPgKcQzBeCKwRXCK5ptoiTILiVJt0QnHPu+zLkKBBRiv8VajRokcT/Dj0GjJjE/xkLVmzYxf8DJy7ceMR/55xz/+kFRgcHIg==
+   eJztzMkRgCAUBFFuKAbiQiIuibgkopA0bQ780sN01bu2c0op9X0eDVoEdJX/PQaMmBAr/99mLFixGfx3HDhxGfxvPEjIBn+llFL/qAC6KwXt
   </data>
  </layer>
  <objectgroup id="10" name="obects">
-  <object id="1" name="entrance" x="160" y="0" width="63.7879" height="9.12121">
+  <object id="1" name="entrance" x="160" y="0" width="64" height="16">
    <properties>
     <property name="Name" value="top"/>
     <property name="Type" value="entrance"/>
    </properties>
   </object>
-  <object id="2" name="room" x="81" y="260" width="14" height="6.06454">
+  <object id="2" name="room" x="48" y="112" width="32" height="16">
    <properties>
     <property name="Name" value="W01M01Room01"/>
     <property name="Type" value="room"/>
-   </properties>
-  </object>
-  <object id="5" name="sign" x="192" y="48" width="48" height="48">
-   <properties>
-    <property name="Name" value="exitsign"/>
-    <property name="Type" value="decor"/>
    </properties>
   </object>
  </objectgroup>

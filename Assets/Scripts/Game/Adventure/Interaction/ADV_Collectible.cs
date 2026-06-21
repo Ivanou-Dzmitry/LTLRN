@@ -12,5 +12,14 @@ public class ADV_Collectible : ADV_InteractionBase
         SaveState(ObjectState.Collected);
     }
 
+    // TODO: wire this up once word-pickup objects with colliders exist on the map
+    // (picking a word up off the ground, as opposed to collecting one from dialogue
+    // via ADV_InteractionManager.CollectWord).
+    //public void CollectNewWord()
+    //{
+    //    ADV_Inventory.Instance.AddItem(itemId);
+    //    SaveState(ObjectState.Collected);
+    //}
+
     protected override void Die() { }
 }

@@ -37,9 +37,13 @@ public class ADV_InventoryPanel : Panel
     [SerializeField] private GridLayoutGroup grid;
 
     [Header("Layouts")]
+    [SerializeField] private GridLayoutConfig notebookLayout;
     [SerializeField] private GridLayoutConfig inventoryLayout;
     [SerializeField] private GridLayoutConfig taskLayout;
     [SerializeField] private GridLayoutConfig mapLayout;
+
+    [Header("Notebook Content")]
+    [SerializeField] private ADV_NotebookSlotUI notebookSlotPrefab;  //Notebook slot prefab    
 
     [Header("Invent Content")]
     [SerializeField] private ADV_InventorySlotUI inventSlotPrefab;  //Inventory slot prefab    
@@ -65,14 +69,17 @@ public class ADV_InventoryPanel : Panel
         closeInventoryButton.onClick.AddListener(CloseInventoryPanel);
 
         base.Initialize();
-
-        SetPanelHeight();
     }
 
     public override void Open()
     {
         objState = GameObject.FindWithTag("GameObjState").GetComponent<GameObjectsState>();
         gameLogic = GameObject.FindWithTag("ADVGameLogic").GetComponent<GameLogic>();
+
+        // Recalculated here rather than in Initialize() (which runs in Awake) — on some
+        // platforms Screen.safeArea reports a stale/incorrect value for the first few
+        // frames, before the native safe-area info has finished initializing.
+        SetPanelHeight();
 
         ADV_InventorySlotUI.OnSlotSelected += OnSlotSelected;
         ADV_MapSlotUI.OnMapSlotSelected += OnMapSlotClicked;
@@ -82,6 +89,7 @@ public class ADV_InventoryPanel : Panel
         // Setup tab buttons
         tabActions = new System.Action[]
         {
+            LoadNotebook,
             LoadInventory,
             LoadTasks,
             LoadMap
@@ -100,7 +108,8 @@ public class ADV_InventoryPanel : Panel
         //default to inventory tab #1
         SelectTab(0);
         LoadClasses();
-        LoadInventory();        
+        LoadNotebook();
+        //LoadInventory();        
     }
 
     private void LoadClasses()
@@ -113,6 +122,35 @@ public class ADV_InventoryPanel : Panel
         mapManager = GameObject.FindWithTag("MapManager").GetComponent<ADV_MapManager>();
     }
 
+    private void LoadNotebook()
+    {
+        // clear old slots
+        foreach (Transform child in inventoryContent)
+            Destroy(child.gameObject);
+
+        //apply notebook layout
+        ApplyLayout(notebookLayout);
+        
+        // spawn one slot per collected word (skip regular Object items — those belong
+        // on the Inventory tab, not here)
+        foreach (var (def, qty) in ADV_Inventory.Instance.GetAllItems())
+        {
+            if (def.itemType != CollectibleItemType.Word)
+                continue;
+
+            ADV_NotebookSlotUI slot = Instantiate(notebookSlotPrefab, inventoryContent);
+            slot.name = def.name;
+            slot.Setup(def, qty);
+        }
+
+        //load description from loctable
+        inventoryDescriptionText.text = LocalizationHelper.GetSafe(
+            "KELIAS_INVENTORY",
+            "NotebookDescTxt",
+            "No description"
+        );
+    }
+
     private void LoadInventory()
     {
         //Debug.Log("Loading inventory panel...");
@@ -122,11 +160,13 @@ public class ADV_InventoryPanel : Panel
             Destroy(child.gameObject);
         
         ApplyLayout(inventoryLayout);
-        
-        // spawn one slot per item
+
+        // spawn one slot per item (skip words — those belong on the Notebook tab)
         foreach (var (def, qty) in ADV_Inventory.Instance.GetAllItems())
         {
-            //Debug.Log($"Loading inventory item: {qty}");
+            if (def.itemType != CollectibleItemType.Object)
+                continue;
+
             ADV_InventorySlotUI slot = Instantiate(inventSlotPrefab, inventoryContent);
 
             slot.name = def.name;

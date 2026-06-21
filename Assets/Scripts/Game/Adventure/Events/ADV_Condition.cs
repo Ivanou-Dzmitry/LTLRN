@@ -9,6 +9,7 @@ public abstract class ADV_Condition : ScriptableObject
 
     [Header("Localization")]
     public LocalizedString description;
+    public CollectibleItemType itemType;
 
     public async Task<string> GetDescriptionAsync(string fallback = "")
         => await description.GetLocalizedStringAsync().Task;

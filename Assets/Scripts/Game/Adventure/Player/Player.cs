@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using static ADV_InteractionBase;
@@ -59,6 +60,9 @@ public class Player : MonoBehaviour
 
     [Header("Light")]
     [SerializeField] private Transform playerLight;
+    [SerializeField] private Light2D flashlight;
+    private Light2D sun;
+
 
     [Header("Joystick")]
     //[SerializeField] private GameObject joystick;
@@ -116,6 +120,21 @@ public class Player : MonoBehaviour
         //stickControler = joystick.GetComponent<OnScreenStick>();
     }
 
+    private void GetSun()
+    {
+        GameObject sunObj = GameObject.FindWithTag("Sun");
+
+        if (sunObj == null)
+        {
+            sun = null;
+            Debug.Log("[Player] GetSun: no object tagged 'Sun' in scene (likely a room/interior with no outdoor light).");
+            return;
+        }
+
+        sun = sunObj.GetComponent<Light2D>();
+        //Debug.Log($"[Player] GetSun: found '{sunObj.name}', intensity={sun?.intensity}");
+    }
+
     private void Start()
     {
         //get logic
@@ -129,6 +148,21 @@ public class Player : MonoBehaviour
         // Suppress stuck detection briefly so physics can settle after spawn.
         _stuckGraceEnd = Time.time + StuckGracePeriod;
         _stuckCheckPos = rigidbodyPlayer.position;
+
+        // NOTE: not calling GetSun()/FlashlightSwithcer() here — Unity doesn't guarantee
+        // Start() order between unrelated GameObjects, so the map (and its "Sun" object)
+        // may not be instantiated yet by ADV_MapManager at this point. RefreshFlashlight()
+        // is called explicitly by ADV_MapManager right after each map/room is instanced.
+    }
+
+    /// <summary>
+    /// Re-checks the current map's sun and updates the flashlight accordingly. Call this
+    /// after a map or room has just been instantiated (see ADV_MapManager), since this
+    /// component's own Start() may run before that map exists.
+    /// </summary>
+    public void RefreshFlashlight()
+    {
+        FlashlightSwithcer();
     }
 
     private void FixedUpdate()
@@ -343,14 +377,6 @@ public class Player : MonoBehaviour
             
     }
 
-/*    private bool DialogueStart()
-    {
-        if (inkText != null)
-            gameLogic.DialogueRoutine(inkText.text);
-
-        return true;
-    }*/
-
     //for collision effects and etc
     public void StartInteract()
     {
@@ -510,8 +536,11 @@ public class Player : MonoBehaviour
 
         // Cancel path on level/room transition — old waypoints are in the previous level's space.
         if (isExit || isRoom)
+        {
+            FlashlightSwithcer();
             CancelPath();
-
+        }
+            
         //get tilemap from collision
         currentTilemap = collision.collider.GetComponentInParent<Tilemap>();
 
@@ -523,6 +552,23 @@ public class Player : MonoBehaviour
         ContactPoint2D contact = collision.GetContact(0);
 
         Vector3Int cellPosition = currentTilemap.WorldToCell(contact.point);
+    }
+
+    private void FlashlightSwithcer()
+    {
+        // Always re-acquire — the previous map/room's "Sun" object may have been
+        // destroyed on transfer, and a stale cached reference would skip the update.
+        GetSun();
+
+        // No "Sun" in this scene (e.g. inside a room/interior) — assume it's dark and
+        // keep the flashlight on, instead of leaving it at whatever it was outdoors.
+        if (sun == null)
+        {
+            flashlight.intensity = 1.0f;
+            return;
+        }
+
+        flashlight.intensity = sun.intensity <= 0.2f ? 1.0f : 0.0f;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

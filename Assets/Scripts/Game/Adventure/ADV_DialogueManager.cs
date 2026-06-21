@@ -21,6 +21,7 @@ public class ADV_DialogueManager : MonoBehaviour
     private GameLogic gameLogic;
 
     [SerializeField] private ADV_IconsManager iconsManager;
+    [SerializeField] private ADV_InteractionManager interactionManager;
 
     [Header("Dialogue")]
     public DialogueState dialogueState;
@@ -45,6 +46,8 @@ public class ADV_DialogueManager : MonoBehaviour
     [Header("Dialogue Buttons")]
     public Button closePanelButton;
     public Button nextStoryButton;
+    public Button saveWordButton; //save word
+    private ButtonImage saveWordBtnImage;
 
     private Story currentStory = null;
     public bool dialogueIsPalying { get; private set; }
@@ -53,6 +56,15 @@ public class ADV_DialogueManager : MonoBehaviour
     private const string LOC_TAG = "loc";
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
+    private const string SAVE_TAG = "saveword";
+    private const string WORD_ID_TAG = "wordId";
+
+    private string lineText = "";
+
+    // Identifies the ADV_ItemDefinition (by its itemId) behind the current line's word,
+    // if any — set by the #wordId tag, cleared on lines without it. Used by
+    // SaveWordToNotebook() to know what to collect.
+    private string currentWordId;
 
     //private static ADV_DialogueManager instance;
 
@@ -76,6 +88,8 @@ public class ADV_DialogueManager : MonoBehaviour
 
         closePanelButton.onClick.AddListener(OnClosePanel);
         nextStoryButton.onClick.AddListener(NextStory);
+        saveWordButton.onClick.AddListener(SaveWordToNotebook);
+        saveWordBtnImage = saveWordButton.GetComponent<ButtonImage>();
 
         dialogueState = DialogueState.None;
     }
@@ -114,28 +128,40 @@ public class ADV_DialogueManager : MonoBehaviour
         if (!playerClass.readyForDialogue)
             return;
 
-        //toggle
-        dialogueIsPalying = !dialogueIsPalying;
-
-        //try read story
+        // Derive the action purely from currentStory (the actual source of truth) instead
+        // of a separately-toggled bool — toggling dialogueIsPalying on every click let it
+        // drift out of sync with reality on fast double-clicks (e.g. continuing a line
+        // would flip it false while the dialogue was still very much active), which made
+        // ExitDialogueMode()/communicateBtn.SetSelected(false) fire at the wrong time.
         if (currentStory != null && currentStory.canContinue)
         {
             ContinueStory();
             return;
-        }        
+        }
 
-        if (dialogueIsPalying && currentStory == null)
+        if (currentStory == null)
+        {
+            dialogueIsPalying = true;
             playerClass.TryToDialogue();
+        }
         else
+        {
             ExitDialogueMode();
+        }
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
+        // The info panel overlaps the dialogue panel — close it immediately so it
+        // doesn't sit on top of (or behind) the conversation UI.
+        ADV_InfoPanel.Instance?.HideImmediately();
+
+        //get story
         currentStory = new Story(inkJSON.text);
 
         // jump to start knot explicitly
         currentStory.ChoosePathString("start");
+
         //Debug.Log($"[EnterDialogue] canContinue after ChoosePathString: {currentStory.canContinue}");
 
         nextStoryButton.gameObject.SetActive(true);
@@ -151,7 +177,7 @@ public class ADV_DialogueManager : MonoBehaviour
 
     private void ExitDialogueMode()
     {
-        Debug.Log("Exit dialogue mode");
+        //Debug.Log("Exit dialogue mode");
 
         dialogueIsPalying = false;
         currentStory = null;
@@ -176,7 +202,7 @@ public class ADV_DialogueManager : MonoBehaviour
             return;
         }
 
-        // MUST call Continue() first � tags are only populated after this
+        // MUST call Continue() first � tags are only populated after this
         string rawLine = currentStory.Continue().Trim();
 
         Debug.Log($"[ContinueStory] raw: '{rawLine}' > tags: [{string.Join(", ", currentStory.currentTags)}]");
@@ -184,11 +210,19 @@ public class ADV_DialogueManager : MonoBehaviour
         // parse all tags into a dict for easy lookup
         Dictionary<string, string> tags = ParseTags(currentStory.currentTags);
 
-        // handle side effects (portrait, layout, etc.)
+        // Reset — only lines tagged #wordId count as a collectible word. Must run before
+        // HandleTags() so the #saveword branch can check whether this word is collected.
+        currentWordId = null;
+
+        if (tags.TryGetValue(WORD_ID_TAG, out string wordId))
+            currentWordId = wordId;
+
+        // handle side effects (portrait, layout, saveword button, etc.)
         HandleTags(tags);
 
+        lineText = null;
+
         // get localized text
-        string lineText = "";
         if (tags.TryGetValue(LOC_TAG, out string locKey))
         {
             lineText = LocalizationSettings
@@ -207,6 +241,7 @@ public class ADV_DialogueManager : MonoBehaviour
             lineText = "...";
 
         dialogueText.text = lineText;
+
         StartCoroutine(dialogPanelClass.ShowDiallogueTextRoutine(lineText));
 
         if (!currentStory.canContinue && currentStory.currentChoices.Count == 0)
@@ -257,6 +292,25 @@ public class ADV_DialogueManager : MonoBehaviour
             Debug.Log($"[HandleTags] Layout: '{layout}'");
             // TODO: apply layout
         }
+
+        if (tags.TryGetValue(SAVE_TAG, out string saveword))
+        {
+            Debug.Log($"[HandleTags] saveword: '{saveword}'");
+
+            bool visibility = bool.Parse(saveword);
+
+            dialogPanelClass.SaveButtonVisibity(visibility);
+
+            // Disabled if this word is already in the inventory — re-enabled per line,
+            // so it doesn't stay disabled forever once a different word comes up.
+            if (visibility)
+            {
+                bool alreadyCollected = !string.IsNullOrEmpty(currentWordId)
+                    && ADV_Inventory.Instance.GetItemsCount(currentWordId) > 0;
+
+                saveWordBtnImage.SetDisabled(alreadyCollected);
+            }
+        }
     }
 
 
@@ -281,6 +335,21 @@ public class ADV_DialogueManager : MonoBehaviour
         }*/
 
 
+    private void SaveWordToNotebook()
+    {
+        if (string.IsNullOrEmpty(currentWordId))
+        {
+            Debug.LogWarning("[ADV_DialogueManager] SaveWordToNotebook: current line has no " +
+                              "#wordId tag — nothing to save.");
+            return;
+        }
+
+        interactionManager.CollectWord(currentWordId);
+
+        // No need to wait for the next line — the word is collected now either way.
+        saveWordBtnImage.SetDisabled(true);
+    }
+
     private void NextStory()
     {
         if (currentStory.canContinue)
@@ -297,6 +366,7 @@ public class ADV_DialogueManager : MonoBehaviour
         //remove listeners
         communicateButton.onClick.RemoveListener(OnCommunicate);
         closePanelButton.onClick.RemoveListener(OnClosePanel);
+        saveWordButton.onClick.RemoveListener(SaveWordToNotebook);
     }
 
 }

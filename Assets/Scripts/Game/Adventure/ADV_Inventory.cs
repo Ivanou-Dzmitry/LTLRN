@@ -28,9 +28,17 @@ public class ADV_Inventory : MonoBehaviour
     public void AddItem(string itemId, int quantity = 1)
     {
         if (!_items.ContainsKey(itemId)) _items[itemId] = 0;
-        _items[itemId] += quantity;
 
-        Debug.Log($"Added {quantity}x {itemId}. Total: {_items[itemId]}");
+        // Words can only ever be collected once â€” cap at stackLimit. Object items keep
+        // stacking freely, unaffected.
+        ADV_ItemDefinition def = registry.Get(itemId);
+
+        if (def != null && def.itemType == CollectibleItemType.Word)
+            _items[itemId] = Mathf.Min(_items[itemId] + quantity, def.stackLimit);
+        else
+            _items[itemId] += quantity;
+
+        //Debug.Log($"Added {quantity}x {itemId}. Total: {_items[itemId]}");
     }
 
     public bool RemoveItem(string itemId, int quantity = 1)
@@ -44,6 +52,10 @@ public class ADV_Inventory : MonoBehaviour
 
     // resolve icon/name at runtime from registry
     public ADV_ItemDefinition GetDefinition(string itemId) => registry.Get(itemId);
+
+    // resolve a Word item by the DB row it was revealed from (dialogue #dbtable/#id/#column tags)
+    public ADV_ItemDefinition GetDefinitionByWordReference(string tableName, int recordID, string columnName)
+        => registry.GetByWordReference(tableName, recordID, columnName);
 
     // called by GameObjectsState when loading
     public void LoadFromSaveData(List<InventoryItemData> data)
@@ -62,12 +74,13 @@ public class ADV_Inventory : MonoBehaviour
         return result;
     }
 
-    // for UI — returns everything with its definition resolved
+    // for UI ï¿½ returns everything with its definition resolved
     public List<(ADV_ItemDefinition def, int qty)> GetAllItems()
     {
         //Debug.Log($"Getting all items. Count: {_items.Count}");
 
         var result = new List<(ADV_ItemDefinition, int)>();
+
         foreach (var kvp in _items)
         {
             var def = registry.Get(kvp.Key);

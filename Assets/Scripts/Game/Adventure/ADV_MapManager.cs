@@ -8,7 +8,7 @@ public class ADV_MapManager : MonoBehaviour
 {
     private GameData gameData;
     private GameLogic gameLogic;
-    //private ADV_CameraMove cameraMoveClass;
+    [SerializeField] private ADV_CameraMove cameraMoveClass;
 
     public Worlds worlds; //world
     private MapsManager mapsManager;    
@@ -47,9 +47,6 @@ public class ADV_MapManager : MonoBehaviour
     [Header("Utils")]
     public TilesUtils tilesUtilsClass;
 
-    [Header("InfoPanel")]
-    [SerializeField] private GameObject infoPanel;
-
     [Header("Player")]
     [SerializeField] private GameObject player;
     //private Player playerClass;
@@ -57,13 +54,15 @@ public class ADV_MapManager : MonoBehaviour
     [SerializeField] private GameObject playerMarkerOnMap;
 
     //public Vector2 cameraChange;
-    private Vector3 playerPositionShift;
+    // Absolute spawn coordinate on the axis being crossed (not a relative offset) — using
+    // a relative offset compounds whatever small overshoot the player had on the old map's
+    // exit collider (e.g. exiting at y=-0.94 instead of exactly y=0), landing them at the
+    // wrong spot on the new map. The other axis keeps the player's current position.
 
-    //constants
-    private Vector3 PLAYER_TOP = new Vector3 (0,-15f,0);
-    private Vector3 PLAYER_BOTTOM = new Vector3(0, 15f, 0);
-    private Vector3 PLAYER_RIGHT = new Vector3(-11, 0, 0);
-    private Vector3 PLAYER_LEFT = new Vector3(11, 0f, 0);
+    private const float ENTRY_Y_AFTER_TOP    = -15f; // moved "top"    -> land near bottom of new map
+    private const float ENTRY_Y_AFTER_BOTTOM = -1f;  // moved "bottom" -> land near top of new map
+    private const float ENTRY_X_AFTER_RIGHT  = 1f;   // moved "right"  -> land near left of new map
+    private const float ENTRY_X_AFTER_LEFT   = 11f;  // moved "left"   -> land near right of new map
 
     private Vector3 PLAYER_IN_ROOM = new Vector3(6, -15, 0);
 
@@ -73,7 +72,13 @@ public class ADV_MapManager : MonoBehaviour
 
     //indexes for save
     private int currentMapIndex;
-    private int currentMapManagerIndex;    
+    private int currentMapManagerIndex;
+
+    // Prevents the entrance tile the player lands on (after a map transfer) from
+    // immediately re-triggering another transfer (e.g. bouncing straight back to the
+    // previous map) before the player has had a chance to physically move away from it.
+    [SerializeField] private float transferCooldown = 0.5f;
+    private float transferLockUntil;
     
     private void Awake()
     {
@@ -172,8 +177,7 @@ public class ADV_MapManager : MonoBehaviour
 
     private bool InstanceMapPrefab(Map map)
     {
-        if(infoPanel.activeSelf)
-            infoPanel.SetActive(false);
+        ADV_InfoPanel.Instance?.HideImmediately();
 
         if (map != null)
         {
@@ -196,17 +200,17 @@ public class ADV_MapManager : MonoBehaviour
             foreach (var exit in currentMapInstance.GetComponentsInChildren<ADV_RoomExit>())
                 exitPoints[exit.roomId] = exit.transform;
 
+            // The map's "Sun" object now exists — safe to re-check it for the flashlight.
+            player.GetComponent<Player>()?.RefreshFlashlight();
+
             //Debug.Log($">>>Map {currentMapID} loaded. Exits found: {exitPoints.Count}");
 
             //show panel with map info if needed
             if (map.showMapInfo)
-            {
-                infoPanel.SetActive(true);
-                ADV_InfoPanel iPanel = infoPanel.GetComponent<ADV_InfoPanel>();
-              
-                iPanel.ShowInfo(currentMap.description.GetLocalizedString());
-            }
-                
+                ADV_InfoPanel.Instance?.ShowInfo(currentMap.description.GetLocalizedString());
+
+            cameraMoveClass?.RecalculateBounds(currentMapInstance.transform);
+
             return true;
         }
         else
@@ -226,54 +230,73 @@ public class ADV_MapManager : MonoBehaviour
         int newRow = (int)playerPositionOnMap.x;
         int newCol = (int)playerPositionOnMap.y;
 
+        Vector3 spawnPosition = player.transform.position;
+
         switch (direction.ToLower())
         {
             case "top":
                 newRow = Mathf.Min(newRow + 1, rows - 1);    // prevent going past last row
-                playerPositionShift = PLAYER_TOP;
+                spawnPosition.y = ENTRY_Y_AFTER_TOP;
                 break;
             case "bottom":
                 newRow = Mathf.Max(newRow - 1, 0);           // prevent going below first row
-                playerPositionShift = PLAYER_BOTTOM;
+                spawnPosition.y = ENTRY_Y_AFTER_BOTTOM;
                 break;
             case "left":
                 newCol = Mathf.Max(newCol - 1, 0);           // prevent going before first column
-                playerPositionShift = PLAYER_LEFT;
+                spawnPosition.x = ENTRY_X_AFTER_LEFT;
                 break;
             case "right":
                 newCol = Mathf.Min(newCol + 1, columns - 1); // prevent going past last column
-                playerPositionShift = PLAYER_RIGHT;
+                spawnPosition.x = ENTRY_X_AFTER_RIGHT;
                 break;
             default:
                 Debug.LogWarning("Invalid direction: " + direction);
                 break;
         }
 
+        //set new player position
         Vector2 newPlayerPosition = new Vector2(newRow, newCol);
 
         string mapName = mapValues[newRow, newCol];
 
-        //Debug.Log($">>> Next position is at Row {newRow}, Column {newCol} Map: {mapName}");
-
-        //Debug.Log($"{mapName}");
+        Debug.Log($"[ADV_MapManager] MapTransfer: direction='{direction}' from row={playerPositionOnMap.x} " +
+                  $"col={playerPositionOnMap.y} -> row={newRow} col={newCol} mapName='{mapName}' " +
+                  $"spawnPosition={spawnPosition} playerPosBefore={player.transform.position}");
 
         for (int i = 0; i< mapsManager.maps.Length; i++)
         {
             if (mapsManager.maps[i].mapPrefab.name == mapName)
             {
                 if(currentRoomInstance != null)
+                {
+                    currentRoomInstance.SetActive(false);
                     Destroy(currentRoomInstance);
+                }
+
+                // Disable immediately (not just Destroy, which is deferred to end of frame) —
+                // otherwise the old map's Global Light2D is still active when the new map's
+                // Global Light2D is instantiated below, and URP warns about duplicate globals.
+                currentMapInstance.SetActive(false);
 
                 Destroy(currentMapInstance);
-                
+
                 InstanceMapPrefab(mapsManager.maps[i]);
 
-                player.transform.position += playerPositionShift;
+                //set player position after transfer
+                player.transform.position = spawnPosition;
+
+                // Block re-triggering ExitCheck for a short moment — the player likely
+                // lands directly on the new map's own entrance tile for this edge.
+                transferLockUntil = Time.time + transferCooldown;
+
+                Debug.Log($"[ADV_MapManager] MapTransfer: landed at playerPosAfter={player.transform.position}, " +
+                          $"transfer locked until t={transferLockUntil:F2}");
 
                 currentMapIndex = i;
                 gameData.saveData.currentMapIndex = currentMapIndex;
                 gameData.SaveToFile();
-   
+
                 playerPositionOnMap = FindMapPosition(mapValues, mapName);
 
                 mainPanelUI.PanelFadeOut();
@@ -295,12 +318,23 @@ public class ADV_MapManager : MonoBehaviour
         {
             if(customProperty[1] == "entrance")
             {
+                if (Time.time < transferLockUntil)
+                {
+                    Debug.Log($"[ADV_MapManager] ExitCheck: entrance '{customProperty[0]}' ignored — " +
+                              $"still in transfer cooldown ({transferLockUntil - Time.time:F2}s left). " +
+                              $"This is likely the entrance tile the player just spawned on.");
+                    return false;
+                }
+
+                Debug.Log($"[ADV_MapManager] ExitCheck: entrance triggered, direction='{customProperty[0]}', " +
+                          $"collider='{collision.collider.name}', playerPositionOnMap={playerPositionOnMap}");
+
                 MapTransfer(playerPositionOnMap, customProperty[0]);
 
                 return true;
             }
         }
-                
+
         return false;
     }
 
@@ -341,6 +375,11 @@ public class ADV_MapManager : MonoBehaviour
                         string roomId = currentRoomInstance.name.Replace("(Clone)", "").Trim();
 
                         mainPanelUI.PanelFadeOut();
+
+                        // Disable immediately so the room's Global Light2D deregisters before
+                        // the new map's Global Light2D is instantiated below (avoids URP's
+                        // "More than one global light" warning).
+                        currentRoomInstance.SetActive(false);
 
                         // rebuild map + exitPoints
                         InstanceMapPrefab(currentMap);
@@ -385,12 +424,20 @@ public class ADV_MapManager : MonoBehaviour
 
     private void TransferToRoom(int index)
     {
+        // Disable immediately — Destroy() is deferred to end of frame, which would leave
+        // the map's Global Light2D active while the room's Global Light2D is instantiated.
+        currentMapInstance.SetActive(false);
         Destroy(currentMapInstance);
 
         //instance room
         currentRoomInstance = Instantiate(currentMap.roomPrefabs[index], Vector3.zero, Quaternion.identity);
         currentRoomInstance.transform.parent = transform;
         currentRoomInstance.name = currentMap.roomPrefabs[index].name;
+
+        cameraMoveClass?.RecalculateBounds(currentRoomInstance.transform);
+
+        // Rooms have no "Sun" object — this re-checks and falls back to flashlight-on.
+        player.GetComponent<Player>()?.RefreshFlashlight();
 
         //set player position in room
         player.transform.position = PLAYER_IN_ROOM;
@@ -402,9 +449,7 @@ public class ADV_MapManager : MonoBehaviour
         playerClass.currentPlayerLocation = Player.PlayerLocation.Room;
 
         //show panel with room description
-        infoPanel.SetActive(true);
-        ADV_InfoPanel iPanel = infoPanel.GetComponent<ADV_InfoPanel>();
-        iPanel.ShowInfo(currentMap.roomDescription[index].GetLocalizedString());
+        ADV_InfoPanel.Instance?.ShowInfo(currentMap.roomDescription[index].GetLocalizedString());
     }
 
 

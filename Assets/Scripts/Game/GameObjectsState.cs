@@ -96,6 +96,15 @@ public class GameObjectsState : MonoBehaviour
         return true;
     }
 
+    /// <summary>Removes a single id's saved state (e.g. dropping a collected word so it can be collected again).</summary>
+    public void RemoveInteractionState(string id)
+    {
+        objStateData.interactionStates.RemoveAll(x => x.id == id);
+
+        if (stateDict != null)
+            stateDict.Remove(id);
+    }
+
     public bool ResetInventory()
     {
         objStateData.inventory.Clear();

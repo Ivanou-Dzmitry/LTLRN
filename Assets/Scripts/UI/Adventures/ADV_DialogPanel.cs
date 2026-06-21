@@ -20,13 +20,26 @@ public class ADV_DialogPanel : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button closeDiallogButton;
     [SerializeField] private Button submitButton;
+    [SerializeField] private Button saveButton;
+
+    [Header("Settings")]
+    [SerializeField] private Canvas canvasRoot;
+    [SerializeField] private GameObject dialogPanel;
+    [SerializeField] private float panelHeight = 400;
 
     private void Awake()
     {
         closeDiallogButton.onClick.AddListener(OnDiallogClose);
+        
+        //get animator
         animator = GetComponent<Animator>();
 
+        //add listener on button
         submitButton.onClick.AddListener(HandleSubmit);
+
+        //get canvas
+        if (canvasRoot == null)
+            canvasRoot = dialogPanel.GetComponentInParent<Canvas>();
     }
 
     void Start()
@@ -70,6 +83,8 @@ public class ADV_DialogPanel : MonoBehaviour
 
     public IEnumerator ShowDiallogueTextRoutine(string text)
     {
+        ApplyPanelHeight();
+
         dialogText.maxVisibleCharacters = 0;
         dialogText.text = text;
         dialogText.ForceMeshUpdate();
@@ -89,6 +104,35 @@ public class ADV_DialogPanel : MonoBehaviour
         {
             characterImage.sprite = image;            
         }
+    }
+
+    private void ApplyPanelHeight()
+    {
+        if (canvasRoot == null)
+            return;
+
+        RectTransform rt = dialogPanel.GetComponent<RectTransform>();
+        if (rt == null)
+            return;
+
+        float scaleFactor = canvasRoot.scaleFactor;
+
+        Rect safeArea = Screen.safeArea;
+        float topInsetPx = Screen.height - (safeArea.y + safeArea.height);
+        float topInset = topInsetPx / scaleFactor;
+
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panelHeight + topInset);
+    }
+
+    public void SaveButtonVisibity(bool visible)
+    {
+        if(saveButton ==null)
+            return;
+
+        if (visible)
+            saveButton.gameObject.SetActive(true);
+        else
+            saveButton.gameObject.SetActive(false);
     }
 
 }

@@ -429,6 +429,18 @@ MonoBehaviour:
     m_Localized: INFORMATION
     m_Metadata:
       m_Items: []
+  - m_Id: 66631501338537984
+    m_Localized: Notebook
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67383101099139072
+    m_Localized: Click to move. Double-click to run.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67734690724896768
+    m_Localized: Save word
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

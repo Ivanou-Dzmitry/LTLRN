@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: dlg_pnl_in
+  m_Name: Diallog_pnl_in
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -72,15 +72,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5833333
         value: 5
-        inSlope: 272.15997
-        outSlope: 272.15997
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 35.36
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -327,15 +327,15 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.5833333
         value: 5
-        inSlope: 272.15997
-        outSlope: 272.15997
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 35.36
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136

@@ -2,11 +2,19 @@
 <tileset version="1.10" tiledversion="1.12.1" name="kelias" tilewidth="16" tileheight="16" tilecount="1024" columns="32" objectalignment="topleft">
  <grid orientation="orthogonal" width="32" height="32"/>
  <image source="../../Art/kelias_tiles_01.png" width="512" height="512"/>
+ <tile id="35">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="2" width="16" height="14"/>
+  </objectgroup>
+ </tile>
  <tile id="36">
   <properties>
    <property name="Name" value=""/>
    <property name="Type" value=""/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="2" width="4" height="14"/>
+  </objectgroup>
  </tile>
  <tile id="37">
   <properties>
@@ -72,6 +80,24 @@
    <property name="Name" value=""/>
    <property name="Type" value=""/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="1" width="14" height="15"/>
+  </objectgroup>
+ </tile>
+ <tile id="168">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="1" width="15" height="15"/>
+  </objectgroup>
+ </tile>
+ <tile id="169">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="1" width="16" height="14"/>
+  </objectgroup>
+ </tile>
+ <tile id="170">
+  <objectgroup draworder="index" id="3">
+   <object id="3" x="0" y="1" width="15" height="15"/>
+  </objectgroup>
  </tile>
  <tile id="192">
   <objectgroup draworder="index" id="2">
@@ -102,6 +128,36 @@
    </object>
   </objectgroup>
  </tile>
+ <tile id="197">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="0" width="14" height="15"/>
+  </objectgroup>
+ </tile>
+ <tile id="198">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="1" width="15" height="13"/>
+  </objectgroup>
+ </tile>
+ <tile id="199">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="1" width="15" height="13"/>
+  </objectgroup>
+ </tile>
+ <tile id="200">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="0" width="14" height="16"/>
+  </objectgroup>
+ </tile>
+ <tile id="201">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="1" width="14" height="14"/>
+  </objectgroup>
+ </tile>
+ <tile id="202">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="0" width="14" height="16"/>
+  </objectgroup>
+ </tile>
  <tile id="224">
   <objectgroup draworder="index" id="2">
    <object id="1" x="8" y="0">
@@ -119,6 +175,21 @@
    <object id="1" x="0" y="0">
     <polygon points="0,0 16,0 0,16"/>
    </object>
+  </objectgroup>
+ </tile>
+ <tile id="232">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="0" width="15" height="14"/>
+  </objectgroup>
+ </tile>
+ <tile id="233">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="1" width="16" height="13"/>
+  </objectgroup>
+ </tile>
+ <tile id="234">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0" width="15" height="14"/>
   </objectgroup>
  </tile>
  <tile id="256">
@@ -277,6 +348,29 @@
    <wangtile tileid="320" wangid="0,1,0,0,0,0,0,0"/>
    <wangtile tileid="321" wangid="0,1,0,0,0,0,0,1"/>
    <wangtile tileid="322" wangid="0,0,0,0,0,0,0,1"/>
+  </wangset>
+  <wangset name="Bush01" type="corner" tile="-1">
+   <wangcolor name="Bush" color="#ff0000" tile="-1" probability="1"/>
+   <wangtile tileid="168" wangid="0,0,0,1,0,0,0,0"/>
+   <wangtile tileid="169" wangid="0,0,0,1,0,1,0,0"/>
+   <wangtile tileid="170" wangid="0,0,0,0,0,1,0,0"/>
+   <wangtile tileid="200" wangid="0,1,0,1,0,0,0,0"/>
+   <wangtile tileid="201" wangid="0,1,0,1,0,1,0,1"/>
+   <wangtile tileid="202" wangid="0,0,0,0,0,1,0,1"/>
+   <wangtile tileid="232" wangid="0,1,0,0,0,0,0,0"/>
+   <wangtile tileid="233" wangid="0,1,0,0,0,0,0,1"/>
+   <wangtile tileid="234" wangid="0,0,0,0,0,0,0,1"/>
+  </wangset>
+  <wangset name="Bush02" type="corner" tile="-1">
+   <wangcolor name="Bush" color="#ff0000" tile="-1" probability="1"/>
+   <wangtile tileid="168" wangid="0,1,0,0,0,1,0,1"/>
+   <wangtile tileid="169" wangid="0,1,0,0,0,0,0,1"/>
+   <wangtile tileid="170" wangid="0,1,0,1,0,0,0,1"/>
+   <wangtile tileid="200" wangid="0,0,0,0,0,1,0,1"/>
+   <wangtile tileid="202" wangid="0,1,0,1,0,0,0,0"/>
+   <wangtile tileid="232" wangid="0,0,0,1,0,1,0,1"/>
+   <wangtile tileid="233" wangid="0,0,0,1,0,1,0,0"/>
+   <wangtile tileid="234" wangid="0,1,0,1,0,1,0,0"/>
   </wangset>
  </wangsets>
 </tileset>

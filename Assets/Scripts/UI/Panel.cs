@@ -148,19 +148,43 @@ namespace LTLRN.UI
             // Calculate available height in safe area (accounting for canvas scale)
             float safeAreaHeight = safeArea.height / scaleFactor;
 
+            // Pixels cut off by notch/status bar (top) and home indicator (bottom).
+            // Screen.safeArea origin is bottom-left, so top inset = screenHeight - (y + height).
+            float topInsetPx    = Screen.height - (safeArea.y + safeArea.height);
+            float bottomInsetPx = safeArea.y;
+
+            float topInset    = topInsetPx / scaleFactor;
+            float bottomInset = bottomInsetPx / scaleFactor;
+
+            // Grow top/bottom panels by the inset so their background bleeds under the
+            // notch / home indicator, while their content (anchored bottom/top respectively)
+            // stays within the safe area. On phones with no notch, inset is 0 — no change.
+            float panel01Height = PANEL_01_HEIGHT + topInset;
+            float panel03Height = PANEL_03_HEIGHT + bottomInset;
+
+            // If panel_03 doesn't exist in this scene, panel_02 becomes the bottom-most
+            // panel — don't reserve space for a panel that isn't there.
+            float reservedPanel03Height = panel_03 != null ? PANEL_03_HEIGHT : 0f;
+
             // Calculate panel_02 height
-            panel02Height = safeAreaHeight - PANEL_01_HEIGHT - PANEL_03_HEIGHT;
+            panel02Height = safeAreaHeight - PANEL_01_HEIGHT - reservedPanel03Height;
             panel02Height = Mathf.Max(panel02Height, 0f);
+
+/*            Debug.Log($"[Panel:{name}] Screen=({Screen.width}x{Screen.height}) safeArea={safeArea} " +
+                      $"scaleFactor={scaleFactor} safeAreaHeight={safeAreaHeight} " +
+                      $"topInset={topInset} bottomInset={bottomInset} " +
+                      $"PANEL_01_HEIGHT={PANEL_01_HEIGHT} reservedPanel03Height={reservedPanel03Height} " +
+                      $"-> panel01Height={panel01Height} panel02Height={panel02Height} panel03Height={panel03Height}");*/
 
             // Set heights
             if(panel_01 != null)
-                panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_01_HEIGHT);
-            
+                panel_01.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel01Height);
+
             if (panel_02 != null)
                 panel_02.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel02Height);
 
             if (panel_03 != null)
-                panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, PANEL_03_HEIGHT);
+                panel_03.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, panel03Height);
         }
     }
 }

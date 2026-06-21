@@ -10,8 +10,11 @@ public class ADV_TaskSlotUI : MonoBehaviour
 
     public void SetupTask(ADV_Condition taskDef)
     {        
-        descriptionText.text = taskDef.description.GetLocalizedString();
-
+        if(taskDef.itemType == CollectibleItemType.Object)
+        {
+            descriptionText.text = taskDef.description.GetLocalizedString();
+        }
+        
         if (taskDef.IsMet())
         {
             icon.sprite = sprites[1];

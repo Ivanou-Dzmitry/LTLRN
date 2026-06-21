@@ -29,7 +29,14 @@ public class ADV_InventorySlotUI : MonoBehaviour
         quantityLabel.text = quantity > 1 ? quantity.ToString() : "";
   
         //load propper language description
-        descriptionLabel.text = def.itemName.GetLocalizedString();
+        if(def.itemType == CollectibleItemType.Object)
+            descriptionLabel.text = def.itemName.GetLocalizedString();
+
+        // The word itself must stay in the learned language regardless of UI language —
+        // resolve it live from the DB rather than trusting the cached wordReference.value
+        // (which is just whatever the editor dropdown had selected, and can go stale).
+        if (def.itemType == CollectibleItemType.Word)
+            descriptionLabel.text = DBUtils.Instance.ResolveReference(def.wordReference);
 
         slotButton.onClick.AddListener(OnSlotClicked);
         OnSlotSelected += HandleSelectionChanged;

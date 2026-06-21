@@ -21,6 +21,8 @@ TagManager:
   - Enemy
   - GameObjState
   - MapManager
+  - Sun
+  - InfoPanel
   layers:
   - Default
   - TransparentFX

@@ -10,18 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a2708eeae0c81742b3d9617ea5179d7, type: 3}
-  m_Name: CollectPixel01
+  m_Name: CollectWord01
   m_EditorClassIdentifier: Assembly-CSharp::ADV_Condition_CollectItem
   description:
     m_TableReference:
-      m_TableCollectionName: GUID:a86b47b9336c0714aaab30bf085e0617
+      m_TableCollectionName: GUID:54eb17b2e240b7443b062310ea9718ce
     m_TableEntryReference:
-      m_KeyId: 44496479840165888
+      m_KeyId: 19931555185192960
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  itemId: dpixel01
+  itemType: 1
+  wordReference:
+    tableName: Phrases01
+    columnName: NomSing
+    recordID: 1
+    value: Labas
+    whereColumn: 
+    whereValue: 
+  itemId: LabasWord
   requiredAmount: 1
   references:
     version: 2
