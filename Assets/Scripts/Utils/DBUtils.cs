@@ -27,18 +27,16 @@ public class DBUtils : MonoBehaviour
         }
     }
 
-    //main database
+    //main database (content — copied from StreamingAssets)
     private string dbPath;
     private bool isInitialized = false;
-    private const string dbName = "ltlrn01.db"; 
+    private const string dbName = "ltlrn01.db";
+    private const string DB_HASH_KEY = "db_hash_ltlrn01"; // stores MD5 of last copied DB
 
-    //game data
+    //game data (player progress — never overwritten, only created)
     private string dbDataPath;
     private bool isDataInitialized = false;
-    private const string dbDataName = "keliasdata.db"; 
-
-    private const int DB_VERSION = 3; // Increment this when you update the database
-    private const string VERSION_KEY = "database_version";
+    private const string dbDataName = "keliasdata.db";
 
     //loading IMAGES
     private const string IMAGES_ROOT = "Images";
@@ -133,63 +131,139 @@ public class DBUtils : MonoBehaviour
 
     private IEnumerator InitializeDatabase()
     {
-        // Initialize main database
-        yield return InitializeSingleDatabase(dbName, DB_VERSION, VERSION_KEY,
-            (path) => dbPath = path);
+        // Content DB: copy from StreamingAssets when missing or version changed.
+        // Player progress is NOT stored here — safe to overwrite.
+        dbPath = GetDestinationPath(dbName);
+        yield return InitializeContentDatabase();
 
-        // Initialize data database
-        yield return InitializeSingleDatabase(dbDataName, DB_VERSION, VERSION_KEY,
-            (path) => dbDataPath = path);
+        // Data DB: never copy — only create tables if they don't exist yet.
+        // Overwriting this would erase player progress.
+        dbDataPath = GetDestinationPath(dbDataName);
+        yield return InitializeDataDatabase();
 
-        // Check connections
-        //Debug.Log("Final Main Database Path: " + dbPath);
-        isInitialized = CheckConnection(dbPath);
-        //Debug.Log("DB1 Connection Result: " + isInitialized);
-
-        //Debug.Log("Final Data Database Path: " + dbDataPath);
+        isInitialized     = CheckConnection(dbPath);
         isDataInitialized = CheckConnection(dbDataPath);
-        //Debug.Log("DB2 Connection Result: " + isDataInitialized);
 
-        // Create tables
         bool res = CreateGameDataTables();
-        
         if (!res)
-            Debug.Log("DB2 create tables: " + res);
+            Debug.LogWarning("[DBUtils] CreateGameDataTables returned false");
     }
 
-
-    private IEnumerator InitializeSingleDatabase(string databaseName, int targetVersion,
-    string versionKey, System.Action<string> setPath)
+    // Copies ltlrn01.db from StreamingAssets when the file has changed or is missing.
+    // In Editor: always copies so any DB edit is reflected immediately.
+    // In builds: compares MD5 hash — copies only when something actually changed.
+    private IEnumerator InitializeContentDatabase()
     {
-        string sourceDbPath = GetSourcePath(databaseName);
-        string destDbPath = GetDestinationPath(databaseName);
+        string sourcePath = GetSourcePath(dbName);
 
-        // Set the path using callback
-        setPath(destDbPath);
+#if UNITY_EDITOR
+        // Editor: always copy — instant feedback when DB is edited
+        Debug.Log($"[DBUtils] Editor mode — copying {dbName}");
+        if (File.Exists(dbPath)) File.Delete(dbPath);
+        File.Copy(sourcePath, dbPath);
+        yield break;
+#elif UNITY_ANDROID
+        // Android: source is inside APK — read hash from companion .hash file first
+        yield return InitializeContentDatabaseAndroid(sourcePath);
+#else
+        // PC / Mac / iOS: source is a regular file — compute MD5 directly
+        yield return InitializeContentDatabaseStandalone(sourcePath);
+#endif
+    }
 
-        // Check if database needs update
-        int savedVersion = PlayerPrefs.GetInt(versionKey, 0);
-        bool needsUpdate = savedVersion < targetVersion || !File.Exists(destDbPath);
+#if !UNITY_EDITOR && UNITY_ANDROID
+    private IEnumerator InitializeContentDatabaseAndroid(string sourcePath)
+    {
+        // Read the precomputed hash file placed next to the DB in StreamingAssets
+        string hashFilePath = sourcePath + ".hash";
+        string sourceHash = null;
 
-        if (needsUpdate)
+        using (var req = UnityEngine.Networking.UnityWebRequest.Get(hashFilePath))
         {
-            Debug.Log($"Updating {databaseName} from version {savedVersion} to {targetVersion}");
+            yield return req.SendWebRequest();
+            if (req.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
+                sourceHash = req.downloadHandler.text.Trim();
+            else
+                Debug.LogWarning($"[DBUtils] Could not read hash file: {req.error}");
+        }
 
-            // Delete old database if exists
-            if (File.Exists(destDbPath))
+        string storedHash = PlayerPrefs.GetString(DB_HASH_KEY, "");
+        bool needsUpdate = !File.Exists(dbPath) || sourceHash == null || sourceHash != storedHash;
+
+        if (!needsUpdate)
+        {
+            Debug.Log($"[DBUtils] {dbName} up to date (hash match)");
+            yield break;
+        }
+
+        Debug.Log($"[DBUtils] {dbName} changed — downloading from APK");
+
+        using (var req = UnityEngine.Networking.UnityWebRequest.Get(sourcePath))
+        {
+            yield return req.SendWebRequest();
+            if (req.result == UnityEngine.Networking.UnityWebRequest.Result.Success)
             {
-                File.Delete(destDbPath);
-                Debug.Log($"Old {databaseName} deleted");
+                File.WriteAllBytes(dbPath, req.downloadHandler.data);
+                if (sourceHash != null)
+                {
+                    PlayerPrefs.SetString(DB_HASH_KEY, sourceHash);
+                    PlayerPrefs.Save();
+                }
+                Debug.Log($"[DBUtils] {dbName} updated successfully");
             }
+            else
+            {
+                Debug.LogError($"[DBUtils] Failed to copy {dbName}: {req.error}");
+            }
+        }
+    }
+#endif
 
-            // Copy database
-            yield return CopyDatabase(sourceDbPath, destDbPath, databaseName, versionKey, targetVersion);
-        }
-        else
+#if !UNITY_EDITOR && !UNITY_ANDROID
+    private IEnumerator InitializeContentDatabaseStandalone(string sourcePath)
+    {
+        if (!File.Exists(sourcePath))
         {
-            //Debug.Log($"{databaseName} is up to date (version {savedVersion})");
-            yield return null;
+            Debug.LogError($"[DBUtils] Source DB not found: {sourcePath}");
+            yield break;
         }
+
+        string sourceHash = ComputeMD5(sourcePath);
+        string storedHash = PlayerPrefs.GetString(DB_HASH_KEY, "");
+        bool needsUpdate  = !File.Exists(dbPath) || sourceHash != storedHash;
+
+        if (!needsUpdate)
+        {
+            Debug.Log($"[DBUtils] {dbName} up to date (hash match)");
+            yield break;
+        }
+
+        Debug.Log($"[DBUtils] {dbName} changed — copying");
+        File.Copy(sourcePath, dbPath, overwrite: true);
+        PlayerPrefs.SetString(DB_HASH_KEY, sourceHash);
+        PlayerPrefs.Save();
+        Debug.Log($"[DBUtils] {dbName} updated successfully");
+        yield return null;
+    }
+#endif
+
+    private static string ComputeMD5(string filePath)
+    {
+        using (var md5 = System.Security.Cryptography.MD5.Create())
+        using (var stream = File.OpenRead(filePath))
+        {
+            byte[] hash = md5.ComputeHash(stream);
+            return System.BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+        }
+    }
+
+    // Creates keliasdata.db tables via ORM if they don't exist. Never copies from StreamingAssets.
+    private IEnumerator InitializeDataDatabase()
+    {
+        if (!File.Exists(dbDataPath))
+            Debug.Log($"[DBUtils] {dbDataName} not found — will be created by ORM");
+
+        yield return null;
     }
 
     private string GetDestinationPath(string databaseName)
@@ -1109,7 +1183,7 @@ public class DBUtils : MonoBehaviour
         if (spriteCache[folder].TryGetValue(imageName, out Sprite sprite))
             return sprite;
 
-       //Debug.LogWarning($"Sprite not found: {folder}/{imageName} � trying atlas index {spriteNum}");
+       //Debug.LogWarning($"Sprite not found: {folder}/{imageName} � trying atlas index {spriteNum}");
 
         atlasResourcePath = $"{IMAGES_ROOT}/{folder}/{imageName}"; // set atlas path for fallback
 

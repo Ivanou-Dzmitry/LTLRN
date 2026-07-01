@@ -125,14 +125,12 @@ public class ADV_DialogueManager : MonoBehaviour
 
     public void OnCommunicate()
     {
+        Debug.Log($"[OnCommunicate] readyForDialogue={playerClass.readyForDialogue} " +
+                  $"currentStory={currentStory != null} dialogueState={dialogueState}");
+
         if (!playerClass.readyForDialogue)
             return;
 
-        // Derive the action purely from currentStory (the actual source of truth) instead
-        // of a separately-toggled bool — toggling dialogueIsPalying on every click let it
-        // drift out of sync with reality on fast double-clicks (e.g. continuing a line
-        // would flip it false while the dialogue was still very much active), which made
-        // ExitDialogueMode()/communicateBtn.SetSelected(false) fire at the wrong time.
         if (currentStory != null && currentStory.canContinue)
         {
             ContinueStory();

@@ -366,6 +366,8 @@ public class Player : MonoBehaviour
 
     public void TryToDialogue()
     {
+        Debug.Log($"[TryToDialogue] readyForDialogue={readyForDialogue} inkText={inkText != null}");
+
         if (!readyForDialogue)
             return;
 
@@ -374,7 +376,6 @@ public class Player : MonoBehaviour
             ADV_DialogueManager.Instance.EnterDialogueMode(inkText);
             currentPlayerState = PlayerState.Talk;
         }
-            
     }
 
     //for collision effects and etc
@@ -459,15 +460,16 @@ public class Player : MonoBehaviour
     {
         Debug.Log($"IN Trigger: {collider.name}");
 
-        //set current collider to use
-        currentCollider = collider;
-
         //try to get dialogue from object
         inkText = tilesUtilsClass.GetDialogueFromCollider(collider);
 
         //run diallogue if found
         if (inkText != null && currentPlayerState != PlayerState.Attack)
         {
+            // Track only the dialogue collider so spurious exits (e.g. child trigger colliders)
+            // don't clear inkText while the player is still in the NPC zone.
+            currentCollider = collider;
+
             readyForDialogue = true;
 
             //dialogue possible
@@ -505,12 +507,15 @@ public class Player : MonoBehaviour
     //for diallog - EXIT
     private void OnTriggerExit2D(Collider2D collider)
     {
-        //Debug.Log($"OUT Trigger: {collider.name}");
+        // Ignore exits from any collider that isn't the one that started the current dialogue
+        // (e.g. InteractIcon child trigger, info-panel triggers, etc.).
+        if (collider != currentCollider)
+            return;
 
         currentCollider = null;
 
         readyForDialogue = false;
-        
+
         inkText = null;
 
         InteractIconRoutine(false);
